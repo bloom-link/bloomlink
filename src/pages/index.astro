@@ -1,0 +1,839 @@
+---
+import '../styles/global.css';
+
+const nav = [
+  { label: 'Bloom Linkとは', href: '#about' },
+  { label: 'できること', href: '#service' },
+  { label: '選ばれる理由', href: '#reason' },
+  { label: '料金プラン', href: '#price' },
+  { label: '制作事例', href: '#works' },
+  { label: 'お問い合わせ', href: '#contact' },
+];
+
+const aboutChecklist = [
+  'お客さまに必要な情報を、必要なときに届ける',
+  '来店前から来店後まで、心地よいつながりをつくる',
+  'お店の想いが伝わる、あなたらしい仕組みをつくる',
+];
+
+const aboutMePhoto = '/images/profile.jpg';
+
+const aboutMeBody = [
+  '私は、花屋の家に生まれました。\n小学生の頃からお店を手伝い、気づけばそれが当たり前の毎日になっていました。',
+  '正直、しんどいと感じたことも何度もあります。それでも続けてこられたのは、「あなたにお願いしたい」と言ってくださるお客さまがいたからです。',
+  '父が引退し、お店を離れることになったときも、「もう少し残ってほしい」と声をかけていただきました。それは、私を頼りにしてくださるお客さまがたくさんいてくださったからでした。',
+  'この経験が、今の私の仕事の原点になっています。',
+  '私がLINE構築を選んだのは、「作って終わり」の仕事ではないからです。\n構築したあとも、お店に寄り添い、一緒に考え、少しずつ育てていける。そんな長いお付き合いができることに、大きな魅力を感じています。',
+  '通り過ぎるだけのご縁ではなく、お店とお客さまのつながりを、時間をかけて育てていきたい。',
+  'だから私は、LINEをただの「配信ツール」としてご提案するのではありません。\nお店の想いやお客さまとの関係性を大切にしながら、それぞれのお店に合った「つながりが育つ仕組み」を、一緒につくっていきます。',
+  'ご相談は、まだ何も決まっていない段階でも大丈夫です。',
+  '「うちの場合はどうしたらいい？」',
+  'そんなところから、一緒に考えさせていただけたら嬉しいです。',
+];
+
+// ヒーロー右側の画像
+const heroPhoto = '/images/hero.jpg';
+
+// 写真ファイルができたら、例: '/images/about-vase.jpg' を設定してください。
+// 設定すると、プレースホルダーの枠線・案内文字は自動で消え、実際の写真が表示されます。
+const aboutPhoto = '/images/about-soft.png';
+
+// スマホ・LINEアイコン・機能アイコン・装飾をまとめた画像
+const servicePhoto = '/images/line-features.jpg';
+
+// 電卓・ノート・植物の世界観写真ができたら、例: '/images/price-scene.jpg' を設定してください。
+// 設定すると、プレースホルダーは自動で消えます。
+const pricePhoto = '/images/price-photo.jpg';
+
+// Bloom Linkのロゴ（Bと葉っぱ）データができたら設定してください。
+// フッターの緑背景になじむよう、白／明るい色のバージョン（透過PNG・SVG推奨）を、
+// 例: '/images/logo-mark-white.svg' のように指定してください。
+// 設定すると、ブランド名「Bloom Link」の上に自動で表示されます。
+const footerLogo = null;
+
+const worries = [
+  { no: '01', text: '忙しくて、\n手が回らない', image: '/images/worry1.png' },
+  { no: '02', text: 'LINEを始めたけど、\nうまく使えていない', image: '/images/worry2.png' },
+  { no: '03', text: '予約や問い合わせの\n管理が大変', image: '/images/worry3.png' },
+  { no: '04', text: 'ファンになってもらう\nところまで育てられない', image: '/images/worry4.png' },
+];
+
+const services = [
+  { title: '予約・受付', desc: '24時間いつでも予約受付。スムーズな予約管理が可能に。' },
+  { title: 'クーポン・特典配信', desc: 'クーポンやお知らせを届けて、来店のきっかけをつくる。' },
+  { title: '自動応答・チャット', desc: 'よくある質問に自動で対応。お客さまの満足度をアップ。' },
+  { title: 'リピート・来店促進', desc: 'お客さま一人ひとりに合った情報を届けて、自然とまた来たくなる関係に。' },
+  { title: 'お客さま管理', desc: '属性や来店履歴をもとに、最適な情報を届けることができます。' },
+  { title: '分析・顧客管理', desc: 'データを分析して、効果的な改善やサービスの向上につなげる。' },
+];
+
+const reasons = [
+  { title: '丁寧な\nヒアリング', desc: 'あなたの想いや課題を丁寧にお聞きし、最適な仕組みをご提案します。', icon: '/images/reason1.png' },
+  { title: 'オーダーメイド\n設計', desc: 'あなたのお店に合ったLINEの仕組みを、一から設計します。', icon: '/images/reason2.png' },
+  { title: '初心者サポート\nが得意', desc: '初めてでも安心。わかるまでやさしくサポートします。', icon: '/images/reason3.png' },
+  { title: '運用まで\nしっかりサポート', desc: '構築して終わりではなく、成果につながる運用まで伴走します。', icon: '/images/reason4.png' },
+  { title: '継続につながる\n仕組み', desc: 'リピートやファンづくりにつながる仕組みをご提案します。', icon: '/images/reason5.png' },
+];
+
+const buildPlans = [
+  {
+    name: 'LINE公式\nはじめの一歩プラン',
+    price: '8万円〜',
+    desc: 'まずはLINE公式アカウントを整えて、\n「ちゃんと使える」形に。',
+    items: ['初期設定', 'リッチメニュー作成', '予約導線の設置', 'あいさつメッセージ設定'],
+    accent: 'sage',
+  },
+  {
+    name: 'LINE＋Lステップ\nスタートプラン',
+    price: '10万円〜',
+    desc: '予約前後の自動案内や、\nお客様の仕分けの土台まで。',
+    items: ['LINE公式の内容すべて', '自動返信の設定', 'タグ設計・仕分けの土台', '予約リマインド設定'],
+    accent: 'pink',
+    highlight: true,
+  },
+  {
+    name: 'オーダーメイド構築\nしっかり設計プラン',
+    price: '18万円〜',
+    desc: '導線設計・出し分け・配信設計まで。\n本格的に成果につなげたい方へ。',
+    accent: 'dark',
+    items: ['LINE＋Lステップの内容すべて', '導線設計・出し分け・配信設計', '出し分け・セグメント配信', '効果測定・改善サポート'],
+  },
+];
+
+const supportPlans = [
+  { name: 'ライトプラン', amount: '8,000', desc: '月1回の配信づくりなど' },
+  { name: 'お店を育てるプラン', amount: '12,000', desc: '月2回の配信づくり・分析サポートなど' },
+  { name: 'しっかりサポートプラン', amount: '15,000', desc: '月4回の配信・改善提案・サポート充実など' },
+];
+
+const works = [
+  {
+    tag: '制作事例',
+    tagStyle: 'solid',
+    name: 'るなや',
+    sub: '飲食店（居酒屋）',
+    desc: '予約・営業情報・アクセスなど、\nお客様が迷わず利用できるLINEを設計しました。',
+    photo: '/images/runaya-richmenu.jpg',
+  },
+  {
+    tag: '制作中（進行中）',
+    tagStyle: 'pink',
+    name: 'ROSA WOOD',
+    sub: 'アロマサロン',
+    desc: 'ブランドコンセプトからご一緒し、\n世界観を大切にしたLINE構築を進めています。',
+    photo: '/images/rosawood.jpg',
+    linkLabel: '制作ストーリーを見る',
+    linkHref: '/story/rosa-wood',
+  },
+  {
+    tag: 'LINE体験デモ',
+    tagStyle: 'soft',
+    name: 'Pilates Studio',
+    sub: 'Lステップ デモアカウント',
+    desc: '実際のLINEの使い心地を体験いただける、\nデモアカウントです。',
+    photo: '/images/pilates.jpg',
+    qr: '/images/pilates-qr.png',
+    linkLabel: 'LINEを体験してみる',
+    linkHref: 'https://line.me/ti/p/%40202lchui',
+  },
+];
+
+const flow = [
+  { no: '01', text: 'ご相談・\nお問い合わせ', desc: 'まずはお気軽にご相談ください。', icon: '/images/flow1.png' },
+  { no: '02', text: 'ヒアリング', desc: 'お悩みやご希望を丁寧にお伺いします。', icon: '/images/flow2.png' },
+  { no: '03', text: 'ご提案・\nお見積り', desc: '最適なプランとお見積りをご提案します。', icon: '/images/flow3.png' },
+  { no: '04', text: '制作・構築', desc: 'LINE公式・Lステップを丁寧に構築します。', icon: '/images/flow4.png' },
+  { no: '05', text: '運用・\nサポート', desc: '公開後も改善・運用をサポートします。', icon: '/images/flow5.png' },
+];
+
+const comingSoon = [
+  {
+    title: 'LP制作',
+    desc: 'ブランドの世界観を大切にした、\n伝わるLP制作も準備中です。',
+    note: '※このサイトも、企画からデザイン・制作まで、すべて私が行いました。',
+    icon: '/images/coming-lp.png',
+  },
+  {
+    title: 'ブランドデザイン',
+    desc: 'ロゴ・名刺・ショップカードなど、\nブランドづくりのお手伝いも準備しています。',
+    icon: '/images/coming-brand.png',
+  },
+];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloom Link｜LINEで、また来たくなる仕組みを</title>
+    <meta
+      name="description"
+      content="Bloom Linkは、LINE公式アカウントの構築・運用をサポートするサービスです。予約・リピート・お知らせを、やさしく仕組み化します。"
+    />
+  </head>
+  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
+    <!-- ヘッダー -->
+    <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-sage/10">
+      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+        <a href="#" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-[#5c5450]">
+          {nav.map((item) => (
+            <a href={item.href} class="hover:text-sage transition-colors">{item.label}</a>
+          ))}
+        </nav>
+        <a
+          href="#contact"
+          class="text-xs md:text-sm text-cream rounded-full px-5 py-2 bg-gradient-to-b from-[#3f6d55] to-[#2c4a3a] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_6px_16px_rgba(47,78,62,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(47,78,62,0.16)] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+        >
+          無料相談してみる
+        </a>
+      </div>
+    </header>
+
+    <!-- 01 トップ / ヒーロー -->
+    <section class="relative overflow-hidden bg-[#FDFBF7]">
+      <div class="max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid md:grid-cols-[0.8fr_1.25fr] gap-10 items-center">
+        <div>
+          <p class="hero-in hero-in-1 text-xs tracking-wider text-sage/70 mb-3">LINE公式アカウントの構築から運用まで</p>
+          <h1 class="text-[26px] md:text-[32px] leading-[1.35] tracking-normal">
+            <span class="hero-in hero-in-1 block font-medium">お客さまが自然と</span>
+            <span class="hero-in hero-in-2 block mt-1 ml-2 md:ml-4 whitespace-nowrap">
+              <span class="font-bold text-pink">&quot;また来たくなる&quot;</span><span class="font-medium">仕組みを、</span>
+            </span>
+            <span class="hero-in hero-in-2 block mt-1 font-medium">LINEで。</span>
+          </h1>
+          <p class="hero-in hero-in-3 mt-7 text-sm md:text-base text-[#5c5450] leading-relaxed max-w-xs md:max-w-sm">
+            予約・リピート・お知らせを、<br class="md:hidden" />
+            やさしく仕組み化します。
+          </p>
+          <a
+            href="#contact"
+            class="hero-in hero-in-4 inline-block mt-8 text-cream rounded-full px-8 py-3 text-sm bg-gradient-to-b from-[#3f6d55] to-[#2c4a3a] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_6px_16px_rgba(47,78,62,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(47,78,62,0.16)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            まずは無料で相談してみる
+          </a>
+        </div>
+        <div class="hero-photo-in flex justify-center">
+          {heroPhoto ? (
+            <img src={heroPhoto} alt="Bloom Linkのイメージ" class="w-full h-auto" />
+          ) : (
+            <div class="w-full max-w-sm aspect-[4/5] rounded-3xl border-2 border-dashed border-sage/30 bg-white/50 flex items-center justify-center text-center text-sm text-sage/60 p-6">
+              ここにスマホ画面とお店の<br />イラストを入れる
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Bloom Linkとは -->
+    <section id="about" class="relative bg-cream overflow-hidden">
+      <div class="relative max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-[2fr_3fr] gap-14 md:gap-16 items-center">
+        <!-- 写真エリア：写真そのものが空間に置かれているように、カード感を出さない -->
+        <div class="reveal relative order-2 md:order-1 mx-auto md:mx-0 w-full">
+          {aboutPhoto ? (
+            <img src={aboutPhoto} alt="花瓶と植物" class="relative w-full h-auto" />
+          ) : (
+            <div class="relative w-full aspect-[3/4] rounded-xl border border-dashed border-sage/20 bg-gradient-to-b from-white/50 to-beige/20 flex items-end justify-center overflow-hidden">
+              <span class="text-[11px] text-sage/40 mb-3">ここに花瓶と植物の写真を入れる</span>
+            </div>
+          )}
+        </div>
+
+        <!-- 文章エリア：横幅と余白に少しずつ違いをつけて、詰まった印象を避ける -->
+        <div class="relative order-1 md:order-2 md:py-10">
+          <h2 class="reveal text-xl md:text-2xl font-normal text-sage mb-8 md:mb-10">Bloom Linkとは</h2>
+          <p class="reveal text-[#5c5450] leading-[2] mb-10 max-w-md [word-break:keep-all] [overflow-wrap:break-word]">
+            <span class="block">Bloom Linkは、</span>
+            <span class="block mt-1">LINE公式アカウントの構築を通して、お店とお客さまをつなぎ、関係を育てるお手伝いをします。</span>
+          </p>
+
+          <ul class="reveal-stagger space-y-6 mb-10 ml-1 md:ml-2 max-w-sm">
+            {aboutChecklist.map((item) => (
+              <li class="flex items-start gap-3 text-sm text-[#5c5450]">
+                <svg
+                  aria-hidden="true"
+                  class="mt-0.5 w-4 h-4 shrink-0 text-sage/70"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                >
+                  <path d="M12 20c0-6 3-9 8-11-1 6-3 9-8 11z" />
+                  <path d="M12 20c0-6-3-9-8-11 1 6 3 9 8 11z" />
+                  <path d="M12 20v-7" />
+                </svg>
+                <span class="leading-relaxed [word-break:keep-all] [overflow-wrap:break-word]">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p class="reveal text-[#c48f99] leading-[2] max-w-md [word-break:keep-all] [overflow-wrap:break-word]">
+            <span class="block">お店の魅力が伝わり、ファンが増え、売上が安定する。</span>
+            <span class="block mt-1">そんな未来を、LINEで一緒に実現します。</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 こんなお悩み、ありませんか？ -->
+    <section id="worry">
+      <div class="max-w-6xl mx-auto px-6 py-10 md:py-14">
+        <div class="md:flex md:items-start md:gap-16">
+          <!-- 左：タイトルと共感の文章 -->
+          <div class="md:w-56 md:shrink-0 mb-12 md:mb-0 -mt-2 md:-mt-6">
+            <h2 class="reveal text-xl md:text-2xl font-semibold leading-snug mb-4 text-center text-sage">こんなお悩み、<br />ありませんか？</h2>
+            <p class="reveal text-[#5c5450] leading-[1.9] text-sm max-w-[260px]">
+              <span class="block">知り合いや友人にはSNSで告知しているけれど、思うようにお客様が集まらない。</span>
+              <span class="block mt-3">忙しくて手が回らない、そんな方へ。</span>
+            </p>
+          </div>
+
+          <!-- 右：カードが主役 -->
+          <div class="grid grid-cols-2 md:flex md:flex-1 gap-5 md:gap-7">
+            {worries.map((w, i) => (
+              <div
+                class={`relative bg-white rounded-[1.75rem] px-4 pt-9 pb-5 flex flex-col items-center text-center shadow-[0_14px_34px_rgba(53,94,72,0.06)] h-60 md:h-72 md:flex-1 ${
+                  i % 2 === 1 ? 'md:translate-x-1 reveal-fade' : 'reveal'
+                }`}
+                style={`transition-delay: ${i * 0.1}s`}
+              >
+                <div
+                  class={`absolute left-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-pink text-white flex items-center justify-center text-xs font-medium shadow-[0_6px_14px_rgba(53,94,72,0.08)] ${
+                    i % 2 === 1 ? '-top-6' : '-top-4'
+                  }`}
+                >
+                  {w.no}
+                </div>
+                <p class="text-sm text-[#5c5450] leading-relaxed whitespace-pre-line shrink-0 mb-3">{w.text}</p>
+                <div
+                  class={`flex-1 w-full min-h-0 flex items-center justify-center px-3 pb-3 ${
+                    i === 0 || i === 3 ? 'p-5' : ''
+                  }`}
+                >
+                  <img src={w.image} alt={w.text} class="max-h-full max-w-full object-contain" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 LINEだからできること -->
+    <section id="service" class="bg-cream">
+      <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="reveal text-2xl md:text-3xl font-medium mb-2 text-sage">LINEだからできること。</h2>
+        <p class="reveal text-sm text-sage/70 mb-2">お店とお客さまを、やさしくつなぐ。</p>
+        <p class="reveal text-[#5c5450] leading-loose mb-3 max-w-2xl">
+          つながりが、売上を育てる。<br />
+          LINEには、お店の未来を変える力があります。
+        </p>
+
+        <!-- PC表示：画像を中央に、各機能をアイコンと同じ高さの左右に配置 -->
+        <div class="hidden md:flex md:justify-center">
+          <div class="reveal relative w-full max-w-[800px]">
+            {servicePhoto ? (
+              <img
+                src={servicePhoto}
+                alt="LINEでお店とお客様がつながるイメージ"
+                class="w-full h-auto"
+              />
+            ) : (
+              <div class="w-full aspect-[925/588] rounded-[2rem] border border-dashed border-sage/20 bg-gradient-to-b from-beige/30 to-white flex items-center justify-center text-center text-sm text-sage/40 p-6">
+                ここにスマホ・LINEアイコン・機能アイコン・装飾をまとめた画像を入れる
+              </div>
+            )}
+
+            <!-- 左側の機能：カレンダー17%・チケット42%・吹き出し67% の高さに合わせる -->
+            <div class="absolute top-[17%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[0].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[0].desc}</p>
+            </div>
+            <div class="absolute top-[42%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[1].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[1].desc}</p>
+            </div>
+            <div class="absolute top-[67%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[2].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[2].desc}</p>
+            </div>
+
+            <!-- 右側の機能：ハート12%・人43%・グラフ67% の高さに合わせる -->
+            <div class="absolute top-[12%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[3].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[3].desc}</p>
+            </div>
+            <div class="absolute top-[43%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[4].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[4].desc}</p>
+            </div>
+            <div class="absolute top-[67%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
+              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[5].title}</h3>
+              <p class="text-xs text-[#5c5450] leading-snug">{services[5].desc}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- モバイル表示：画像のみ（機能一覧は下に縦並び） -->
+        <div class="reveal md:hidden mx-auto w-full max-w-[320px]">
+          {servicePhoto ? (
+            <img
+              src={servicePhoto}
+              alt="LINEでお店とお客様がつながるイメージ"
+              class="w-full h-auto"
+            />
+          ) : (
+            <div class="w-full aspect-[3/2] rounded-[2rem] border border-dashed border-sage/20 bg-gradient-to-b from-beige/30 to-white flex items-center justify-center text-center text-sm text-sage/40 p-6">
+              ここにスマホ・LINEアイコン・機能アイコン・装飾をまとめた画像を入れる
+            </div>
+          )}
+        </div>
+
+        <!-- スマホ表示：画像の下に機能説明を縦並び -->
+        <div class="reveal-stagger md:hidden mt-8 grid gap-6">
+          {services.map((s) => (
+            <div>
+              <h3 class="font-medium mb-2 whitespace-pre-line leading-relaxed">{s.title}</h3>
+              <p class="text-sm text-[#5c5450] leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Bloom Linkが選ばれる理由 -->
+    <section id="reason">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="md:flex md:items-start md:gap-16">
+          <!-- 左：番号とタイトル（コンパクトに） -->
+          <div class="md:w-56 md:shrink-0 mb-10 md:mb-0">
+            <h2 class="reveal text-xl md:text-2xl font-medium leading-snug">
+              <span class="block">Bloom Linkが</span>
+              <span class="block">選ばれる理由</span>
+            </h2>
+          </div>
+
+          <!-- 右：5つの理由（ゆとりを持って、点線区切り） -->
+          <div class="reveal-stagger grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-nowrap gap-x-8 gap-y-10 md:divide-x md:divide-dashed md:divide-sage/20 justify-center md:justify-start">
+            {reasons.map((r, i) => (
+              <div class="flex flex-col items-center text-center gap-4 px-2 md:px-8 md:first:pl-0 md:last:pr-0 w-full md:w-36">
+                <img src={r.icon} alt={r.title.replace('\n', '')} class="w-16 h-16" />
+                <h3 class="text-sm font-medium whitespace-pre-line leading-relaxed">{r.title}</h3>
+                <p class="text-xs text-[#5c5450]/70 leading-relaxed">{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 料金の目安 -->
+    <section id="price" class="bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <h2 class="reveal text-2xl md:text-3xl font-medium mb-3">料金の目安</h2>
+
+        <div class="md:grid md:grid-cols-[1.8fr_3.2fr] md:gap-14 items-start mb-16">
+          <div class="mb-10 md:mb-0">
+            <p class="reveal text-xl md:text-2xl font-medium text-sage leading-snug mb-8 md:mb-10">
+              <span class="block">あなたのお店に</span>
+              <span class="block">合わせてご提案します</span>
+            </p>
+
+            <!-- 丸バッジ：スマホ表示（見出しの下に自然に回り込む） -->
+            <div class="md:hidden w-40 h-36 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex flex-col items-center justify-center text-center gap-1.5 px-6 py-5 mb-8">
+              <p class="text-base font-semibold text-pink leading-tight whitespace-nowrap">構築だけ</p>
+              <p class="text-[10px] text-pink/70 leading-tight whitespace-nowrap">（運用サポートなし）</p>
+              <p class="text-sm text-pink leading-tight whitespace-nowrap">でも大丈夫です</p>
+            </div>
+
+            <p class="reveal ja-text text-[#5c5450] leading-[2] max-w-md">
+              <span class="block">Bloom Linkでは、決まったプランをおすすめするのではなく、</span>
+              <span class="block mt-3">お店の状況や「こんなことをしたい」に合わせてご提案します。</span>
+              <span class="block mt-5">まずはLINE公式から。必要になったら<span class="whitespace-nowrap">Lステップ</span>へ。</span>
+              <span class="block mt-1">無理なく育てていけるよう、一緒に考えます。</span>
+            </p>
+          </div>
+
+          <!-- 右：写真エリア（世界観ビジュアル） -->
+          <div class="reveal relative">
+            <div class="absolute -inset-8 bg-gradient-to-br from-white/70 via-beige/30 to-transparent rounded-[3rem] blur-2xl"></div>
+
+            <!-- 丸バッジ：PC表示（料金の目安の見出しと高さを揃える） -->
+            <div class="hidden md:flex md:absolute md:top-[-48px] md:right-full md:mr-[-30px] w-36 h-32 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex-col items-center justify-center text-center gap-1 px-4 py-4 z-10">
+              <p class="text-sm font-semibold text-pink leading-tight whitespace-nowrap">構築だけ</p>
+              <p class="text-[9px] text-pink/70 leading-tight whitespace-nowrap">（運用サポートなし）</p>
+              <p class="text-xs text-pink leading-tight whitespace-nowrap">でも大丈夫です</p>
+            </div>
+
+            {pricePhoto ? (
+              <div class="relative w-full aspect-[4/3] md:aspect-auto md:h-[364px] rounded-[2rem] overflow-hidden">
+                <img
+                  src={pricePhoto}
+                  alt="電卓・ノート・植物のある風景"
+                  class="block w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div class="relative w-full aspect-[4/3] rounded-[2rem] border border-dashed border-sage/20 bg-gradient-to-b from-white/60 to-beige/30 flex items-center justify-center text-center text-sm text-sage/40 p-6">
+                ここに電卓・ノート・植物の写真を入れる
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- 構築プラン -->
+        <div class="flex items-center justify-center gap-4 mb-10">
+          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
+          <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
+            ① 構築（最初の1回だけの費用）
+          </span>
+          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
+        </div>
+        <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-6">
+          {buildPlans.map((p) => (
+            <div
+              class={`relative overflow-hidden rounded-3xl p-9 md:p-11 bg-white border border-sage/10 text-center mx-auto w-full max-w-[92%] md:max-w-[93%] h-full flex flex-col ${
+                p.highlight
+                  ? 'shadow-[0_22px_50px_rgba(53,94,72,0.09)]'
+                  : 'shadow-[0_14px_36px_rgba(53,94,72,0.045)]'
+              }`}
+            >
+              <h3 class="font-semibold text-[#2c4a3a] whitespace-pre-line leading-snug mb-4">{p.name}</h3>
+              <div
+                class={`w-12 h-[2px] mx-auto mb-5 ${
+                  p.accent === 'pink' ? 'bg-pink/60' : p.accent === 'dark' ? 'bg-[#1f3a2d]/45' : 'bg-sage/45'
+                }`}
+              ></div>
+              <p
+                class={`whitespace-nowrap mb-5 ${
+                  p.accent === 'pink' ? 'text-[#DFA2AE]' : p.accent === 'dark' ? 'text-[#1f3a2d]' : 'text-sage'
+                }`}
+              >
+                {(() => {
+                  const m = p.price.match(/^(\d+)(.*)$/);
+                  const numSize = p.highlight ? 'text-[24px] md:text-[30px]' : 'text-[22px] md:text-[28px]';
+                  const unitSize = p.highlight ? 'text-[15px] md:text-[17px]' : 'text-[14px] md:text-[16px]';
+                  return m ? (
+                    <>
+                      <span class={`font-semibold ${numSize}`}>{m[1]}</span>
+                      <span class={`${unitSize} ml-0.5`}>{m[2]}</span>
+                    </>
+                  ) : (
+                    <span class={p.highlight ? 'text-[19px] md:text-[24px]' : 'text-[18px] md:text-[23px]'}>{p.price}</span>
+                  );
+                })()}
+              </p>
+              <p class="text-xs text-[#8a8078] whitespace-pre-line leading-relaxed mb-8">{p.desc}</p>
+              <ul class="text-sm text-[#4a4542] space-y-3.5 text-left max-w-[220px] mx-auto">
+                {p.items.map((item) => (
+                  <li class="flex items-start gap-2.5">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="w-4 h-4 mt-0.5 shrink-0 text-sage"
+                    >
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6" />
+                      <path
+                        d="M6.5 10.4l2.4 2.4 4.6-5.2"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div
+                class={`absolute bottom-0 left-0 right-0 h-[3px] ${
+                  p.accent === 'pink' ? 'bg-pink' : p.accent === 'dark' ? 'bg-[#1f3a2d]' : 'bg-sage'
+                }`}
+              ></div>
+            </div>
+          ))}
+        </div>
+        <p class="reveal text-xs text-[#6b6259] text-center mb-10 max-w-md mx-auto rounded-2xl border border-[#e5e0da] bg-[#FAF7F2] px-6 py-4">
+          ※ 金額はすべて目安です。内容・規模に合わせて、ご相談しながら調整します。
+        </p>
+
+        <!-- 運用サポート -->
+        <div class="flex items-center justify-center gap-4 mb-10">
+          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
+          <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
+            ② 運用サポート（毎月・希望する方だけ）
+          </span>
+          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
+        </div>
+        <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-8">
+          {supportPlans.map((p) => (
+            <div class="rounded-3xl p-10 md:p-12 bg-white border border-sage/10 shadow-[0_10px_28px_rgba(53,94,72,0.035)] text-center mx-auto w-full max-w-[88%]">
+              <h3 class="font-medium text-[#5b6a60] leading-snug mb-4">{p.name}</h3>
+              <div class="w-10 h-[2px] bg-sage/40 mx-auto mb-3"></div>
+              <p class="mb-3">
+                <span class="text-[15px] text-[#DFA2AE]/80 align-top">月</span>
+                <span class="text-[19px] md:text-[24px] text-[#DFA2AE]">{p.amount}</span>
+                <span class="text-[10px] md:text-[12px] text-[#DFA2AE]">円</span>
+                <span class="text-[10px] md:text-[12px] text-[#DFA2AE]/80">〜</span>
+              </p>
+              <p class="text-xs text-[#5c5450]/70 leading-relaxed">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+        <p class="reveal text-sm text-sage text-center mb-8">
+          運用は必須ではありません。「作って終わり」も、あとから始めても大丈夫です。
+        </p>
+
+        <div class="reveal bg-pinkLight/20 rounded-[1.75rem] w-full px-8 py-6 md:px-14 md:py-7 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+          <div class="shrink-0 md:pr-10 md:border-r md:border-pink/20">
+            <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-sm px-5 py-2 whitespace-nowrap">
+              安心してご相談いただくために
+            </span>
+          </div>
+          <ul class="space-y-4 text-sm text-[#5c5450] leading-[1.9] flex-1">
+            {[
+              { bold: '金額はすべて目安です。', rest: '内容・規模に合わせて、ご相談しながら調整します。' },
+              { bold: 'リッチメニューなどのデザインは、こだわりの内容に応じて、専門のデザイナーへ依頼することも可能です。', rest: '別途費用（＋α）をいただく場合があります。' },
+              { bold: 'LINE公式アカウント・Lステップ自体の利用料（お店側のご負担）は別途となります。', rest: 'どちらも無料から始められます。' },
+            ].map((item) => (
+              <li class="flex items-start gap-4">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  class="w-4 h-4 mt-0.5 shrink-0 text-sage/70"
+                >
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6" />
+                  <path
+                    d="M6.5 10.4l2.4 2.4 4.6-5.2"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span><span class="font-medium">{item.bold}</span>{item.rest}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 制作事例・体験デモ -->
+    <section id="works">
+      <div class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="reveal text-2xl md:text-3xl font-medium mb-4">制作事例・体験デモ</h2>
+        <p class="reveal text-[#5c5450] leading-loose mb-10 max-w-2xl">
+          制作事例や、実際のLINEを体験いただけるデモアカウントをご紹介しています。
+        </p>
+        <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+          {works.map((w) => (
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm h-full flex flex-col">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src={w.photo} alt={`${w.name}の写真`} class="block w-full h-full object-cover" />
+              </div>
+              <div class="p-7 md:p-8 flex flex-col flex-1">
+                <span
+                  class={`inline-block w-fit text-xs rounded-full px-3 py-1 mb-4 ${
+                    w.tagStyle === 'solid'
+                      ? 'bg-sage text-cream'
+                      : w.tagStyle === 'pink'
+                      ? 'bg-pinkLight/30 text-pink'
+                      : 'bg-sage/10 text-sage'
+                  }`}
+                >
+                  {w.tag}
+                </span>
+                <h3 class="font-medium mb-1">{w.name}</h3>
+                <p class="text-xs text-sage mb-4">{w.sub}</p>
+                <p class="text-sm text-[#5c5450] leading-relaxed whitespace-pre-line mb-6">{w.desc}</p>
+                <div class="mt-auto pt-1">
+                  {w.linkLabel && (
+                    <div class="flex items-end justify-between gap-3">
+                      <a
+                        href={w.linkHref}
+                        class={
+                          w.tagStyle === 'pink'
+                            ? 'text-xs text-pink underline underline-offset-4 decoration-pink/40 hover:text-[#c48f99] hover:decoration-[#c48f99] transition-colors'
+                            : 'text-xs text-sage underline underline-offset-4 decoration-sage/40 hover:text-[#2c4a3a] hover:decoration-[#2c4a3a] transition-colors'
+                        }
+                      >
+                        {w.linkLabel}
+                      </a>
+                      {w.qr && (
+                        <a href={w.linkHref} class="shrink-0">
+                          <img src={w.qr} alt="LINE QRコード" class="w-12 h-12 md:w-14 md:h-14 object-contain" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="reveal mt-8 bg-beige/50 rounded-2xl p-8 max-w-3xl mx-auto text-sm text-[#5c5450] leading-loose flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p class="font-bold text-sage mb-2">LINE体験デモアカウントについて</p>
+            <p class="leading-loose">
+              お客様にLINEの仕組みや構築イメージをご体験いただくためのデモアカウントです。<br />
+              実在する店舗ではありませんので、安心してご利用ください。<br />
+              ご体験後は、ブロック・削除していただいて大丈夫です。
+            </p>
+          </div>
+          <img
+            src="/images/demo-phone.png"
+            alt="スマホでLINEを操作するイメージ"
+            class="w-24 md:w-28 h-auto shrink-0 object-contain"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 07.5 ABOUT ME -->
+    <section id="about-me" class="bg-cream">
+      <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+        <div class="grid md:grid-cols-[1.8fr_3.2fr] gap-12 md:gap-16 items-start">
+          <!-- 写真 -->
+          <div class="reveal order-1 mx-auto md:mx-0 w-full max-w-sm md:max-w-none md:sticky md:top-28">
+            <div class="rounded-[2rem] overflow-hidden">
+              <img src={aboutMePhoto} alt="Bloom Link代表 原早苗" class="block w-full h-auto" />
+            </div>
+          </div>
+
+          <!-- 文章 -->
+          <div class="order-2">
+            <p class="reveal text-xs tracking-[0.2em] text-sage/50 mb-4">ABOUT</p>
+            <h2 class="reveal text-2xl md:text-3xl font-medium text-sage leading-snug mb-10">
+              つながりを育てる仕事を選んだ理由
+            </h2>
+            <div class="reveal-stagger ja-text text-[#5c5450] leading-[1.9] space-y-4 max-w-3xl">
+              {aboutMeBody.map((line) => (
+                <p class="whitespace-pre-line">{line}</p>
+              ))}
+            </div>
+            <div class="reveal mt-12">
+              <p class="text-lg md:text-xl text-sage font-medium tracking-wide">原 早苗（はら さなえ）</p>
+              <p class="text-sm text-[#8a8078] mt-1.5">Bloom Link 代表 ／ LINE公式アカウント・Lステップ構築</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 ご相談から運用までの流れ -->
+    <section id="flow" class="bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="reveal text-2xl md:text-3xl font-medium mb-14 md:mb-16">ご相談から運用までの流れ</h2>
+        <div class="reveal-stagger grid grid-cols-2 md:grid-cols-5 gap-y-12 gap-x-6 md:gap-x-4">
+          {flow.map((f, i) => (
+            <div class="flex flex-col items-center text-center gap-3 relative">
+              <div class="w-20 h-20 rounded-full bg-white border border-sage/15 shadow-[0_8px_20px_rgba(53,94,72,0.06)] flex items-center justify-center shrink-0">
+                <img src={f.icon} alt={f.text.replace('\n', '')} class="w-14 h-14 object-contain" />
+              </div>
+              <p class="text-[11px] tracking-[0.15em] text-pink mt-1">STEP {f.no}</p>
+              <h3 class="text-sm font-medium whitespace-pre-line leading-relaxed">{f.text}</h3>
+              <p class="text-xs text-[#4a4542] leading-relaxed max-w-[130px]">{f.desc}</p>
+
+              {i < flow.length - 1 && (
+                <>
+                  <span class="hidden md:block absolute top-8 -right-6 w-8 h-px border-t border-dashed border-sage/30"></span>
+                  <svg
+                    aria-hidden="true"
+                    class="hidden md:block absolute top-[26px] -right-7 w-2.5 h-2.5 text-sage/40"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                  >
+                    <path d="M2 1.5l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Coming Soon -->
+    <section id="coming-soon">
+      <div class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+        <div class="md:flex md:items-start md:gap-12">
+          <!-- 左：ラベル・見出し・説明文 -->
+          <div class="md:w-64 md:shrink-0 mb-10 md:mb-0">
+            <h2 class="reveal text-2xl md:text-3xl font-medium mb-4">Coming Soon</h2>
+            <p class="reveal text-[#5c5450] leading-loose max-w-xs">
+              Bloom Linkは、お客様とともに成長しながら、
+              サービスも少しずつ広げていきます。
+            </p>
+          </div>
+
+          <!-- 右：カード2枚 -->
+          <div class="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 flex-1 items-stretch">
+            {comingSoon.map((c, i) => (
+              <div class="bg-white rounded-[1.75rem] p-10 md:p-11 text-center shadow-[0_14px_36px_rgba(53,94,72,0.05)] flex flex-col items-center h-full">
+                <img src={c.icon} alt={c.title} class="w-28 h-28 mb-6 object-contain" />
+                <h3 class="font-medium mb-3">{c.title}</h3>
+                <p class="text-sm text-[#5c5450] leading-relaxed whitespace-pre-line mb-6">{c.desc}</p>
+                {c.note && (
+                  <p class="text-[11px] text-[#6B6B64] leading-relaxed mb-4">{c.note}</p>
+                )}
+                <p class="mt-auto text-xs tracking-wide text-pink font-medium">Coming Soon</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お問い合わせ / フッター -->
+    <footer id="contact" class="bg-sage text-cream">
+      <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 text-center">
+        {footerLogo && (
+          <img src={footerLogo} alt="Bloom Link" class="h-10 md:h-12 w-auto mx-auto mb-5" />
+        )}
+        <p class="reveal text-xl tracking-[0.15em] mb-7">Bloom Link</p>
+        <p class="reveal mb-6 text-2xl md:text-3xl leading-relaxed">
+          つながりを育て、<br />
+          未来を咲かせる。
+        </p>
+        <p class="reveal mb-10 text-sm text-cream/85 max-w-xs md:max-w-sm mx-auto leading-relaxed">
+          LINEの活用方法や構築について、<br class="hidden md:block" />
+          お気軽にご相談ください。
+        </p>
+        <a
+          href="mailto:bloomlink.01@gmail.com"
+          class="reveal inline-block text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
+        >
+          無料で相談してみる →
+        </a>
+        <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
+        <p class="mt-12 text-xs text-cream/60">&copy; {new Date().getFullYear()} Bloom Link</p>
+      </div>
+    </footer>
+
+    <script>
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = document.querySelectorAll('.reveal, .reveal-fade, .reveal-stagger');
+
+      if (prefersReducedMotion) {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

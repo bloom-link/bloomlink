@@ -1,0 +1,222 @@
+---
+import '../../styles/global.css';
+
+const journeySteps = ['知る', '好きになる', '体験する', '安心する', '予約する', 'また会いたくなる'];
+
+const sections = [
+  {
+    no: '01',
+    title: 'まず、じっくり"知る"ことから始めました',
+    body: [
+      'ご相談をいただいてすぐに提案するのではなく、まずはROSA WOODさまのInstagramやホームページを、時間をかけて拝見しました。',
+      'Instagramには400人を超えるフォロワーさんがいらっしゃり、ななえさんの日々の暮らしや想いが、ていねいに綴られていました。',
+      'アロマを使った石けん・ハンドクリーム・バスソルトなどの手づくり。季節の恵みを楽しむ梅シロップ、お味噌づくり、あずきカイロ、玉ねぎ麹など…。',
+      '画面越しからも、「暮らしを大切にされている方なんだな」という温かな空気が伝わってきました。',
+      'そして、その世界観に惹かれたファンの方が、すでにたくさんいらっしゃることも感じました。また、ななえさんの魅力は、発信される一つひとつの言葉にも、相手を思いやる優しさがあふれていました。',
+    ],
+  },
+  {
+    no: '02',
+    title: '私が感じたROSA WOODさまの魅力',
+    body: [
+      '発信を拝見する中で、私が一番感じた大きな魅力は、施術だけではなく、ななえさんのお人柄や丁寧な暮らしでした。',
+      'その温かな世界観に惹かれ、「ななえさんに会いたい」「ななえさんに相談したい」と足を運ぶ方がたくさんいらっしゃることも伝わってきました。',
+      'この魅力をLINEでも大切につないでいけたら、お客さまとのご縁はさらに深まり、安心して長く通いたくなる場所になっていく。',
+      'そんな未来を思い描きました。',
+    ],
+  },
+];
+
+const proposalIntro = [
+  'そこでご提案したのは、アロマサロンとしての魅力を大切にしながら、「やさしく歳を重ねる暮らしの相談室」という世界観をLINEでも育てていくことでした。',
+  '施術だけでなく、手づくりや季節の暮らし、学びの時間も含めて、「ななえさんに会いたい」——そう思っていただける場所を、LINEの中にもつくっていく。',
+  'そのために、リッチメニューを使い、お客さまが自然に世界観へ入り込める導線を設計しました。',
+];
+
+const proposalOutro = [
+  'ポイントは、「施術の日だけ」で終わらないこと。人柄・暮らし・アロマを入口に、お客さまとのつながりを日々の暮らしの中で育てていけるLINEを目指しました。',
+  'また、「暮らしを楽しむ教室（年間講座）」も自然にご紹介できるように設計し、すでにファンでいてくださる方にも、より楽しんでいただけるLINEになるよう考えています。',
+  'LINEは、ただ情報を届けるツールではなく、お店の想いや魅力をやさしく届け、ご縁を育てていく場所。それが、Bloom Linkが大切にしている考え方です。',
+];
+
+const gallery = [
+  { src: '/images/story-gallery1.jpg', caption: 'ROSA WOODのアロマ' },
+  { src: '/images/story-gallery2.jpg', caption: '施術メニュー' },
+  { src: '/images/story-gallery3.jpg', caption: '暮らしを楽しむ教室' },
+  { src: '/images/story-gallery4.jpg', caption: '季節の手しごと' },
+];
+
+const finalSections = [
+  {
+    no: '05',
+    title: 'これから',
+    body: [
+      'ROSA WOODさまとの取り組みは、現在も進行中です。',
+      '一度作って終わりではなく、実際に運用しながら、お客さまと一緒に育てていく。そんな伴走型のサポートを大切にしています。',
+      '完成後の変化や、その先のストーリーも、またご紹介できたら嬉しいです。',
+    ],
+  },
+];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>制作ストーリー｜ROSA WOODさま｜Bloom Link</title>
+    <meta
+      name="description"
+      content="Bloom LinkがROSA WOODさまと進めているLINE構築の制作ストーリー。どんな想いで、どう考えながら進めているかをご紹介します。"
+    />
+  </head>
+  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
+    <!-- ヘッダー -->
+    <header class="bg-cream/90 backdrop-blur border-b border-sage/10">
+      <div class="max-w-3xl mx-auto flex items-center px-6 py-5">
+        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <!-- タイトル -->
+      <p class="text-xs tracking-[0.2em] text-sage/60 mb-4">制作ストーリー</p>
+      <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-6">
+        ROSA WOODさま
+        <span class="block text-base md:text-lg text-[#5c5450] font-normal mt-2">アロマテラピーサロン</span>
+      </h1>
+      <p class="text-xs text-[#8a8078] leading-relaxed mb-16 max-w-xl">
+        ※この案件は現在進行中です。完成した結果ではなく、「どんな想いで、どう考えながら進めているか」という制作の過程をご紹介します。
+      </p>
+
+      <!-- はじめに -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <p class="text-[#5c5450] leading-[2]">
+          <span class="block">Bloom Linkは、「LINEを作ること」を目的にはしていません。</span>
+          <span class="block mt-4">そのお店らしさや想いを大切にしながら、お客さまとのつながりを育てていくことを大切にしています。</span>
+          <span class="block mt-4">ROSA WOODさまとの取り組みは、その想いを形にしていく、大切なプロジェクトのひとつです。</span>
+        </p>
+      </section>
+
+      {sections.map((s, i) => (
+        <section class={`mb-16 pb-16 ${i < sections.length - 1 || true ? 'border-b border-sage/10' : ''}`}>
+          <div class="flex items-baseline gap-3 mb-6">
+            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
+            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+          </div>
+          <div class="text-[#5c5450] leading-[2] space-y-4">
+            {s.body.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- 3. ご提案 -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="text-xs text-sage/40 tracking-wider">03</span>
+          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">
+            ご提案 ―「暮らしの中でも、やさしくつながるLINE」へ
+          </h2>
+        </div>
+        <div class="text-[#5c5450] leading-[2] space-y-4 mb-10">
+          {proposalIntro.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
+
+        <!-- リッチメニュー実物 -->
+        <figure class="mb-3">
+          <div class="rounded-2xl overflow-hidden">
+            <img
+              src="/images/rosawood-richmenu.jpg"
+              alt="ROSA WOODさま向けに設計したリッチメニュー"
+              class="block w-full h-auto"
+            />
+          </div>
+          <figcaption class="text-xs text-sage/50 text-center mt-3">実際に設計したリッチメニュー</figcaption>
+        </figure>
+
+        <!-- ギャラリー -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-10 mb-10">
+          {gallery.map((g) => (
+            <figure>
+              <div class="rounded-xl overflow-hidden">
+                <img src={g.src} alt={g.caption} class="block w-full h-auto" />
+              </div>
+              <figcaption class="text-[11px] text-sage/50 text-center mt-2">{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <!-- ご縁が育つ流れ -->
+        <div class="bg-pinkLight/15 rounded-[1.5rem] px-6 py-8 md:px-10 md:py-10 mb-10">
+          <p class="text-sm font-medium text-sage tracking-wide mb-6 text-center">【 ご縁が育つ流れ 】</p>
+          <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-4">
+            {journeySteps.map((step, i) => (
+              <>
+                <span class="inline-flex items-center rounded-full bg-white text-sage text-xs md:text-sm px-4 py-2 whitespace-nowrap shadow-[0_4px_12px_rgba(53,94,72,0.06)]">
+                  {step}
+                </span>
+                {i < journeySteps.length - 1 && (
+                  <span class="text-pink/70 text-sm px-0.5">→</span>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+
+        <div class="text-[#5c5450] leading-[2] space-y-4">
+          {proposalOutro.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
+      </section>
+
+      <!-- 4. ご感想 -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="text-xs text-sage/40 tracking-wider">04</span>
+          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">ご感想</h2>
+        </div>
+        <p class="text-[#5c5450] leading-[2] mb-6">ご提案をお伝えした際に、こんなお言葉をいただきました。</p>
+        <blockquote class="border-l-2 border-pink/40 pl-6 md:pl-8 py-2 mb-6">
+          <p class="text-[#4a4542] leading-[2] italic">
+            「今までのコンサルの方にはなかった発想で、とてもワクワクしました。ぜひこの方向で進めていきたいです。」
+          </p>
+          <p class="text-sm text-sage/70 mt-4">── アロマテラピーサロン ROSA WOOD　後藤 奈々絵さま</p>
+        </blockquote>
+        <p class="text-[#5c5450] leading-[2]">この言葉をいただけたことは、私にとって大きな励みになりました。</p>
+      </section>
+
+      {finalSections.map((s) => (
+        <section class="mb-16">
+          <div class="flex items-baseline gap-3 mb-6">
+            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
+            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+          </div>
+          <div class="text-[#5c5450] leading-[2] space-y-4">
+            {s.body.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- 結び -->
+      <p class="text-center text-sage/80 italic tracking-wide mb-20">
+        つながりを育て、未来を咲かせる。—— Bloom Link
+      </p>
+
+      <!-- トップへ戻る -->
+      <div class="text-center">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm text-sage hover:text-sage/70 transition-colors"
+        >
+          ← トップページへ戻る
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
