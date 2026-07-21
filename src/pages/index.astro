@@ -417,12 +417,12 @@ const comingSoon = [
           </div>
 
           <!-- 右：5つの理由（ゆとりを持って、点線区切り） -->
-          <div class="reveal-stagger grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-10 md:divide-x md:divide-dashed md:divide-sage/20 justify-center md:justify-start">
+          <div class="reveal-stagger grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-10 md:divide-x md:divide-dashed md:divide-sage/20">
             {reasons.map((r, i) => (
-              <div class="flex flex-col items-center text-center gap-4 px-2 md:px-3 md:first:pl-0 md:last:pr-0">
+              <div class="min-w-0 flex flex-col items-center text-center gap-4 px-2 md:px-3 md:first:pl-0 md:last:pr-0">
                 <img src={r.icon} alt={r.title.replace('\n', '')} class="w-16 h-16" />
-                <h3 class="text-sm font-medium whitespace-pre-line leading-relaxed [word-break:keep-all] [line-break:strict]">{r.title}</h3>
-                <p class="text-xs text-[#5c5450]/70 leading-relaxed [word-break:keep-all] [line-break:strict]">{r.desc}</p>
+                <h3 class="w-full text-sm font-medium whitespace-pre-line leading-relaxed [word-break:keep-all] [line-break:strict]">{r.title}</h3>
+                <p class="w-full text-xs text-[#5c5450]/70 leading-relaxed [overflow-wrap:break-word]">{r.desc}</p>
               </div>
             ))}
           </div>
