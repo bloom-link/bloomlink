@@ -59,7 +59,7 @@ const worries = [
 ];
 
 const services = [
-  { title: '予約・受付', desc: '24時間いつでも予約受付。スムーズな予約管理が可能に。' },
+  { title: '予約・受付', desc: '24時間いつでも予約受付。予約ページや外部予約システムへ、スムーズにご案内。' },
   { title: 'クーポン・特典配信', desc: 'クーポンやお知らせを届けて、来店のきっかけをつくる。' },
   { title: '自動応答・チャット', desc: 'よくある質問に自動で対応。お客さまの満足度をアップ。' },
   { title: 'リピート・来店促進', desc: 'お客さま一人ひとりに合った情報を届けて、自然とまた来たくなる関係に。' },
@@ -98,7 +98,7 @@ const buildPlans = [
     price: '20万円〜',
     desc: '集客から予約、再来店までを考え、お客さまとのつながりが育つ流れを設計します。',
     accent: 'dark',
-    items: ['LINE＋Lステッププランの内容すべて', 'お店に合わせた導線・配信シナリオ設計', 'お客さまごとの情報整理と配信の出し分け', '来店後・購入後のフォロー設計', '配信結果を見ながら改善できる仕組みづくり'],
+    items: ['LINE＋Lステッププランの内容すべて', 'お店に合わせた導線・配信シナリオ設計', 'お客さまごとの情報整理と配信の出し分け', '来店後・購入後のフォロー設計', '配信結果を見ながら改善できる仕組みづくり', 'お店に合った予約方法のご提案（外部予約システムとの連携も対応）'],
     note: 'その場限りの配信ではなく、リピートや売上につながる流れを作りたい方へ。',
   },
 ];
@@ -495,7 +495,7 @@ const comingSoon = [
         <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-6">
           {buildPlans.map((p) => (
             <div
-              class={`relative overflow-hidden rounded-3xl p-9 md:p-11 bg-white border border-sage/10 text-center mx-auto w-full max-w-[92%] md:max-w-[93%] h-full flex flex-col ${
+              class={`relative overflow-hidden rounded-3xl p-9 md:p-11 bg-white border border-sage/10 text-center mx-auto w-full max-w-[92%] md:max-w-[93%] flex flex-col ${
                 p.highlight
                   ? 'shadow-[0_22px_50px_rgba(53,94,72,0.09)]'
                   : 'shadow-[0_14px_36px_rgba(53,94,72,0.045)]'
