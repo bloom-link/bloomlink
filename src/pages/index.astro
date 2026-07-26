@@ -16,7 +16,7 @@ const aboutChecklist = [
   'お店の想いが伝わる、あなたらしい仕組みをつくる',
 ];
 
-const aboutMePhoto = '/images/profile.jpg';
+const aboutMePhoto = '/images/about-round.jpg';
 
 const aboutMeBody = [
   '私は、花屋の家に生まれました。\n小学生の頃からお店を手伝い、気づけばそれが当たり前の毎日になっていました。',
@@ -752,28 +752,31 @@ const comingSoon = [
 
     <!-- 07.5 ABOUT ME -->
     <section id="about-me" class="bg-cream">
-      <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <div class="grid md:grid-cols-[1.8fr_3.2fr] gap-12 md:gap-16 items-start">
-          <!-- 写真 -->
-          <div class="reveal order-1 mx-auto md:mx-0 w-full max-w-sm md:max-w-none md:sticky md:top-28">
-            <div class="rounded-[2rem] overflow-hidden">
-              <img src={aboutMePhoto} alt="Bloom Link代表 原早苗" class="block w-full h-auto" />
-            </div>
+      <div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div class="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-10">
+          <!-- 丸い写真 -->
+          <div class="reveal shrink-0 mx-auto md:mx-0">
+            <img
+              src={aboutMePhoto}
+              alt="Bloom Link代表 原早苗"
+              class="block w-[180px] h-[180px] md:w-[200px] md:h-[200px] rounded-full object-cover border-[3px] border-pinkLight shadow-[0_10px_24px_rgba(53,94,72,0.1)]"
+            />
           </div>
 
-          <!-- 文章 -->
-          <div class="order-2">
-            <p class="reveal text-xs tracking-[0.2em] text-sage/50 mb-4">ABOUT</p>
-            <h2 class="reveal text-2xl md:text-3xl font-medium text-sage leading-snug mb-10">
+          <!-- 文章カード -->
+          <div class="reveal flex-1 border border-[#BFD4C7] rounded-xl bg-white px-8 py-10 md:px-12 md:py-12">
+            <p class="text-xs tracking-[0.2em] text-sage/50 mb-3">ABOUT</p>
+            <h2 class="text-[22px] md:text-[28px] font-medium text-sage leading-snug mb-3">
               つながりを育てる仕事を選んだ理由
             </h2>
-            <div class="reveal-stagger ja-text text-[#5c5450] leading-[1.9] space-y-4 max-w-3xl">
+            <div class="w-10 h-px bg-[#BFD4C7] mb-8"></div>
+            <div class="reveal-stagger ja-text text-[15px] text-[#6B6B64] leading-[1.9] space-y-4">
               {aboutMeBody.map((line) => (
                 <p class="whitespace-pre-line">{line}</p>
               ))}
             </div>
-            <div class="reveal mt-12">
-              <p class="text-lg md:text-xl text-sage font-medium tracking-wide">原 早苗（はら さなえ）</p>
+            <div class="mt-10">
+              <p class="text-lg text-sage font-medium tracking-wide">原 早苗（はら さなえ）</p>
               <p class="text-sm text-[#8a8078] mt-1.5">Bloom Link 代表 ／ LINE公式アカウント・Lステップ構築</p>
             </div>
           </div>
