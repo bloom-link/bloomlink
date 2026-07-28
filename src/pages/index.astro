@@ -17,6 +17,13 @@ const aboutChecklist = [
 ];
 
 const aboutMePhoto = '/images/about-round.jpg';
+const aboutIllust = '/images/about-illust.jpg';
+
+const aboutMeCard = [
+  '25年間花屋で働いてきた私が、\n介護をきっかけに50歳から新しい働き方に挑戦しました。',
+  '「作って終わり」ではなく、\nお店に寄り添いながら一緒に育てていく。',
+  'そんな仕事がしたくて、\nBloom Linkを始めました。',
+];
 
 const aboutMeBody = [
   '私は、花屋の家に生まれました。\n小学生の頃からお店を手伝い、気づけばそれが当たり前の毎日になっていました。',
@@ -778,37 +785,113 @@ const comingSoon = [
 
     <!-- 07.5 ABOUT ME -->
     <section id="about-me" class="bg-cream">
-      <div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
-        <div class="flex flex-col md:flex-row-reverse md:items-start gap-8 md:gap-10">
-          <!-- 丸い写真 -->
-          <div class="reveal shrink-0 mx-auto md:mx-0">
-            <img
-              src={aboutMePhoto}
-              alt="Bloom Link代表 原早苗"
-              class="block w-[180px] h-[180px] md:w-[200px] md:h-[200px] rounded-full object-cover border-[3px] border-pinkLight shadow-[0_10px_24px_rgba(53,94,72,0.1)]"
-            />
-          </div>
-
+      <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div class="reveal flex flex-col md:flex-row items-center gap-10 md:gap-14 bg-white rounded-[28px] border border-[#BFD4C7] px-6 py-10 md:px-12 md:py-12">
           <!-- 文章カード -->
-          <div class="reveal flex-1 border border-[#BFD4C7] rounded-xl bg-white px-6 py-8 md:px-9 md:py-9">
+          <div class="flex-1 order-2 md:order-1">
             <p class="text-[11px] tracking-[0.2em] text-sage/50 mb-2">ABOUT</p>
-            <h2 class="text-[17px] md:text-[19px] font-medium text-sage leading-snug mb-2.5">
+            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-3">
               つながりを育てる仕事を選んだ理由
             </h2>
-            <div class="w-8 h-px bg-[#BFD4C7] mb-5"></div>
-            <div class="reveal-stagger ja-text text-[13px] text-[#6B6B64] leading-[1.8] space-y-3">
-              {aboutMeBody.map((line) => (
+            <div class="w-10 h-[2px] bg-sage mb-6"></div>
+            <div class="ja-text text-[13px] md:text-sm text-[#6B6B64] leading-[1.9] space-y-3 mb-8">
+              {aboutMeCard.map((line) => (
                 <p class="whitespace-pre-line">{line}</p>
               ))}
             </div>
-            <div class="mt-6">
-              <p class="text-sm text-sage font-medium tracking-wide">原 早苗（はら さなえ）</p>
-              <p class="text-xs text-[#8a8078] mt-1">Bloom Link 代表 ／ LINE公式アカウント・Lステップ構築</p>
+            <button
+              id="about-me-open"
+              type="button"
+              class="inline-flex items-center gap-2 rounded-full border border-sage text-sage text-sm px-6 py-2.5 hover:bg-sage hover:text-white transition-colors duration-200"
+            >
+              <svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M12 20c0-6 3-9 8-11-1 6-3 9-8 11z" />
+                <path d="M12 20c0-6-3-9-8-11 1 6 3 9 8 11z" />
+                <path d="M12 20v-7" />
+              </svg>
+              私のストーリーを見る
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
+          </div>
+
+          <!-- イラスト -->
+          <div class="flex-1 order-1 md:order-2 w-full max-w-sm md:max-w-none mx-auto">
+            <img src={aboutIllust} alt="ノートパソコンに向かう女性のイラスト" class="block w-full h-auto" />
+          </div>
+        </div>
+      </div>
+
+      <!-- モーダル -->
+      <div id="about-me-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8">
+        <div id="about-me-overlay" class="absolute inset-0 bg-[#2c2622]/50"></div>
+        <div class="relative bg-white rounded-[24px] max-w-3xl w-full max-h-[85vh] overflow-y-auto px-6 py-10 md:px-12 md:py-12 shadow-[0_24px_60px_rgba(0,0,0,0.2)]">
+          <button
+            id="about-me-close"
+            type="button"
+            aria-label="閉じる"
+            class="absolute top-5 right-5 w-8 h-8 flex items-center justify-center text-sage/60 hover:text-sage transition-colors"
+          >
+            <svg aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <div class="flex flex-col md:flex-row gap-8 md:gap-10 items-start">
+            <!-- 丸い写真 -->
+            <div class="shrink-0 mx-auto md:mx-0">
+              <img
+                src={aboutMePhoto}
+                alt="Bloom Link代表 原早苗"
+                class="block w-[160px] h-[160px] md:w-[180px] md:h-[180px] rounded-full object-cover border-[3px] border-pinkLight shadow-[0_10px_24px_rgba(53,94,72,0.1)]"
+              />
+            </div>
+
+            <!-- 文章 -->
+            <div class="flex-1">
+              <h3 class="text-lg md:text-xl font-medium text-sage leading-snug mb-3">
+                つながりを育てる仕事を選んだ理由
+              </h3>
+              <div class="w-10 h-[2px] bg-sage mb-6"></div>
+              <div class="ja-text text-[13px] md:text-sm text-[#6B6B64] leading-[1.9] space-y-4">
+                {aboutMeBody.map((line) => (
+                  <p class="whitespace-pre-line">{line}</p>
+                ))}
+              </div>
+              <div class="mt-8">
+                <p class="text-sm text-sage font-medium tracking-wide">原 早苗（はら さなえ）</p>
+                <p class="text-xs text-[#8a8078] mt-1">Bloom Link 代表 ／ LINE公式アカウント・Lステップ構築</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <script>
+      const aboutMeOpenBtn = document.getElementById('about-me-open');
+      const aboutMeCloseBtn = document.getElementById('about-me-close');
+      const aboutMeModal = document.getElementById('about-me-modal');
+      const aboutMeOverlay = document.getElementById('about-me-overlay');
+
+      const openAboutMeModal = () => {
+        aboutMeModal?.classList.remove('hidden');
+        aboutMeModal?.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeAboutMeModal = () => {
+        aboutMeModal?.classList.add('hidden');
+        aboutMeModal?.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+
+      aboutMeOpenBtn?.addEventListener('click', openAboutMeModal);
+      aboutMeCloseBtn?.addEventListener('click', closeAboutMeModal);
+      aboutMeOverlay?.addEventListener('click', closeAboutMeModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAboutMeModal();
+      });
+    </script>
 
     <!-- 08 ご相談から運用までの流れ -->
     <section id="flow" class="bg-white">
