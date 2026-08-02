@@ -193,7 +193,7 @@ const comingSoon = [
         </nav>
         <a
           href="#contact"
-          class="text-xs md:text-sm text-cream rounded-full px-5 py-2 bg-gradient-to-b from-[#3f6d55] to-[#2c4a3a] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_6px_16px_rgba(47,78,62,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(47,78,62,0.16)] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+          class="text-xs md:text-sm text-white rounded-full px-5 py-2 bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
         >
           無料相談してみる
         </a>
@@ -226,12 +226,22 @@ const comingSoon = [
               はじめの一歩から、そばで一緒に。あなたのお店に合ったLINEを、少しずつ育てていけたら嬉しいです。
             </span>
           </p>
-          <a
-            href="mailto:bloomlink.01@gmail.com"
-            class="hero-in hero-in-4 inline-block mt-8 text-cream rounded-full px-8 py-3 text-sm bg-gradient-to-b from-[#3f6d55] to-[#2c4a3a] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_6px_16px_rgba(47,78,62,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(47,78,62,0.16)] hover:-translate-y-0.5 transition-all duration-200"
-          >
-            まずは無料で相談してみる
-          </a>
+          <div class="hero-in hero-in-4 mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="mailto:bloomlink.01@gmail.com"
+              class="inline-block text-white rounded-full px-8 py-3 text-sm bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200"
+            >
+              まずは無料で相談してみる
+            </a>
+            <a
+              href="https://lin.ee/w7c1g5d"
+              target="_blank"
+              rel="noopener"
+              class="inline-block text-white rounded-full px-8 py-3 text-sm bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_6px_16px_rgba(4,140,58,0.16)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(4,140,58,0.22)] hover:-translate-y-0.5 transition-all duration-200"
+            >
+              LINEで友だち追加
+            </a>
+          </div>
         </div>
         <div class="hero-photo-in flex justify-center">
           {heroPhoto ? (
@@ -968,12 +978,23 @@ const comingSoon = [
           LINEの活用方法や構築について、<br class="hidden md:block" />
           お気軽にご相談ください。
         </p>
-        <a
-          href="mailto:bloomlink.01@gmail.com"
-          class="reveal inline-block text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
-        >
-          無料で相談してみる →
-        </a>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+          <a
+            href="mailto:bloomlink.01@gmail.com"
+            class="reveal inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
+          >
+            無料で相談してみる →
+          </a>
+          <a
+            href="https://lin.ee/w7c1g5d"
+            target="_blank"
+            rel="noopener"
+            class="reveal inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#05b94e] hover:to-[#039e42] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
+          >
+            LINEで友だち追加
+          </a>
+        </div>
+        <p class="reveal mt-5 text-xs text-cream/75">メールでも、LINEでも、お好きな方でどうぞ。</p>
         <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
         <p class="mt-12 text-xs text-cream/60">&copy; {new Date().getFullYear()} Bloom Link</p>
       </div>
