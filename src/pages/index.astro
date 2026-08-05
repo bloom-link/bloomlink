@@ -82,38 +82,42 @@ const reasons = [
   { title: '継続につながる\n仕組み', desc: 'リピートやファンづくりにつながる仕組みをご提案します。', icon: '/images/reason5.png' },
 ];
 
-const buildPlans = [
+// ① 毎月の運用プラン（主役）
+const monthlyPlans = [
   {
-    name: 'LINE公式\nはじめの一歩プラン',
-    price: '8万円〜',
-    desc: 'まずはLINEを始めたい方へ',
-    items: ['LINE公式アカウントの基本設定', 'リッチメニューの作成', 'あいさつメッセージの設定', '予約・お問い合わせ導線の設計'],
-    note: '小さく始めたいお店におすすめ',
+    name: 'ライトプラン',
+    amount: '15000',
+    desc: 'まずは続けてみたいお店へ',
+    items: ['発信を月2回、一緒に考えて届ける', '画面（リッチメニュー等）の手入れ', 'ご相談'],
     accent: 'sage',
   },
   {
-    name: 'LINE＋Lステップ\nスタートプラン',
-    price: '10万円〜',
-    desc: 'リピーターを増やしたい方へ',
-    items: ['LINE公式の設定内容すべて', '自動メッセージ・リマインド配信', 'アンケート・フォームの活用', 'セグメント配信で顧客管理'],
-    note: 'もっと活用したいお店におすすめ',
+    name: 'スタンダードプラン\n（おすすめ）',
+    amount: '30000',
+    desc: '本気で再来店を増やしたいお店へ',
+    items: ['発信を月4回', '反応を見て内容を改善', 'クーポン・キャンペーンのご提案', '月1回の効果レポート', 'ご相談'],
     accent: 'pink',
     highlight: true,
   },
   {
-    name: 'オーダーメイド構築\nしっかり設計プラン',
-    price: '20万円〜',
-    desc: 'お店に合わせて仕組み化したい方へ',
+    name: 'しっかりプラン',
+    amount: '50000',
+    desc: '力を入れて伸ばしたいお店へ',
+    items: ['発信を週1回（月4〜5回）', '季節・イベントの企画', '自動あいさつなどの仕組み育て', '優先でご相談'],
     accent: 'dark',
-    items: ['お店に合わせた設計・ご提案', '配信設計・シナリオ設計（Lステップ等）', '予約・決済・外部システムとの連携', '運用サポート・改善提案'],
-    note: 'しっかり成果につなげたいお店におすすめ',
   },
 ];
 
-const supportPlans = [
-  { name: 'ライトプラン', amount: '8,000', desc: '月1回の配信づくりなど' },
-  { name: 'お店を育てるプラン', amount: '12,000', desc: '月2回の配信づくり・分析サポートなど' },
-  { name: 'しっかりサポートプラン', amount: '20,000', desc: '月4回の配信・改善提案・サポート充実など' },
+// ② 構築（最初の1回だけ・運用への入口）
+const buildOptions = [
+  {
+    label: '今なら',
+    title: 'モニター特典で構築0円',
+    desc: '先着3店舗／運用はモニター価格 月10,000円・3ヶ月',
+    highlight: true,
+  },
+  { label: '通常', prefix: '初期費用', amount: '3', unit: '万円〜', desc: '運用プランとセット' },
+  { label: '構築だけご希望の方', amount: '8', unit: '万円〜', desc: '運用サポートなし' },
 ];
 
 const works = [
@@ -204,9 +208,8 @@ const comingSoon = [
     <section class="relative overflow-hidden bg-[#FDFBF7]">
       <div class="max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid md:grid-cols-[0.8fr_1.25fr] gap-10 items-center">
         <div>
-          <p class="hero-in hero-in-1 text-xs tracking-wider text-sage mb-3">
-            介護をきっかけに、<br class="md:hidden" />
-            50歳から始まった新しい挑戦
+          <p class="hero-in hero-in-1 text-sm md:text-base font-medium tracking-wider text-sage mb-3">
+            LINE公式の構築から運用まで。
           </p>
           <h1 class="text-[26px] md:text-[32px] leading-[1.35] tracking-normal">
             <span class="hero-in hero-in-1 block font-medium">お客さまが自然と</span>
@@ -215,6 +218,9 @@ const comingSoon = [
             </span>
             <span class="hero-in hero-in-2 block mt-1 font-medium">LINEで。</span>
           </h1>
+          <p class="hero-in hero-in-3 mt-4 text-xs md:text-sm text-[#6B6B64] leading-relaxed max-w-xs md:max-w-md">
+            お客さまと長くつながりたいお店・事業者さまへ。構築から運用まで、いっしょに育てます。
+          </p>
           <p class="hero-in hero-in-3 mt-6 text-sm md:text-base text-[#5c5450] leading-relaxed md:leading-loose max-w-xs md:max-w-md">
             <span class="block">
               パソコンも苦手だった私が、介護をきっかけにゼロから始めた新しい働き方。まだ試行錯誤の毎日です。
@@ -243,9 +249,11 @@ const comingSoon = [
             </a>
           </div>
         </div>
-        <div class="hero-photo-in flex justify-center">
+        <div class="hero-photo-in flex justify-center md:self-end md:mb-[76px]">
           {heroPhoto ? (
-            <img src={heroPhoto} alt="Bloom Linkのイメージ" class="w-full h-auto" />
+            <div class="w-full overflow-hidden aspect-[1536/871]">
+              <img src={heroPhoto} alt="Bloom Linkのイメージ" class="block w-full h-auto" />
+            </div>
           ) : (
             <div class="w-full max-w-sm aspect-[4/5] rounded-3xl border-2 border-dashed border-sage/30 bg-white/50 flex items-center justify-center text-center text-sm text-sage/60 p-6">
               ここにスマホ画面とお店の<br />イラストを入れる
@@ -514,6 +522,97 @@ const comingSoon = [
       </div>
     </section>
 
+    <!-- 05.5 モニター店舗募集 -->
+    <section id="monitor" class="bg-[#E6F1EA]">
+      <div class="max-w-5xl mx-auto px-6 py-14 md:py-20">
+        <div class="flex flex-col gap-10 md:grid md:grid-cols-[1.1fr_1.05fr] md:gap-14 md:items-stretch">
+          <!-- 左：見出し・リード文・ボタン（上端と下端を右のカードにそろえる） -->
+          <div class="text-center md:text-left md:flex md:flex-col">
+            <h2 class="reveal ja-text text-xl md:text-2xl font-bold text-sage leading-relaxed mb-3">
+              <span class="block">LINE構築0円。</span>
+              <span class="block">一緒にLINEを育ててくださる<br class="hidden md:block" />モニター店舗を募集します。</span>
+            </h2>
+
+            <p class="reveal text-xs md:text-sm text-[#6B6B64] mb-6">
+              今回は先着3店舗さまを募集しています。
+            </p>
+
+            <p class="reveal ja-text text-sm md:text-base text-[#6B6B64] leading-loose">無料で終わる関係ではなく、<br class="hidden lg:block" />LINEを一緒に育てながら、成果や事例を<br class="hidden lg:block" />作っていけるパートナーを募集しています。</p>
+
+            <p class="reveal ja-text text-base md:text-lg font-medium text-sage leading-relaxed mt-8">「まずは試してみたい」<br class="hidden lg:block" />という方も大歓迎です。あなたのお店に合ったLINEを、<br class="hidden lg:block" />一緒に育てていきましょう。</p>
+
+            <div class="reveal mt-14">
+              <a
+                href="#contact"
+                class="inline-block text-white rounded-full px-8 py-3.5 text-sm md:text-base bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200"
+              >
+                モニターに応募する →
+              </a>
+            </div>
+          </div>
+
+          <!-- 右：白いカード（上にピンクのラベル） -->
+          <div class="reveal relative mt-4 md:mt-0">
+            <span class="absolute -top-4 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-full bg-pink text-white text-xs md:text-sm px-5 py-2 shadow-[0_6px_16px_rgba(180,120,132,0.18)]">
+              先着3店舗・構築費用0円
+            </span>
+            <div class="rounded-[28px] bg-white px-6 pt-10 pb-8 md:px-9 md:pt-11 md:pb-9 shadow-[0_10px_28px_rgba(53,94,72,0.08)] text-center md:text-left">
+              <div class="inline-block text-left">
+                <p class="text-sm font-bold text-sage mb-3">料金</p>
+                <ul class="text-sm md:text-base text-[#6B6B64] leading-loose space-y-3">
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>構築（最初のLINE作り）：0円（通常3〜5万円）</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>
+                      運用（毎月いっしょに育てる）：モニター特別価格 月10,000円（最初の3ヶ月）
+                      <span class="block text-xs md:text-sm text-[#6B6B64]/80 mt-1 pl-4">
+                        → 3ヶ月のあと、続けたい場合は通常プラン（ライト月15,000円〜）へ
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+
+                <p class="text-sm font-bold text-sage mt-8 mb-3">「育てる」って、こんなことです</p>
+                <ul class="text-sm md:text-base text-[#6B6B64] leading-loose space-y-3">
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>毎月のLINE配信</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>配信内容のご提案</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>季節に合わせた改善</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>メニューや画面の更新</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>困った時のご相談</span>
+                  </li>
+                </ul>
+
+                <p class="text-sm font-bold text-sage mt-8 mb-3">対象</p>
+                <ul class="text-sm md:text-base text-[#6B6B64] leading-loose space-y-3">
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>お客さまの声・事例の掲載にご協力いただける方</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 06 料金の目安 -->
     <section id="price" class="bg-white">
       <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
@@ -528,16 +627,16 @@ const comingSoon = [
 
             <!-- 丸バッジ：スマホ表示（見出しの下に自然に回り込む） -->
             <div class="md:hidden w-40 h-36 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex flex-col items-center justify-center text-center gap-1.5 px-6 py-5 mb-8">
-              <p class="text-base font-semibold text-pink leading-tight whitespace-nowrap">構築だけ</p>
-              <p class="text-[10px] text-pink/70 leading-tight whitespace-nowrap">（運用サポートなし）</p>
-              <p class="text-sm text-pink leading-tight whitespace-nowrap">でも大丈夫です</p>
+              <p class="text-base font-semibold text-pink leading-tight whitespace-nowrap">まずは運用から。</p>
+              <p class="text-sm text-pink leading-tight whitespace-nowrap">一緒に育てるのが</p>
+              <p class="text-sm text-pink leading-tight whitespace-nowrap">基本です</p>
             </div>
 
             <p class="reveal ja-text text-[#5c5450] leading-[2.15] max-w-md">
-              <span class="block">Bloom Linkでは、決まったプランをおすすめするのではなく、</span>
-              <span class="block mt-1">お店の状況や「こんなことをしたい」に合わせて、</span>
-              <span class="block mt-1">必要な仕組みをご提案します。</span>
-              <span class="block mt-5">はじめての方も、安心してご相談ください。</span>
+              <span class="block">Bloom Linkは「作って終わり」ではなく、</span>
+              <span class="block mt-1">毎月一緒に育てるのが基本です。</span>
+              <span class="block mt-5">まずは運用から、無理のない形で</span>
+              <span class="block mt-1">一緒に始めましょう。</span>
             </p>
           </div>
 
@@ -547,9 +646,9 @@ const comingSoon = [
 
             <!-- 丸バッジ：PC表示（料金の目安の見出しと高さを揃える） -->
             <div class="hidden md:flex md:absolute md:top-[-48px] md:right-full md:mr-[-30px] w-36 h-32 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex-col items-center justify-center text-center gap-1 px-4 py-4 z-10">
-              <p class="text-sm font-semibold text-pink leading-tight whitespace-nowrap">構築だけ</p>
-              <p class="text-[9px] text-pink/70 leading-tight whitespace-nowrap">（運用サポートなし）</p>
-              <p class="text-xs text-pink leading-tight whitespace-nowrap">でも大丈夫です</p>
+              <p class="text-sm font-semibold text-pink leading-tight whitespace-nowrap">まずは運用から。</p>
+              <p class="text-xs text-pink leading-tight whitespace-nowrap">一緒に育てるのが</p>
+              <p class="text-xs text-pink leading-tight whitespace-nowrap">基本です</p>
             </div>
 
             {pricePhoto ? (
@@ -568,16 +667,16 @@ const comingSoon = [
           </div>
         </div>
 
-        <!-- 構築プラン -->
+        <!-- ① 毎月の運用プラン（主役） -->
         <div class="flex items-center justify-center gap-4 mb-10">
           <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
           <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
-            ① 構築（最初の1回だけの費用）
+            ① 毎月の運用プラン
           </span>
           <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
         </div>
         <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-6">
-          {buildPlans.map((p) => (
+          {monthlyPlans.map((p) => (
             <div
               class={`relative overflow-hidden rounded-3xl p-9 md:p-11 bg-white border border-sage/10 text-center mx-auto w-full max-w-[92%] md:max-w-[93%] flex flex-col ${
                 p.highlight
@@ -596,19 +695,9 @@ const comingSoon = [
                   p.accent === 'pink' ? 'text-[#DFA2AE]' : p.accent === 'dark' ? 'text-[#1f3a2d]' : 'text-sage'
                 }`}
               >
-                {(() => {
-                  const m = p.price.match(/^(\d+)(.*)$/);
-                  const numSize = p.highlight ? 'text-[24px] md:text-[30px]' : 'text-[22px] md:text-[28px]';
-                  const unitSize = p.highlight ? 'text-[15px] md:text-[17px]' : 'text-[14px] md:text-[16px]';
-                  return m ? (
-                    <>
-                      <span class={`font-semibold ${numSize}`}>{m[1]}</span>
-                      <span class={`${unitSize} ml-0.5`}>{m[2]}</span>
-                    </>
-                  ) : (
-                    <span class={p.highlight ? 'text-[19px] md:text-[24px]' : 'text-[18px] md:text-[23px]'}>{p.price}</span>
-                  );
-                })()}
+                <span class={p.highlight ? 'text-[15px] md:text-[17px] mr-1' : 'text-[14px] md:text-[16px] mr-1'}>月</span>
+                <span class={p.highlight ? 'font-semibold text-[24px] md:text-[30px]' : 'font-semibold text-[22px] md:text-[28px]'}>{p.amount}</span>
+                <span class={p.highlight ? 'text-[15px] md:text-[17px] ml-0.5' : 'text-[14px] md:text-[16px] ml-0.5'}>円〜</span>
               </p>
               <p class="text-xs text-[#8a8078] whitespace-pre-line leading-relaxed mb-8">{p.desc}</p>
               <ul class="text-sm text-[#4a4542] space-y-3.5 text-left max-w-[220px] mx-auto">
@@ -633,15 +722,6 @@ const comingSoon = [
                   </li>
                 ))}
               </ul>
-              {p.note && (
-                <p
-                  class={`inline-block text-xs text-[#8a8078] leading-relaxed mt-6 rounded-full px-4 py-2 ${
-                    p.accent === 'pink' ? 'bg-pinkLight/35' : 'bg-sage/15'
-                  }`}
-                >
-                  {p.note}
-                </p>
-              )}
               <div
                 class={`absolute bottom-0 left-0 right-0 h-[3px] ${
                   p.accent === 'pink' ? 'bg-pink' : p.accent === 'dark' ? 'bg-[#1f3a2d]' : 'bg-sage'
@@ -650,36 +730,46 @@ const comingSoon = [
             </div>
           ))}
         </div>
-        <p class="reveal text-xs text-[#6b6259] text-center mb-10 max-w-md mx-auto rounded-2xl border border-[#e5e0da] bg-[#FAF7F2] px-6 py-4">
-          ※ 金額はすべて目安です。内容・規模に合わせて、ご相談しながら調整します。
+        <p class="reveal ja-text text-sm text-sage text-center mb-6 max-w-2xl mx-auto leading-relaxed">
+          運用は、作って終わりにしないための大切な部分です。まずはライトプランから、無理なく一緒に始められます。
+        </p>
+        <p class="reveal text-xs text-[#6b6259] text-center mb-16 max-w-md mx-auto rounded-2xl border border-[#e5e0da] bg-[#FAF7F2] px-6 py-4">
+          ※ まずは3ヶ月から。つながりは、続けることで育っていきます。
         </p>
 
-        <!-- 運用サポート -->
+        <!-- ② 構築（最初の1回だけ・運用への入口） -->
         <div class="flex items-center justify-center gap-4 mb-10">
           <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
           <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
-            ② 運用サポート（毎月・希望する方だけ）
+            ② 構築（最初の1回だけ・運用への入口）
           </span>
           <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
         </div>
         <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-8">
-          {supportPlans.map((p) => (
-            <div class="rounded-3xl p-10 md:p-12 bg-white border border-sage/10 shadow-[0_10px_28px_rgba(53,94,72,0.035)] text-center mx-auto w-full max-w-[88%]">
-              <h3 class="font-medium text-[#5b6a60] leading-snug mb-4">{p.name}</h3>
-              <div class="w-10 h-[2px] bg-sage/40 mx-auto mb-3"></div>
-              <p class="mb-3">
-                <span class="text-[11px] text-[#DFA2AE]/80 align-top">月</span>
-                <span class="text-xs text-[#DFA2AE]">{p.amount}</span>
-                <span class="text-[10px] text-[#DFA2AE]">円</span>
-                <span class="text-[10px] text-[#DFA2AE]/80">〜</span>
-              </p>
-              <p class="text-xs text-[#5c5450]/70 leading-relaxed">{p.desc}</p>
+          {buildOptions.map((o) => (
+            <div
+              class={`rounded-3xl p-10 md:p-12 bg-white text-center mx-auto w-full max-w-[88%] border ${
+                o.highlight
+                  ? 'border-pink/30 shadow-[0_14px_36px_rgba(180,120,132,0.10)]'
+                  : 'border-sage/10 shadow-[0_10px_28px_rgba(53,94,72,0.035)]'
+              }`}
+            >
+              <p class={`text-xs mb-3 ${o.highlight ? 'text-[#C77E90]' : 'text-[#8a8078]'}`}>{o.label}</p>
+              <h3 class={`font-medium leading-snug mb-4 ${o.highlight ? 'text-[#C77E90]' : 'text-[#5b6a60]'}`}>
+                {o.amount ? (
+                  <>
+                    {o.prefix && <span class="block text-sm mb-1">{o.prefix}</span>}
+                    <span class="whitespace-nowrap"><span class="font-semibold text-[22px] md:text-[26px]">{o.amount}</span><span class="text-[13px] md:text-[14px]">{o.unit}</span></span>
+                  </>
+                ) : (
+                  o.title
+                )}
+              </h3>
+              <div class={`w-10 h-[2px] mx-auto mb-3 ${o.highlight ? 'bg-pink/50' : 'bg-sage/40'}`}></div>
+              <p class="text-xs text-[#5c5450]/70 leading-relaxed">{o.desc}</p>
             </div>
           ))}
         </div>
-        <p class="reveal text-sm text-sage text-center mb-8">
-          運用は必須ではありません。「作って終わり」も、あとから始めても大丈夫です。
-        </p>
 
         <div class="reveal bg-pinkLight/20 rounded-[1.75rem] w-full px-8 py-6 md:px-14 md:py-7 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
           <div class="shrink-0 md:pr-10 md:border-r md:border-pink/20">
@@ -965,7 +1055,7 @@ const comingSoon = [
 
     <!-- お問い合わせ / フッター -->
     <footer id="contact" class="bg-sage text-cream">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 text-center">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-16 text-center">
         {footerLogo && (
           <img src={footerLogo} alt="Bloom Link" class="h-10 md:h-12 w-auto mx-auto mb-5" />
         )}
@@ -975,7 +1065,7 @@ const comingSoon = [
           未来を咲かせる。
         </p>
         <p class="reveal mb-10 text-sm text-cream/85 max-w-xs md:max-w-sm mx-auto leading-relaxed">
-          LINEの活用方法や構築について、<br class="hidden md:block" />
+          LINE公式の構築から運用まで、<br class="hidden md:block" />
           お気軽にご相談ください。
         </p>
         <div class="flex flex-col md:flex-row items-center justify-center gap-4">
