@@ -1,0 +1,331 @@
+---
+import '../styles/global.css';
+
+const LINE_URL = 'https://lin.ee/w7c1g5d';
+
+// トップページと同じヘッダーナビ（別ページなので /#... で戻れるようにする）
+const nav = [
+  { label: 'Bloom Linkとは', href: '/#about' },
+  { label: 'できること', href: '/#service' },
+  { label: '選ばれる理由', href: '/#reason' },
+  { label: '料金プラン', href: '/#price' },
+  { label: '制作事例', href: '/#works' },
+  { label: '作品集', href: '/works/' },
+  { label: 'お問い合わせ', href: '/#contact' },
+];
+
+// セクション1：制作事例（3件）
+// left … 左の列の画像（案件ごとに中身が違う）
+//   shadow: false の画像には影を付けない（phone-* は画像内に影があるため）
+const cases = [
+  {
+    left: {
+      src: '/images/works/phone-runaya.jpg',
+      alt: 'るなや LINE画面',
+      maxW: 'max-w-[400px]',
+      // スマホ画面は縦長なので、PCでは右側（リッチメニュー＋カード）の高さに収まるよう幅を絞る
+      imgMaxW: 'max-w-[400px] md:max-w-[300px]',
+      shadow: false,
+      caption: null,
+    },
+    name: 'るなや',
+    industry: '飲食店（東京・府中）',
+    desc: '予約・営業状況・グループ店のご案内までを1画面に。「今日は開いてる？」に、お店が答えなくても答えられる形にしました。',
+    richmenu: { src: '/images/works/runaya-richmenu.jpg', alt: 'るなや リッチメニュー' },
+    cards: [
+      { src: '/images/works/runaya-card-hours.jpg', alt: 'るなや 営業時間カード', caption: '営業時間' },
+      { src: '/images/works/runaya-card-status.jpg', alt: 'るなや 本日の営業状況カード', caption: '本日の営業状況' },
+    ],
+  },
+  {
+    left: {
+      src: '/images/works/rosawood-message.jpg',
+      alt: 'ROSA WOOD リッチメッセージ',
+      maxW: 'max-w-[380px]',
+      shadow: true,
+      caption: 'リッチメッセージ（トークに届く読みもの）',
+    },
+    name: 'ROSA WOOD',
+    industry: 'アロマテラピーサロン',
+    desc: 'メニューが多いサロンでも迷わないように導線を整理。読みものとして届けるリッチメッセージも作りました。',
+    richmenu: { src: '/images/works/rosawood-richmenu.jpg', alt: 'ROSA WOOD リッチメニュー' },
+    cards: [
+      { src: '/images/works/rosawood-card-aroma.jpg', alt: 'ROSA WOODのアロマ カード', caption: 'ROSA WOODのアロマ' },
+      { src: '/images/works/rosawood-card-voice.jpg', alt: 'お客様の声 カード', caption: 'お客様の声' },
+    ],
+  },
+  {
+    left: {
+      src: '/images/works/bloomlink-logo.jpg',
+      alt: 'Bloom Link ロゴデザイン',
+      maxW: 'max-w-[400px]',
+      shadow: true,
+      caption: 'ロゴデザイン',
+    },
+    name: 'Bloom Link（自社）',
+    industry: 'LINE公式アカウント・Lステップ構築サポート',
+    desc: 'ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。',
+    richmenu: { src: '/images/works/bloomlink-richmenu.jpg', alt: 'Bloom Link リッチメニュー' },
+    cards: [],
+  },
+];
+
+// セクション2：デザイン見本
+const samples = [
+  {
+    src: '/images/works/sample-cafe-richmenu.jpg',
+    alt: 'カフェ向け リッチメニュー見本',
+    title: 'カフェ',
+    desc: '朝の光とやわらかい線で、ゆっくり過ごせる時間を。',
+  },
+  {
+    src: '/images/works/sample-bar-richmenu.jpg',
+    alt: 'BAR向け リッチメニュー見本',
+    title: 'BAR',
+    desc: '同じ飲食店でも、夜のお店は色も線もがらりと変わります。',
+  },
+];
+
+// セクション3：バナー・サムネイル
+const banners = [
+  { src: '/images/works/note-thumbnail-1.jpg', alt: 'note記事サムネイル 1', caption: 'note記事サムネイル' },
+  { src: '/images/works/note-thumbnail-2.jpg', alt: 'note記事サムネイル 2', caption: 'note記事サムネイル' },
+];
+
+const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>作品集｜Bloom Link</title>
+    <meta
+      name="description"
+      content="Bloom Linkがこれまでにつくった LINE公式アカウントのデザイン作品集。リッチメニュー・カードタイプメッセージ・リッチメッセージの制作事例をご紹介します。"
+    />
+  </head>
+  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
+    <!-- ヘッダー（トップページと同じ） -->
+    <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-sage/10">
+      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-[#5c5450]">
+          {nav.map((item) => (
+            <a href={item.href} class="hover:text-sage transition-colors">{item.label}</a>
+          ))}
+        </nav>
+        <a
+          href="/#contact"
+          class="text-xs md:text-sm text-white rounded-full px-5 py-2 bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+        >
+          無料相談してみる
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ■ 冒頭 -->
+      <section class="bg-cream">
+        <div class="max-w-5xl mx-auto px-6 pt-20 md:pt-28 pb-8 md:pb-10">
+          <p class="text-xs tracking-[0.25em] text-sage/60 mb-4">WORKS</p>
+          <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-8">作品集</h1>
+          <p class="ja-text text-[#5c5450] leading-[2] mb-8 max-w-3xl">
+            これまでにつくった LINE公式アカウントのデザインです。<br />
+            お店の雰囲気に合わせて、一つひとつ作っています。
+          </p>
+          <ul class="space-y-2 text-sm text-[#6B6B64] leading-relaxed max-w-3xl">
+            <li>・リッチメニュー … LINEを開いたとき、画面の下半分にいつも出ているメニュー</li>
+            <li>・カードタイプメッセージ … トークに届く、横にスワイプして見られるカード</li>
+            <li>・リッチメッセージ … トークに届く、1枚の大きな画像</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ■ セクション1：制作事例 -->
+      <section class="bg-cream">
+        <div class="max-w-5xl mx-auto px-6 pt-10 md:pt-12 pb-16 md:pb-24">
+          <div class="mb-14 md:mb-20">
+            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">制作事例</h2>
+            <p class="text-sm text-[#6B6B64]">実際のお店で使われているLINEです</p>
+          </div>
+
+          <div class="space-y-24 md:space-y-32">
+            {cases.map((c) => (
+              <article class="grid gap-y-8 md:grid-cols-[400px_1fr] md:gap-x-16 md:gap-y-0">
+                <!-- 1行目・左：店名 → 業種 → 説明（文字幅は下の画像とそろえる） -->
+                <div class={`${c.left.maxW} md:col-start-1 md:row-start-1 md:mb-[30px]`}>
+                  <h3 class="text-lg md:text-xl font-medium text-sage leading-snug mb-1">{c.name}</h3>
+                  <p class="text-sm text-[#6B6B64] mb-5">{c.industry}</p>
+                  <p class="ja-text text-[#5c5450] leading-[2]">{c.desc}</p>
+                </div>
+
+                <!-- 1行目・右：空 -->
+                <div class="hidden md:block md:col-start-2 md:row-start-1"></div>
+
+                <!-- 2行目・左：画像（案件ごとに中身が違う1枚） -->
+                <div class="md:col-start-1 md:row-start-2">
+                  <figure class={c.left.imgMaxW ?? c.left.maxW}>
+                    <img
+                      src={c.left.src}
+                      alt={c.left.alt}
+                      loading="lazy"
+                      class={`block w-full h-auto rounded-2xl ${c.left.shadow ? imgShadow : ''}`}
+                    />
+                    {c.left.caption && (
+                      <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{c.left.caption}</figcaption>
+                    )}
+                  </figure>
+                </div>
+
+                <!-- 2行目・右：リッチメニュー ＋ カード -->
+                <div class="md:col-start-2 md:row-start-2">
+                  <!-- リッチメニュー -->
+                  <figure class="mb-8">
+                    <img
+                      src={c.richmenu.src}
+                      alt={c.richmenu.alt}
+                      loading="lazy"
+                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                    />
+                    <figcaption class="text-xs text-[#6B6B64] text-center mt-3">リッチメニュー</figcaption>
+                  </figure>
+
+                  <!-- カード（横2列・スマホでも2列） -->
+                  {c.cards.length > 0 && (
+                    <div class="grid grid-cols-2 gap-4 md:gap-6">
+                      {c.cards.map((card) => (
+                        <figure>
+                          <img
+                            src={card.src}
+                            alt={card.alt}
+                            loading="lazy"
+                            class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                          />
+                          <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{card.caption}</figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ セクション2：デザイン見本（背景をごく薄いサブ緑に） -->
+      <section class="bg-[#BFD4C7]/20">
+        <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+          <div class="mb-12 md:mb-16">
+            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">デザイン見本</h2>
+            <p class="text-sm text-[#6B6B64]">落ち着いた雰囲気だけでなく、こんなテイストも作れます</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+            {samples.map((s) => (
+              <div>
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  loading="lazy"
+                  class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                />
+                <h3 class="text-base md:text-lg font-medium text-sage mt-5 mb-2">{s.title}</h3>
+                <p class="ja-text text-sm text-[#5c5450] leading-[1.9]">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p class="ja-text text-sm text-[#6B6B64] leading-[1.9] mt-12">
+            同じ「飲食店」でも、お店の時間帯やお客さまに合わせて作り分けます。
+          </p>
+        </div>
+      </section>
+
+      <!-- ■ セクション3：バナー・サムネイル -->
+      <section class="bg-cream">
+        <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+          <div class="mb-12 md:mb-16">
+            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">バナー・サムネイル</h2>
+            <p class="text-sm text-[#6B6B64]">LINE以外のデザインも作っています</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+            {banners.map((b) => (
+              <figure>
+                <img
+                  src={b.src}
+                  alt={b.alt}
+                  loading="lazy"
+                  class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                />
+                <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{b.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ 最後：お問い合わせへの導線 -->
+      <section class="bg-cream">
+        <div class="max-w-3xl mx-auto px-6 pb-24 md:pb-32 pt-4 text-center">
+          <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-5">うちのお店だと、どうなる？</h2>
+          <p class="ja-text text-[#5c5450] leading-[2] mb-10">
+            ご相談は無料です。無理な勧誘はしません。
+          </p>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(4,140,58,0.16)] hover:from-[#05b94e] hover:to-[#039e42] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(4,140,58,0.22)] hover:-translate-y-0.5 transition-all duration-200"
+            >
+              LINEで相談する
+            </a>
+            <a
+              href="/#works"
+              class="inline-block w-full max-w-xs md:w-auto text-sage rounded-full px-9 py-3.5 text-sm font-medium border border-sage/30 hover:bg-sage/5 hover:-translate-y-0.5 transition-all duration-200"
+            >
+              閉じる
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター（トップページと同じ） -->
+    <footer class="bg-sage text-cream">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-16 text-center">
+        <p class="text-xl tracking-[0.15em] mb-7">Bloom Link</p>
+        <p class="mb-6 text-2xl md:text-3xl leading-relaxed">
+          つながりを育て、<br />
+          未来を咲かせる。
+        </p>
+        <p class="mb-10 text-sm text-cream/85 max-w-xs md:max-w-sm mx-auto leading-relaxed">
+          LINE公式の構築から運用まで、<br class="hidden md:block" />
+          お気軽にご相談ください。
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+          <a
+            href="mailto:bloomlink.01@gmail.com"
+            class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
+          >
+            無料で相談してみる →
+          </a>
+          <a
+            href={LINE_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#05b94e] hover:to-[#039e42] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
+          >
+            LINEで友だち追加
+          </a>
+        </div>
+        <p class="mt-5 text-xs text-cream/75">メールでも、LINEでも、お好きな方でどうぞ。</p>
+        <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
+        <p class="mt-12 text-xs text-cream/60">&copy; {new Date().getFullYear()} Bloom Link</p>
+      </div>
+    </footer>
+  </body>
+</html>

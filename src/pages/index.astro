@@ -7,6 +7,7 @@ const nav = [
   { label: '選ばれる理由', href: '#reason' },
   { label: '料金プラン', href: '#price' },
   { label: '制作事例', href: '#works' },
+  { label: '作品集', href: '/works/' },
   { label: 'お問い合わせ', href: '#contact' },
 ];
 
@@ -125,7 +126,7 @@ const works = [
     tag: '制作事例',
     tagStyle: 'solid',
     name: 'るなや',
-    sub: '飲食店（居酒屋）',
+    sub: '飲食店（東京・府中）',
     desc: '予約・営業情報・アクセスなど、\nお客様が迷わず利用できるLINEを設計しました。',
     photo: '/images/runaya-richmenu.jpg',
   },
@@ -163,13 +164,14 @@ const flow = [
 const comingSoon = [
   {
     title: 'LP制作',
-    desc: 'ブランドの世界観を大切にした、\n伝わるLP制作も準備中です。',
+    desc: 'ブランドの世界観を大切にした、\n伝わるLPをお作りします。',
     note: '※このサイトも、企画からデザイン・制作まで、すべて私が行いました。',
     icon: '/images/coming-lp.png',
   },
   {
     title: 'ブランドデザイン',
-    desc: 'ロゴ・名刺・ショップカードなど、\nブランドづくりのお手伝いも準備しています。',
+    desc: 'ロゴ・名刺・ショップカードなど、\nブランドづくりをお手伝いします。',
+    note: '※Bloom Linkのロゴ・名刺も、私がデザインしました。',
     icon: '/images/coming-brand.png',
   },
 ];
@@ -876,6 +878,16 @@ const comingSoon = [
             class="w-24 md:w-28 h-auto shrink-0 object-contain"
           />
         </div>
+
+        <div class="reveal mt-12 text-center">
+          <a
+            href="/works/"
+            class="inline-flex items-center gap-1.5 text-sm text-sage underline underline-offset-4 decoration-sage/40 hover:decoration-sage transition-colors"
+          >
+            作品集をもっと見る
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1028,10 +1040,10 @@ const comingSoon = [
         <div class="md:flex md:items-start md:gap-12">
           <!-- 左：ラベル・見出し・説明文 -->
           <div class="md:w-64 md:shrink-0 mb-10 md:mb-0">
-            <h2 class="reveal text-2xl md:text-3xl font-medium mb-4">Coming Soon</h2>
+            <h2 class="reveal text-2xl md:text-3xl font-medium mb-4">その他のお仕事</h2>
             <p class="reveal text-[#5c5450] leading-loose max-w-xs">
-              Bloom Linkは、お客様とともに成長しながら、
-              サービスも少しずつ広げていきます。
+              LINEのまわりで必要になるものは、
+              まとめてお引き受けできます。
             </p>
           </div>
 
@@ -1045,7 +1057,7 @@ const comingSoon = [
                 {c.note && (
                   <p class="text-[11px] text-[#6B6B64] leading-relaxed mb-4">{c.note}</p>
                 )}
-                <p class="mt-auto text-xs tracking-wide text-pink font-medium">Coming Soon</p>
+                <a href="#contact" class="mt-auto text-xs tracking-wide text-pink font-medium hover:text-pink/80 transition-colors">ご相談ください →</a>
               </div>
             ))}
           </div>
