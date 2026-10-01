@@ -1,0 +1,115 @@
+---
+// 料金プラン用の表。
+// PC幅：ふつうの表。スマホ幅：横に潰れないよう、梅／竹／松ごとのカードを縦に並べる。
+// セルは文字列でも、{ main, sub } でもよい（sub は main の下に小さめの字で添える）。
+type Cell = string | { main: string; sub?: string };
+interface Row {
+  label: string;
+  values: Cell[];
+}
+interface Props {
+  title: string;
+  cols: string[];
+  rows: Row[];
+  highlight?: number; // おすすめ列の番号（0始まり）。既定は1＝竹
+  lead?: string; // 見出しの下に添える説明文（任意）
+}
+const { title, cols, rows, highlight = 1, lead } = Astro.props;
+
+const toCell = (v: Cell) => (typeof v === 'string' ? { main: v, sub: undefined } : v);
+---
+
+<div class="mb-12 md:mb-16">
+  <h3
+    class:list={[
+      'reveal flex items-center gap-3 text-lg md:text-xl font-medium text-sage',
+      lead ? 'mb-3' : 'mb-5',
+    ]}
+  >
+    <span class="h-px w-6 bg-sage/40"></span>{title}
+  </h3>
+  {lead && (
+    <p class="reveal text-sm text-[#5c5450] leading-[1.9] mb-5 max-w-2xl">{lead}</p>
+  )}
+
+  <!-- PC：表 -->
+  <div class="reveal-fade hidden md:block overflow-hidden rounded-2xl border border-sage/15">
+    <table class="w-full table-fixed border-collapse text-sm">
+      <thead>
+        <tr>
+          <th class="w-32 bg-[#E6F1EA] p-3"></th>
+          {cols.map((c, i) => (
+            <th
+              class={`p-3 text-center font-semibold ${
+                i === highlight ? 'bg-pink text-white' : 'bg-sage text-cream'
+              }`}
+            >
+              {c}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr class="border-t border-sage/12">
+            <th
+              class="bg-[#E6F1EA] text-sage font-medium text-left align-top p-3 text-[13px] leading-relaxed [overflow-wrap:break-word]"
+            >
+              {row.label}
+            </th>
+            {row.values.map((v, i) => (
+              <td
+                class={`align-top p-3 leading-relaxed text-[#4a4542] [overflow-wrap:break-word] ${
+                  i === highlight ? 'bg-pinkLight/10' : ''
+                }`}
+              >
+                {toCell(v).main}
+                {toCell(v).sub && (
+                  <span class="block mt-1 text-[11px] text-[#8a8078] leading-relaxed">
+                    {toCell(v).sub}
+                  </span>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- スマホ：カード -->
+  <div class="md:hidden space-y-5">
+    {cols.map((c, i) => (
+      <div
+        class={`reveal-fade rounded-2xl border bg-white overflow-hidden ${
+          i === highlight
+            ? 'border-pink/40 shadow-[0_10px_28px_rgba(180,120,132,0.10)]'
+            : 'border-sage/15 shadow-[0_8px_20px_rgba(53,94,72,0.05)]'
+        }`}
+      >
+        <p
+          class={`px-5 py-3 text-center font-semibold ${
+            i === highlight ? 'bg-pink text-white' : 'bg-sage text-cream'
+          }`}
+        >
+          {c}
+        </p>
+        <dl class="divide-y divide-sage/10">
+          {rows.map((row) => (
+            <div class="px-5 py-3">
+              <dt class="text-xs font-medium text-sage mb-1">{row.label}</dt>
+              <dd class="text-sm text-[#4a4542] leading-relaxed [overflow-wrap:break-word]">
+                {toCell(row.values[i]).main}
+                {toCell(row.values[i]).sub && (
+                  <span class="block mt-1 text-xs text-[#8a8078] leading-relaxed">
+                    {toCell(row.values[i]).sub}
+                  </span>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    ))}
+  </div>
+</div>

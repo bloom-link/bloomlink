@@ -1,0 +1,211 @@
+---
+import '../../styles/global.css';
+
+const sections = [
+  {
+    no: '01',
+    title: 'まず、お店の「困りごと」を聞きました',
+    body: [
+      'るなやさまは、毎日日替わりのおうちご飯とお酒をお出しする、府中の小さなお店です。お店を回しているのは、オーナーさんお一人です。',
+      '最初にお聞きした一番の悩みは、「予約を把握できていない時がある」ということでした。',
+      '予約のほとんどは、オーナーさんご自身の個人LINEに届いていました。接客や仕込みの手がふさがっているときほど、連絡に気づくのが遅れてしまう。そんな状態でした。',
+      'そこで、私が最初に考えたのは「きれいなLINEを作ること」ではなく、「お一人で回すお店の手間を、どう減らすか」でした。',
+    ],
+  },
+  {
+    no: '02',
+    title: '私が感じたるなやさまの魅力',
+    body: [
+      'お客さまがるなやさまを選ぶ理由は、オーナーさん本人に会いに来ることでした。「楽しい」「私の家に来たみたい」。そんな言葉をよく言われるそうです。',
+      'お客さまの居場所をつくる。いつでも来ていい場所であること。それが、このお店でいちばん大切にしたいことだと感じました。',
+      'だから、LINEも堅苦しくしない。予約や営業状況の連絡は、お客さまにも、オーナーさんにも、手間をかけない形にしよう。そう決めました。',
+    ],
+  },
+];
+
+const proposalIntro = [
+  'ご提案したのは、「予約も、営業状況も、お店が手をかけなくても伝わるLINE」でした。',
+  'お客さまが迷わないよう、リッチメニューは6つの区画に整理しました。「予約する」「るなやとは」「本日の営業状況」「営業日・営業時間とポイントカード」「アクセス・Instagram」「グループ店舗のご案内」です。',
+];
+
+const proposalOutro = [
+  '予約のしくみは、お店に合わせて一から作りました。予約が入るとオーナーさんのLINEにすぐ通知が届き、毎日お昼には、明日の予約の一覧も届きます。人数やお席の希望を選んでいただけて、満席になれば自動で受付が止まります。',
+  '「本日の営業状況」は、スマホの画面から、営業中・定休日・臨時休業・満席をその場で切りかえられます。お客さまは「今日は開いてる？」と、お店に聞かなくても確かめられます。',
+  'また、予約のカードには、来店回数や好きなもの・苦手なものが表示されます（初回にお客さまが任意で答えた内容だけです）。お一人で回すお店でも、常連さんを「いつもの」でお迎えできるようにしました。',
+  '既製のシステムを入れるのではなく、お店の実際の条件に合わせて作る。そうすることで、月々のシステム利用料もかからない形にできました。',
+];
+
+const smallThings = [
+  'キャンセルの連絡は、電話ではなくLINEのトークだけにしました。オーナーさんが落ち着いて確認できる時間に、まとめて見られるようにするためです。',
+  '「営業状況」の管理画面は、暗証番号で守り、スマホ一つで更新できるようにしました。',
+  '店内のQRコードや、お店のInstagramからLINEに入ってもらう道すじも整えました。',
+];
+
+const gallery = [
+  { src: '/images/runaya-card-hours-2026-10.webp', caption: '営業時間のカード' },
+  { src: '/images/runaya-card-point-2026-10.webp', caption: 'ポイントカードのカード' },
+];
+
+const finalSections = [
+  {
+    no: '04',
+    title: 'これから',
+    body: [
+      'るなやさまの取り組みは、お店で使い始めるための最終の準備を進めているところです。',
+      '作って終わりではなく、実際に使いながら、お客さまの声やお店の変化に合わせて、少しずつ育てていく。そんな伴走型のサポートを大切にしています。',
+      '使い始めたあとの変化も、またご紹介できたら嬉しいです。',
+    ],
+  },
+];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>制作ストーリー｜るなやさま｜Bloom Link</title>
+    <meta
+      name="description"
+      content="Bloom Linkが、府中の飲食店「るなや」さまと進めてきたLINE構築の制作ストーリー。お一人で回すお店の手間を、どう減らしたかをご紹介します。"
+    />
+  </head>
+  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
+    <!-- ヘッダー -->
+    <header class="bg-cream/90 backdrop-blur border-b border-sage/10">
+      <div class="max-w-3xl mx-auto flex items-center px-6 py-5">
+        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <!-- タイトル -->
+      <p class="text-xs tracking-[0.2em] text-sage/60 mb-4">制作ストーリー</p>
+      <p class="text-base font-light tracking-wide text-sage/60 mb-1">飲食店（東京・府中）</p>
+      <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-6">
+        るなやさま
+      </h1>
+      <p class="text-xs text-[#8a8078] leading-relaxed mb-16 max-w-xl">
+        ※この案件は、お店で使い始めるための最終の準備中です。完成した結果ではなく、「どんな想いで、どう考えて作ったか」という制作の過程をご紹介します。
+      </p>
+
+      <!-- はじめに -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <p class="text-[#5c5450] leading-[2]">
+          <span class="block">Bloom Linkは、「LINEを作ること」を目的にはしていません。</span>
+          <span class="block mt-4">一人でお店を回すオーナーさんの手間を、LINEで減らすこと。それが、私の仕事です。</span>
+          <span class="block mt-4">るなやさまとの取り組みは、その想いを形にした、大切なプロジェクトのひとつです。</span>
+        </p>
+      </section>
+
+      {sections.map((s) => (
+        <section class="mb-16 pb-16 border-b border-sage/10">
+          <div class="flex items-baseline gap-3 mb-6">
+            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
+            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+          </div>
+          <div class="text-[#5c5450] leading-[2] space-y-4">
+            {s.body.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- 3. ご提案 -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="text-xs text-sage/40 tracking-wider">03</span>
+          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">
+            ご提案 ―「予約も、営業状況も、手をかけなくても伝わる」LINEへ
+          </h2>
+        </div>
+        <div class="text-[#5c5450] leading-[2] space-y-4 mb-10">
+          {proposalIntro.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
+
+        <!-- リッチメニュー実物 -->
+        <figure class="mb-3">
+          <div class="rounded-2xl overflow-hidden">
+            <img
+              src="/images/runaya-richmenu-2026-10.webp"
+              alt="るなやさま向けに設計したリッチメニュー"
+              class="block w-full h-auto"
+            />
+          </div>
+          <figcaption class="text-xs text-sage/50 text-center mt-3">実際に設計したリッチメニュー</figcaption>
+        </figure>
+
+        <!-- ギャラリー -->
+        <div class="grid grid-cols-2 gap-3 md:gap-4 mt-8 md:mt-10 mb-10 max-w-md mx-auto">
+          {gallery.map((g) => (
+            <figure>
+              <div class="rounded-xl overflow-hidden">
+                <img src={g.src} alt={g.caption} class="block w-full h-auto" />
+              </div>
+              <figcaption class="text-[11px] text-sage/50 text-center mt-2">{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <figure class="mb-10 max-w-[260px] mx-auto">
+          <div class="rounded-xl overflow-hidden">
+            <img src="/images/runaya-eigyo-2026-10.png" alt="本日の営業状況（実際の画面）" class="block w-full h-auto" />
+          </div>
+          <figcaption class="text-[11px] text-sage/50 text-center mt-2">本日の営業状況（実際の画面）</figcaption>
+        </figure>
+
+        <div class="text-[#5c5450] leading-[2] space-y-4">
+          {proposalOutro.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
+      </section>
+
+      <!-- 小さな工夫 -->
+      <section class="mb-16 pb-16 border-b border-sage/10">
+        <div class="bg-pinkLight/15 rounded-[1.5rem] px-6 py-8 md:px-10 md:py-10">
+          <p class="text-sm font-medium text-sage tracking-wide mb-5 text-center">【 小さな工夫 】</p>
+          <ul class="text-[#5c5450] leading-[2] text-sm md:text-base space-y-3">
+            {smallThings.map((t) => (
+              <li class="flex gap-3">
+                <span class="text-pink/70 shrink-0">・</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {finalSections.map((s) => (
+        <section class="mb-16">
+          <div class="flex items-baseline gap-3 mb-6">
+            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
+            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+          </div>
+          <div class="text-[#5c5450] leading-[2] space-y-4">
+            {s.body.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- 結び -->
+      <p class="text-center text-sage/80 italic tracking-wide mb-20">
+        つながりを育て、未来を咲かせる。—— Bloom Link
+      </p>
+
+      <!-- トップへ戻る -->
+      <div class="text-center">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm text-sage hover:text-sage/70 transition-colors"
+        >
+          ← トップページへ戻る
+        </a>
+      </div>
+    </main>
+  </body>
+</html>

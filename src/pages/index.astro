@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import PlanTable from '../components/PlanTable.astro';
 
 const nav = [
   { label: 'Bloom Linkとは', href: '#about' },
@@ -12,7 +13,7 @@ const nav = [
 ];
 
 const aboutChecklist = [
-  'お客さまに必要な情報を、必要なときに届ける',
+  '予約の連絡も、営業状況のお知らせも、手をかけなくても伝わる',
   '来店前から来店後まで、心地よいつながりをつくる',
   'お店の想いが伝わる、あなたらしい仕組みをつくる',
 ];
@@ -27,6 +28,9 @@ const aboutMeCard = [
 ];
 
 const aboutMeBody = [
+  'パソコンが苦手だった私が、介護をきっかけに始めた新しい働き方です。',
+  '25年間、花屋としてお店に立ってきました。お店を続ける大変さも、お客さまとのつながりの大切さも、知っています。',
+  'だからこそ、はじめの一歩から、そばで一緒に。あなたのお店に合ったLINEを、少しずつ育てていけたら嬉しいです。',
   '私は、花屋の家に生まれました。\n小学生の頃からお店を手伝い、気づけばそれが当たり前の毎日になっていました。',
   '正直、しんどいと感じたことも何度もあります。それでも続けてこられたのは、「あなたにお願いしたい」と言ってくださるお客さまがいたからです。',
   '父が引退し、お店を離れることになったときも、「もう少し残ってほしい」と声をかけていただきました。それは、私を頼りにしてくださるお客さまがたくさんいてくださったからでした。',
@@ -38,6 +42,10 @@ const aboutMeBody = [
   '「うちの場合はどうしたらいい？」',
   'そんなところから、一緒に考えさせていただけたら嬉しいです。',
 ];
+
+// モニター募集セクションの表示。募集しない月は false にする（セクションごと隠れます）。
+// 文面は「10月分は10月15日まで」。募集が終わったら false に。
+const showMonitor = true;
 
 // ヒーロー右側の画像
 const heroPhoto = '/images/hero.jpg';
@@ -60,65 +68,89 @@ const pricePhoto = '/images/price-photo.jpg';
 const footerLogo = null;
 
 const worries = [
-  { no: '01', text: '忙しくて、\n手が回らない', image: '/images/worry1.png' },
+  { no: '01', text: '接客中で、予約の\n連絡に気づけない', image: '/images/worry1.png' },
   { no: '02', text: 'LINEを始めたけど、\nうまく使えていない', image: '/images/worry2.png' },
-  { no: '03', text: '予約や問い合わせの\n管理が大変', image: '/images/worry3.png' },
-  { no: '04', text: 'ファンになってもらう\nところまで育てられない', image: '/images/worry4.png' },
+  { no: '03', text: '営業状況やお知らせを、\nそのつど手で知らせている', image: '/images/worry3.png' },
+  { no: '04', text: 'システムを調べる時間も、\n覚える時間もない', image: '/images/worry4.png' },
 ];
 
 const services = [
-  { title: '予約・受付', desc: '24時間いつでも予約受付。予約ページや外部予約システムへ、スムーズにご案内。' },
-  { title: 'クーポン・特典配信', desc: 'クーポンやお知らせを届けて、来店のきっかけをつくる。' },
-  { title: '自動応答・チャット', desc: 'よくある質問に自動で対応。お客さまの満足度をアップ。' },
-  { title: 'リピート・来店促進', desc: 'お客さま一人ひとりに合った情報を届けて、自然とまた来たくなる関係に。' },
-  { title: 'お客さま管理', desc: '属性や来店履歴をもとに、最適な情報を届けることができます。' },
-  { title: '分析・顧客管理', desc: 'データを分析して、効果的な改善やサービスの向上につなげる。' },
+  { title: '予約・受付', desc: '予約が入ると、お店のLINEにすぐ通知。24時間いつでも受付できます。' },
+  { title: '営業状況・お知らせ', desc: '本日の営業状況やキャンペーンを、スマホからすぐ届けられます。' },
+  { title: '自動応答・チャット', desc: 'よくある質問に自動でお返事。接客中でも、お客さまを待たせません。' },
+  { title: 'リピート・来店促進', desc: '季節やお店の予定に合わせて、配信の内容までご提案します。' },
+  { title: 'お客さま管理', desc: 'お客さまの情報をもとに、必要な方へ必要なお知らせを。' },
+  { title: '毎月おまかせ', desc: '配信の文章と画像づくりまで、こちらでお引き受けします。' },
 ];
 
 const reasons = [
   { title: '丁寧な\nヒアリング', desc: 'あなたの想いや課題を丁寧にお聞きし、最適な仕組みをご提案します。', icon: '/images/reason1.png' },
-  { title: 'オーダーメイド\n設計', desc: 'あなたのお店に合ったLINEの仕組みを、一から設計します。', icon: '/images/reason2.png' },
+  { title: 'お店専用に、\n手間を減らす', desc: '一人で回すお店でも続けられるよう、予約の通知や営業状況の切りかえなど、手間を減らす仕組みをお店に合わせて整えます。', icon: '/images/reason2.png' },
   { title: '初心者サポート\nが得意', desc: '初めてでも安心。わかるまでやさしくサポートします。', icon: '/images/reason3.png' },
   { title: '運用まで\nしっかりサポート', desc: '構築して終わりではなく、成果につながる運用まで伴走します。', icon: '/images/reason4.png' },
   { title: '継続につながる\n仕組み', desc: 'リピートやファンづくりにつながる仕組みをご提案します。', icon: '/images/reason5.png' },
 ];
 
-// ① 毎月の運用プラン（主役）
-const monthlyPlans = [
+// 料金プラン：表1 LINE公式アカウント
+const linePlanCols = ['梅', '竹（おすすめ）', '松'];
+const linePlanRows = [
   {
-    name: 'ライトプラン',
-    amount: '15000',
-    desc: 'まずは続けてみたいお店へ',
-    items: ['発信を月2回、一緒に考えて届ける', '画面（リッチメニュー等）の手入れ', 'ご相談'],
-    accent: 'sage',
+    label: 'こんなお店に',
+    values: ['まずは、はじめてみたい', '配信まで、まかせたい', 'お店が2つ以上ある'],
   },
   {
-    name: 'スタンダードプラン\n（おすすめ）',
-    amount: '30000',
-    desc: '本気で再来店を増やしたいお店へ',
-    items: ['発信を月4回', '反応を見て内容を改善', 'クーポン・キャンペーンのご提案', '月1回の効果レポート', 'ご相談'],
-    accent: 'pink',
-    highlight: true,
+    label: '最初の構築',
+    values: [
+      '30,000円',
+      '80,000円',
+      '1店舗目 80,000円／2店舗目〜 50,000円',
+    ],
   },
   {
-    name: 'しっかりプラン',
-    amount: '50000',
-    desc: '力を入れて伸ばしたいお店へ',
-    items: ['発信を週1回（月4〜5回）', '季節・イベントの企画', '自動あいさつなどの仕組み育て', '優先でご相談'],
-    accent: 'dark',
+    label: 'つくるもの',
+    values: [
+      'リッチメニュー3区画＋あいさつ文',
+      'リッチメニュー6区画＋カード最大16枚＋あいさつ文＋自動応答',
+      '竹の内容を全店舗分＋店舗間の導線',
+    ],
+  },
+  {
+    label: '毎月の運用',
+    values: ['月15,000円', '月20,000円', '月15,000円 × 店舗数'],
+  },
+  { label: '最低期間', values: ['3ヶ月', '3ヶ月', '6ヶ月'] },
+  { label: '毎月の差し替え', values: ['差し替え1回', '差し替え2回＋並べ替え1回', '差し替え2回＋並べ替え1回'] },
+];
+
+// 料金プラン：表2 LINE＋お店の紹介ページ のセット
+const setPlanCols = ['梅セット', '竹セット（おすすめ）', '松セット'];
+const setPlanRows = [
+  { label: '最初にかかる費用', values: ['30,000円', '90,000円', '100,000円（2店舗目〜 ＋50,000円ずつ）'] },
+  {
+    label: '中身',
+    values: [
+      'LINE梅＋紹介ページ1ページ',
+      'LINE竹＋取材して文章も作る1ページ',
+      'LINE松＋3〜5ページ（2店舗から。1店舗の方は竹セットへ）',
+    ],
+  },
+  { label: '毎月（見守り）', values: ['5,000円', '―', '―'] },
+  { label: '毎月（おまかせ）', values: ['15,000円', '20,000円', '15,000円 × 店舗数'] },
+  {
+    label: 'おまかせに含まれる毎月の差し替え',
+    values: [
+      'ページ1回＋LINE公式1回',
+      'ページ2回＋LINE公式（差し替え2回＋並べ替え1回）',
+      'ページ2回＋LINE公式（差し替え2回＋並べ替え1回）',
+    ],
   },
 ];
 
-// ② 構築（最初の1回だけ・運用への入口）
-const buildOptions = [
-  {
-    label: '今なら',
-    title: 'モニター特典で構築0円',
-    desc: '先着3店舗／運用はモニター価格 月10,000円・3ヶ月',
-    highlight: true,
-  },
-  { label: '通常', prefix: '初期費用', amount: '3', unit: '万円〜', desc: '運用プランとセット' },
-  { label: '構築だけご希望の方', amount: '8', unit: '万円〜', desc: '運用サポートなし' },
+// 料金プラン：お店の紹介ページだけ
+const pagePlans = [
+  { name: '梅', price: '初期10,000円＋月額5,000円', note: 'まずは1ページから' },
+  { name: '竹', price: '初期30,000円＋月額8,000円', note: '取材して文章も作る1ページ' },
+  { name: '松', price: '初期50,000円＋月額12,000円', note: '3〜5ページ・お店をまるごと紹介' },
 ];
 
 const works = [
@@ -127,15 +159,19 @@ const works = [
     tagStyle: 'solid',
     name: 'るなや',
     sub: '飲食店（東京・府中）',
-    desc: '予約・営業情報・アクセスなど、\nお客様が迷わず利用できるLINEを設計しました。',
-    photo: '/images/runaya-richmenu.jpg',
+    heading: 'ワンオペのお店の、予約の見落としを減らしました。',
+    desc: '予約が入ると、すぐにお店のLINEに通知が届きます。「予約する」「本日の営業状況」「アクセス・Instagram」「グループ店舗のご案内」が、リッチメニューのひと押しで開けます。',
+    photo: '/images/runaya-richmenu-2026-10.webp',
+    linkLabel: '制作ストーリーを見る',
+    linkHref: '/story/runaya',
   },
   {
-    tag: '制作中（進行中）',
+    tag: '制作事例',
     tagStyle: 'pink',
     name: 'ROSA WOOD',
     sub: 'アロマテラピーサロン',
-    desc: 'ブランドコンセプトからご一緒し、\n世界観を大切にしたLINE構築を進めています。',
+    heading: 'お客さまから「綺麗になった」「予約がLINEからできた」とお声をいただきました。',
+    desc: 'リッチメニュー6区画とカード16枚のLINEを作りました。「暮らしを楽しむ教室」の説明をLINEに入れたことで、講座や教室を、以前より積極的に開催されるようになりました。',
     photo: '/images/rosawood.jpg',
     linkLabel: '制作ストーリーを見る',
     linkHref: '/story/rosa-wood',
@@ -181,7 +217,7 @@ const comingSoon = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bloom Link｜LINEで、また来たくなる仕組みを</title>
+    <title>Bloom Link｜一人で回すお店の手間を減らす、LINE公式アカウント構築</title>
     <meta
       name="description"
       content="Bloom Linkは、LINE公式アカウントの構築・運用をサポートするサービスです。予約・リピート・お知らせを、やさしく仕組み化します。"
@@ -209,34 +245,26 @@ const comingSoon = [
     <!-- 01 トップ / ヒーロー -->
     <section class="relative overflow-hidden bg-[#FDFBF7]">
       <div class="max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid md:grid-cols-[0.8fr_1.25fr] gap-10 items-center">
-        <div>
+        <div class="md:self-center">
           <p class="hero-in hero-in-1 text-sm md:text-base font-medium tracking-wider text-sage mb-3">
-            LINE公式の構築から運用まで。
+            LINE公式アカウントの構築から運用まで。
           </p>
           <h1 class="text-[26px] md:text-[32px] leading-[1.35] tracking-normal">
-            <span class="hero-in hero-in-1 block font-medium">お客さまが自然と</span>
-            <span class="hero-in hero-in-2 block mt-1 ml-2 md:ml-4 whitespace-nowrap">
-              <span class="font-bold text-pink">&quot;また来たくなる&quot;</span><span class="font-medium">仕組みを、</span>
-            </span>
-            <span class="hero-in hero-in-2 block mt-1 font-medium">LINEで。</span>
+            <span class="hero-in hero-in-1 block font-medium">スタッフを増やす前に、</span>
+            <span class="hero-in hero-in-2 block mt-1 font-bold text-pink">LINEにまかせてみる。</span>
           </h1>
-          <p class="hero-in hero-in-3 mt-4 text-xs md:text-sm text-[#6B6B64] leading-relaxed max-w-xs md:max-w-md">
-            お客さまと長くつながりたいお店・事業者さまへ。構築から運用まで、いっしょに育てます。
+          <p class="hero-in hero-in-3 mt-4 text-[14px] md:text-[17px] font-medium text-sage leading-relaxed max-w-none md:max-w-md">
+            オーナーさんの毎日の手間を、LINEで減らします。
           </p>
-          <p class="hero-in hero-in-3 mt-6 text-sm md:text-base text-[#5c5450] leading-relaxed md:leading-loose max-w-xs md:max-w-md">
-            <span class="block">
-              パソコンも苦手だった私が、介護をきっかけにゼロから始めた新しい働き方。まだ試行錯誤の毎日です。
-            </span>
-            <span class="block mt-4">
-              でも、25年間お店に立って、お客さまとのつながりを大切にしてきました。その想いは、今も変わりません。
-            </span>
-            <span class="block mt-4">
-              はじめの一歩から、そばで一緒に。あなたのお店に合ったLINEを、少しずつ育てていけたら嬉しいです。
-            </span>
+          <p class="hero-in hero-in-3 mt-4 text-[14px] md:text-[17px] text-[#55514d] leading-[1.9] max-w-xs md:max-w-md">
+            予約の連絡に気づけない。<br class="hidden md:block" />営業状況をそのつど知らせている。<br />
+            そんな毎日の「手間」を、<br class="hidden md:block" />お店専用のLINEにまかせられるように整えます。
           </p>
           <div class="hero-in hero-in-4 mt-8 flex flex-wrap items-center gap-3">
             <a
-              href="mailto:bloomlink.01@gmail.com"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform"
+              target="_blank"
+              rel="noopener"
               class="inline-block text-white rounded-full px-8 py-3 text-sm bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200"
             >
               まずは無料で相談してみる
@@ -251,7 +279,7 @@ const comingSoon = [
             </a>
           </div>
         </div>
-        <div class="hero-photo-in flex justify-center md:self-end md:mb-[76px]">
+        <div class="hero-photo-in flex justify-center md:self-center">
           {heroPhoto ? (
             <div class="w-full overflow-hidden aspect-[1536/871]">
               <img src={heroPhoto} alt="Bloom Linkのイメージ" class="block w-full h-auto" />
@@ -285,10 +313,13 @@ const comingSoon = [
           <p class="reveal text-[#5c5450] leading-[2] mb-10 max-w-md [word-break:keep-all] [overflow-wrap:break-word]">
             <span class="block">Bloom Linkは、</span>
             <span class="block mt-4">
-              LINE公式アカウントの構築をはじめ、<br />
-              あなたのお店に合った方法を一緒に考えながら、
+              一人でお店を回すオーナーさんの手間を、<br />
+              LINEで減らすお手伝いをします。
             </span>
-            <span class="block mt-4">お店とお客さまのつながりを育てるお手伝いをします。</span>
+            <span class="block mt-4">
+              LINE公式アカウントの構築から、そのあとの運用まで。<br />
+              あなたのお店に合った方法を、一緒に考えます。
+            </span>
           </p>
 
           <ul class="reveal-stagger space-y-6 mb-10 ml-1 md:ml-2 max-w-sm">
@@ -312,7 +343,7 @@ const comingSoon = [
           </ul>
 
           <p class="reveal text-[#c48f99] leading-[2] max-w-md [word-break:keep-all] [overflow-wrap:break-word]">
-            <span class="block">お店の魅力が伝わり、ファンが増え、売上が安定する。</span>
+            <span class="block">手間が減って、お客さまと向き合う時間が増える。</span>
             <span class="block mt-1">そんな未来を、LINEで一緒に実現します。</span>
           </p>
         </div>
@@ -329,8 +360,8 @@ const comingSoon = [
           </span>
           <p class="text-xs tracking-[0.25em] text-sage/70 mb-4">FREE GIFT</p>
           <h2 class="text-lg md:text-xl font-bold text-sage leading-relaxed max-w-xl mx-auto">
-            読むだけでOK。<br class="hidden md:block" />
-            &quot;また来たくなる&quot;のヒントを、まるごとプレゼント
+            スマホだけで、15分。<br class="hidden md:block" />
+            LINE公式アカウントの作り方を、まるごとプレゼント
           </h2>
         </div>
 
@@ -339,8 +370,8 @@ const comingSoon = [
           <div class="shrink-0 w-full max-w-[240px] md:max-w-[280px] mx-auto md:mx-0">
             <div class="rounded-[28px] p-5 md:p-6 bg-[#E6F1EA]">
               <img
-                src="/images/free-guide-cover.jpg"
-                alt="Bloom Link 無料ガイド"
+                src="/images/guide-cover.jpg"
+                alt="LINE公式アカウントの作り方 無料ガイド（14ページ）"
                 class="block w-full h-auto shadow-[0_14px_32px_rgba(53,94,72,0.15)]"
               />
             </div>
@@ -349,13 +380,14 @@ const comingSoon = [
           <!-- 右：文章とボタン -->
           <div class="flex-1 text-center md:text-left">
             <p class="text-sm md:text-base text-[#6B6B64] leading-loose mb-6">
-              花屋を25年やってきた私が、自然とやってきた「また来たくなる」工夫を、
-              LINEでできる形にまとめました。むずかしい言葉なしの、読むだけのミニガイドです。
+              お店のLINE公式アカウントを、スマホだけでつくる手順を14ページにまとめました。
+              実際の画面のスクリーンショット入りなので、この通りに進めれば必ずできます。
+              パソコンは要りません。
             </p>
             <ul class="text-sm md:text-base text-[#6B6B64] leading-loose mb-8 inline-block text-left space-y-2">
               <li><span class="text-sage font-bold mr-2">&#10003;</span>お名前とメールの2つだけ（約30秒）</li>
               <li><span class="text-sage font-bold mr-2">&#10003;</span>送信するとすぐに、その場で読めます</li>
-              <li><span class="text-sage font-bold mr-2">&#10003;</span>しつこい営業はしません</li>
+              <li><span class="text-sage font-bold mr-2">&#10003;</span>相談したからといって、申し込む必要はありません</li>
             </ul>
             <div>
               <a
@@ -380,8 +412,8 @@ const comingSoon = [
           <div class="md:w-56 md:shrink-0 mb-12 md:mb-0 -mt-2 md:-mt-6">
             <h2 class="reveal text-xl md:text-2xl font-semibold leading-snug mb-4 text-center text-sage">こんなお悩み、<br />ありませんか？</h2>
             <p class="reveal text-[#5c5450] leading-[1.9] text-sm max-w-[260px]">
-              <span class="block">知り合いや友人にはSNSで告知しているけれど、思うようにお客様が集まらない。</span>
-              <span class="block mt-3">忙しくて手が回らない、そんな方へ。</span>
+              <span class="block">接客や仕込みで手がふさがっている。それでも、連絡や管理は待ってくれない。</span>
+              <span class="block mt-3">そんな方へ。</span>
             </p>
           </div>
 
@@ -419,8 +451,8 @@ const comingSoon = [
     <!-- 04 LINEだからできること -->
     <section id="service" class="bg-cream">
       <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        <h2 class="reveal text-2xl md:text-3xl font-medium mb-2 text-sage">LINEだからできること。</h2>
-        <p class="reveal text-sm text-sage/70 mb-2">お店とお客さまを、やさしくつなぐ。</p>
+        <h2 class="reveal text-[21px] md:text-3xl font-medium mb-2 text-sage">Bloom Linkだから、できること。</h2>
+        <p class="reveal text-sm text-sage/70 mb-2">一人で回すお店の「手間」を、LINEで減らします。</p>
         <p class="reveal text-[#5c5450] leading-loose mb-3 max-w-2xl">
           つながりが、売上を育てる。<br />
           LINEには、お店の未来を変える力があります。
@@ -524,7 +556,8 @@ const comingSoon = [
       </div>
     </section>
 
-    <!-- 05.5 モニター店舗募集 -->
+    <!-- 05.5 モニター店舗募集（showMonitor を false にすると、このセクションごと隠れます） -->
+    {showMonitor && (
     <section id="monitor" class="bg-[#E6F1EA]">
       <div class="max-w-5xl mx-auto px-6 py-14 md:py-20">
         <div class="flex flex-col gap-10 md:grid md:grid-cols-[1.1fr_1.05fr] md:gap-14 md:items-stretch">
@@ -532,11 +565,11 @@ const comingSoon = [
           <div class="text-center md:text-left md:flex md:flex-col">
             <h2 class="reveal ja-text text-xl md:text-2xl font-bold text-sage leading-relaxed mb-3">
               <span class="block">LINE構築0円。</span>
-              <span class="block">一緒にLINEを育ててくださる<br class="hidden md:block" />モニター店舗を募集します。</span>
+              <span class="block">モニター店舗さまを、<br class="hidden md:block" />毎月先着2名まで募集します。</span>
             </h2>
 
-            <p class="reveal text-xs md:text-sm text-[#6B6B64] mb-6">
-              今回は先着3店舗さまを募集しています。
+            <p class="reveal text-xs md:text-sm text-[#6B6B64] mb-6 leading-relaxed">
+              10月分は10月15日までです。
             </p>
 
             <p class="reveal ja-text text-sm md:text-base text-[#6B6B64] leading-loose">無料で終わる関係ではなく、<br class="hidden lg:block" />LINEを一緒に育てながら、成果や事例を<br class="hidden lg:block" />作っていけるパートナーを募集しています。</p>
@@ -556,7 +589,7 @@ const comingSoon = [
           <!-- 右：白いカード（上にピンクのラベル） -->
           <div class="reveal relative mt-4 md:mt-0">
             <span class="absolute -top-4 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-full bg-pink text-white text-xs md:text-sm px-5 py-2 shadow-[0_6px_16px_rgba(180,120,132,0.18)]">
-              先着3店舗・構築費用0円
+              毎月先着2名・構築費用0円
             </span>
             <div class="rounded-[28px] bg-white px-6 pt-10 pb-8 md:px-9 md:pt-11 md:pb-9 shadow-[0_10px_28px_rgba(53,94,72,0.08)] text-center md:text-left">
               <div class="inline-block text-left">
@@ -564,16 +597,20 @@ const comingSoon = [
                 <ul class="text-sm md:text-base text-[#6B6B64] leading-loose space-y-3">
                   <li class="flex gap-3">
                     <span class="text-sage font-bold shrink-0">&#10003;</span>
-                    <span>構築（最初のLINE作り）：0円（通常3〜5万円）</span>
+                    <span>構築（最初のLINE作り）：0円（通常30,000円）</span>
                   </li>
                   <li class="flex gap-3">
                     <span class="text-sage font-bold shrink-0">&#10003;</span>
                     <span>
-                      運用（毎月いっしょに育てる）：モニター特別価格 月10,000円（最初の3ヶ月）
+                      運用（毎月いっしょに育てる）：最初の3か月 月10,000円
                       <span class="block text-xs md:text-sm text-[#6B6B64]/80 mt-1 pl-4">
-                        → 3ヶ月のあと、続けたい場合は通常プラン（ライト月15,000円〜）へ
+                        → 4か月目から 月15,000円
                       </span>
                     </span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="text-sage font-bold shrink-0">&#10003;</span>
+                    <span>最低期間：6か月</span>
                   </li>
                 </ul>
 
@@ -614,31 +651,32 @@ const comingSoon = [
         </div>
       </div>
     </section>
+    )}
 
-    <!-- 06 料金の目安 -->
+    <!-- 06 料金プラン -->
     <section id="price" class="bg-white">
       <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <h2 class="reveal text-2xl md:text-3xl font-medium mb-3">料金の目安</h2>
+        <h2 class="reveal text-2xl md:text-3xl font-medium mb-3">料金プラン</h2>
 
         <div class="md:grid md:grid-cols-[1.8fr_3.2fr] md:gap-14 items-start mb-16">
           <div class="mb-10 md:mb-0">
             <p class="reveal text-xl md:text-2xl font-medium text-sage leading-snug mb-8 md:mb-10">
-              <span class="block">あなたのお店に合った方法を、</span>
-              <span class="block">一緒に考えご提案します</span>
+              <span class="block">最初は少なめに、</span>
+              <span class="block">毎月の形で続けられます</span>
             </p>
 
             <!-- 丸バッジ：スマホ表示（見出しの下に自然に回り込む） -->
-            <div class="md:hidden w-40 h-36 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex flex-col items-center justify-center text-center gap-1.5 px-6 py-5 mb-8">
-              <p class="text-base font-semibold text-pink leading-tight whitespace-nowrap">まずは運用から。</p>
-              <p class="text-sm text-pink leading-tight whitespace-nowrap">一緒に育てるのが</p>
-              <p class="text-sm text-pink leading-tight whitespace-nowrap">基本です</p>
+            <div class="min-[1100px]:hidden w-40 h-36 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex flex-col items-center justify-center text-center gap-1.5 px-6 py-5 mb-8">
+              <p class="text-base font-semibold text-pink leading-tight whitespace-nowrap">最初は少なく、</p>
+              <p class="text-sm text-pink leading-tight whitespace-nowrap">毎月の形で、</p>
+              <p class="text-sm text-pink leading-tight whitespace-nowrap">続けられます</p>
             </div>
 
             <p class="reveal ja-text text-[#5c5450] leading-[2.15] max-w-md">
               <span class="block">Bloom Linkは「作って終わり」ではなく、</span>
-              <span class="block mt-1">毎月一緒に育てるのが基本です。</span>
-              <span class="block mt-5">まずは運用から、無理のない形で</span>
-              <span class="block mt-1">一緒に始めましょう。</span>
+              <span class="block mt-1">毎月いっしょに育てるのが基本です。</span>
+              <span class="block mt-5">一人で回すお店でも続けられるよう、</span>
+              <span class="block mt-1">手間のかからない形でご一緒します。</span>
             </p>
           </div>
 
@@ -647,10 +685,10 @@ const comingSoon = [
             <div class="absolute -inset-8 bg-gradient-to-br from-white/70 via-beige/30 to-transparent rounded-[3rem] blur-2xl"></div>
 
             <!-- 丸バッジ：PC表示（料金の目安の見出しと高さを揃える） -->
-            <div class="hidden md:flex md:absolute md:top-[-48px] md:right-full md:mr-[-30px] w-36 h-32 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex-col items-center justify-center text-center gap-1 px-4 py-4 z-10">
-              <p class="text-sm font-semibold text-pink leading-tight whitespace-nowrap">まずは運用から。</p>
-              <p class="text-xs text-pink leading-tight whitespace-nowrap">一緒に育てるのが</p>
-              <p class="text-xs text-pink leading-tight whitespace-nowrap">基本です</p>
+            <div class="hidden min-[1100px]:flex min-[1100px]:absolute min-[1100px]:top-[-48px] min-[1100px]:right-full min-[1100px]:mr-[-30px] w-36 h-32 rounded-[50%] bg-white shadow-[0_10px_28px_rgba(53,94,72,0.1)] flex-col items-center justify-center text-center gap-1 px-4 py-4 z-10">
+              <p class="text-sm font-semibold text-pink leading-tight whitespace-nowrap">最初は少なく、</p>
+              <p class="text-xs text-pink leading-tight whitespace-nowrap">毎月の形で、</p>
+              <p class="text-xs text-pink leading-tight whitespace-nowrap">続けられます</p>
             </div>
 
             {pricePhoto ? (
@@ -669,143 +707,68 @@ const comingSoon = [
           </div>
         </div>
 
-        <!-- ① 毎月の運用プラン（主役） -->
-        <div class="flex items-center justify-center gap-4 mb-10">
-          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
-          <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
-            ① 毎月の運用プラン
-          </span>
-          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
-        </div>
-        <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-6">
-          {monthlyPlans.map((p) => (
-            <div
-              class={`relative overflow-hidden rounded-3xl p-9 md:p-11 bg-white border border-sage/10 text-center mx-auto w-full max-w-[92%] md:max-w-[93%] flex flex-col ${
-                p.highlight
-                  ? 'shadow-[0_22px_50px_rgba(53,94,72,0.09)]'
-                  : 'shadow-[0_14px_36px_rgba(53,94,72,0.045)]'
-              }`}
-            >
-              <h3 class="font-semibold text-[#2c4a3a] whitespace-pre-line leading-snug mb-4">{p.name}</h3>
-              <div
-                class={`w-12 h-[2px] mx-auto mb-5 ${
-                  p.accent === 'pink' ? 'bg-pink/60' : p.accent === 'dark' ? 'bg-[#1f3a2d]/45' : 'bg-sage/45'
-                }`}
-              ></div>
-              <p
-                class={`whitespace-nowrap mb-5 ${
-                  p.accent === 'pink' ? 'text-[#DFA2AE]' : p.accent === 'dark' ? 'text-[#1f3a2d]' : 'text-sage'
-                }`}
-              >
-                <span class={p.highlight ? 'text-[15px] md:text-[17px] mr-1' : 'text-[14px] md:text-[16px] mr-1'}>月</span>
-                <span class={p.highlight ? 'font-semibold text-[24px] md:text-[30px]' : 'font-semibold text-[22px] md:text-[28px]'}>{p.amount}</span>
-                <span class={p.highlight ? 'text-[15px] md:text-[17px] ml-0.5' : 'text-[14px] md:text-[16px] ml-0.5'}>円〜</span>
-              </p>
-              <p class="text-xs text-[#8a8078] whitespace-pre-line leading-relaxed mb-8">{p.desc}</p>
-              <ul class="text-sm text-[#4a4542] space-y-3.5 text-left max-w-[220px] mx-auto">
-                {p.items.map((item) => (
-                  <li class="flex items-start gap-2.5">
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      class="w-4 h-4 mt-0.5 shrink-0 text-sage"
-                    >
-                      <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6" />
-                      <path
-                        d="M6.5 10.4l2.4 2.4 4.6-5.2"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div
-                class={`absolute bottom-0 left-0 right-0 h-[3px] ${
-                  p.accent === 'pink' ? 'bg-pink' : p.accent === 'dark' ? 'bg-[#1f3a2d]' : 'bg-sage'
-                }`}
-              ></div>
-            </div>
-          ))}
-        </div>
-        <p class="reveal ja-text text-sm text-sage text-center mb-6 max-w-2xl mx-auto leading-relaxed">
-          運用は、作って終わりにしないための大切な部分です。まずはライトプランから、無理なく一緒に始められます。
-        </p>
-        <p class="reveal text-xs text-[#6b6259] text-center mb-16 max-w-md mx-auto rounded-2xl border border-[#e5e0da] bg-[#FAF7F2] px-6 py-4">
-          ※ まずは3ヶ月から。つながりは、続けることで育っていきます。
+        <!-- 表1：LINE公式アカウント／表2：お店の紹介ページ -->
+        <p class="reveal text-sm text-[#5c5450] leading-[1.9] mb-8 bg-[#FAF7F2] border border-[#e5e0da] rounded-2xl px-5 py-3 max-w-3xl">
+          <span class="font-medium text-sage">どのプランも共通：</span>写真・ロゴなどの画像は、お客さまにご提供をお願いしています。
         </p>
 
-        <!-- ② 構築（最初の1回だけ・運用への入口） -->
-        <div class="flex items-center justify-center gap-4 mb-10">
-          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
-          <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-base px-7 py-2.5 whitespace-nowrap">
-            ② 構築（最初の1回だけ・運用への入口）
-          </span>
-          <span class="hidden sm:block h-px flex-1 max-w-[140px] bg-sage/20"></span>
-        </div>
-        <div class="reveal-stagger grid md:grid-cols-3 gap-6 md:gap-8 mb-8">
-          {buildOptions.map((o) => (
-            <div
-              class={`rounded-3xl p-10 md:p-12 bg-white text-center mx-auto w-full max-w-[88%] border ${
-                o.highlight
-                  ? 'border-pink/30 shadow-[0_14px_36px_rgba(180,120,132,0.10)]'
-                  : 'border-sage/10 shadow-[0_10px_28px_rgba(53,94,72,0.035)]'
-              }`}
-            >
-              <p class={`text-xs mb-3 ${o.highlight ? 'text-[#C77E90]' : 'text-[#8a8078]'}`}>{o.label}</p>
-              <h3 class={`font-medium leading-snug mb-4 ${o.highlight ? 'text-[#C77E90]' : 'text-[#5b6a60]'}`}>
-                {o.amount ? (
-                  <>
-                    {o.prefix && <span class="block text-sm mb-1">{o.prefix}</span>}
-                    <span class="whitespace-nowrap"><span class="font-semibold text-[22px] md:text-[26px]">{o.amount}</span><span class="text-[13px] md:text-[14px]">{o.unit}</span></span>
-                  </>
-                ) : (
-                  o.title
-                )}
-              </h3>
-              <div class={`w-10 h-[2px] mx-auto mb-3 ${o.highlight ? 'bg-pink/50' : 'bg-sage/40'}`}></div>
-              <p class="text-xs text-[#5c5450]/70 leading-relaxed">{o.desc}</p>
-            </div>
-          ))}
+        <PlanTable
+          title="LINE公式アカウント"
+          cols={linePlanCols}
+          rows={linePlanRows}
+          lead="LINE公式アカウントだけをご依頼の場合です（最低期間は梅・竹3ヶ月／松6ヶ月）。"
+        />
+        <PlanTable
+          title="LINE＋お店の紹介ページ のセット"
+          cols={setPlanCols}
+          rows={setPlanRows}
+          lead="最低1年のご契約です。お店の紹介ページは、スマホやパソコンで見られるお店の案内ページです。ホームページとLINEで、同じ写真や文章を使えるので、そのぶんお安くしています。"
+        />
+
+        <!-- セット表の下の説明：見守りとおまかせ -->
+        <div class="reveal max-w-3xl text-sm text-[#5c5450] leading-[1.95] bg-[#FAF7F2] border border-[#e5e0da] rounded-2xl px-6 py-5 mb-12 md:mb-14">
+          <p class="font-medium text-sage mb-2">毎月の2つのかたち</p>
+          <ul class="space-y-1.5">
+            <li>・見守り … 動かなくなったときの点検・修理をします。変えたいところは、そのつどのお支払いです。（梅セットのみ）</li>
+            <li>・おまかせ … 上の表の回数まで、ページとLINE公式の差し替えができます。ページの管理も含まれます。</li>
+          </ul>
         </div>
 
-        <div class="reveal bg-pinkLight/20 rounded-[1.75rem] w-full px-8 py-6 md:px-14 md:py-7 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
-          <div class="shrink-0 md:pr-10 md:border-r md:border-pink/20">
-            <span class="inline-flex items-center rounded-full border border-[#C77E90]/50 text-[#C77E90] font-medium text-sm px-5 py-2 whitespace-nowrap">
-              安心してご相談いただくために
-            </span>
-          </div>
-          <ul class="space-y-4 text-sm text-[#5c5450] leading-[1.9] flex-1">
-            {[
-              { bold: '金額はすべて目安です。', rest: '内容・規模に合わせて、ご相談しながら調整します。' },
-              { bold: 'リッチメニューなどのデザインは、こだわりの内容に応じて、専門のデザイナーへ依頼することも可能です。', rest: '別途費用（＋α）をいただく場合があります。' },
-              { bold: 'LINE公式アカウント・Lステップ自体の利用料（お店側のご負担）は別途となります。', rest: 'どちらも無料から始められます。' },
-            ].map((item) => (
-              <li class="flex items-start gap-4">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  class="w-4 h-4 mt-0.5 shrink-0 text-sage/70"
-                >
-                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6" />
-                  <path
-                    d="M6.5 10.4l2.4 2.4 4.6-5.2"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span><span class="font-medium">{item.bold}</span>{item.rest}</span>
+        <!-- お店の紹介ページだけ（リスト表示） -->
+        <div class="mb-12 md:mb-16">
+          <h3 class="reveal flex items-center gap-3 text-lg md:text-xl font-medium text-sage mb-3">
+            <span class="h-px w-6 bg-sage/40"></span>お店の紹介ページだけをご希望の方
+          </h3>
+          <p class="reveal text-sm text-[#5c5450] leading-[1.9] mb-5 max-w-2xl">
+            スマホやパソコンで見られる、お店の案内ページだけをご依頼の場合です。
+          </p>
+          <ul class="reveal space-y-3 max-w-3xl">
+            {pagePlans.map((p) => (
+              <li class="flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-2xl border border-sage/15 bg-[#FAF7F2] px-5 py-4">
+                <span class="text-sage font-semibold w-8 shrink-0">{p.name}</span>
+                <span class="text-[#3f3a37] font-medium">{p.price}</span>
+                <span class="text-sm text-[#5c5450]">（{p.note}）</span>
               </li>
             ))}
           </ul>
+          <p class="reveal text-xs text-[#6b6259] leading-[1.9] mt-4">※ご契約は最低1年です。</p>
         </div>
+
+        <!-- 一番下の注意書き -->
+        <ul class="reveal max-w-3xl text-xs text-[#6b6259] leading-[2] space-y-1">
+          <li>・修正はまとめて1回でご連絡ください</li>
+          <li>・確認用のご提示から7日以内にご連絡ください（過ぎた場合は完了とさせていただきます）</li>
+          <li>・規定回数を超える修正：1回 5,000円／デザインの方向性を変える作り直し：＋30,000円</li>
+          <li>
+            ※ 「差し替え」とは、文章・写真・日付・色などの入れ替えです。順番や置き場所を変える「並べ替え」、デザインの方向性から変える「作り直し」は、プランごとに範囲が決まっています。お申し込み前に1枚の紙でご説明します。
+          </li>
+          <li>・写真・ロゴ・お店の色は、お客さまにご用意いただきます</li>
+          <li>・予約のしくみ・空き状況カレンダーは別料金です</li>
+          <li>・LINE公式アカウント自体の利用料はお店側のご負担です</li>
+          <li>・独自ドメインをご希望の場合、ドメイン代（年1,500円ほど）はお店側のご負担です</li>
+          <li>・表示の金額は、すべて税別です（別途、消費税がかかります）</li>
+        </ul>
+
       </div>
     </section>
 
@@ -835,7 +798,10 @@ const comingSoon = [
                   {w.tag}
                 </span>
                 <p class="text-[11px] font-light tracking-wide text-sage/60 mb-1">{w.sub}</p>
-                <h3 class="font-medium mb-4">{w.name}</h3>
+                <h3 class="font-medium mb-3">{w.name}</h3>
+                {w.heading && (
+                  <p class="text-sm font-medium text-sage leading-relaxed mb-3">{w.heading}</p>
+                )}
                 <p class="text-sm text-[#5c5450] leading-relaxed whitespace-pre-line mb-6">{w.desc}</p>
                 <div class="mt-auto pt-1">
                   {w.linkLabel && (
@@ -1096,8 +1062,22 @@ const comingSoon = [
             LINEで友だち追加
           </a>
         </div>
-        <p class="reveal mt-5 text-xs text-cream/75">メールでも、LINEでも、お好きな方でどうぞ。</p>
+        <div class="reveal mt-5 flex justify-center">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform"
+            target="_blank"
+            rel="noopener"
+            class="inline-block w-full max-w-xs md:w-auto text-sage bg-cream rounded-full px-9 py-3.5 text-sm font-medium shadow-[0_6px_18px_rgba(0,0,0,0.15)] hover:bg-white transition-all duration-200"
+          >
+            相談フォームはこちら
+          </a>
+        </div>
+        <p class="reveal mt-5 text-xs text-cream/75">メールでも、LINEでも、フォームでも、お好きな方でどうぞ。</p>
         <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
+        <p class="mt-4 flex items-center justify-center gap-6 text-xs text-cream/85">
+          <a href="https://www.instagram.com/bloomlink_ru/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-cream/40 hover:text-cream transition-colors"><svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>Instagram</a>
+          <a href="https://note.com/b_ru" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-cream/40 hover:text-cream transition-colors"><svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 17V8.5M8 11.2c0-1.7 1-2.7 2.6-2.7s2.4 1 2.4 2.6V17M13 11.2c0-1.7 1-2.7 2.6-2.7" stroke-linecap="round" stroke-linejoin="round"/></svg>note</a>
+        </p>
         <p class="mt-12 text-xs text-cream/60">&copy; {new Date().getFullYear()} Bloom Link</p>
       </div>
     </footer>
