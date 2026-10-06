@@ -167,6 +167,19 @@ const pagePlans = [
   { name: '松', price: '初期50,000円＋月額12,000円', note: '3〜5ページ・お店をまるごと紹介' },
 ];
 
+// 料金プラン：Bloom Linkオリジナルのしくみ（今日のお知らせ）
+const noticePlans = [
+  { name: '梅', price: '10,000円', note: '文字だけのお知らせ' },
+  { name: '竹', price: '30,000円', note: '切りかえボタン＋お知らせを自由に書ける' },
+  { name: '松', price: '50,000円〜', note: '写真つき・予約システムなみのしくみ' },
+];
+
+// 料金プラン：Bloom Linkオリジナルのしくみ（白いカード2枚）
+const originalPlans = [
+  { kind: 'yoyaku', title: 'お店専用の予約システム', sub: null, img: '/images/dekiru/yoyaku-admin-list.png', alt: '予約管理の画面' },
+  { kind: 'notice', title: '今日のお知らせ', sub: '本日の営業状況・本日のランチなど', img: '/images/dekiru/status-customer.png', alt: '本日の営業状況の画面' },
+];
+
 const works = [
   {
     tag: '制作事例',
@@ -506,12 +519,12 @@ const comingSoon = [
       <div class="max-w-[960px] mx-auto px-6 md:px-[72px] pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white rounded-[24px] px-7 py-7 md:px-8 md:py-[30px] flex flex-col gap-3">
           <h3 class="phrase m-0 text-lg font-bold text-sage">お店のやり方に、<wbr />合わせて作ります</h3>
-          <p class="phrase m-0 text-sm leading-[1.95] text-[#4A4F4A]">席数、<wbr />定休日、<wbr />お客さまに<wbr />聞きたいことまで、<wbr />お店の<wbr />やり方に<wbr />合わせて<wbr />作ります。<wbr /><span class="whitespace-nowrap">使いながら「ここをこうしたい」も、</span><wbr />あとから<wbr />直せます。</p>
+          <p class="phrase m-0 text-sm leading-[1.95] text-[#4A4F4A]">席数、<wbr />定休日、<wbr />お客さまに<wbr />聞きたいことまで、<wbr />お店の<wbr />やり方に<wbr />合わせて<wbr />作ります。<wbr />使いながら⁠「ここを<wbr />こうしたい」⁠も、<wbr />あとから<wbr />直せます。</p>
         </div>
         <div class="bg-white rounded-[24px] px-7 py-7 md:px-8 md:py-[30px] flex flex-col gap-3">
           <h3 class="phrase m-0 text-lg font-bold text-sage">毎月の<wbr />システム代が、<wbr />かかりません</h3>
           <p class="phrase m-0 text-sm leading-[1.95] text-[#4A4F4A]">予約システムの<wbr />会社に払う<wbr />月額料金や、<wbr />予約1件ごとの<wbr />手数料は<wbr />かかりません。</p>
-          <p class="phrase m-0 text-xs leading-[1.8] text-[#6B6B64]">※システムの<wbr />構築料は<wbr />別途<wbr />かかります。<wbr />くわしくは<a href="#price" class="text-sage underline underline-offset-2 hover:text-[#DFA2AE] transition-colors">料金表</a>を<wbr />ご覧ください。</p>
+          <p class="phrase m-0 text-xs leading-[1.8] text-[#6B6B64]">※システムの<wbr />構築料・<wbr />管理費は<wbr />別途<wbr />かかります。<wbr />くわしくは<a href="#price" class="text-sage underline underline-offset-2 hover:text-[#DFA2AE] transition-colors">料金表</a>を<wbr />ご覧ください。</p>
         </div>
       </div>
 
@@ -558,9 +571,9 @@ const comingSoon = [
     <!-- 05 Bloom Linkが選ばれる理由 -->
     <section id="reason">
       <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <div class="md:flex md:items-start md:gap-16">
-          <!-- 左：番号とタイトル（コンパクトに） -->
-          <div class="md:w-56 md:shrink-0 mb-10 md:mb-0">
+        <div class="lg:flex lg:items-start lg:gap-16">
+          <!-- 左：番号とタイトル（コンパクトに）※タブレット幅では上に置く（横に並べるとはみ出すため） -->
+          <div class="lg:w-56 lg:shrink-0 mb-10 lg:mb-0">
             <h2 class="reveal text-xl md:text-2xl font-medium leading-snug">
               <span class="block">Bloom Linkが</span>
               <span class="block">選ばれる理由</span>
@@ -779,6 +792,61 @@ const comingSoon = [
           <p class="reveal text-xs text-[#6b6259] leading-[1.9] mt-4">※ご契約は最低1年です。</p>
         </div>
 
+        <!-- Bloom Linkオリジナルのしくみ（うすいミントの面＋白いカード2枚） -->
+        <div id="original" class="reveal mb-12 md:mb-16 max-w-5xl rounded-[28px] bg-[#E6EFE9] scroll-mt-24 px-5 py-7 md:px-8 md:py-9">
+          <p class="text-xs font-bold text-[#DFA2AE] tracking-[0.3em] mb-3">ORIGINAL</p>
+          <h3 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-3">Bloom Linkオリジナルのしくみ</h3>
+          <p class="ja-text text-sm text-[#5c5450] leading-[1.9] mb-6">
+            お店に合わせて、いちから作るしくみです。予約システムの会社に払う月額料金や、予約1件ごとの手数料はかかりません。
+          </p>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5">
+            {originalPlans.map((card) => (
+              <div class="bg-white rounded-[24px] p-5 md:p-6 grid grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[72px_minmax(0,1fr)] gap-x-4 sm:gap-x-5 gap-y-4 items-start [grid-template-areas:'phone_head'_'body_body'] sm:[grid-template-areas:'phone_head'_'phone_body']">
+                <div class="[grid-area:phone] relative w-full aspect-[1/2] rounded-[14px] border-[3px] border-[#DCE6DF] bg-[#DCE6DF] overflow-hidden self-center sm:self-start">
+                  <img src={card.img} alt={card.alt} loading="lazy" class="absolute inset-0 block w-full h-full object-cover object-top" />
+                </div>
+                <div class="[grid-area:head] self-center sm:self-end">
+                  <p class="text-base md:text-[17px] font-medium text-sage leading-snug">{card.title}</p>
+                  {card.sub && <p class="text-xs text-[#6B6B64] mt-1">{card.sub}</p>}
+                </div>
+                <div class="[grid-area:body]">
+                  {card.kind === 'yoyaku' ? (
+                    <div>
+                      <p class="text-[#3f3a37] leading-snug">
+                        <span class="text-2xl md:text-[26px] font-bold tracking-wide">50,000円</span>
+                        <span class="text-xs text-[#6B6B64] ml-1">（1店舗）</span>
+                      </p>
+                      <p class="text-sm font-medium text-sage mt-1">＋ 管理費 月3,000円</p>
+                      <p class="ja-text text-xs text-[#6B6B64] leading-[1.8] mt-2">（不具合の修正、席数や営業時間などの設定変更を含みます）</p>
+                    </div>
+                  ) : (
+                    <ul class="space-y-2">
+                      {noticePlans.map((p) => (
+                        <li class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+                          <span class={`w-5 shrink-0 font-semibold ${p.name === '竹' ? 'text-[#DFA2AE]' : 'text-sage'}`}>{p.name}</span>
+                          <span class="text-[15px] font-medium text-[#3f3a37]">{p.price}</span>
+                          <span class="ja-text text-xs text-[#6B6B64]">（{p.note}）</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <p class="ja-text text-xs text-[#6b6259] leading-[1.9]">※くわしい内容は、お店に合わせてご相談のうえお見積りします。</p>
+            <a
+              href="/dekiru/"
+              class="self-center md:self-auto inline-flex items-center justify-center min-h-[48px] px-7 rounded-full bg-sage text-white text-sm font-medium whitespace-nowrap shadow-[0_8px_20px_rgba(53,94,72,0.18)] hover:bg-[#2A4B3A] transition-colors duration-200"
+            >
+              実際の画面と動画で見る →
+            </a>
+          </div>
+        </div>
+
         <!-- 一番下の注意書き -->
         <ul class="reveal max-w-3xl text-xs text-[#6b6259] leading-[2] space-y-1">
           <li>・修正はまとめて1回でご連絡ください</li>
@@ -788,7 +856,7 @@ const comingSoon = [
             ※ 「差し替え」とは、文章・写真・日付・色などの入れ替えです。順番や置き場所を変える「並べ替え」、デザインの方向性から変える「作り直し」は、プランごとに範囲が決まっています。お申し込み前に1枚の紙でご説明します。
           </li>
           <li>・写真・ロゴ・お店の色は、お客さまにご用意いただきます</li>
-          <li>・予約のしくみ・空き状況カレンダーは別料金です</li>
+          <li>・予約のしくみ・今日のお知らせの料金は、「<a href="#original" class="text-sage underline underline-offset-2 hover:text-[#DFA2AE] transition-colors">Bloom Linkオリジナルのしくみ</a>」をご覧ください。</li>
           <li>・LINE公式アカウント自体の利用料はお店側のご負担です</li>
           <li>・独自ドメインをご希望の場合、ドメイン代（年1,500円ほど）はお店側のご負担です</li>
           <li>・表示の金額は、すべて税別です（別途、消費税がかかります）</li>
