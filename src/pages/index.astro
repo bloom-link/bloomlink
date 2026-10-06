@@ -4,7 +4,7 @@ import PlanTable from '../components/PlanTable.astro';
 
 const nav = [
   { label: 'Bloom Linkとは', href: '#about' },
-  { label: 'できること', href: '#service' },
+  { label: 'できること', href: '/dekiru/' },
   { label: '選ばれる理由', href: '#reason' },
   { label: '料金プラン', href: '#price' },
   { label: '制作事例', href: '#works' },
@@ -56,6 +56,20 @@ const aboutPhoto = '/images/about-soft.png';
 
 // スマホ・LINEアイコン・機能アイコン・装飾をまとめた画像
 const servicePhoto = '/images/line-features.jpg';
+
+// できること（2a）：右上のイラスト。public/images/dekiru/original-illust.png を置くと自動で表示される
+// （ファイルがないときは、しましまの枠だけを出す＝壊れた画像のマークが出ない）
+const originalIllust =
+  Object.keys(import.meta.glob('/public/images/dekiru/original-illust.png')).length > 0
+    ? '/images/dekiru/original-illust.png'
+    : null;
+
+// できること（2a）：スマホ画面3枚のカード（言葉のまとまりごとに区切る。'BR' は改行）
+const serviceScreens = [
+  { src: '/images/dekiru/yoyaku-admin-list.png', alt: '予約管理の画面', title: ['お店専用の', '予約システム'], note: ['満席で', '自動で', '受付停止', ' など'] },
+  { src: '/images/dekiru/status-customer.png', alt: '営業状況の画面', title: ['今日のお知らせを、', 'BR', 'ボタン1つで'], note: ['営業中・', '本日のランチ', ' など'] },
+  { src: '/images/dekiru/bot-salon.png', alt: '秘書BOTの画面', title: ['LINEの秘書', '（準備中）'], note: ['送るだけで', '予定が入る'] },
+];
 
 // 電卓・ノート・植物の世界観写真ができたら、例: '/images/price-scene.jpg' を設定してください。
 // 設定すると、プレースホルダーは自動で消えます。
@@ -448,87 +462,98 @@ const comingSoon = [
       </div>
     </section>
 
-    <!-- 04 LINEだからできること -->
+    <!-- 04 できること（デザイン案 2a：うすいミントの帯＋スマホ画面3枚のカード） -->
     <section id="service" class="bg-cream">
-      <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        <h2 class="reveal text-[21px] md:text-3xl font-medium mb-2 text-sage">Bloom Linkだから、できること。</h2>
-        <p class="reveal text-sm text-sage/70 mb-2">一人で回すお店の「手間」を、LINEで減らします。</p>
-        <p class="reveal text-[#5c5450] leading-loose mb-3 max-w-2xl">
-          つながりが、売上を育てる。<br />
-          LINEには、お店の未来を変える力があります。
-        </p>
-
-        <!-- PC表示：画像を中央に、各機能をアイコンと同じ高さの左右に配置 -->
-        <div class="hidden md:flex md:justify-center">
-          <div class="reveal relative w-full max-w-[800px]">
-            {servicePhoto ? (
-              <img
-                src={servicePhoto}
-                alt="LINEでお店とお客様がつながるイメージ"
-                class="w-full h-auto"
-              />
-            ) : (
-              <div class="w-full aspect-[925/588] rounded-[2rem] border border-dashed border-sage/20 bg-gradient-to-b from-beige/30 to-white flex items-center justify-center text-center text-sm text-sage/40 p-6">
-                ここにスマホ・LINEアイコン・機能アイコン・装飾をまとめた画像を入れる
-              </div>
-            )}
-
-            <!-- 左側の機能：カレンダー17%・チケット42%・吹き出し67% の高さに合わせる -->
-            <div class="absolute top-[17%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[0].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[0].desc}</p>
-            </div>
-            <div class="absolute top-[42%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[1].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[1].desc}</p>
-            </div>
-            <div class="absolute top-[67%] right-full -translate-y-1/2 pr-2 w-[190px] text-right">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[2].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[2].desc}</p>
-            </div>
-
-            <!-- 右側の機能：ハート12%・人43%・グラフ67% の高さに合わせる -->
-            <div class="absolute top-[12%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[3].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[3].desc}</p>
-            </div>
-            <div class="absolute top-[43%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[4].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[4].desc}</p>
-            </div>
-            <div class="absolute top-[67%] left-full -translate-y-1/2 pl-2 w-[190px] text-left">
-              <h3 class="font-medium mb-1 leading-snug text-[15px]">{services[5].title}</h3>
-              <p class="text-xs text-[#5c5450] leading-snug">{services[5].desc}</p>
-            </div>
+      <!-- 帯（うすいミント） -->
+      <div class="bg-[#E6EFE9]">
+        <div class="max-w-[960px] mx-auto px-6 md:px-[72px] pt-14 pb-14 md:pt-[72px] md:pb-[140px] grid gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:gap-12 md:items-center">
+          <div class="flex flex-col gap-[22px]">
+            <span class="text-xs font-bold text-[#DFA2AE] tracking-[0.3em]">ORIGINAL</span>
+            <h2 class="phrase m-0 text-2xl md:text-[32px] leading-[1.5] font-bold text-sage tracking-[0.04em]">お店に合わせて、<br />いちから<wbr />作る。</h2>
+            <p class="phrase m-0 text-[15px] leading-[2.05] text-[#4A4F4A]">
+              お店・サロンに<wbr />合わせて、<wbr />Bloom&nbsp;Linkが<wbr />おつくり<wbr />できます。<br />
+              既製品の<wbr />予約システムに、<wbr />お店を<wbr />合わせなくて<wbr />大丈夫です。<br />
+              そのお店だけの<wbr />しくみを、<wbr />LINEの中に<wbr />おつくり<wbr />できます。<br />
+              今お使いの<wbr />予約ページを、<wbr />LINEの<wbr />ボタンから<wbr />開けるように<wbr />することも<wbr />できます<wbr />（一部を除く）。
+            </p>
           </div>
-        </div>
-
-        <!-- モバイル表示：画像のみ（機能一覧は下に縦並び） -->
-        <div class="reveal md:hidden mx-auto w-full max-w-[320px]">
-          {servicePhoto ? (
-            <img
-              src={servicePhoto}
-              alt="LINEでお店とお客様がつながるイメージ"
-              class="w-full h-auto"
-            />
+          <!-- 右上のイラスト（public/images/dekiru/original-illust.png を入れると表示される） -->
+          {originalIllust ? (
+            <!-- 背景は透明なので、わくや背景はつけずに帯の上にそのまま置く（スマホでは少し小さめ） -->
+            <img src={originalIllust} alt="お店の人とスマホのイラスト" width="1100" height="870" loading="lazy" class="block w-full max-w-[280px] md:max-w-none mx-auto h-auto" />
           ) : (
-            <div class="w-full aspect-[3/2] rounded-[2rem] border border-dashed border-sage/20 bg-gradient-to-b from-beige/30 to-white flex items-center justify-center text-center text-sm text-sage/40 p-6">
-              ここにスマホ・LINEアイコン・機能アイコン・装飾をまとめた画像を入れる
-            </div>
+            <div class="aspect-[5/4] rounded-[24px] bg-white bg-[repeating-linear-gradient(135deg,#FFFFFF_0_10px,#F4F7F5_10px_20px)]"></div>
           )}
         </div>
+      </div>
 
-        <!-- スマホ表示：画像の下に機能説明を縦並び -->
-        <div class="reveal-stagger md:hidden mt-8 grid gap-6">
-          {services.map((s) => (
-            <div>
-              <h3 class="font-medium mb-2 whitespace-pre-line leading-relaxed">{s.title}</h3>
-              <p class="text-sm text-[#5c5450] leading-relaxed">{s.desc}</p>
+      <!-- スマホ画面3枚のカード（PCでは帯に重ねる／スマホでは帯の下に並べる） -->
+      <div class="max-w-[960px] mx-auto px-6 md:px-[72px] mt-10 md:-mt-[88px] grid grid-cols-1 md:grid-cols-3 gap-6 max-md:max-w-sm" data-rise-group>
+        {serviceScreens.map((s) => (
+          <div class="rise-card bg-white rounded-[24px] p-[22px] flex flex-col gap-[14px] items-center shadow-[0_10px_30px_rgba(53,94,72,0.08)]">
+            <div class="relative w-[150px] aspect-[9/16] rounded-[22px] border-[5px] border-[#DCE6DF] bg-[#DCE6DF] overflow-hidden">
+              <img src={s.src} alt={s.alt} loading="lazy" class="absolute inset-0 block w-full h-full object-cover object-top" />
             </div>
-          ))}
+            <div class="text-center flex flex-col gap-1">
+              <div class="phrase text-[15px] font-bold text-[#2E3A33]">{s.title.map((t) => (t === 'BR' ? <br /> : <>{t}<wbr /></>))}</div>
+              <div class="phrase text-xs text-[#6B6B64]">{s.note.map((t) => <>{t}<wbr /></>)}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 売り①② -->
+      <div class="max-w-[960px] mx-auto px-6 md:px-[72px] pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-[24px] px-7 py-7 md:px-8 md:py-[30px] flex flex-col gap-3">
+          <h3 class="phrase m-0 text-lg font-bold text-sage">お店のやり方に、<wbr />合わせて作ります</h3>
+          <p class="phrase m-0 text-sm leading-[1.95] text-[#4A4F4A]">席数、<wbr />定休日、<wbr />お客さまに<wbr />聞きたいことまで、<wbr />お店の<wbr />やり方に<wbr />合わせて<wbr />作ります。<wbr /><span class="whitespace-nowrap">使いながら「ここをこうしたい」も、</span><wbr />あとから<wbr />直せます。</p>
+        </div>
+        <div class="bg-white rounded-[24px] px-7 py-7 md:px-8 md:py-[30px] flex flex-col gap-3">
+          <h3 class="phrase m-0 text-lg font-bold text-sage">毎月の<wbr />システム代が、<wbr />かかりません</h3>
+          <p class="phrase m-0 text-sm leading-[1.95] text-[#4A4F4A]">予約システムの<wbr />会社に払う<wbr />月額料金や、<wbr />予約1件ごとの<wbr />手数料は<wbr />かかりません。</p>
+          <p class="phrase m-0 text-xs leading-[1.8] text-[#6B6B64]">※システムの<wbr />構築料は<wbr />別途<wbr />かかります。<wbr />くわしくは<a href="#price" class="text-sage underline underline-offset-2 hover:text-[#DFA2AE] transition-colors">料金表</a>を<wbr />ご覧ください。</p>
         </div>
       </div>
+
+      <!-- ボタン -->
+      <div class="max-w-[960px] mx-auto px-6 md:px-[72px] pt-10 md:pt-14 pb-16 md:pb-[72px] flex flex-col items-center gap-5 text-center">
+        <p class="phrase m-0 text-sm leading-[1.9] text-[#4A4F4A]">
+          府中の<wbr />「るなや」さんで<wbr />使っている<wbr />予約システムを、<br class="hidden md:inline" /><wbr />実際の<wbr />画面と動画で<wbr />見られます。
+        </p>
+        <a
+          href="/dekiru/"
+          class="inline-flex items-center justify-center min-h-[48px] w-full max-w-xs md:w-auto bg-sage text-white text-[15px] font-medium px-10 py-4 rounded-full shadow-[0_8px_20px_rgba(53,94,72,0.18)] hover:bg-[#2A4B3A] transition-colors duration-200"
+         style="white-space:nowrap">
+          実際の画面と動画で見る →
+        </a>
+      </div>
     </section>
+
+    <!-- できること：カードを左から順にふわっと出す -->
+    <script>
+      const group = document.querySelector('[data-rise-group]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (group && !reduce && 'IntersectionObserver' in window) {
+        const cards = Array.from(group.querySelectorAll('.rise-card'));
+        group.classList.add('rise-ready');
+        const io = new IntersectionObserver(
+          (entries) => {
+            // 同時に入ってきたカードだけを、左（上）から0.15秒ずつずらす
+            entries
+              .filter((e) => e.isIntersecting)
+              .sort((a, b) => cards.indexOf(a.target) - cards.indexOf(b.target))
+              .forEach((e, i) => {
+                const el = e.target as HTMLElement;
+                el.style.transitionDelay = `${i * 0.15}s`;
+                el.classList.add('is-in');
+                io.unobserve(el);
+              });
+          },
+          { threshold: 0.2 }
+        );
+        cards.forEach((c) => io.observe(c));
+      }
+    </script>
 
     <!-- 05 Bloom Linkが選ばれる理由 -->
     <section id="reason">
@@ -654,7 +679,7 @@ const comingSoon = [
     )}
 
     <!-- 06 料金プラン -->
-    <section id="price" class="bg-white">
+    <section id="price" class="bg-white overflow-x-clip">
       <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
         <h2 class="reveal text-2xl md:text-3xl font-medium mb-3">料金プラン</h2>
 
@@ -1048,7 +1073,9 @@ const comingSoon = [
         </p>
         <div class="flex flex-col md:flex-row items-center justify-center gap-4">
           <a
-            href="mailto:bloomlink.01@gmail.com"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform"
+            target="_blank"
+            rel="noopener"
             class="reveal inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
           >
             無料で相談してみる →
@@ -1062,17 +1089,7 @@ const comingSoon = [
             LINEで友だち追加
           </a>
         </div>
-        <div class="reveal mt-5 flex justify-center">
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform"
-            target="_blank"
-            rel="noopener"
-            class="inline-block w-full max-w-xs md:w-auto text-sage bg-cream rounded-full px-9 py-3.5 text-sm font-medium shadow-[0_6px_18px_rgba(0,0,0,0.15)] hover:bg-white transition-all duration-200"
-          >
-            相談フォームはこちら
-          </a>
-        </div>
-        <p class="reveal mt-5 text-xs text-cream/75">メールでも、LINEでも、フォームでも、お好きな方でどうぞ。</p>
+        <p class="reveal mt-5 text-xs text-cream/75">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。</p>
         <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
         <p class="mt-4 flex items-center justify-center gap-6 text-xs text-cream/85">
           <a href="https://www.instagram.com/bloomlink_ru/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-cream/40 hover:text-cream transition-colors"><svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>Instagram</a>

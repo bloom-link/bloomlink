@@ -112,3 +112,29 @@ body {
     transition: none !important;
   }
 }
+
+/* できること（2a）：スマホ画面カードのふわっと表示
+   JSが動いたときだけ rise-ready が付く（JSが動かなければ最初から表示） */
+.rise-ready .rise-card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rise-ready .rise-card.is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise-ready .rise-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* できること（2a）：言葉のまとまり（<wbr>の位置）でだけ改行する。iPhoneのSafariでも同じように効く */
+.phrase {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}

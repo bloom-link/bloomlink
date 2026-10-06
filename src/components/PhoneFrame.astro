@@ -1,0 +1,19 @@
+---
+// スマホの枠（角丸の黒いふち）。中に img か video を1つ入れる。
+// 中身は w-full h-auto で、画像の縦の長さに合わせて枠が伸びる（画像が切れない）。
+// 枠の内側も黒にしておくことで、すき間が出ても白い線が見えないようにしている。
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`mx-auto w-full ${className}`}>
+  <div class="relative rounded-[2.4rem] bg-[#1c1c1e] px-[9px] pt-[26px] pb-[16px] shadow-[0_18px_40px_rgba(180,120,132,0.16)]">
+    <!-- 上のスピーカー部分 -->
+    <span aria-hidden="true" class="absolute top-[10px] left-1/2 -translate-x-1/2 h-[6px] w-[64px] rounded-full bg-[#3a3a3c]"></span>
+    <div class="overflow-hidden rounded-[1.6rem] bg-[#1c1c1e] [&>img]:block [&>img]:w-full [&>img]:h-auto [&>video]:block [&>video]:w-full [&>video]:h-auto">
+      <slot />
+    </div>
+  </div>
+</div>
