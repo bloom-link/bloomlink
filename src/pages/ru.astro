@@ -1,0 +1,137 @@
+---
+import '../styles/global.css';
+
+// ルーの自己紹介ページ（Instagram @bloomlink_ru のプロフィールのリンク1つだけ、の行き先）。
+// 大きなボタンは「無料プレゼント（登録なしで読める）」の1つだけ。LINEは囲い込まない：気になる人だけ。
+// 色は無料プレゼントPDF・/hanaya/ とそろえる。
+const GIFT_URL = 'https://drive.google.com/file/d/1NRkOnw4R3oM0OdsSyfsLFUzVYtcXJRbL/view?usp=sharing';
+const NOTE_URL = ''; // noteの記事を出したら入れる
+const RU_LINE_URL = ''; // ルーのLINE（ru_Bloom Link Flower）の友だち追加リンクを入れる
+
+const subLinks = [
+  { title: '現場の教科書', sub: 'フローリストになる前に読むnote', href: NOTE_URL },
+  { title: 'ルーに質問する', sub: 'LINEで気軽にどうぞ（月2回、現場の話も届きます）', href: RU_LINE_URL },
+];
+
+const en = "font-['Georgia','Times_New_Roman',serif] tracking-[0.3em] text-[#8A76A6]";
+const mincho = "font-['Yu_Mincho','YuMincho','Hiragino_Mincho_ProN',serif]";
+const body = 'ja-text text-[#4D4A46] leading-[2]';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ルー｜花屋の娘として25年</title>
+    <meta
+      name="description"
+      content="花屋の娘として25年。フローリストを目指すあなたへ、現場の話を。無料プレゼント「花屋の本当の1年と5つの現実」は登録なしで読めます。"
+    />
+  </head>
+  <body class="bg-[#FAF9F6] text-[#3D3A36] font-sans antialiased">
+    <main class="max-w-xl mx-auto">
+      <!-- ■ 1. ルーについて -->
+      <section class="relative px-6 pt-12 pb-14">
+        <div aria-hidden="true" class="absolute top-0 right-0 w-[62%] h-[300px] bg-[#E4DDEB]"></div>
+        <div aria-hidden="true" class="absolute top-[250px] left-0 w-[18%] h-[60px] bg-[#DCE1D6]"></div>
+        <img
+          src="/images/hanaya/hands-wreath.jpg"
+          alt="リースを作る手元"
+          class="relative w-[72%] max-w-[300px] aspect-square object-cover object-[20%_50%]"
+        />
+        <div class="relative mt-10">
+          <p class={`${en} text-xs mb-5 flex items-center gap-4`}>
+            ABOUT RU<span aria-hidden="true" class="inline-block w-12 h-px bg-[#8A76A6]"></span>
+          </p>
+          <h1 class={`${mincho} text-[1.25rem] md:text-[1.7rem] font-medium leading-[1.75] mb-6`}>
+            花屋の娘として25年。<br />フローリストを目指すあなたへ、<br />現場の話を。
+          </h1>
+          <p class={`${body} text-[0.95rem] mb-8`}>
+            父の店で、経営と現場の両方に25年関わってきました。店は継がずに人に託し、母の介護で花の仕事を離れましたが、51歳でもう一度、花と向き合っています。
+          </p>
+          <div class="border-t border-[#E3E0D9] pt-4">
+            <p class={`${mincho} text-2xl tracking-[0.15em]`}>ルー</p>
+            <p class="text-xs text-[#86827C] mt-1 tracking-[0.1em]">花屋歴25年｜Bloom Link　原 早苗</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ 2. 無料プレゼント（大きなボタンはここだけ） -->
+      <section class="px-6 pb-14">
+        <div class="bg-white border-t-2 border-[#8A76A6]">
+          <img src="/images/hanaya/tulip.jpg" alt="紫のチューリップの花束" class="w-full h-[190px] object-cover object-[70%_50%]" />
+          <div class="px-6 py-7">
+            <p class={`${en} text-xs mb-4`}>FREE GIFT</p>
+            <p class="text-xs text-[#4D4A46] tracking-[0.1em] mb-1">フローリストになる前に知っておきたい</p>
+            <h2 class={`${mincho} text-[1.35rem] font-medium leading-[1.6] mb-4`}>
+              花屋の本当の1年と<br /><span class="text-[#8A76A6]">5</span>つの現実
+            </h2>
+            <p class={`${body} text-sm mb-6`}>
+              忙しい時期・売れにくい時期と、開く前に知っておいてほしい5つのこと。スマホでそのまま読めます。
+            </p>
+            <a
+              href={GIFT_URL}
+              target="_blank"
+              rel="noopener"
+              class="block text-center bg-[#3D3A36] text-white px-6 py-4 text-sm tracking-[0.12em] hover:bg-[#8A76A6] transition-colors"
+            >
+              無料プレゼントを読む
+            </a>
+            <p class="text-center text-xs text-[#86827C] mt-3">登録なしで読めます</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ 3. もっと知りたい人へ（小さく） -->
+      <section class="px-6 pb-14">
+        <p class={`${en} text-xs mb-5`}>MORE</p>
+        <ul class="border-t border-[#E3E0D9]">
+          {subLinks.map((l) => (
+            <li class="border-b border-[#E3E0D9]">
+              {l.href ? (
+                <a href={l.href} target="_blank" rel="noopener" class="flex items-center justify-between gap-4 py-5 group">
+                  <span>
+                    <span class="block font-bold text-[#3D3A36]">{l.title}</span>
+                    <span class="block text-xs text-[#86827C] mt-1">{l.sub}</span>
+                  </span>
+                  <span aria-hidden="true" class="text-[#8A76A6] group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+              ) : (
+                <div class="flex items-center justify-between gap-4 py-5">
+                  <span>
+                    <span class="block font-bold text-[#3D3A36]/60">{l.title}</span>
+                    <span class="block text-xs text-[#86827C] mt-1">{l.sub}</span>
+                  </span>
+                  <span class="text-[0.7rem] text-[#8A76A6] border border-[#8A76A6]/50 px-2 py-0.5 whitespace-nowrap">準備中</span>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- ■ 4. お店をしている花屋さんへ -->
+      <section class="mx-6 mb-14 bg-[#DCE1D6] px-6 py-7">
+        <p class={`${en} text-xs mb-3`}>FOR FLORISTS</p>
+        <p class="ja-text text-sm text-[#3D3A36] leading-[1.9] mb-4">
+          お店をされている花屋さんへ。<br />お店のLINE作りのご相談も受けています。
+        </p>
+        <a href="/hanaya/" class="text-sm text-[#3D3A36] underline underline-offset-4 decoration-[#3D3A36]/30 hover:decoration-[#3D3A36] transition-colors">
+          花屋さんの公式LINEについて →
+        </a>
+        <a href="/" class="block mt-3 text-sm text-[#3D3A36] underline underline-offset-4 decoration-[#3D3A36]/30 hover:decoration-[#3D3A36] transition-colors w-fit">
+          Bloom Linkのサイトを見る →
+        </a>
+      </section>
+    </main>
+
+    <footer class="border-t border-[#E3E0D9]">
+      <div class="max-w-xl mx-auto px-6 py-8 text-center">
+        <p class="text-xs text-[#86827C]">
+          <a href="https://www.instagram.com/bloomlink_ru/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-[#3D3A36]/30">Instagram @bloomlink_ru</a>
+        </p>
+        <p class="mt-4 text-xs text-[#AEAAA3]">&copy; {new Date().getFullYear()} Bloom Link</p>
+      </div>
+    </footer>
+  </body>
+</html>
