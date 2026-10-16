@@ -1,0 +1,232 @@
+---
+import '../styles/global.css';
+
+// 花屋さん向けの「公式LINEについて」ページ。
+// ルーのLINE（ru_Bloom Link Flower）のリッチメニューD →「公式LINEとは」から来る人向け。
+// 色は無料プレゼントPDF（明るい版）とそろえる：生成り・グレージュ・セージ・ラベンダー。角はまっすぐ。
+const LINE_URL = 'https://lin.ee/w7c1g5d';
+const FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
+
+const troubles = [
+  '花束のご注文の電話で、作業の手が止まってしまう',
+  'いい花が入っても、お客さまに伝える方法がない',
+  'レッスンやイベントのご案内が、店先のチラシだけ',
+  '母の日と年末のほかは、お客さまが少ない',
+];
+
+const features = [
+  {
+    no: '01',
+    title: '花束のご注文・お問い合わせ',
+    lines: [
+      'ご予算・色・用途・受け取り日を、LINEで聞けます。',
+      'お客さまに「こんな感じ」の写真を送ってもらえるので、イメージがずれにくくなります。',
+      '作業の手を止めずに、あとでまとめてお返事できます。',
+    ],
+  },
+  {
+    no: '02',
+    title: '入荷・おすすめのお知らせ',
+    lines: [
+      '「今日、芍薬が入りました」を、写真つきでお届けできます。',
+      '季節のお花や、母の日のご予約開始のお知らせにも。',
+    ],
+  },
+  {
+    no: '03',
+    title: 'イベント・スクールのお知らせ',
+    lines: [
+      'レッスンやワークショップの日程のご案内、お申し込みの受付、',
+      '前の日のお知らせ（リマインド）までLINEでできます。',
+    ],
+  },
+  {
+    no: '04',
+    title: 'サブスク・販売サイトとつなぐ',
+    lines: [
+      '花の定期便（サブスク）や、ネットショップのページへ、ボタン1つでご案内できます。',
+      'お届け日のお知らせや、新しい商品のご紹介にも使えます。',
+    ],
+    note: '※お支払いは、それぞれのサービスの中で行います。',
+  },
+];
+
+const en = "font-['Georgia','Times_New_Roman',serif] tracking-[0.3em] text-[#8A76A6]";
+const mincho = "font-['Yu_Mincho','YuMincho','Hiragino_Mincho_ProN',serif]";
+const h2 = `${mincho} text-[1.4rem] md:text-[1.75rem] font-medium text-[#3D3A36] leading-[1.6]`;
+const body = 'ja-text text-[#4D4A46] leading-[2]';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>花屋さんの公式LINE｜Bloom Link</title>
+    <meta
+      name="description"
+      content="「いい花が入りました」を、届けられるお店に。花屋の現場に25年いた人が作る、花屋さんのための公式LINEのご案内です。"
+    />
+  </head>
+  <body class="bg-[#FAF9F6] text-[#3D3A36] font-sans antialiased">
+    <!-- ヘッダー -->
+    <header class="sticky top-0 z-50 bg-[#FAF9F6]/90 backdrop-blur border-b border-[#E3E0D9]">
+      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/" class="font-['Georgia','Times_New_Roman',serif] text-lg tracking-[0.15em] text-[#3D3A36]">Bloom Link</a>
+        <a
+          href="#soudan"
+          class="text-xs md:text-sm text-[#3D3A36] border border-[#3D3A36] px-5 py-2 hover:bg-[#3D3A36] hover:text-white transition-colors whitespace-nowrap"
+        >
+          無料で相談する
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ■ 1. いちばん上 -->
+      <section class="relative bg-[#FAF9F6] overflow-hidden">
+        <img
+          src="/images/hanaya/hero-hyacinth.jpg"
+          alt="ヒヤシンスとユーカリの花束"
+          class="w-full h-[62vw] object-cover object-[75%_50%] md:absolute md:inset-0 md:h-full"
+        />
+        <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-[#FAF9F6]/95 via-[#FAF9F6]/70 to-transparent"></div>
+        <div class="relative max-w-6xl mx-auto px-6 pt-10 pb-16 md:pt-40 md:pb-44">
+          <p class={`${en} text-xs mb-6 flex items-center gap-4`}>
+            FOR FLORISTS<span aria-hidden="true" class="inline-block w-14 h-px bg-[#8A76A6]"></span>
+          </p>
+          <h1 class={`${mincho} text-[1.4rem] md:text-[2.6rem] font-medium leading-[1.6] text-[#3D3A36] mb-7`}>
+            「いい花が入りました」を、<br />届けられるお店に。
+          </h1>
+          <p class={`${body} max-w-md`}>花屋さんのための、公式LINEのご案内です。</p>
+        </div>
+      </section>
+
+      <!-- ■ 2. こんなこと、ありませんか？ -->
+      <section class="bg-[#EFEEE8]">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+          <p class={`${en} text-xs mb-4`}>CONCERNS</p>
+          <h2 class={`${h2} mb-10 pb-6 border-b border-[#D6D2CA]`}>こんなこと、ありませんか？</h2>
+          <ul class="space-y-5">
+            {troubles.map((t) => (
+              <li class="flex gap-4 ja-text text-[#4D4A46] leading-[1.9]">
+                <span aria-hidden="true" class="mt-[0.95em] h-px w-5 shrink-0 bg-[#8A76A6]"></span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+          <p class={`${mincho} text-lg md:text-xl text-[#3D3A36] mt-12 pl-5 border-l-2 border-[#8A76A6] leading-[1.8]`}>
+            公式LINEで、少し楽になるかもしれません。
+          </p>
+        </div>
+      </section>
+
+      <!-- ■ 3. できること -->
+      <section class="bg-[#FAF9F6]">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <p class={`${en} text-xs mb-4`}>WHAT LINE CAN DO</p>
+          <h2 class={`${h2} mb-12 md:mb-16`}>公式LINEで、できること</h2>
+          <div class="grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14 md:items-start">
+            <div class="md:sticky md:top-24">
+              <img
+                src="/images/hanaya/ranunculus.jpg"
+                alt="ガラスの花瓶に生けたピンクのラナンキュラス"
+                loading="lazy"
+                class="w-full h-[70vw] md:h-[560px] object-cover"
+              />
+            </div>
+            <div class="space-y-6">
+              {features.map((f) => (
+                <article class="bg-white border-t-2 border-[#8A76A6] px-6 md:px-9 py-7 md:py-9">
+                  <div class="flex items-baseline gap-4 mb-4">
+                    <span class="font-['Georgia','Times_New_Roman',serif] text-3xl text-[#8A76A6] leading-none">{f.no}</span>
+                    <h3 class="text-base md:text-lg font-bold text-[#3D3A36] leading-snug">{f.title}</h3>
+                  </div>
+                  <p class={`${body} text-[0.95rem]`}>
+                    {f.lines.map((l, i) => (
+                      <>{l}{i < f.lines.length - 1 && <br class="hidden md:block" />}</>
+                    ))}
+                  </p>
+                  {f.note && <p class="ja-text text-xs text-[#86827C] leading-[1.9] mt-3">{f.note}</p>}
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ 4. 花屋の現場にいた人が作ります -->
+      <section class="bg-[#DCE1D6]">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <div class="grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14 md:items-center">
+            <img
+              src="/images/hanaya/hydrangea.jpg"
+              alt="ガラスの花瓶に生けた白い紫陽花"
+              loading="lazy"
+              class="w-full h-[70vw] md:h-[520px] object-cover"
+            />
+            <div>
+              <p class={`${en} text-xs mb-4`}>ABOUT ME</p>
+              <h2 class={`${h2} mb-8`}>花屋の現場にいた人が作ります</h2>
+              <p class={`${body} mb-10`}>
+                花屋の娘として生まれ、父の店で経営と現場の両方に25年関わってきました。<br class="hidden md:block" />
+                母の日も、お盆も、年末も、店先に立ってきたからこそ、<br class="hidden md:block" />
+                花屋さんの1年の流れに合わせたLINEを一緒に考えられます。
+              </p>
+              <div class="border-t border-[#3D3A36]/30 pt-5">
+                <p class={`${mincho} text-2xl text-[#3D3A36] tracking-[0.15em]`}>ルー</p>
+                <p class="text-sm text-[#5F5C57] mt-1 tracking-[0.1em]">Bloom Link　原 早苗</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ■ 5. さいごに -->
+      <section id="soudan" class="bg-[#FAF9F6] scroll-mt-20">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
+          <p class={`${en} text-xs mb-4`}>CONTACT</p>
+          <h2 class={`${h2} mb-6`}>「うちのお店だと、何ができる？」</h2>
+          <p class={`${body} mb-10`}>
+            それを一緒に考えるのが、無料相談です。<br />
+            無理におすすめすることはありません。
+          </p>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block w-full max-w-xs md:w-auto bg-[#3D3A36] text-white px-10 py-4 text-sm tracking-[0.1em] hover:bg-[#8A76A6] transition-colors"
+            >
+              LINEで相談してみる
+            </a>
+            <a
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block w-full max-w-xs md:w-auto border border-[#3D3A36] text-[#3D3A36] px-10 py-4 text-sm tracking-[0.1em] hover:bg-[#3D3A36] hover:text-white transition-colors"
+            >
+              フォームで相談する
+            </a>
+          </div>
+          <p class="mt-10">
+            <a href="/" class="text-sm text-[#3D3A36] underline underline-offset-4 decoration-[#3D3A36]/30 hover:decoration-[#3D3A36] transition-colors">Bloom Linkのサイトを見る →</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-[#EFEEE8] border-t border-[#E3E0D9]">
+      <div class="max-w-6xl mx-auto px-6 py-12 text-center">
+        <p class="font-['Georgia','Times_New_Roman',serif] text-lg tracking-[0.15em] text-[#3D3A36] mb-4">Bloom Link</p>
+        <p class="flex items-center justify-center gap-6 text-xs text-[#5F5C57]">
+          <a href="https://www.instagram.com/bloomlink_ru/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-[#3D3A36]/30 hover:text-[#3D3A36]">Instagram</a>
+          <a href="https://note.com/b_ru" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-[#3D3A36]/30 hover:text-[#3D3A36]">note</a>
+          <span>bloomlink.01@gmail.com</span>
+        </p>
+        <p class="mt-8 text-xs text-[#86827C]">&copy; {new Date().getFullYear()} Bloom Link</p>
+      </div>
+    </footer>
+  </body>
+</html>
