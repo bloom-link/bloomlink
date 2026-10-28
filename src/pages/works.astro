@@ -14,11 +14,36 @@ const nav = [
   { label: 'お問い合わせ', href: '/#contact' },
 ];
 
-// セクション1：制作事例（3件）
-// left … 左の列の画像（案件ごとに中身が違う）
+// セクション1：制作事例
+// どの事例も「どんなお店・困っていたこと・作ったもの・いただいた声・期間」の同じ形でそろえる
+// left … 左の列の画像（案件ごとに中身が違う。null なら出さない）
 //   shadow: false の画像には影を付けない（phone-* は画像内に影があるため）
+// voice が空の事例は「いただいた声」を出さない
 const cases = [
   {
+    id: 'rosawood',
+    left: {
+      src: '/images/works/rosawood-message.jpg',
+      alt: 'ROSA WOOD リッチメッセージ',
+      maxW: 'max-w-[380px]',
+      shadow: true,
+      caption: 'リッチメッセージ（トークに届く読みもの）',
+    },
+    name: 'ROSA WOOD',
+    industry: 'アロマテラピーサロン',
+    desc: 'アロマの施術と、暮らしを楽しむ教室をしているサロンです。',
+    trouble: 'LINEを「予約を取るだけの場所」にしたくない。オーナーさんの人柄や暮らしを知ってもらい、ファンになってもらいたい。',
+    made: ['リッチメニュー6区画（アロマってなに？／暮らし／施術メニュー／お客様の声・Q&A／教室／ご予約）', 'めくって読めるカード16枚', '施術メニューのページ'],
+    voice: ['予約を初めてスマホからできました。', '綺麗になった'],
+    period: '約3か月（2026年6月〜9月）',
+    richmenu: { src: '/images/works/rosawood-richmenu.jpg', alt: 'ROSA WOOD リッチメニュー' },
+    cards: [
+      { src: '/images/works/rosawood-card-aroma.jpg', alt: 'ROSA WOODのアロマ カード', caption: 'ROSA WOODのアロマ' },
+      { src: '/images/works/rosawood-card-voice.jpg', alt: 'お客様の声 カード', caption: 'お客様の声' },
+    ],
+  },
+  {
+    id: 'runaya',
     left: {
       src: '/images/works/phone-runaya.jpg',
       alt: 'るなや LINE画面',
@@ -30,7 +55,11 @@ const cases = [
     },
     name: 'るなや',
     industry: '飲食店（東京・府中）',
-    desc: '予約・営業状況・グループ店のご案内までを1画面に。「今日は開いてる？」に、お店が答えなくても答えられる形にしました。',
+    desc: '毎日日替わりのおうちご飯とお酒のお店です（17席・おひとりで営業）。',
+    trouble: '予約がDM・電話・口頭でばらばらに入り、見落としそうになる。「今日やってますか？」の問い合わせにも、営業中に答えていた。',
+    made: ['お店専用の予約システム（月額0円）：満席で自動停止／お店のLINEにお知らせ／お客さまに予約の控え', 'お客様一覧（来店回数・アンケート・お店のメモ）', '本日の営業状況（ボタン1つで切りかえ）', '「るなやとは」ページ・ポイントカード'],
+    voice: ['使いやすい'],
+    period: '約3か月（2026年7月〜10月）',
     richmenu: { src: '/images/runaya-richmenu-2026-10.webp', alt: 'るなや リッチメニュー' },
     cards: [
       { src: '/images/runaya-card-hours-2026-10.webp', alt: 'るなや 営業時間カード', caption: '営業時間' },
@@ -39,23 +68,49 @@ const cases = [
     ],
   },
   {
+    id: 'yugon',
     left: {
-      src: '/images/works/rosawood-message.jpg',
-      alt: 'ROSA WOOD リッチメッセージ',
-      maxW: 'max-w-[380px]',
-      shadow: true,
-      caption: 'リッチメッセージ（トークに届く読みもの）',
+      src: '/images/works/phone-yugon.jpg',
+      alt: 'ゆうごんさん LINE画面',
+      maxW: 'max-w-[400px]',
+      imgMaxW: 'max-w-[300px] md:max-w-[260px]',
+      shadow: false,
+      caption: null,
     },
-    name: 'ROSA WOOD',
-    industry: 'アロマテラピーサロン',
-    desc: 'メニューが多いサロンでも迷わないように導線を整理。読みものとして届けるリッチメッセージも作りました。納品後、お客さまから「綺麗になった」「予約がLINEからできた」とお声をいただいています。',
-    richmenu: { src: '/images/works/rosawood-richmenu.jpg', alt: 'ROSA WOOD リッチメニュー' },
+    name: 'ゆうごんさん',
+    industry: '夫婦円満カウンセラー',
+    desc: '生まれた日から本来の自分を読み解く、夫婦のためのカウンセリングです。',
+    trouble: 'いきなり「相談しませんか？」では、申し込みのハードルが高い。まず気軽に、自分の今の状態に気づいてもらう入り口がほしい。',
+    made: ['LINE公式アカウントのリニューアル（リッチメニュー4区画）', '違和感レベルチェック（5問に答えると点数とレベルが出る）', 'プロフィール・ご相談の流れのページ'],
+    voice: [],
+    period: '約3週間（2026年9月）',
+    richmenu: { src: '/images/works/yugon-richmenu.jpg', alt: 'ゆうごんさん リッチメニュー' },
     cards: [
-      { src: '/images/works/rosawood-card-aroma.jpg', alt: 'ROSA WOODのアロマ カード', caption: 'ROSA WOODのアロマ' },
-      { src: '/images/works/rosawood-card-voice.jpg', alt: 'お客様の声 カード', caption: 'お客様の声' },
+      { src: '/images/works/yugon-check.jpg', alt: '違和感レベルチェック', caption: '違和感レベルチェック' },
     ],
   },
   {
+    id: 'daijobu',
+    left: {
+      src: '/images/works/phone-daijobu.jpg',
+      alt: 'ダイ・JO部 LINE画面',
+      maxW: 'max-w-[400px]',
+      imgMaxW: 'max-w-[260px]',
+      shadow: true,
+      caption: 'スマホで見たところ',
+    },
+    name: 'ダイ・JO部',
+    industry: '府中の個人事業主の集まり',
+    desc: '府中・府中近郊の個人事業主がつながる集まりです（2026年10月発足）。',
+    trouble: 'メンバーのお仕事やイベントの情報を、ひとつの場所にまとめたい。',
+    made: ['メンバー専用のLINE公式アカウント（リッチメニュー左右2つ）', 'メンバー紹介ページ・イベントのページ'],
+    voice: [],
+    period: '約1週間（2026年10月）',
+    richmenu: { src: '/images/works/daijobu-richmenu.jpg', alt: 'ダイ・JO部 リッチメニュー' },
+    cards: [],
+  },
+  {
+    id: 'bloomlink',
     left: {
       src: '/images/works/bloomlink-logo.jpg',
       alt: 'Bloom Link ロゴデザイン',
@@ -66,13 +121,25 @@ const cases = [
     name: 'Bloom Link（自社）',
     industry: 'LINE公式アカウント・Lステップ構築サポート',
     desc: 'ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。',
+    trouble: null,
+    made: [],
+    voice: [],
+    period: null,
     richmenu: { src: '/images/works/bloomlink-richmenu.jpg', alt: 'Bloom Link リッチメニュー' },
     cards: [],
   },
 ];
 
 // セクション2：デザイン見本
+// phone があるものは、スマホで見たところ＋リッチメニューを横に並べて大きく見せる
 const samples = [
+  {
+    src: '/images/works/sample-ru-richmenu.jpg',
+    alt: '花屋の学び（ルー）リッチメニュー',
+    phone: { src: '/images/works/phone-ru.jpg', alt: '花屋の学び（ルー）スマホで見たところ' },
+    title: '花屋の学び（ルー）',
+    desc: '花屋をめざす方へ向けたLINE。無料プレゼントを大きく見せて、教科書・質問・相談の3つに分けました。写真の色をそろえて、落ち着いた雰囲気に。',
+  },
   {
     src: '/images/works/sample-cafe-richmenu.jpg',
     alt: 'カフェ向け リッチメニュー見本',
@@ -94,6 +161,7 @@ const banners = [
 ];
 
 const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
+const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/50 rounded-full px-3 py-0.5 mb-2';
 ---
 
 <html lang="ja">
@@ -103,7 +171,7 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
     <title>作品集｜Bloom Link</title>
     <meta
       name="description"
-      content="Bloom Linkがこれまでにつくった LINE公式アカウントのデザイン作品集。リッチメニュー・カードタイプメッセージ・リッチメッセージの制作事例をご紹介します。"
+      content="Bloom Linkがこれまでにつくった LINE公式アカウントとお店専用のしくみの作品集。困っていたこと・作ったもの・いただいた声を、お店ごとにご紹介します。"
     />
   </head>
   <body class="bg-cream text-[#3f3a37] font-sans antialiased">
@@ -132,8 +200,8 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
           <p class="text-xs tracking-[0.25em] text-sage/60 mb-4">WORKS</p>
           <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-8">作品集</h1>
           <p class="ja-text text-[#5c5450] leading-[2] mb-8 max-w-3xl">
-            これまでにつくった LINE公式アカウントのデザインです。<br />
-            お店の雰囲気に合わせて、一つひとつ作っています。
+            これまでにつくった LINE公式アカウントと、お店専用のしくみです。<br />
+            どれも「そのお店の困りごと」から考えて、一つひとつ作っています。
           </p>
           <ul class="space-y-2 text-sm text-[#6B6B64] leading-relaxed max-w-3xl">
             <li>・リッチメニュー … LINEを開いたとき、画面の下半分にいつも出ているメニュー</li>
@@ -143,22 +211,67 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
         </div>
       </section>
 
-      <!-- ■ セクション1：制作事例 -->
-      <section class="bg-cream">
-        <div class="max-w-5xl mx-auto px-6 pt-10 md:pt-12 pb-16 md:pb-24">
-          <div class="mb-14 md:mb-20">
+      <!-- ■ セクション1：制作事例（背景を薄い緑にして、白いカードを浮かせる） -->
+      <section class="bg-[#BFD4C7]/25">
+        <div class="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-16 md:pb-24">
+          <div class="mb-10 md:mb-14 px-2 md:px-0">
             <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">制作事例</h2>
             <p class="text-sm text-[#6B6B64]">実際のお店で使われているLINEです</p>
+            <p class="mt-4"><a href="/dekiru/" class="text-sm text-sage underline underline-offset-4 decoration-sage/30 hover:decoration-sage transition-colors">できることを見る →</a></p>
           </div>
 
-          <div class="space-y-24 md:space-y-32">
+          <div class="space-y-10 md:space-y-14">
             {cases.map((c) => (
-              <article class="grid gap-y-8 md:grid-cols-[400px_1fr] md:gap-x-16 md:gap-y-0">
-                <!-- 1行目・左：店名 → 業種 → 説明（文字幅は下の画像とそろえる） -->
-                <div class={`${c.left.maxW} md:col-start-1 md:row-start-1 md:mb-[30px]`}>
-                  <h3 class="text-lg md:text-xl font-medium text-sage leading-snug mb-1">{c.name}</h3>
-                  <p class="text-sm text-[#6B6B64] mb-5">{c.industry}</p>
+              <article id={c.id} class="scroll-mt-24 bg-white rounded-3xl px-5 py-6 md:px-12 md:py-12 shadow-[0_10px_30px_rgba(53,94,72,0.08)]">
+                <!-- 店名の帯（ここでメリハリをつける） -->
+                <div class="rounded-xl bg-gradient-to-b from-[#e7aeb8] to-[#DFA2AE] text-white text-center px-4 py-3 md:py-4 mb-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
+                  <h3 class="text-lg md:text-xl font-medium tracking-wider leading-snug">{c.name}</h3>
+                </div>
+                <p class="text-sm text-[#6B6B64] text-center mb-8 md:mb-10">{c.industry}</p>
+
+                <div class="grid gap-y-8 md:grid-cols-[400px_1fr] md:gap-x-12 md:gap-y-0">
+                <!-- 1行目・左：説明 → 困っていたこと・作ったもの・声・期間 -->
+                <div class={`${c.left?.maxW ?? 'max-w-[400px]'} md:col-start-1 md:row-start-1 md:mb-[30px]`}>
                   <p class="ja-text text-[#5c5450] leading-[2]">{c.desc}</p>
+                  {c.trouble && (
+                    <dl class="mt-6 space-y-5">
+                      <div>
+                        <dt class={dtClass}>困っていたこと</dt>
+                        <dd class="ja-text text-sm text-[#5c5450] leading-[1.9]">{c.trouble}</dd>
+                      </div>
+                      {c.made.length > 0 && (
+                        <div>
+                          <dt class={dtClass}>作ったもの</dt>
+                          <dd>
+                            <ul class="space-y-1.5">
+                              {c.made.map((m) => (
+                                <li class="flex gap-2.5 ja-text text-sm text-[#5c5450] leading-[1.9]">
+                                  <span aria-hidden="true" class="mt-[0.8em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]"></span>
+                                  <span>{m}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </dd>
+                        </div>
+                      )}
+                      {c.voice.length > 0 && (
+                        <div>
+                          <dt class={dtClass}>いただいた声</dt>
+                          <dd class="space-y-1.5">
+                            {c.voice.map((v) => (
+                              <p class="ja-text text-sm text-sage leading-[1.9] bg-[#E8B8BE]/15 rounded-xl px-4 py-2">「{v.replace(/。$/, '')}」</p>
+                            ))}
+                          </dd>
+                        </div>
+                      )}
+                      {c.period && (
+                        <div>
+                          <dt class={dtClass}>期間</dt>
+                          <dd class="ja-text text-sm text-[#5c5450] leading-[1.9]">{c.period}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  )}
                 </div>
 
                 <!-- 1行目・右：空 -->
@@ -166,17 +279,19 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
 
                 <!-- 2行目・左：画像（案件ごとに中身が違う1枚） -->
                 <div class="md:col-start-1 md:row-start-2">
-                  <figure class={c.left.imgMaxW ?? c.left.maxW}>
-                    <img
-                      src={c.left.src}
-                      alt={c.left.alt}
-                      loading="lazy"
-                      class={`block w-full h-auto rounded-2xl ${c.left.shadow ? imgShadow : ''}`}
-                    />
-                    {c.left.caption && (
-                      <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{c.left.caption}</figcaption>
-                    )}
-                  </figure>
+                  {c.left && (
+                    <figure class={c.left.imgMaxW ?? c.left.maxW}>
+                      <img
+                        src={c.left.src}
+                        alt={c.left.alt}
+                        loading="lazy"
+                        class={`block w-full h-auto rounded-2xl ${c.left.shadow ? imgShadow : ''}`}
+                      />
+                      {c.left.caption && (
+                        <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{c.left.caption}</figcaption>
+                      )}
+                    </figure>
+                  )}
                 </div>
 
                 <!-- 2行目・右：リッチメニュー ＋ カード -->
@@ -209,14 +324,15 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
                     </div>
                   )}
                 </div>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- ■ セクション2：デザイン見本（背景をごく薄いサブ緑に） -->
-      <section class="bg-[#BFD4C7]/20">
+      <!-- ■ セクション2：デザイン見本（制作事例の緑と交互にするため、こちらは薄いピンク） -->
+      <section class="bg-[#E8B8BE]/[0.14]">
         <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <div class="mb-12 md:mb-16">
             <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">デザイン見本</h2>
@@ -225,13 +341,30 @@ const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             {samples.map((s) => (
-              <div>
-                <img
-                  src={s.src}
-                  alt={s.alt}
-                  loading="lazy"
-                  class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                />
+              <div class={s.phone ? 'md:col-span-2' : ''}>
+                {s.phone ? (
+                  <div class="grid grid-cols-[34%_1fr] gap-4 md:gap-8 items-end">
+                    <img
+                      src={s.phone.src}
+                      alt={s.phone.alt}
+                      loading="lazy"
+                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                    />
+                    <img
+                      src={s.src}
+                      alt={s.alt}
+                      loading="lazy"
+                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={s.src}
+                    alt={s.alt}
+                    loading="lazy"
+                    class={`block w-full h-auto rounded-2xl ${imgShadow}`}
+                  />
+                )}
                 <h3 class="text-base md:text-lg font-medium text-sage mt-5 mb-2">{s.title}</h3>
                 <p class="ja-text text-sm text-[#5c5450] leading-[1.9]">{s.desc}</p>
               </div>

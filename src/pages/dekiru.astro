@@ -26,29 +26,51 @@ const troubles = [
 
 const yoyakuPoints = [
   '満席になったら、自動で受付を止めます',
+  '予約が入ると、お店のLINEにお知らせが届きます',
   'はじめての方には、好きな食べ物や苦手なものをうかがいます',
-  '来店回数や苦手なものが、予約と一緒にわかります',
   '席数や定休日は、スマホからいつでも変えられます',
 ];
 
+const kokyakuPoints = [
+  '来店回数・アンケートの答え・お店のメモを、1人1枚のカードに',
+  '名前や電話番号で、すぐに探せます',
+  '「今月お誕生日の方」だけを出すこともできます',
+];
+
 const otherUses = [
-  '飲食店なら「本日のランチ」',
-  'サロンなら「本日の出勤スタッフ」',
+  '飲食店なら「本日のおすすめ」「本日のランチ」',
+  'サロンなら「本日の出勤スタッフ」「本日の空き時間」',
   'スマホで撮った写真つきにもできます',
 ];
 
-const botExtras = [
-  '領収書の整理',
-  '請求書の整理・発行',
-  '各店舗の売り上げ管理',
+const checkUses = [
+  'カウンセリングなら「心の違和感チェック」',
+  'サロンなら「肌タイプチェック」「疲れ度チェック」',
+  '習い事なら「向いているコース診断」',
+];
+
+const botPoints = [
+  '「今日の予定」と送ると、今日のお客さまを一覧で',
+  'レシートの写真を送ると、AIが読み取って表に1行ずつ記録',
+  'メールで届く領収書も、毎朝自動で保存',
+];
+
+const monitorTerms = [
+  { k: '料金', v: '1機能 10,000円（通常50,000円〜）\n予定の秘書か、領収書の秘書のどちらか1つ' },
+  { k: '管理費', v: '3か月無料（4か月目から月3,000円）' },
+  { k: 'AIの利用料', v: '実費（使った分だけ）' },
+  { k: 'お願い', v: '月1回、使い心地を教えてください（10分くらい）\n感想を作品集でご紹介させてください' },
+  { k: '募集', v: '2026年12月31日まで（3名になりしだい終了）' },
 ];
 
 // 見出しの上の小さなラベル（できること①など）
-const label = 'text-xs tracking-[0.2em] text-[#DFA2AE] mb-3';
-const h2 = 'text-xl md:text-2xl font-medium text-sage leading-snug';
+// ピンクの帯ラベルでメリハリをつける（作品集の店名の帯と同じ色）
+const label = 'inline-block text-xs md:text-sm tracking-[0.2em] text-white rounded-full px-5 py-1.5 mb-4 bg-gradient-to-b from-[#e7aeb8] to-[#DFA2AE] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]';
+const h2 = 'text-xl md:text-[1.7rem] font-medium text-sage leading-snug';
 const body = 'ja-text text-[#5c5450] leading-[2]';
 const caption = 'text-xs text-[#6B6B64] text-center mt-4';
 const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
+const jireiLink = 'text-sm text-sage underline underline-offset-4 decoration-sage/30 hover:decoration-sage transition-colors';
 ---
 
 <html lang="ja">
@@ -58,7 +80,7 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
     <title>できること｜Bloom Link</title>
     <meta
       name="description"
-      content="スタッフを増やす前に、LINEにまかせてみる。お店専用の予約システム、今日のお知らせ、LINEの秘書など、Bloom Linkが作れるLINEのしくみをご紹介します。"
+      content="スタッフを増やす前に、LINEにまかせてみる。予約システム＆お客様一覧、本日の営業、違和感レベルチェック、スマホ秘書など、Bloom Linkが作れるLINEのしくみをご紹介します。"
     />
   </head>
   <body class="bg-cream text-[#3f3a37] font-sans antialiased">
@@ -91,7 +113,8 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
           </h1>
           <p class={`${body} max-w-3xl`}>
             オーナーさんの毎日の手間を、LINEで減らします。<br />
-            お店ごとに、そのお店だけのしくみを作ります。
+            お店ごとに、そのお店だけのしくみを作ります。<br />
+            パソコンを開かず、スマホ一つで解決します。
           </p>
         </div>
       </section>
@@ -114,13 +137,13 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
         </div>
       </section>
 
-      <!-- ■ 3. できること① お店専用の予約システム -->
+      <!-- ■ 3. できること① 予約システム＆お客様一覧 -->
       <section class="bg-cream">
         <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
           <div class="grid gap-12 md:grid-cols-[1fr_300px] md:gap-16 md:items-center">
             <div>
               <p class={label}>できること①</p>
-              <h2 class={`${h2} mb-8`}>お店専用の予約システム</h2>
+              <h2 class={`${h2} mb-8`}>予約システム＆お客様一覧</h2>
               <p class={`${body} mb-8`}>
                 お客さまは、LINEから人数・日にち・時間を選ぶだけ。<br />
                 24時間、お店が閉まっている時間も予約を受け付けます。
@@ -147,32 +170,54 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
             </PhoneFrame>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-12 mt-20 md:mt-24 max-w-[620px] mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-8 mt-20 md:mt-24 max-w-[900px] mx-auto">
             <figure>
               <PhoneFrame class="max-w-[260px]">
-                <img src="/images/dekiru/yoyaku-admin-list.png" alt="るなや 予約管理の一覧画面" loading="lazy" />
+                <img src="/images/dekiru/kanri-yoyaku.jpg" alt="お店側の画面 予約の一覧" loading="lazy" />
               </PhoneFrame>
-              <figcaption class={caption}>お店側の画面（お名前は架空のものです）</figcaption>
+              <figcaption class={caption}>予約の一覧（今日・明日の組数もひと目で）</figcaption>
             </figure>
             <figure>
               <PhoneFrame class="max-w-[260px]">
-                <img src="/images/dekiru/yoyaku-admin-settings.png" alt="るなや 予約管理の設定画面" loading="lazy" />
+                <img src="/images/dekiru/kanri-kokyaku.jpg" alt="お店側の画面 お客様一覧" loading="lazy" />
               </PhoneFrame>
+              <figcaption class={caption}>お客様一覧（来た回数・好み・お店のメモ）</figcaption>
             </figure>
+            <figure>
+              <PhoneFrame class="max-w-[260px]">
+                <img src="/images/dekiru/kanri-birthday.jpg" alt="お店側の画面 今月お誕生日の方" loading="lazy" />
+              </PhoneFrame>
+              <figcaption class={caption}>「今月お誕生日の方」だけを出したところ</figcaption>
+            </figure>
+          </div>
+          <p class="text-xs text-[#6B6B64] text-center mt-6">※お店側の画面です。お名前・電話番号は架空のものです</p>
+
+          <div class="max-w-[620px] mx-auto mt-16 md:mt-20 rounded-2xl bg-white/70 border border-sage/10 px-6 md:px-10 py-6 md:py-8">
+            <h3 class="text-base md:text-lg font-medium text-sage mb-3">お客様一覧も、スマホで</h3>
+            <p class={`${body} mb-5`}>来てくださったお客さまの情報を、スマホでいつでも見られます。</p>
+            <ul class="space-y-3">
+              {kokyakuPoints.map((p) => (
+                <li class="flex gap-3 ja-text text-[#5c5450] leading-[1.9]">
+                  <span aria-hidden="true" class={dot}></span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <p class="ja-text text-center text-sage font-medium leading-[1.9] mt-14 md:mt-16">
             府中の「るなや」さんで、<br class="md:hidden" />実際に使っていただいています。
           </p>
+          <p class="text-center mt-4"><a href="/works/#runaya" class={jireiLink}>実例を見る（るなや）→</a></p>
         </div>
       </section>
 
-      <!-- ■ 4. できること② 今日のお知らせを、ボタン1つで -->
+      <!-- ■ 4. できること② 本日の営業（おすすめ） -->
       <section class="bg-[#E8B8BE]/[0.14]">
         <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
           <div class="max-w-3xl mb-14 md:mb-16">
             <p class={label}>できること②</p>
-            <h2 class={h2}>今日のお知らせを、<br class="md:hidden" />ボタン1つで</h2>
+            <h2 class={h2}>本日の営業・おすすめを、<br class="md:hidden" />ボタン1つで</h2>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-12 max-w-[620px] mx-auto">
@@ -216,48 +261,105 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
                 </li>
               ))}
             </ul>
+            <p class="text-center mt-10"><a href="/works/#runaya" class={jireiLink}>実例を見る（るなや）→</a></p>
           </div>
         </div>
       </section>
 
-      <!-- ■ 5. できること③ LINEの秘書（準備中） -->
+      <!-- ■ 5. できること③ 違和感レベルチェック（診断・チェックページ） -->
       <section class="bg-cream">
         <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
           <div class="grid gap-12 md:grid-cols-[1fr_300px] md:gap-16 md:items-center">
             <div>
               <p class={label}>できること③</p>
-              <h2 class={`${h2} mb-8`}>
-                LINEの秘書<span class="ml-2 align-middle inline-block text-xs font-normal text-[#c98593] bg-[#E8B8BE]/25 rounded-full px-3 py-0.5">準備中</span>
-              </h2>
+              <h2 class={`${h2} mb-8`}>違和感レベルチェック<br /><span class="text-base md:text-lg">（診断・チェックページ）</span></h2>
               <p class={`${body} mb-8`}>
-                LINEで「明日 15時 カット 山田様」と送るだけで、カレンダーに予定が入ります。<br />
-                前の日の夜と、当日の朝にお知らせが届くので、うっかりを防げます。<br />
-                「今日の予定」と送れば、今日のお客さまを一覧で教えてくれます。
+                いくつかの質問に答えると、点数と結果が出るページです。<br />
+                「自分は今どのくらい？」がわかると、<br class="md:hidden" />お客さまが相談するきっかけになります。
               </p>
-              <div class="rounded-2xl bg-white/70 border border-[#E8B8BE]/50 px-6 py-5 mb-8">
-                <p class="text-sm font-medium text-sage mb-3">こんな機能も作れます</p>
+              <ul class="space-y-3 mb-8">
+                <li class="flex gap-3 ja-text text-[#5c5450] leading-[1.9]"><span aria-hidden="true" class={dot}></span><span>質問はお店に合わせて作ります（5問くらいがおすすめ）</span></li>
+                <li class="flex gap-3 ja-text text-[#5c5450] leading-[1.9]"><span aria-hidden="true" class={dot}></span><span>結果のすぐ下に、オーナーさんからのひとことと申し込みボタン</span></li>
+              </ul>
+              <div class="rounded-2xl bg-white/70 border border-[#E8B8BE]/50 px-6 py-5">
+                <p class="text-sm font-medium text-sage mb-3">業種に合わせて、たとえば</p>
                 <ul class="space-y-2">
-                  {botExtras.map((b) => (
+                  {checkUses.map((u) => (
                     <li class="flex gap-3 ja-text text-[#5c5450] leading-[1.9]">
                       <span aria-hidden="true" class={dot}></span>
-                      <span>{b}</span>
+                      <span>{u}</span>
                     </li>
                   ))}
                 </ul>
-                <p class="ja-text text-sm text-[#6B6B64] leading-[1.9] mt-3">など、お店に合わせて作れます。</p>
               </div>
+            </div>
+            <figure class="w-full md:row-start-1 md:col-start-2">
+              <PhoneFrame class="max-w-[280px] md:max-w-[300px]">
+                <video
+                  src="/images/dekiru/check-flow.mp4"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-label="違和感レベルチェックに答えて結果が出るまで（動画）"
+                ></video>
+              </PhoneFrame>
+              <figcaption class={caption}>夫婦円満カウンセラー ゆうごんさんのチェック</figcaption>
+            </figure>
+          </div>
+          <p class="text-center mt-14"><a href="/works/#yugon" class={jireiLink}>実例を見る（ゆうごんさん）→</a></p>
+        </div>
+      </section>
+
+      <!-- ■ 6. できること④ スマホ秘書（モニター募集中） -->
+      <section class="bg-[#BFD4C7]/20">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+          <div class="grid gap-12 md:grid-cols-[1fr_300px] md:gap-16 md:items-center">
+            <div>
+              <p class={label}>できること④</p>
+              <h2 class={`${h2} mb-8`}>
+                スマホ秘書<span class="ml-2 align-middle inline-block text-xs font-normal text-[#c98593] bg-[#E8B8BE]/25 rounded-full px-3 py-0.5">モニター募集中</span>
+              </h2>
+              <p class={`${body} mb-8`}>
+                LINEで「明日 15時 カット 山田様」と送るだけで、カレンダーに予定が入ります。<br />
+                前の日の夜と当日の朝にお知らせが届くので、うっかりを防げます。
+              </p>
+              <ul class="space-y-3 mb-8">
+                {botPoints.map((b) => (
+                  <li class="flex gap-3 ja-text text-[#5c5450] leading-[1.9]">
+                    <span aria-hidden="true" class={dot}></span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
               <p class="ja-text text-sm text-[#6B6B64] leading-[1.9]">
-                いま準備中です。気になる方は、ご相談のときに声をかけてください。
+                請求書の整理・発行、各店舗の売り上げ管理なども作れます。<br />
+                Bloom Linkも、毎日この秘書を使っています。
               </p>
             </div>
             <PhoneFrame class="max-w-[280px] md:max-w-[300px] md:row-start-1 md:col-start-2">
-              <img src="/images/dekiru/bot-salon.png" alt="LINEの秘書 サロン向けのイメージ" loading="lazy" />
+              <img src="/images/dekiru/bot-salon.png" alt="スマホ秘書 サロン向けのイメージ" loading="lazy" />
             </PhoneFrame>
+          </div>
+
+          <div class="max-w-[620px] mx-auto mt-16 md:mt-20 rounded-2xl bg-white/80 border border-[#E8B8BE]/50 px-6 md:px-10 py-7 md:py-9">
+            <h3 class="text-base md:text-lg font-medium text-sage mb-2">モニターを募集しています（先着3名）</h3>
+            <p class={`${body} mb-6`}>使い心地や改善点を一緒に教えていただける方に、特別価格でお作りします。</p>
+            <dl class="divide-y divide-sage/10">
+              {monitorTerms.map((t) => (
+                <div class="grid grid-cols-[6.5em_1fr] gap-3 py-3">
+                  <dt class="text-sm text-sage font-medium leading-[1.9]">{t.k}</dt>
+                  <dd class="ja-text text-sm text-[#5c5450] leading-[1.9] whitespace-pre-line">{t.v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p class="text-xs text-[#6B6B64] mt-4">※金額はすべて税別です</p>
           </div>
         </div>
       </section>
 
-      <!-- ■ 6. さいごに -->
+      <!-- ■ 7. さいごに -->
       <section class="bg-[#E8B8BE]/[0.14]">
         <div class="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
           <h2 class={`${h2} mb-6`}>「うちのお店だと、何ができる？」</h2>
@@ -273,8 +375,9 @@ const dot = 'mt-[0.85em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]';
           >
             まずは無料で相談してみる
           </a>
-          <p class="mt-7">
-            <a href="/#price" class="text-sm text-sage underline underline-offset-4 decoration-sage/30 hover:decoration-sage transition-colors">サービス・料金を見る</a>
+          <p class="mt-7 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+            <a href="/works/" class={jireiLink}>作品集・実例を見る</a>
+            <a href="/#price" class={jireiLink}>サービス・料金を見る</a>
           </p>
           <p class="mt-14">
             <a href="/" class="text-xs text-[#6B6B64] hover:text-sage transition-colors">← トップへ戻る</a>
