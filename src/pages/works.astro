@@ -2,166 +2,160 @@
 import '../styles/global.css';
 
 const LINE_URL = 'https://lin.ee/w7c1g5d';
+const FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
 
 // トップページと同じヘッダーナビ（別ページなので /#... で戻れるようにする）
+// current: true の項目は、今いるページとして太字＋下線にする
 const nav = [
   { label: 'Bloom Linkとは', href: '/#about' },
   { label: 'できること', href: '/#service' },
   { label: '選ばれる理由', href: '/#reason' },
   { label: '料金プラン', href: '/#price' },
   { label: '制作事例', href: '/#works' },
-  { label: '作品集', href: '/works/' },
+  { label: '作品集', href: '/works/', current: true },
   { label: 'お問い合わせ', href: '/#contact' },
 ];
 
-// セクション1：制作事例
+// 制作事例
 // どの事例も「どんなお店・困っていたこと・作ったもの・いただいた声・期間」の同じ形でそろえる
-// left … 左の列の画像（案件ごとに中身が違う。null なら出さない）
-//   shadow: false の画像には影を付けない（phone-* は画像内に影があるため）
-// voice が空の事例は「いただいた声」を出さない
+// 項目が空の事例は、その項目ごと出さない
+// voiceFrom … 声の下に小さく出す「だれの声か」
 const cases = [
   {
     id: 'rosawood',
-    left: {
-      src: '/images/works/rosawood-message.jpg',
-      alt: 'ROSA WOOD リッチメッセージ',
-      maxW: 'max-w-[380px]',
-      shadow: true,
-      caption: 'リッチメッセージ（トークに届く読みもの）',
-    },
     name: 'ROSA WOOD',
-    industry: 'アロマテラピーサロン',
-    desc: 'アロマの施術と、暮らしを楽しむ教室をしているサロンです。',
+    cat: 'アロマテラピーサロン',
+    period: '約3か月',
+    periodFull: '約3か月（2026年6月〜9月）',
+    lead: 'アロマの施術と、暮らしを楽しむ教室をしているサロンです。',
     trouble: 'LINEを「予約を取るだけの場所」にしたくない。オーナーさんの人柄や暮らしを知ってもらい、ファンになってもらいたい。',
     made: ['リッチメニュー6区画（アロマってなに？／暮らし／施術メニュー／お客様の声・Q&A／教室／ご予約）', 'めくって読めるカード16枚', '施術メニューのページ'],
-    voice: ['予約を初めてスマホからできました。', '綺麗になった'],
-    period: '約3か月（2026年6月〜9月）',
-    richmenu: { src: '/images/works/rosawood-richmenu.jpg', alt: 'ROSA WOOD リッチメニュー' },
-    cards: [
-      { src: '/images/works/rosawood-card-aroma.jpg', alt: 'ROSA WOODのアロマ カード', caption: 'ROSA WOODのアロマ' },
-      { src: '/images/works/rosawood-card-voice.jpg', alt: 'お客様の声 カード', caption: 'お客様の声' },
+    voices: ['「予約を初めてスマホからできました」', '「綺麗になった」'],
+    voiceFrom: 'お客さまより',
+    imgs: [
+      { src: '/images/works/rosawood-message.jpg', cap: 'リッチメッセージ（トークに届く読みもの）' },
+      { src: '/images/works/rosawood-richmenu.jpg', cap: 'リッチメニュー' },
+      { src: '/images/works/rosawood-card-aroma.jpg', cap: 'ROSA WOODのアロマ' },
+      { src: '/images/works/rosawood-card-voice.jpg', cap: 'お客様の声' },
     ],
   },
   {
     id: 'runaya',
-    left: {
-      src: '/images/works/phone-runaya.jpg',
-      alt: 'るなや LINE画面',
-      maxW: 'max-w-[400px]',
-      // スマホ画面は縦長なので、PCでは右側（リッチメニュー＋カード）の高さに収まるよう幅を絞る
-      imgMaxW: 'max-w-[400px] md:max-w-[300px]',
-      shadow: false,
-      caption: null,
-    },
     name: 'るなや',
-    industry: '飲食店（東京・府中）',
-    desc: '毎日日替わりのおうちご飯とお酒のお店です（17席・おひとりで営業）。',
+    cat: '飲食店（東京・府中）',
+    period: '約3か月',
+    periodFull: '約3か月（2026年7月〜10月）',
+    lead: '毎日日替わりのおうちご飯とお酒のお店です（17席・おひとりで営業）。',
     trouble: '予約がDM・電話・口頭でばらばらに入り、見落としそうになる。「今日やってますか？」の問い合わせにも、営業中に答えていた。',
     made: ['お店専用の予約システム（月額0円）：満席で自動停止／お店のLINEにお知らせ／お客さまに予約の控え', 'お客様一覧（来店回数・アンケート・お店のメモ）', '本日の営業状況（ボタン1つで切りかえ）', '「るなやとは」ページ・ポイントカード'],
-    voice: ['使いやすい'],
-    period: '約3か月（2026年7月〜10月）',
-    richmenu: { src: '/images/runaya-richmenu-2026-10.webp', alt: 'るなや リッチメニュー' },
-    cards: [
-      { src: '/images/runaya-card-hours-2026-10.webp', alt: 'るなや 営業時間カード', caption: '営業時間' },
-      { src: '/images/runaya-card-point-2026-10.webp', alt: 'るなや ポイントカード', caption: 'ポイントカード' },
-      { src: '/images/runaya-eigyo-2026-10.png', alt: 'るなや 本日の営業状況（実際の画面）', caption: '本日の営業状況（実際の画面）' },
+    voices: ['「使いやすい」'],
+    voiceFrom: 'オーナーさんより',
+    imgs: [
+      { src: '/images/works/phone-runaya.jpg', cap: 'LINE画面' },
+      { src: '/images/runaya-richmenu-2026-10.webp', cap: 'リッチメニュー' },
+      { src: '/images/runaya-card-hours-2026-10.webp', cap: '営業時間' },
+      { src: '/images/runaya-card-point-2026-10.webp', cap: 'ポイントカード' },
+      { src: '/images/runaya-eigyo-2026-10.png', cap: '本日の営業状況（実際の画面）' },
     ],
   },
   {
     id: 'yugon',
-    left: {
-      src: '/images/works/phone-yugon.jpg',
-      alt: 'ゆうごんさん LINE画面',
-      maxW: 'max-w-[400px]',
-      imgMaxW: 'max-w-[300px] md:max-w-[260px]',
-      shadow: false,
-      caption: null,
-    },
     name: 'ゆうごんさん',
-    industry: '夫婦円満カウンセラー',
-    desc: '生まれた日から本来の自分を読み解く、夫婦のためのカウンセリングです。',
+    cat: '夫婦円満カウンセラー',
+    period: '約3週間',
+    periodFull: '約3週間（2026年9月）',
+    lead: '生まれた日から本来の自分を読み解く、夫婦のためのカウンセリングです。',
     trouble: 'いきなり「相談しませんか？」では、申し込みのハードルが高い。まず気軽に、自分の今の状態に気づいてもらう入り口がほしい。',
     made: ['LINE公式アカウントのリニューアル（リッチメニュー4区画）', '違和感レベルチェック（5問に答えると点数とレベルが出る）', 'プロフィール・ご相談の流れのページ'],
-    voice: [],
-    period: '約3週間（2026年9月）',
-    richmenu: { src: '/images/works/yugon-richmenu.jpg', alt: 'ゆうごんさん リッチメニュー' },
-    cards: [
-      { src: '/images/works/yugon-check.jpg', alt: '違和感レベルチェック', caption: '違和感レベルチェック' },
+    voices: [],
+    voiceFrom: '',
+    imgs: [
+      { src: '/images/works/phone-yugon.jpg', cap: 'LINE画面' },
+      { src: '/images/works/yugon-richmenu.jpg', cap: 'リッチメニュー' },
+      { src: '/images/works/yugon-check.jpg', cap: '違和感レベルチェック' },
     ],
   },
   {
     id: 'daijobu',
-    left: {
-      src: '/images/works/phone-daijobu.jpg',
-      alt: 'ダイ・JO部 LINE画面',
-      maxW: 'max-w-[400px]',
-      imgMaxW: 'max-w-[260px]',
-      shadow: true,
-      caption: 'スマホで見たところ',
-    },
     name: 'ダイ・JO部',
-    industry: '府中の個人事業主の集まり',
-    desc: '府中・府中近郊の個人事業主がつながる集まりです（2026年10月発足）。',
+    cat: '府中の個人事業主の集まり',
+    period: '約1週間',
+    periodFull: '約1週間（2026年10月）',
+    lead: '府中・府中近郊の個人事業主がつながる集まりです（2026年10月発足）。',
     trouble: 'メンバーのお仕事やイベントの情報を、ひとつの場所にまとめたい。',
     made: ['メンバー専用のLINE公式アカウント（リッチメニュー左右2つ）', 'メンバー紹介ページ・イベントのページ'],
-    voice: [],
-    period: '約1週間（2026年10月）',
-    richmenu: { src: '/images/works/daijobu-richmenu.jpg', alt: 'ダイ・JO部 リッチメニュー' },
-    cards: [],
+    voices: [],
+    voiceFrom: '',
+    imgs: [
+      { src: '/images/works/phone-daijobu.jpg', cap: 'スマホで見たところ' },
+      { src: '/images/works/daijobu-richmenu.jpg', cap: 'リッチメニュー' },
+    ],
   },
   {
     id: 'bloomlink',
-    left: {
-      src: '/images/works/bloomlink-logo.jpg',
-      alt: 'Bloom Link ロゴデザイン',
-      maxW: 'max-w-[400px]',
-      shadow: true,
-      caption: 'ロゴデザイン',
-    },
     name: 'Bloom Link（自社）',
-    industry: 'LINE公式アカウント・Lステップ構築サポート',
-    desc: 'ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。',
-    trouble: null,
+    cat: 'LINE公式アカウント・Lステップ構築サポート',
+    period: '',
+    periodFull: '',
+    lead: 'ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。',
+    trouble: '',
     made: [],
-    voice: [],
-    period: null,
-    richmenu: { src: '/images/works/bloomlink-richmenu.jpg', alt: 'Bloom Link リッチメニュー' },
-    cards: [],
+    voices: [],
+    voiceFrom: '',
+    imgs: [
+      { src: '/images/works/bloomlink-logo.jpg', cap: 'ロゴデザイン' },
+      { src: '/images/works/bloomlink-richmenu.jpg', cap: 'リッチメニュー' },
+    ],
   },
+].map((c, i) => ({ ...c, no: String(i + 1).padStart(2, '0') }));
+
+// ことばのミニ辞典
+const glossary = [
+  { term: 'リッチメニュー', desc: 'LINEを開いたとき、画面の下半分にいつも出ているメニュー' },
+  { term: 'カードタイプメッセージ', desc: 'トークに届く、横にスワイプして見られるカード' },
+  { term: 'リッチメッセージ', desc: 'トークに届く、1枚の大きな画像' },
 ];
 
-// セクション2：デザイン見本
-// phone があるものは、スマホで見たところ＋リッチメニューを横に並べて大きく見せる
+// デザイン見本（dark: true は画像の台を暗い色にする）
 const samples = [
   {
-    src: '/images/works/sample-ru-richmenu.jpg',
-    alt: '花屋の学び（ルー）リッチメニュー',
-    phone: { src: '/images/works/phone-ru.jpg', alt: '花屋の学び（ルー）スマホで見たところ' },
+    imgs: [
+      { src: '/images/works/phone-ru.jpg', alt: '花屋の学び（ルー）スマホで見たところ' },
+      { src: '/images/works/sample-ru-richmenu.jpg', alt: '花屋の学び（ルー）リッチメニュー' },
+    ],
     title: '花屋の学び（ルー）',
     desc: '花屋をめざす方へ向けたLINE。無料プレゼントを大きく見せて、教科書・質問・相談の3つに分けました。写真の色をそろえて、落ち着いた雰囲気に。',
+    dark: false,
   },
   {
-    src: '/images/works/sample-cafe-richmenu.jpg',
-    alt: 'カフェ向け リッチメニュー見本',
+    imgs: [{ src: '/images/works/sample-cafe-richmenu.jpg', alt: 'カフェ向け リッチメニュー見本' }],
     title: 'カフェ',
     desc: '朝の光とやわらかい線で、ゆっくり過ごせる時間を。',
+    dark: false,
   },
   {
-    src: '/images/works/sample-bar-richmenu.jpg',
-    alt: 'BAR向け リッチメニュー見本',
+    imgs: [{ src: '/images/works/sample-bar-richmenu.jpg', alt: 'BAR向け リッチメニュー見本' }],
     title: 'BAR',
     desc: '同じ飲食店でも、夜のお店は色も線もがらりと変わります。',
+    dark: true,
   },
 ];
 
-// セクション3：バナー・サムネイル
+// バナー・サムネイル
 const banners = [
   { src: '/images/works/note-thumbnail-1.jpg', alt: 'note記事サムネイル 1', caption: 'note記事サムネイル' },
   { src: '/images/works/note-thumbnail-2.jpg', alt: 'note記事サムネイル 2', caption: 'note記事サムネイル' },
 ];
 
-const imgShadow = 'shadow-[0_8px_24px_rgba(53,94,72,0.08)]';
-const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/50 rounded-full px-3 py-0.5 mb-2';
+// このページだけの色（うすピンク・うすグリーンは使わない）
+// オレンジ #B4501C … 白抜きの四角・番号・点・ホバー
+const optima = "font-[Optima,'Belleza','Candara',sans-serif]";
+const badge = `inline-block bg-[#B4501C] text-white ${optima} text-base tracking-[0.12em] px-4 pt-2 pb-[9px]`;
+const h2 = 'text-[28px] font-medium text-sage tracking-[0.08em]';
+const label = 'text-xs tracking-[0.18em] text-sage font-bold';
+const row = 'py-5 border-t border-sage/[0.18]';
+const imgShadow = 'shadow-[0_1px_2px_rgba(53,94,72,0.08),0_8px_24px_-12px_rgba(53,94,72,0.25)]';
 ---
 
 <html lang="ja">
@@ -173,15 +167,24 @@ const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/5
       name="description"
       content="Bloom Linkがこれまでにつくった LINE公式アカウントとお店専用のしくみの作品集。困っていたこと・作ったもの・いただいた声を、お店ごとにご紹介します。"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
-    <!-- ヘッダー（トップページと同じ） -->
+  <body class="bg-cream text-[#2B3A31] font-sans antialiased">
+    <!-- ヘッダー（トップページと同じ。「作品集」だけ太字＋下線） -->
     <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-sage/10">
       <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
         <nav class="hidden md:flex items-center gap-8 text-sm text-[#5c5450]">
           {nav.map((item) => (
-            <a href={item.href} class="hover:text-sage transition-colors">{item.label}</a>
+            <a
+              href={item.href}
+              class={item.current
+                ? 'text-sage font-bold border-b-[1.5px] border-sage pb-0.5'
+                : 'hover:text-sage transition-colors'}
+              aria-current={item.current ? 'page' : undefined}
+            >{item.label}</a>
           ))}
         </nav>
         <a
@@ -194,234 +197,197 @@ const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/5
     </header>
 
     <main>
-      <!-- ■ 冒頭 -->
-      <section class="bg-cream">
-        <div class="max-w-5xl mx-auto px-6 pt-20 md:pt-28 pb-8 md:pb-10">
-          <p class="text-xs tracking-[0.25em] text-sage/60 mb-4">WORKS</p>
-          <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-8">作品集</h1>
-          <p class="ja-text text-[#5c5450] leading-[2] mb-8 max-w-3xl">
+      <!-- ■ 一番上：オレンジの四角＋説明文 → 目次 -->
+      <section class="max-w-[1180px] mx-auto px-6 pt-16 md:pt-24 pb-14">
+        <div class="flex flex-wrap items-end gap-10 md:gap-12">
+          <div class="flex-[1_1_420px]">
+            <div class="w-full max-w-[510px] aspect-[3/2] bg-[#B4501C] text-white flex flex-col items-center justify-center gap-5">
+              <div class={`${optima} text-[clamp(64px,10vw,112px)] leading-none tracking-[0.01em]`}>Works</div>
+              <h1 class="text-xl font-medium tracking-[0.4em] pl-[0.4em]">作品集</h1>
+            </div>
+          </div>
+          <p class="flex-[1_1_340px] text-base leading-[2.1] text-[#4A5A50]">
             これまでにつくった LINE公式アカウントと、お店専用のしくみです。<br />
             どれも「そのお店の困りごと」から考えて、一つひとつ作っています。
           </p>
-          <ul class="space-y-2 text-sm text-[#6B6B64] leading-relaxed max-w-3xl">
-            <li>・リッチメニュー … LINEを開いたとき、画面の下半分にいつも出ているメニュー</li>
-            <li>・カードタイプメッセージ … トークに届く、横にスワイプして見られるカード</li>
-            <li>・リッチメッセージ … トークに届く、1枚の大きな画像</li>
-          </ul>
+        </div>
+
+        <!-- 目次（押すとその事例まで移動） -->
+        <nav aria-label="制作事例の目次" class="mt-16 border-t border-sage/20">
+          {cases.map((c) => (
+            <a
+              href={`#${c.id}`}
+              class="grid grid-cols-[48px_minmax(0,1fr)] md:grid-cols-[64px_minmax(0,1fr)_auto] gap-x-4 gap-y-1 items-baseline px-1 py-[18px] border-b border-sage/20 hover:bg-[#F2ECE3] transition-colors"
+            >
+              <span class={`${optima} text-[22px] text-[#B4501C]`}>{c.no}</span>
+              <span class="text-lg font-bold text-sage">
+                {c.name}<span class="font-normal text-[13px] text-[#6B6B64] ml-3.5">{c.cat}</span>
+              </span>
+              <span class="col-start-2 md:col-start-auto text-[13px] text-[#6B6B64]">{c.period ? `${c.period} ↓` : '↓'}</span>
+            </a>
+          ))}
+        </nav>
+      </section>
+
+      <!-- ■ ことばのミニ辞典 -->
+      <section class="max-w-[1180px] mx-auto px-6 pb-10">
+        <div class="bg-white rounded-[20px] px-6 md:px-8 py-7 grid gap-6 md:grid-cols-3">
+          <p class="md:col-span-3 text-xs tracking-[0.2em] text-[#B4501C] font-bold">ことばのミニ辞典</p>
+          {glossary.map((g) => (
+            <div>
+              <p class="font-bold text-sage mb-1.5">{g.term}</p>
+              <p class="text-sm leading-[1.8] text-[#4A5A50]">{g.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <!-- ■ セクション1：制作事例（背景を薄い緑にして、白いカードを浮かせる） -->
-      <section class="bg-[#BFD4C7]/25">
-        <div class="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-16 md:pb-24">
-          <div class="mb-10 md:mb-14 px-2 md:px-0">
-            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">制作事例</h2>
-            <p class="text-sm text-[#6B6B64]">実際のお店で使われているLINEです</p>
-            <p class="mt-4"><a href="/dekiru/" class="text-sm text-sage underline underline-offset-4 decoration-sage/30 hover:decoration-sage transition-colors">できることを見る →</a></p>
-          </div>
-
-          <div class="space-y-10 md:space-y-14">
-            {cases.map((c) => (
-              <article id={c.id} class="scroll-mt-24 bg-white rounded-3xl px-5 py-6 md:px-12 md:py-12 shadow-[0_10px_30px_rgba(53,94,72,0.08)]">
-                <!-- 店名の帯（ここでメリハリをつける） -->
-                <div class="rounded-xl bg-gradient-to-b from-[#e7aeb8] to-[#DFA2AE] text-white text-center px-4 py-3 md:py-4 mb-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
-                  <h3 class="text-lg md:text-xl font-medium tracking-wider leading-snug">{c.name}</h3>
-                </div>
-                <p class="text-sm text-[#6B6B64] text-center mb-8 md:mb-10">{c.industry}</p>
-
-                <div class="grid gap-y-8 md:grid-cols-[400px_1fr] md:gap-x-12 md:gap-y-0">
-                <!-- 1行目・左：説明 → 困っていたこと・作ったもの・声・期間 -->
-                <div class={`${c.left?.maxW ?? 'max-w-[400px]'} md:col-start-1 md:row-start-1 md:mb-[30px]`}>
-                  <p class="ja-text text-[#5c5450] leading-[2]">{c.desc}</p>
-                  {c.trouble && (
-                    <dl class="mt-6 space-y-5">
-                      <div>
-                        <dt class={dtClass}>困っていたこと</dt>
-                        <dd class="ja-text text-sm text-[#5c5450] leading-[1.9]">{c.trouble}</dd>
-                      </div>
-                      {c.made.length > 0 && (
-                        <div>
-                          <dt class={dtClass}>作ったもの</dt>
-                          <dd>
-                            <ul class="space-y-1.5">
-                              {c.made.map((m) => (
-                                <li class="flex gap-2.5 ja-text text-sm text-[#5c5450] leading-[1.9]">
-                                  <span aria-hidden="true" class="mt-[0.8em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#DFA2AE]"></span>
-                                  <span>{m}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </dd>
-                        </div>
-                      )}
-                      {c.voice.length > 0 && (
-                        <div>
-                          <dt class={dtClass}>いただいた声</dt>
-                          <dd class="space-y-1.5">
-                            {c.voice.map((v) => (
-                              <p class="ja-text text-sm text-sage leading-[1.9] bg-[#E8B8BE]/15 rounded-xl px-4 py-2">「{v.replace(/。$/, '')}」</p>
-                            ))}
-                          </dd>
-                        </div>
-                      )}
-                      {c.period && (
-                        <div>
-                          <dt class={dtClass}>期間</dt>
-                          <dd class="ja-text text-sm text-[#5c5450] leading-[1.9]">{c.period}</dd>
-                        </div>
-                      )}
-                    </dl>
-                  )}
-                </div>
-
-                <!-- 1行目・右：空 -->
-                <div class="hidden md:block md:col-start-2 md:row-start-1"></div>
-
-                <!-- 2行目・左：画像（案件ごとに中身が違う1枚） -->
-                <div class="md:col-start-1 md:row-start-2">
-                  {c.left && (
-                    <figure class={c.left.imgMaxW ?? c.left.maxW}>
-                      <img
-                        src={c.left.src}
-                        alt={c.left.alt}
-                        loading="lazy"
-                        class={`block w-full h-auto rounded-2xl ${c.left.shadow ? imgShadow : ''}`}
-                      />
-                      {c.left.caption && (
-                        <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{c.left.caption}</figcaption>
-                      )}
-                    </figure>
-                  )}
-                </div>
-
-                <!-- 2行目・右：リッチメニュー ＋ カード -->
-                <div class="md:col-start-2 md:row-start-2">
-                  <!-- リッチメニュー -->
-                  <figure class="mb-8">
-                    <img
-                      src={c.richmenu.src}
-                      alt={c.richmenu.alt}
-                      loading="lazy"
-                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                    />
-                    <figcaption class="text-xs text-[#6B6B64] text-center mt-3">リッチメニュー</figcaption>
-                  </figure>
-
-                  <!-- カード（横2列・スマホでも2列） -->
-                  {c.cards.length > 0 && (
-                    <div class="grid grid-cols-2 gap-4 md:gap-6">
-                      {c.cards.map((card) => (
-                        <figure>
-                          <img
-                            src={card.src}
-                            alt={card.alt}
-                            loading="lazy"
-                            class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                          />
-                          <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{card.caption}</figcaption>
-                        </figure>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                </div>
-              </article>
-            ))}
-          </div>
+      <!-- ■ 制作事例の見出し -->
+      <section class="max-w-[1180px] mx-auto px-6 pt-14 pb-6">
+        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-3">
+          <div class={badge}>Case studies</div>
+          <h2 class={`${h2} basis-full`}>制作事例</h2>
+          <span class="text-sm text-[#6B6B64]">実際のお店で使われているLINEです</span>
+          <a href="/dekiru/" class="md:ml-auto text-sm font-medium text-sage hover:text-[#B4501C] transition-colors">できることを見る →</a>
         </div>
       </section>
 
-      <!-- ■ セクション2：デザイン見本（制作事例の緑と交互にするため、こちらは薄いピンク） -->
-      <section class="bg-[#E8B8BE]/[0.14]">
-        <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
-          <div class="mb-12 md:mb-16">
-            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">デザイン見本</h2>
-            <p class="text-sm text-[#6B6B64]">落ち着いた雰囲気だけでなく、こんなテイストも作れます</p>
+      <!-- ■ 各事例（事例ごとに文章と画像の左右を入れかえる） -->
+      {cases.map((c, i) => (
+        <article id={c.id} class="max-w-[1180px] mx-auto px-6 py-14 scroll-mt-20">
+          <div class="border-t border-sage pt-7 mb-9">
+            <div class={`inline-block bg-[#B4501C] text-white ${optima} text-[15px] tracking-[0.2em] px-3.5 pt-[7px] pb-2 mb-4`}>CASE {c.no}</div>
+            <div class="flex flex-wrap items-center gap-4">
+              <h3 class="text-[26px] md:text-[30px] font-medium text-sage tracking-[0.04em]">{c.name}</h3>
+              <span class="text-[13px] text-sage border border-sage rounded-full px-3 py-1">{c.cat}</span>
+            </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-            {samples.map((s) => (
-              <div class={s.phone ? 'md:col-span-2' : ''}>
-                {s.phone ? (
-                  <div class="grid grid-cols-[34%_1fr] gap-4 md:gap-8 items-end">
-                    <img
-                      src={s.phone.src}
-                      alt={s.phone.alt}
-                      loading="lazy"
-                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                    />
-                    <img
-                      src={s.src}
-                      alt={s.alt}
-                      loading="lazy"
-                      class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                    />
+          <div class={`flex flex-col gap-10 md:gap-12 md:items-start ${i % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+            <!-- 文章 -->
+            <div class="md:flex-[1_1_320px] min-w-0">
+              <p class="mb-7 text-[17px] leading-[2] text-[#2B3A31]">{c.lead}</p>
+              {c.trouble && (
+                <div class={row}>
+                  <p class={`${label} mb-2.5`}>困っていたこと</p>
+                  <p class="text-[15px] leading-[1.95] text-[#4A5A50]">{c.trouble}</p>
+                </div>
+              )}
+              {c.made.length > 0 && (
+                <div class={row}>
+                  <p class={`${label} mb-2.5`}>作ったもの</p>
+                  <ul class="flex flex-col gap-2">
+                    {c.made.map((m) => (
+                      <li class="flex gap-2.5 text-[15px] leading-[1.8] text-[#4A5A50]">
+                        <span aria-hidden="true" class="flex-none w-1.5 h-1.5 rounded-full bg-[#B4501C] mt-[11px]"></span>
+                        <span>{m}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {c.voices.length > 0 && (
+                <div class={row}>
+                  <p class={`${label} mb-3`}>いただいた声</p>
+                  <div class="bg-[#F4EADF] rounded-2xl px-6 py-[22px] flex flex-col gap-2.5">
+                    {c.voices.map((v) => (
+                      <p class="text-lg font-medium leading-[1.7] text-sage">{v}</p>
+                    ))}
+                    <p class="text-xs text-[#6B6B64] mt-1">— {c.voiceFrom}</p>
                   </div>
-                ) : (
-                  <img
-                    src={s.src}
-                    alt={s.alt}
-                    loading="lazy"
-                    class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                  />
-                )}
-                <h3 class="text-base md:text-lg font-medium text-sage mt-5 mb-2">{s.title}</h3>
-                <p class="ja-text text-sm text-[#5c5450] leading-[1.9]">{s.desc}</p>
+                </div>
+              )}
+              {c.periodFull && (
+                <div class="pt-5 border-t border-sage/[0.18] flex items-baseline gap-4">
+                  <p class={label}>期間</p>
+                  <p class="text-[15px] text-[#4A5A50]">{c.periodFull}</p>
+                </div>
+              )}
+            </div>
+
+            <!-- 画像（台の上に2列で並べる。画像は切らずに全体を表示） -->
+            <div class="md:flex-[1.4_1_420px] min-w-0 bg-[#EFE9E0] rounded-3xl p-4 md:p-5">
+              <div class="columns-2 gap-3 md:gap-4">
+                {c.imgs.map((im) => (
+                  <figure class="mb-4 break-inside-avoid">
+                    <img
+                      src={im.src}
+                      alt={im.cap}
+                      loading="lazy"
+                      class={`block w-full h-auto rounded-xl bg-white ${imgShadow}`}
+                    />
+                    <figcaption class="text-xs text-[#6B6B64] mt-2 pl-0.5">{im.cap}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+
+      <!-- ■ デザイン見本（白い帯） -->
+      <section class="bg-white mt-14">
+        <div class="max-w-[1180px] mx-auto px-6 py-16 md:py-[88px]">
+          <div class={badge}>Design samples</div>
+          <h2 class={`${h2} mt-[18px] mb-2.5`}>デザイン見本</h2>
+          <p class="mb-10 text-[15px] text-[#4A5A50]">落ち着いた雰囲気だけでなく、こんなテイストも作れます</p>
+          <div class="grid gap-7 md:grid-cols-3 items-start">
+            {samples.map((s) => (
+              <div class="flex flex-col gap-4">
+                <div class={`rounded-[20px] p-4 ${s.dark ? 'bg-[#26332C]' : 'bg-cream'} ${s.imgs.length > 1 ? 'grid grid-cols-[1fr_1.4fr] gap-3 items-center' : ''}`}>
+                  {s.imgs.map((im) => (
+                    <img src={im.src} alt={im.alt} loading="lazy" class="block w-full h-auto rounded-[10px]" />
+                  ))}
+                </div>
+                <h3 class="text-lg font-medium text-sage">{s.title}</h3>
+                <p class="text-sm leading-[1.9] text-[#4A5A50]">{s.desc}</p>
               </div>
             ))}
           </div>
-
-          <p class="ja-text text-sm text-[#6B6B64] leading-[1.9] mt-12">
+          <p class="mt-10 text-[15px] text-sage font-medium text-center">
             同じ「飲食店」でも、お店の時間帯やお客さまに合わせて作り分けます。
           </p>
         </div>
       </section>
 
-      <!-- ■ セクション3：バナー・サムネイル -->
-      <section class="bg-cream">
-        <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
-          <div class="mb-12 md:mb-16">
-            <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-2">バナー・サムネイル</h2>
-            <p class="text-sm text-[#6B6B64]">LINE以外のデザインも作っています</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-            {banners.map((b) => (
-              <figure>
-                <img
-                  src={b.src}
-                  alt={b.alt}
-                  loading="lazy"
-                  class={`block w-full h-auto rounded-2xl ${imgShadow}`}
-                />
-                <figcaption class="text-xs text-[#6B6B64] text-center mt-3">{b.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
+      <!-- ■ バナー・サムネイル -->
+      <section class="max-w-[1180px] mx-auto px-6 py-16 md:py-[88px]">
+        <div class={badge}>Banners</div>
+        <h2 class={`${h2} mt-[18px] mb-2.5`}>バナー・サムネイル</h2>
+        <p class="mb-10 text-[15px] text-[#4A5A50]">LINE以外のデザインも作っています</p>
+        <div class="grid gap-7 md:grid-cols-2">
+          {banners.map((b) => (
+            <figure>
+              <img src={b.src} alt={b.alt} loading="lazy" class="block w-full h-auto rounded-2xl" />
+              <figcaption class="text-xs text-[#6B6B64] mt-2.5">{b.caption}</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
-      <!-- ■ 最後：お問い合わせへの導線 -->
-      <section class="bg-cream">
-        <div class="max-w-3xl mx-auto px-6 pb-24 md:pb-32 pt-4 text-center">
-          <h2 class="text-xl md:text-2xl font-medium text-sage leading-snug mb-5">うちのお店だと、どうなる？</h2>
-          <p class="ja-text text-[#5c5450] leading-[2] mb-10">
-            ご相談は無料です。無理な勧誘はしません。
-          </p>
-          <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+      <!-- ■ 緑の帯：お問い合わせへの導線 -->
+      <section class="bg-sage text-white">
+        <div class="max-w-[1180px] mx-auto px-6 py-20 md:py-24 flex flex-wrap items-center gap-10">
+          <div class="flex-[1_1_380px]">
+            <h2 class="mb-3.5 text-[clamp(26px,3.4vw,38px)] font-medium tracking-[0.06em]">うちのお店だと、どうなる？</h2>
+            <p class="text-[15px] leading-[1.9] text-[#E6EEE9]">ご相談は無料です。無理な勧誘はしません。</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
             <a
               href={LINE_URL}
               target="_blank"
               rel="noopener"
-              class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(4,140,58,0.16)] hover:from-[#05b94e] hover:to-[#039e42] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(4,140,58,0.22)] hover:-translate-y-0.5 transition-all duration-200"
+              class="inline-block bg-white text-sage rounded-full px-7 py-4 font-bold text-[15px] hover:bg-[#B4501C] hover:text-white transition-colors"
             >
               LINEで相談する
             </a>
             <a
-              href="/#works"
-              class="inline-block w-full max-w-xs md:w-auto text-sage rounded-full px-9 py-3.5 text-sm font-medium border border-sage/30 hover:bg-sage/5 hover:-translate-y-0.5 transition-all duration-200"
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block border border-white/60 text-white rounded-full px-7 py-4 font-medium text-[15px] hover:bg-white/10 transition-colors"
             >
-              閉じる
+              フォームで相談する
             </a>
           </div>
         </div>
@@ -429,7 +395,7 @@ const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/5
     </main>
 
     <!-- フッター（トップページと同じ） -->
-    <footer class="bg-sage text-cream">
+    <footer class="bg-sage text-cream border-t border-white/10">
       <div class="max-w-6xl mx-auto px-6 py-14 md:py-16 text-center">
         <p class="text-xl tracking-[0.15em] mb-7">Bloom Link</p>
         <p class="mb-6 text-2xl md:text-3xl leading-relaxed">
@@ -442,7 +408,7 @@ const dtClass = 'inline-block text-xs tracking-[0.15em] text-sage bg-[#BFD4C7]/5
         </p>
         <div class="flex flex-col md:flex-row items-center justify-center gap-4">
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform"
+            href={FORM_URL}
             target="_blank"
             rel="noopener"
             class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
