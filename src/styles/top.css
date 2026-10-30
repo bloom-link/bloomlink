@@ -1,0 +1,42 @@
+/* トップページ（2026/10 リニューアル）だけで使う部品 */
+
+/* 写真がまだない場所の仮の枠（斜めストライプ） */
+.ph-stripe {
+  background: repeating-linear-gradient(135deg, #f2e9dc 0 8px, #ede2d3 8px 16px);
+}
+.ph-stripe-light {
+  background: repeating-linear-gradient(135deg, #fbf6ee 0 8px, #f2e9dc 8px 16px);
+}
+.ph-stripe-dark {
+  background: repeating-linear-gradient(135deg, #ede2d3 0 8px, #e6d9c7 8px 16px);
+}
+.ph-stripe-mini {
+  background: repeating-linear-gradient(135deg, #ede2d3 0 4px, #e6d9c7 4px 8px);
+}
+
+/* 縦書き（スマホ幅では横書きにもどす） */
+@media (min-width: 768px) {
+  .tate {
+    writing-mode: vertical-rl;
+  }
+}
+
+/* FAQ の開閉 */
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq[open] .pm {
+  transform: rotate(45deg);
+}
+
+/* 事例スライダーのスクロールバーを隠す */
+.nosb {
+  scrollbar-width: none;
+}
+.nosb::-webkit-scrollbar {
+  display: none;
+}
