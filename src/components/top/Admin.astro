@@ -1,0 +1,54 @@
+---
+// 05 管理画面
+import Label from './Label.astro';
+
+const adminPoints = [
+  { n: '01', h: 'アプリのダウンロードはいりません', t: 'LINEと、いつものスマホのブラウザで開けます' },
+  { n: '02', h: 'ボタンが大きくて、迷わない', t: '機械が苦手な人でも使えるように作ります' },
+  { n: '03', h: '見られる人と範囲も、お店に合わせて', t: 'オーナーさんだけでも、スタッフみんなでも。見せる範囲はお店に合わせて決められます' },
+];
+
+const screens = ['予約の一覧', '今日のお知らせの切りかえボタン', 'スマホ秘書'];
+---
+
+<section class="py-24 md:py-40 px-[clamp(24px,5vw,72px)]">
+  <div class="max-w-[1080px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-[clamp(48px,7vw,96px)] items-center">
+    <div class="flex flex-col gap-8">
+      <Label text="04 — Admin" />
+      <h2 class="m-0 font-mincho font-medium text-[28px] md:text-[34px] leading-[1.9] tracking-[.14em]">
+        管理画面も、<br /><span class="text-bl-blue">スマホの中に。</span>
+      </h2>
+      <p class="m-0 text-sm leading-[2.2] font-light text-bl-body">
+        予約の一覧も、お客さまの記録も、今日のお知らせの切りかえも。 お店の中でも、現場でも、移動中でも、スマホを開けばすぐに見られます。 パソコンを開かなくても大丈夫です。
+      </p>
+      <ul class="m-0 p-0 list-none flex flex-col border-t border-bl-ink">
+        {adminPoints.map((a) => (
+          <li class="grid grid-cols-[36px_minmax(0,1fr)] gap-3 py-5 border-b border-bl-line">
+            <span class="font-garamond text-lg text-bl-orange">{a.n}</span>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="m-0 font-mincho text-[17px] font-medium tracking-[.06em]">{a.h}</h3>
+              <p class="m-0 text-[13px] leading-[1.9] font-light text-bl-sub">{a.t}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <div class="relative overflow-hidden h-[460px] md:h-[600px] rounded-t-full bg-bl-orange">
+        <div class="absolute left-[4%] md:left-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 -rotate-[7deg]">
+          <div class="ph-stripe-light w-full h-full rounded-[20px] flex items-center justify-center font-mono text-[10px] text-bl-faint text-center">予約の一覧</div>
+        </div>
+        <div class="absolute right-[4%] md:right-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 rotate-[7deg]">
+          <div class="ph-stripe-light w-full h-full rounded-[20px] flex items-center justify-center font-mono text-[10px] text-bl-faint text-center">スマホ秘書</div>
+        </div>
+        <div class="absolute left-1/2 -translate-x-1/2 -bottom-[30px] w-[150px] h-[320px] md:w-[200px] md:h-[440px] rounded-[30px] bg-bl-ink p-[7px] shadow-[0_20px_40px_rgba(0,0,0,.18)]">
+          <div class="ph-stripe-light w-full h-full rounded-[23px] flex items-center justify-center font-mono text-[10px] text-bl-faint text-center">今日のお知らせの<br />切りかえボタン</div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-x-7 gap-y-2 flex-wrap text-xs text-bl-sub tracking-[.08em]">
+        {screens.map((s) => <span>{s}</span>)}
+      </div>
+    </div>
+  </div>
+</section>

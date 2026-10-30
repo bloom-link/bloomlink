@@ -1,0 +1,105 @@
+---
+// 06 事例（横スライダー）
+import Label from './Label.astro';
+
+const works = [
+  {
+    cat: '飲食店（東京・府中）',
+    name: 'るなや',
+    sys: '予約・受付システム／LINE公式アカウント',
+    items: ['ワンオペのお店の、予約の見落としを減らしました', '予約が入ると、すぐにお店のLINEに通知が届きます', '「予約する」「本日の営業状況」「アクセス」が、ボタンひと押しで開けます'],
+    link: '→ 制作ストーリーを見る',
+    href: '/story/runaya',
+  },
+  {
+    cat: 'アロマテラピーサロン',
+    name: 'ROSA WOOD',
+    sys: 'LINE公式アカウント',
+    items: ['オーナーさんの声：「誰が何に関心があるのかが、わかるようになりました」', 'お客さまの声：「見やすくなった」', '教室の説明をLINEに入れたことで、講座や教室を以前より積極的に開催されるようになりました'],
+    link: '→ 制作ストーリーを見る',
+    href: '/story/rosa-wood',
+  },
+  {
+    cat: '夫婦円満カウンセラー',
+    name: 'ゆうごんさん',
+    sys: 'お客さま向けのセルフチェック',
+    items: ['お客さまが質問に答えると、結果がLINEで届くチェックを作りました'],
+    link: '→ 実例を見る',
+    href: '/works/',
+  },
+  {
+    cat: '府中の個人事業主の集まり',
+    name: 'ダイ・JO部',
+    sys: 'メンバー専用のLINE（連絡の窓口）',
+    items: ['メンバーへのお知らせや案内を、1つのLINEにまとめました'],
+    link: '→ 実例を見る',
+    href: '/works/',
+  },
+];
+---
+
+<section id="works" class="py-24 md:py-40 px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-12 md:gap-[72px]">
+    <div class="flex justify-between items-end gap-6 flex-wrap pb-7 border-b border-bl-ink">
+      <div class="flex flex-col gap-4">
+        <Label text="05 — Works" />
+        <h2 class="m-0 font-mincho font-medium text-[24px] md:text-[34px] tracking-[.14em]">実際に使っていただいています。</h2>
+      </div>
+      <div class="flex gap-3">
+        <button type="button" data-works-prev aria-label="前へ" class="w-[52px] h-[52px] rounded-full border-0 bg-bl-blue hover:bg-bl-orange transition-colors text-white text-lg cursor-pointer">←</button>
+        <button type="button" data-works-next aria-label="次へ" class="w-[52px] h-[52px] rounded-full border-0 bg-bl-blue hover:bg-bl-orange transition-colors text-white text-lg cursor-pointer">→</button>
+      </div>
+    </div>
+
+    <div
+      data-works-track
+      class="nosb flex gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth -mr-[clamp(24px,5vw,72px)] pr-[clamp(24px,5vw,72px)]"
+    >
+      {works.map((w) => (
+        <article class="flex-[0_0_min(440px,82vw)] snap-start flex flex-col gap-6">
+          <div class="ph-stripe aspect-[3/2] flex items-center justify-center font-mono text-[11px] text-bl-faint">写真：{w.name}</div>
+          <div class="flex flex-col gap-2.5">
+            <span class="text-[11px] text-bl-faint tracking-[.16em]">{w.cat}</span>
+            <h3 class="m-0 font-mincho text-[26px] font-medium tracking-[.1em] text-bl-orange">{w.name}</h3>
+            <span class="text-xs font-medium text-bl-blue tracking-[.04em]">使っているしくみ：{w.sys}</span>
+          </div>
+          <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+            {w.items.map((it) => (
+              <li class="text-[13px] leading-loose text-bl-body font-light">— {it}</li>
+            ))}
+          </ul>
+          <a href={w.href} class="self-start text-xs tracking-[.14em] text-bl-ink no-underline border-b border-bl-ink pb-1 hover:text-bl-orange hover:border-bl-orange transition-colors">{w.link}</a>
+        </article>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] border-y border-bl-ink">
+      <div class="py-10 md:pr-10 flex flex-col gap-4 border-b md:border-b-0 md:border-r border-bl-line">
+        <h3 class="m-0 font-mincho text-[22px] font-medium tracking-[.1em]">LINEを体験してみる</h3>
+        <p class="m-0 text-[13px] leading-loose text-bl-body font-light">Lステップのデモアカウント（Pilates Studio）で、実際の使い心地を試せます。</p>
+        <a href="https://line.me/ti/p/%40202lchui" target="_blank" rel="noopener" class="self-start text-xs tracking-[.14em] text-bl-ink no-underline border-b border-bl-ink pb-1 hover:text-bl-orange hover:border-bl-orange transition-colors">→ LINEを体験してみる</a>
+      </div>
+      <div class="py-10 md:pl-10 flex flex-col gap-4">
+        <div class="flex gap-3 items-center">
+          <span class="w-2.5 h-2.5 rounded-full bg-bl-blue shrink-0"></span>
+          <h3 class="m-0 font-mincho text-[22px] font-medium tracking-[.1em]">工務店・会社のモニター募集中</h3>
+        </div>
+        <p class="m-0 text-[13px] leading-loose text-bl-body font-light">工務店や小さな会社でも使っていただけるように、モニターを募集しています。</p>
+        <a href="https://lin.ee/w7c1g5d" target="_blank" rel="noopener" class="self-start text-xs tracking-[.14em] text-bl-orange no-underline border-b border-bl-orange pb-1 hover:text-bl-ink hover:border-bl-ink transition-colors">→ LINEで相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ← → ボタンで、カード1枚分（カード幅＋すき間40px）ずつ動かす
+  const track = document.querySelector<HTMLElement>('[data-works-track]');
+  const slide = (dir: number) => {
+    if (!track) return;
+    const card = track.firstElementChild as HTMLElement | null;
+    const w = card ? card.getBoundingClientRect().width + 40 : 480;
+    track.scrollBy({ left: dir * w, behavior: 'smooth' });
+  };
+  document.querySelector('[data-works-prev]')?.addEventListener('click', () => slide(-1));
+  document.querySelector('[data-works-next]')?.addEventListener('click', () => slide(1));
+</script>

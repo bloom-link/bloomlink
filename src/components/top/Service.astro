@@ -1,0 +1,98 @@
+---
+// 04 できること（3段の流れ）
+import Label from './Label.astro';
+
+const tiers = [
+  {
+    no: '01',
+    label: '見つけてもらう',
+    name: 'LP（お店・会社の紹介ページ）',
+    lead: 'はじめての人に、あなたのお店・会社が伝わるページ。',
+    items: [
+      'スマホで見やすい1ページの紹介ページ',
+      'Instagramや検索から来た人を、LINEの友だち追加へつなぐ',
+      'LINEと同じ写真や文章を使うので、まとめて作れる',
+    ],
+  },
+  {
+    no: '02',
+    label: 'つながる',
+    name: 'LINE公式アカウント・Lステップ構築',
+    lead: '一度来た人と、ずっとつながれる窓口。',
+    items: [
+      'リッチメニュー（LINEの下に出るボタンの画面）を、お店・会社に合わせて作る',
+      'あいさつ・自動の返事・お知らせの配信を整える',
+      'Lステップで、お客さまに合わせた案内を自動で送れる',
+    ],
+    note: 'お客さま向けだけでなく、スタッフや取引先との連絡の窓口にも使えます。',
+  },
+];
+
+const tools = [
+  { n: '①', name: '予約・受付システム', lead: '予約が入ったら、スマホにすぐお知らせ。', items: ['お客さまはLINEから予約できる', '満席になったら、自動で受付をストップ', '現地調査や打ち合わせの予約にも使える'] },
+  { n: '②', name: 'スマホ秘書', lead: 'LINEに送るだけで、予定も領収書も片づく。', items: ['「明日 15時 山田様」と送ると、カレンダーに予定が入る', '前の日の夜と当日の朝に、お知らせが届く', 'レシートを撮って送ると、表に記録される'] },
+  { n: '③', name: '顧客管理', lead: 'お客さまのことが、スマホでひと目でわかる。', items: ['来店の回数が、自動でたまる', 'アンケートの答えや、お店のメモをいっしょに残せる', '紙の台帳がいらなくなる'] },
+  { n: '④', name: '今日のお知らせ', lead: '「今日やってる？」に、ボタン1つで答える。', items: ['営業中・お休み・本日のランチ・今日の現場など', 'スマホでボタンを押すだけで切りかわる', 'お客さまはLINEからいつでも見られる'] },
+  { n: '⑤', name: 'お客さま向けのセルフチェック', lead: 'お客さまが自分で答えて、ぴったりの案内が届く。', items: ['5つの質問に答えると、点数とレベルが自動で出る', '相談の前に、お客さまの状態がわかる'] },
+];
+---
+
+<section id="service" class="py-24 md:py-40 px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-16 md:gap-[88px]">
+    <div class="flex flex-col gap-5 items-center text-center">
+      <Label text="03 — Service" />
+      <h2 class="m-0 font-mincho font-medium text-[24px] md:text-[34px] leading-[1.9] tracking-[.14em]">
+        見つけてもらって、つながって、<br />スマホで回す。
+      </h2>
+    </div>
+
+    {tiers.map((tr) => (
+      <div class="grid grid-cols-1 md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 md:gap-14 pt-11 border-t-2 border-bl-blue">
+        <div class="flex gap-5 items-start">
+          <span class="font-garamond text-[56px] leading-[.9] font-normal text-bl-orange">{tr.no}</span>
+          <span class="pt-1 font-mincho text-2xl font-medium tracking-[.12em]">{tr.label}</span>
+        </div>
+        <div class="flex flex-col gap-[18px]">
+          <h3 class="m-0 text-[17px] font-medium tracking-[.08em]">{tr.name}</h3>
+          <p class="m-0 font-mincho text-[19px] leading-[1.8] font-medium text-bl-orange">{tr.lead}</p>
+          <ul class="m-0 p-0 list-none flex flex-col">
+            {tr.items.map((it) => (
+              <li class="text-sm leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line">{it}</li>
+            ))}
+          </ul>
+          {tr.note && <p class="m-0 text-[13px] leading-[1.9] text-bl-sub">※ {tr.note}</p>}
+        </div>
+      </div>
+    ))}
+
+    <div class="flex flex-col gap-10 pt-11 border-t-2 border-bl-blue">
+      <div class="flex gap-5 items-start">
+        <span class="font-garamond text-[56px] leading-[.9] font-normal text-bl-orange">03</span>
+        <span class="pt-1 font-mincho text-2xl font-medium tracking-[.12em]">スマホで回す</span>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(190px,1fr))] border-l border-bl-line">
+        {tools.map((tl) => (
+          <div class="pt-1 pb-8 md:pb-2 px-[22px] border-r border-bl-line flex flex-col gap-3.5">
+            <span class="font-garamond text-xl text-bl-blue">{tl.n}</span>
+            <h3 class="m-0 font-mincho text-lg leading-[1.6] font-medium tracking-[.06em]">{tl.name}</h3>
+            <p class="m-0 text-[13px] leading-[1.9] font-medium text-bl-orange">{tl.lead}</p>
+            <ul class="m-0 p-0 list-none flex flex-col gap-2">
+              {tl.items.map((it) => (
+                <li class="text-xs leading-[1.9] text-bl-sub font-light">— {it}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <a
+        href="/dekiru/"
+        class="flex gap-4 items-center text-[13px] tracking-[.14em] text-white no-underline bg-bl-blue hover:bg-bl-orange transition-colors px-8 md:px-10 py-[18px] rounded-full"
+      >
+        くわしく見る（「できること」のページへ）<span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
