@@ -1,0 +1,31 @@
+---
+// 10 つくる人
+import Label from './Label.astro';
+---
+
+<section class="py-24 md:py-40 px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+  <div class="max-w-[1080px] mx-auto flex gap-[clamp(48px,8vw,120px)] flex-wrap items-end">
+    <div class="flex flex-col md:flex-row gap-8 md:items-end">
+      <h2 class="tate m-0 font-mincho font-medium text-[22px] md:text-[26px] leading-[1.9] tracking-[.18em] md:h-[460px]">
+        つながりを育てる仕事を<br />選んだ理由
+      </h2>
+      <div class="relative">
+        <div class="ph-stripe-dark w-[320px] max-w-[70vw] h-[420px] md:h-[460px] rounded-t-[160px] flex items-center justify-center font-mono text-[11px] text-bl-faint text-center">
+          写真<br />スマホを操作する<br />女性のポートレート
+        </div>
+        <div class="absolute -right-5 md:-right-7 top-[60px] w-10 h-10 md:w-14 md:h-14 rounded-full bg-bl-orange"></div>
+      </div>
+    </div>
+    <div class="flex-1 min-w-[min(300px,100%)] flex flex-col gap-7">
+      <Label text="10 — About me" />
+      <div class="flex flex-col gap-2">
+        <span class="font-mincho text-[30px] font-medium tracking-[.2em]">原 早苗</span>
+        <span class="text-xs text-bl-sub tracking-[.14em]">はら さなえ ／ Bloom Link 代表</span>
+      </div>
+      <p class="m-0 text-sm leading-[2.2] text-bl-body font-light">花屋の商売人の娘として生まれ、25年間、花屋で働いてきました。 介護をきっかけに、50歳から新しい働き方に挑戦しています。</p>
+      <p class="m-0 text-sm leading-[2.2] text-bl-body font-light">お店に立つ大変さも、お客さまと長くつながる大切さも、現場で見てきました。 だからこそ、「作って終わり」ではなく、お店に寄り添いながら一緒に育てていく仕事がしたくて、Bloom Linkを始めました。</p>
+      <p class="m-0 text-sm leading-[2.2] text-bl-body font-light">わたし自身も、毎日スマホ秘書を使っています。 パソコンが得意でなくても使えるものを、使う人の目線で作ります。</p>
+      <a href="#" class="self-start text-xs tracking-[.14em] text-bl-ink no-underline border-b border-bl-ink pb-1 hover:text-bl-orange hover:border-bl-orange transition-colors">→ 私のストーリーを見る</a>
+    </div>
+  </div>
+</section>

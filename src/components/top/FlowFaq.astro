@@ -1,0 +1,69 @@
+---
+// 09 流れ・よくある質問
+import Label from './Label.astro';
+
+const steps = [
+  { n: 1, h: 'ご相談（無料）', t: 'LINEでもメールでも、困っていることを気軽に送ってください。' },
+  { n: 2, h: 'お話をお聞きします', t: 'お店・会社のやり方や、お客さまのことを聞かせてください。 お近くの方は対面で、遠方の方はオンライン（ビデオ通話）でお話しします。' },
+  { n: 3, h: 'ご提案・お見積り', t: '必要なものだけを選んで、金額をお伝えします。' },
+  { n: 4, h: '制作', t: 'できあがったものを確認していただき、直したいところは7日以内にまとめてお知らせください。' },
+  { n: 5, h: '完成・使い方のご説明', t: 'スマホでの使い方を、わかるまでお伝えします。' },
+  { n: 6, h: '見守り・配信おまかせ（ご希望の方）', t: '完成後も、止まらないように見守ります。' },
+];
+
+const faqs = [
+  { q: 'パソコンが苦手でも大丈夫ですか？', a: '大丈夫です。スマホだけで使えるように作ります。使い方も、わかるまでお伝えします。' },
+  { q: 'LINE公式アカウントをまだ持っていません。', a: '作るところからお手伝いします。自分で作ってみたい方には、スマホで作る手順をまとめた無料ガイドもあります。' },
+  { q: 'すでにLINE公式アカウントを使っています。', a: '今のアカウントをそのまま使って、整えることができます。' },
+  { q: '毎月の見守りに入らないといけませんか？', a: 'いいえ、選べます。作ったら終わりの「作り切り」もあります。作り切りの場合も、納品後30日までは、こちらのミスによる不具合を無料で直します。' },
+  { q: 'LINE公式アカウントの利用料はかかりますか？', a: 'LINE公式アカウントの利用料は、お店・会社のご負担です。無料のプランから始められます。' },
+  { q: '写真やロゴがありません。', a: 'スマホで撮ったお写真で大丈夫です。サイズなどに合わせて、こちらで加工・修正します。 写真やロゴがない場合は、こちらで考えることもできます（別途）。こだわりがある場合は、デザイナーさんへのご依頼もできます（別途）。' },
+  { q: 'どのくらいで完成しますか？', a: '内容によって変わりますが、おおよそ1か月〜3か月です。' },
+  { q: '工務店や会社でも使えますか？', a: 'はい、使えます。今、工務店・会社のモニターを募集しています。' },
+  { q: '遠くに住んでいても頼めますか？', a: 'はい。オンライン（ビデオ通話）での打ち合わせで大丈夫でしたら、全国どこからでもお受けできます。' },
+];
+---
+
+<section class="py-24 md:py-40 px-[clamp(24px,5vw,72px)]">
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-24 md:gap-[140px]">
+    <div class="grid grid-cols-1 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] gap-10 md:gap-14">
+      <div class="flex flex-col gap-4">
+        <Label text="08 — Flow" />
+        <h2 class="m-0 font-mincho font-medium text-[26px] md:text-[30px] leading-[1.8] tracking-[.14em]">ご相談から<br />完成までの流れ</h2>
+      </div>
+      <ol class="m-0 p-0 list-none flex flex-col border-t border-bl-ink">
+        {steps.map((st) => (
+          <li class="grid grid-cols-[56px_minmax(0,1fr)] md:grid-cols-[72px_minmax(0,1fr)] gap-4 py-[26px] border-b border-bl-line">
+            <span class="font-garamond text-[34px] leading-none text-bl-orange">{st.n}</span>
+            <div class="flex flex-col gap-2">
+              <h3 class="m-0 font-mincho text-lg font-medium tracking-[.08em]">{st.h}</h3>
+              <p class="m-0 text-[13px] leading-loose text-bl-body font-light">{st.t}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] gap-10 md:gap-14">
+      <div class="flex flex-col gap-4">
+        <Label text="09 — FAQ" />
+        <h2 class="m-0 font-mincho font-medium text-[26px] md:text-[30px] tracking-[.14em]">よくある質問</h2>
+      </div>
+      <div class="flex flex-col border-t border-bl-ink">
+        {faqs.map((f) => (
+          <details class="faq border-b border-bl-line">
+            <summary class="flex gap-5 items-center py-6 text-[15px] font-medium">
+              <span class="font-garamond text-xl text-bl-orange">Q</span>
+              <span class="flex-1">{f.q}</span>
+              <span class="pm text-xl font-light transition-transform duration-200">+</span>
+            </summary>
+            <div class="flex gap-5 pb-7">
+              <span class="font-garamond text-xl text-bl-blue">A</span>
+              <p class="m-0 flex-1 text-sm leading-[2.1] text-bl-body font-light pt-0.5">{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

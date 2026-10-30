@@ -1,0 +1,130 @@
+---
+// 08 料金（金額はすべて税別）
+import Label from './Label.astro';
+
+const buildGroups = [
+  {
+    title: '作り切り',
+    sub: '毎月の費用：なし',
+    color: 'orange',
+    rows: [
+      { name: '作り切り（ボタン3つ）', first: '50,000円〜', monthly: 'なし' },
+      { name: '作り切り（ボタン4つ以上）', first: '80,000円〜', monthly: 'なし' },
+    ],
+  },
+  {
+    title: '構築＋見守り',
+    sub: '最初の費用をおさえて、毎月見守り',
+    color: 'blue',
+    rows: [
+      { name: '構築＋見守り（ボタン3つ）', first: '30,000円〜', monthly: '5,500円〜' },
+      { name: '構築＋見守り＋配信おまかせ（ボタン3つ）', first: '30,000円〜', monthly: '15,500円〜' },
+    ],
+  },
+];
+
+const watchPrices = [
+  { name: 'ボタン3つ', price: '5,500円〜' },
+  { name: 'ボタン4つ', price: '7,000円〜' },
+  { name: 'ボタン5つ', price: '8,500円〜' },
+  { name: 'ボタン6つ', price: '10,000円〜' },
+];
+
+const watchItems = [
+  '月1回、ボタンやリンクがちゃんと動くかチェック',
+  '画面や設定の控えを保管（もしものときに元に戻せます）',
+  'LINE側のしくみが変わったときのお知らせと対応',
+  'お店の方がさわって、おかしくなったときも直します',
+];
+
+const addons = [
+  { name: '配信おまかせ', price: '月＋10,000円〜', t: 'お知らせの文章・画像を作って送ります。月2回まで' },
+  { name: 'Lステップの運用', price: '月＋10,000円〜', t: '毎月「誰が何に関心があるか」をまとめてご報告します' },
+  { name: '文字・写真の変更', price: '1回5,000円〜', t: '見守りの方は3,000円〜' },
+];
+---
+
+<section id="price" class="py-24 md:py-40 px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-20">
+    <div class="flex justify-between items-end gap-6 flex-wrap">
+      <div class="flex flex-col gap-4">
+        <Label text="07 — Price" />
+        <h2 class="m-0 font-mincho font-medium text-[28px] md:text-[34px] tracking-[.14em]">料金</h2>
+      </div>
+      <span class="text-xs text-bl-sub tracking-[.1em]">（金額はすべて税別）</span>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">LINE公式アカウントの構築</h3>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-6">
+        {buildGroups.map((g) => {
+          const isOrange = g.color === 'orange';
+          return (
+            <div class:list={['bg-bl-card rounded border-t-4 pt-8 px-6 md:px-8 pb-3 flex flex-col gap-2', isOrange ? 'border-bl-orange' : 'border-bl-blue']}>
+              <div class="flex justify-between items-baseline gap-4 flex-wrap pb-4 border-b border-bl-line">
+                <span class:list={['font-mincho text-2xl font-medium tracking-[.1em]', isOrange ? 'text-bl-orange' : 'text-bl-blue']}>{g.title}</span>
+                <span class="text-xs text-bl-sub tracking-[.06em]">{g.sub}</span>
+              </div>
+              {g.rows.map((r) => (
+                <div class="flex flex-col gap-3.5 py-5 border-b border-bl-line last:border-b-0">
+                  <div class="flex gap-3.5 items-center">
+                    <span class="ph-stripe-mini w-10 h-7 shrink-0"></span>
+                    <span class="text-sm font-medium [word-break:keep-all] [overflow-wrap:anywhere]">{r.name}</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-0.5">
+                      <span class="text-[11px] text-bl-faint tracking-[.14em]">最初に</span>
+                      <span class="font-garamond text-[26px] md:text-[30px] font-medium leading-tight">{r.first}</span>
+                    </div>
+                    <div class="flex flex-col gap-0.5">
+                      <span class="text-[11px] text-bl-faint tracking-[.14em]">毎月</span>
+                      <span class:list={['font-garamond text-[26px] md:text-[30px] font-medium leading-tight', isOrange ? 'text-bl-faint' : 'text-bl-blue']}>{r.monthly}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-7">
+      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">見守り（毎月）</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {watchPrices.map((r) => (
+          <div class="bg-bl-card rounded p-5 md:p-6 flex flex-col gap-1.5">
+            <span class="text-[11px] text-bl-faint tracking-[.14em]">リッチメニュー</span>
+            <span class="text-base font-medium text-bl-blue">{r.name}</span>
+            <span class="font-garamond text-[24px] md:text-[28px] font-medium leading-tight">
+              {r.price}<span class="font-notojp text-[11px] text-bl-sub ml-1">／月</span>
+            </span>
+          </div>
+        ))}
+      </div>
+      <div class="flex flex-col gap-5 pt-1">
+        <p class="m-0 font-mincho text-xl font-medium tracking-[.1em] text-bl-orange">止まらないように、毎月見守ります。</p>
+        <ul class="m-0 p-0 list-none flex flex-col">
+          {watchItems.map((it) => (
+            <li class="text-[13px] leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line2">{it}</li>
+          ))}
+        </ul>
+        <p class="m-0 text-[11px] leading-loose text-bl-sub">※見守りは6か月からのご契約です ※ボタン6つ以上、カードや自動の返事が多い場合はご相談ください</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">追加できるもの</h3>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] border-t border-bl-ink">
+        {addons.map((ad) => (
+          <div class="py-6 pr-6 flex flex-col gap-2 border-b border-bl-line2">
+            <span class="text-sm font-medium">{ad.name}</span>
+            <span class="font-garamond text-[22px] text-bl-orange">{ad.price}</span>
+            <span class="text-xs leading-[1.9] text-bl-sub font-light">{ad.t}</span>
+          </div>
+        ))}
+      </div>
+      <p class="m-0 text-[11px] text-bl-sub">※LINE公式アカウント・Lステップの利用料は、お店・会社のご負担です</p>
+    </div>
+  </div>
+</section>
