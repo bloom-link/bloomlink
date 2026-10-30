@@ -1,0 +1,36 @@
+---
+// 02 お悩み
+import Label from './Label.astro';
+
+const problems = [
+  '接客中や現場にいて、予約の電話やLINEにすぐ返せない',
+  '1日が終わってから、疲れた体でパソコンを開いて事務作業',
+  'レシートや領収書が、財布や車の中にたまっていく',
+  'お客さまの情報が、紙の台帳・スマホ・頭の中にバラバラ',
+  '「今日やってる？」「今日のランチは？」と、毎日同じことを聞かれる',
+].map((t, i) => ({ n: String(i + 1).padStart(2, '0'), t }));
+---
+
+<section class="py-24 md:py-40 px-[clamp(24px,5vw,72px)]">
+  <div class="max-w-[1080px] mx-auto flex gap-[clamp(48px,9vw,140px)] flex-wrap items-start">
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+      <Label text="01 — Problem" class="tate" />
+      <h2 class="tate m-0 font-mincho font-medium text-[26px] md:text-[32px] leading-[1.9] tracking-[.16em] md:h-[440px]">
+        こんなこと、<br />ありませんか？
+      </h2>
+    </div>
+    <div class="flex-1 min-w-[min(300px,100%)] flex flex-col gap-[72px] pt-2">
+      <ul class="m-0 p-0 list-none flex flex-col">
+        {problems.map((p) => (
+          <li class="flex gap-7 items-baseline py-[26px] border-b border-bl-line text-base leading-[1.9] font-light">
+            <span class="font-garamond text-[19px] font-medium text-bl-blue min-w-6">{p.n}</span>
+            <span>{p.t}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="m-0 font-mincho text-[22px] md:text-[28px] leading-[1.8] font-medium tracking-[.1em]">
+        それ、<span class="text-bl-orange">スマホひとつ</span>で<br />片づけられます。
+      </p>
+    </div>
+  </div>
+</section>

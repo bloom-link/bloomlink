@@ -1,0 +1,41 @@
+---
+// 03 こんな方に
+import Label from './Label.astro';
+
+const users = [
+  { k: '飲食店', t: '予約が入ると、スマホに通知' },
+  { k: 'サロン・教室', t: 'LINEから予約、お客さまの来店記録' },
+  { k: '工務店', monitor: true, t: '見積もり・現地調査の予約、施工したお宅の記録、現場で領収書をパシャ' },
+  { k: '小さな会社', monitor: true, t: '予定の管理、請求書・領収書の整理' },
+];
+---
+
+<section class="pb-24 md:pb-40 px-[clamp(24px,5vw,72px)]">
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-16">
+    <div class="flex justify-between items-end gap-6 flex-wrap pb-7 border-b border-bl-ink">
+      <div class="flex flex-col gap-4">
+        <Label text="02 — For you" />
+        <h2 class="m-0 font-mincho font-medium text-[28px] md:text-[34px] tracking-[.14em]">こんな方に</h2>
+      </div>
+      <span class="text-xs text-bl-sub tracking-[.14em]">使い方の例</span>
+    </div>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-x-7 gap-y-10">
+      {users.map((u) => (
+        <div class="flex flex-col gap-[22px]">
+          <div class="ph-stripe aspect-[3/4] rounded-t-full flex items-center justify-center font-mono text-[11px] text-bl-faint">
+            写真：{u.k}
+          </div>
+          <div class="flex flex-col gap-2.5">
+            <div class="flex gap-2.5 items-baseline flex-wrap">
+              <span class="font-mincho text-xl font-medium tracking-[.1em]">{u.k}</span>
+              {u.monitor && (
+                <span class="text-[11px] font-medium text-white bg-bl-blue rounded-full px-2.5 py-[3px] tracking-[.1em]">モニター募集中</span>
+              )}
+            </div>
+            <p class="m-0 text-[13px] leading-loose text-bl-sub font-light">{u.t}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

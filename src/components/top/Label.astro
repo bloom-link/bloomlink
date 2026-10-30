@@ -1,0 +1,10 @@
+---
+// 「01 — Problem」のような英字の小さなラベル
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className = '' } = Astro.props;
+---
+
+<span class={`font-garamond italic text-[17px] tracking-[.12em] text-bl-orange ${className}`}>{text}</span>
