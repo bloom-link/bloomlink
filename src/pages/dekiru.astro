@@ -274,8 +274,18 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
             <div class="shrink-0 mx-auto flex flex-col gap-3.5 items-center">
               <div class="w-[min(300px,calc(100vw-96px))] aspect-[300/400] rounded-t-[999px] bg-bl-blue flex items-end justify-center overflow-hidden">
                 <div class="w-[60%] h-[78%] rounded-t-[22px] bg-bl-ink px-1.5 pt-1.5">
-                  <!-- 正方形の画像なので、切らずに丸ごと見せる -->
-                  <img src="/images/dekiru/check-yugon.jpg" alt="ゆうごんさんの違和感レベルチェックの画面" loading="lazy" class="block w-full h-full object-contain rounded-t-2xl bg-[#F9F8F4]" />
+                  <!-- 動いているところ：LINEからチェックを開いて、5問に答えて、結果が出るまで（2026/11/4。音なし・くり返し） -->
+                  <video
+                    src="/images/dekiru/check-yugon-flow.mp4"
+                    poster="/images/dekiru/check-yugon-flow-poster.jpg"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    aria-label="ゆうごんさんの違和感レベルチェックに答えて、結果が出るまで（動画）"
+                    class="block w-full h-full object-cover object-top rounded-t-2xl bg-[#F9F8F4]"
+                  ></video>
                 </div>
               </div>
               <span class="text-xs text-bl-sub">夫婦円満カウンセラー ゆうごんさんのチェック</span>
