@@ -1,0 +1,120 @@
+---
+// 私のストーリー（原 早苗）。トップの「つくる人」の［私のストーリーを見る］から開く
+// 文章は早苗さんの原稿のまま（2026/11/3）。デザインは「できること」ページとそろえている
+import '../../styles/global.css';
+import '../../styles/top.css';
+
+const LINE_URL = 'https://lin.ee/w7c1g5d';
+const FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
+
+const body = 'm-0 text-[15px] leading-[2.3] text-bl-body font-light';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>つながりを育てる仕事を選んだ理由｜原 早苗｜Bloom Link</title>
+    <meta
+      name="description"
+      content="パソコンが苦手だった私が、介護をきっかけに始めた新しい働き方です。25年間花屋としてお店に立ってきたBloom Link代表 原 早苗のストーリー。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-bl-cream text-bl-ink font-notojp antialiased tracking-[.04em]">
+    <div class="flex flex-col overflow-x-hidden">
+      <!-- ヘッダー（トップと同じメニュー） -->
+      <header class="pt-8 px-[clamp(24px,5vw,72px)]">
+        <div class="flex justify-between items-center gap-6 flex-wrap pb-5 border-b border-bl-line">
+          <a href="/" class="text-[13px] font-medium tracking-[.42em] text-bl-ink no-underline">BLOOM LINK</a>
+          <nav class="flex gap-6 md:gap-10 whitespace-nowrap text-xs tracking-[.14em]">
+            <a href="/dekiru/" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">できること</a>
+            <a href="/#price" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">料金</a>
+            <a href="/#works" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">事例</a>
+          </nav>
+        </div>
+        <a href="/" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← トップへ戻る</a>
+      </header>
+
+      <!-- 見出しと、はじめのことば -->
+      <section class="pt-14 pb-24 md:pb-[120px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap gap-x-[clamp(40px,7vw,96px)] gap-y-12 items-end">
+          <div class="flex-[1_1_440px] flex flex-col gap-8">
+            <span class="font-garamond italic text-[17px] tracking-[.12em] text-bl-orange">My story</span>
+            <h1 class="m-0 font-mincho text-[clamp(28px,4vw,42px)] leading-[1.75] font-medium tracking-[.1em]">つながりを育てる仕事を<br />選んだ理由</h1>
+            <p class="m-0 font-mincho text-lg md:text-[19px] leading-[1.9] font-medium text-bl-orange">パソコンが苦手だった私が、介護をきっかけに始めた新しい働き方です。</p>
+            <p class={body}>25年間、花屋としてお店に立ってきました。お店を続ける大変さも、お客さまとのつながりの大切さも、知っています。</p>
+            <p class={body}>だからこそ、はじめの一歩から、そばで一緒に。あなたのお店に合ったLINEを、少しずつ育てていけたら嬉しいです。</p>
+          </div>
+          <!-- 写真は小さめに（早苗さんの希望） -->
+          <div class="relative shrink-0 mx-auto md:mx-0">
+            <img src="/images/top/about-sanae.jpg" alt="花屋の店先でスマホを見る原 早苗" width="160" height="220" class="block w-[160px] h-[220px] object-cover rounded-t-[80px]" />
+            <span class="absolute -right-4 top-[36px] w-8 h-8 rounded-full bg-bl-orange"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 原点 -->
+      <section class="py-24 md:py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[760px] mx-auto flex flex-col gap-8 pt-10 border-t-2 border-bl-blue">
+          <p class={body}>私は、花屋の家に生まれました。<br />小学生の頃からお店を手伝い、気づけばそれが当たり前の毎日になっていました。</p>
+          <p class={body}>正直、しんどいと感じたことも何度もあります。それでも続けてこられたのは、「あなたにお願いしたい」と言ってくださるお客さまがいたからです。</p>
+          <p class={body}>父が引退し、お店を離れることになったときも、「もう少し残ってほしい」と声をかけていただきました。それは、私を頼りにしてくださるお客さまがたくさんいてくださったからでした。</p>
+          <p class="m-0 font-mincho text-xl md:text-[22px] leading-[1.9] font-medium tracking-[.06em] text-bl-orange">この経験が、今の私の仕事の原点になっています。</p>
+        </div>
+      </section>
+
+      <!-- LINE構築を選んだ理由 -->
+      <section class="py-24 md:py-[120px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[760px] mx-auto flex flex-col gap-8 pt-10 border-t-2 border-bl-blue">
+          <p class={body}>私がLINE構築を選んだのは、「作って終わり」の仕事ではないからです。<br />構築したあとも、お店に寄り添い、一緒に考え、少しずつ育てていける。そんな長いお付き合いができることに、大きな魅力を感じています。</p>
+          <p class="m-0 font-mincho text-xl md:text-[22px] leading-[1.9] font-medium tracking-[.06em] border-l-4 border-bl-orange pl-5">通り過ぎるだけのご縁ではなく、お店とお客さまのつながりを、時間をかけて育てていきたい。</p>
+          <p class={body}>だから私は、LINEをただの「配信ツール」としてご提案するのではありません。<br />お店の想いやお客さまとの関係性を大切にしながら、それぞれのお店に合った「つながりが育つ仕組み」を、一緒につくっていきます。</p>
+        </div>
+      </section>
+
+      <!-- ご相談 -->
+      <section class="py-24 md:py-[140px] px-[clamp(24px,5vw,72px)] bg-bl-orange text-white relative overflow-hidden">
+        <span class="absolute -left-20 -bottom-20 w-[240px] h-[240px] rounded-full bg-bl-blue"></span>
+        <div class="max-w-[820px] mx-auto flex flex-col items-center gap-7 text-center relative">
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">ご相談は、まだ何も決まっていない段階でも大丈夫です。</p>
+          <p class="m-0 font-mincho text-[clamp(26px,3.6vw,36px)] leading-[1.8] font-medium tracking-[.1em]">「うちの場合はどうしたらいい？」</p>
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">そんなところから、一緒に考えさせていただけたら嬉しいです。</p>
+          <div class="flex flex-col gap-1.5 items-center pt-4">
+            <span class="font-mincho text-2xl font-medium tracking-[.2em]">原 早苗（はら さなえ）</span>
+            <span class="text-xs tracking-[.12em] text-[#FFF3EC]">Bloom Link 代表 ／ LINE公式アカウント・Lステップ構築</span>
+          </div>
+          <a href={LINE_URL} class="mt-4 bg-bl-blue text-white no-underline text-base font-bold tracking-[.14em] px-14 py-[22px] rounded-full shadow-[0_10px_24px_rgba(0,0,0,.15)] transition-colors hover:bg-bl-ink">LINEで相談する</a>
+          <a href="/" class="mt-3 text-xs tracking-[.12em] text-[#FFF3EC] no-underline">← トップへ戻る</a>
+        </div>
+      </section>
+
+      <!-- フッター（「できること」ページと同じ） -->
+      <footer class="pt-16 pb-10 px-[clamp(24px,5vw,72px)] bg-bl-blue text-white">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap justify-between gap-10">
+          <div class="flex flex-col gap-4">
+            <span class="text-[13px] font-medium tracking-[.42em]">BLOOM LINK</span>
+            <p class="m-0 font-mincho text-xl leading-[1.8] font-medium tracking-[.1em]">つながりを育て、<br />未来を咲かせる。</p>
+            <p class="m-0 text-[13px] leading-loose font-light">LINE公式の構築から運用まで、<br />お気軽にご相談ください。</p>
+          </div>
+          <div class="flex flex-col gap-3.5 items-start">
+            <a href={FORM_URL} class="text-[13px] font-bold text-bl-blue bg-bl-card no-underline px-6 py-[13px] rounded-full transition-colors hover:bg-bl-orange hover:text-white">無料で相談してみる →</a>
+            <a href={LINE_URL} class="text-[13px] font-bold text-white border border-white no-underline px-6 py-3 rounded-full transition-colors hover:bg-white hover:text-bl-blue">LINEで友だち追加</a>
+            <p class="m-0 text-xs leading-[1.9]">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。<br /><a href="mailto:bloomlink.01@gmail.com" class="text-white">bloomlink.01@gmail.com</a></p>
+            <div class="flex gap-6 text-xs tracking-[.14em]">
+              <a href="https://www.instagram.com/bloomlink_ru/" class="text-white no-underline">Instagram</a>
+              <a href="https://note.com/b_ru" class="text-white no-underline">note</a>
+            </div>
+          </div>
+        </div>
+        <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
+      </footer>
+    </div>
+  </body>
+</html>
