@@ -63,8 +63,8 @@ const toolCards = [
   { name: 'スマホ秘書', t: 'LINEに送るだけで、予定はカレンダーへ、レシートは表に記録されます' },
   { name: '今日のお知らせ', t: '「営業中」「本日のランチ」などを、ボタン1つで切りかえられます' },
   { name: '顧客管理', t: '来店の回数やお店のメモが自動でたまります。スマホで見られる画面も追加できます' },
-  { name: 'お客さま向けのセルフチェック', t: 'お客さまが質問に答えると、結果とぴったりの案内がLINEで届きます' },
-  { name: '料金シミュレーション', t: 'お客さまが条件を選ぶと、料金の目安がその場で出ます' },
+  { name: 'お客さま向けのセルフチェック', parts: ['お客さま向けの', 'セルフチェック'], t: 'お客さまが質問に答えると、結果とぴったりの案内がLINEで届きます' },
+  { name: '料金シミュレーション', parts: ['料金', 'シミュレーション'], t: 'お客さまが条件を選ぶと、料金の目安がその場で出ます' },
 ];
 const toolRows = [
   { name: '予約・受付システム', first: '50,000円〜', monthly: '3,000円', fee: true },
@@ -237,14 +237,14 @@ const footNotes = [
     <div class="bg-bl-blue text-white rounded p-[clamp(28px,5vw,56px)] flex flex-col gap-8 relative overflow-hidden">
       <span class="absolute -right-[70px] -top-[70px] w-[200px] h-[200px] rounded-full bg-bl-orange"></span>
       <div class="flex flex-col gap-3 relative max-w-[620px]">
-        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">4.</span>スマホで回すしくみ</h3>
+        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">4.</span><span><span class="inline-block">スマホで</span><span class="inline-block">回すしくみ</span></span></h3>
         <p class="m-0 text-sm leading-loose text-white font-light">LINEとつなげて、お店・会社の毎日の作業をスマホで片づけるしくみです。<br />どれも、パソコンを開かずにスマホで使えます。</p>
       </div>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-3.5 relative">
         {toolCards.map((tc, i) => (
           <div class="bg-bl-card text-bl-ink rounded px-6 py-[26px] grid grid-cols-[auto_minmax(0,1fr)] gap-x-[18px] gap-y-1 items-baseline transition-transform duration-200 hover:-translate-y-[3px]">
             <span class="row-span-2 font-garamond text-[40px] leading-none text-bl-blue">{String(i + 1).padStart(2, '0')}</span>
-            <span class="font-mincho text-[17px] font-medium tracking-[.06em] leading-[1.6]">{tc.name}</span>
+            <span class="font-mincho text-[17px] font-medium tracking-[.06em] leading-[1.6]">{tc.parts ? tc.parts.map((p) => <span class="inline-block">{p}</span>) : tc.name}</span>
             <p class="mt-1.5 mb-0 text-[13px] leading-[1.9] text-bl-body font-light">{tc.t}</p>
           </div>
         ))}
