@@ -1,62 +1,19 @@
 ---
+// 制作ストーリー るなやさま。トップの事例・作品集から開く
+// 見本＝Claude Design「story-runaya-design.dc.html」（2026/11/4）。文章は見本のまま
+// （納品ずみに合わせて、上の注意書きと「これから」の1行目だけ直している）
 import '../../styles/global.css';
+import '../../styles/top.css';
+import Reveal from '../../components/Reveal.astro';
 
-const sections = [
-  {
-    no: '01',
-    title: 'まず、お店の「困りごと」を聞きました',
-    body: [
-      'るなやさまは、毎日日替わりのおうちご飯とお酒をお出しする、府中の小さなお店です。お店を回しているのは、オーナーさんお一人です。',
-      '最初にお聞きした一番の悩みは、「予約を把握できていない時がある」ということでした。',
-      '予約のほとんどは、オーナーさんご自身の個人LINEに届いていました。接客や仕込みの手がふさがっているときほど、連絡に気づくのが遅れてしまう。そんな状態でした。',
-      'そこで、私が最初に考えたのは「きれいなLINEを作ること」ではなく、「お一人で回すお店の手間を、どう減らすか」でした。',
-    ],
-  },
-  {
-    no: '02',
-    title: '私が感じたるなやさまの魅力',
-    body: [
-      'お客さまがるなやさまを選ぶ理由は、オーナーさん本人に会いに来ることでした。「楽しい」「私の家に来たみたい」。そんな言葉をよく言われるそうです。',
-      'お客さまの居場所をつくる。いつでも来ていい場所であること。それが、このお店でいちばん大切にしたいことだと感じました。',
-      'だから、LINEも堅苦しくしない。予約や営業状況の連絡は、お客さまにも、オーナーさんにも、手間をかけない形にしよう。そう決めました。',
-    ],
-  },
-];
+const LINE_URL = 'https://lin.ee/w7c1g5d';
+const FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
 
-const proposalIntro = [
-  'ご提案したのは、「予約も、営業状況も、お店が手をかけなくても伝わるLINE」でした。',
-  'お客さまが迷わないよう、リッチメニューは6つの区画に整理しました。「予約する」「るなやとは」「本日の営業状況」「営業日・営業時間とポイントカード」「アクセス・Instagram」「グループ店舗のご案内」です。',
-];
-
-const proposalOutro = [
-  '予約のしくみは、お店に合わせて一から作りました。予約が入るとオーナーさんのLINEにすぐ通知が届き、毎日お昼には、明日の予約の一覧も届きます。人数やお席の希望を選んでいただけて、満席になれば自動で受付が止まります。',
-  '「本日の営業状況」は、スマホの画面から、営業中・定休日・臨時休業・満席をその場で切りかえられます。お客さまは「今日は開いてる？」と、お店に聞かなくても確かめられます。',
-  'また、予約のカードには、来店回数や好きなもの・苦手なものが表示されます（初回にお客さまが任意で答えた内容だけです）。お一人で回すお店でも、常連さんを「いつもの」でお迎えできるようにしました。',
-  '既製のシステムを入れるのではなく、お店の実際の条件に合わせて作る。そうすることで、月々のシステム利用料もかからない形にできました。',
-];
-
-const smallThings = [
-  'キャンセルの連絡は、電話ではなくLINEのトークだけにしました。オーナーさんが落ち着いて確認できる時間に、まとめて見られるようにするためです。',
-  '「営業状況」の管理画面は、暗証番号で守り、スマホ一つで更新できるようにしました。',
-  '店内のQRコードや、お店のInstagramからLINEに入ってもらう道すじも整えました。',
-];
-
-const gallery = [
-  { src: '/images/runaya-card-hours-2026-10.webp', caption: '営業時間のカード' },
-  { src: '/images/runaya-card-point-2026-10.webp', caption: 'ポイントカードのカード' },
-];
-
-const finalSections = [
-  {
-    no: '04',
-    title: 'これから',
-    body: [
-      'るなやさまの取り組みは、お店で使い始めるための最終の準備を進めているところです。',
-      '作って終わりではなく、実際に使いながら、お客さまの声やお店の変化に合わせて、少しずつ育てていく。そんな伴走型のサポートを大切にしています。',
-      '使い始めたあとの変化も、またご紹介できたら嬉しいです。',
-    ],
-  },
-];
+const body = 'm-0 text-[15px] leading-[2.2] text-bl-body font-light';
+const secHead = 'flex gap-6 items-start pt-10 border-t-2 border-bl-blue';
+const secNo = 'font-garamond text-[72px] leading-[.85] text-bl-orange';
+const secTitle = 'm-0 font-mincho text-[clamp(24px,3vw,32px)] leading-[1.6] font-medium tracking-[.1em]';
 ---
 
 <html lang="ja">
@@ -68,144 +25,98 @@ const finalSections = [
       name="description"
       content="Bloom Linkが、府中の飲食店「るなや」さまと進めてきたLINE構築の制作ストーリー。お一人で回すお店の手間を、どう減らしたかをご紹介します。"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
-    <!-- ヘッダー -->
-    <header class="bg-cream/90 backdrop-blur border-b border-sage/10">
-      <div class="max-w-3xl mx-auto flex items-center px-6 py-5">
-        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
-      </div>
-    </header>
-
-    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
-      <!-- タイトル -->
-      <p class="text-xs tracking-[0.2em] text-sage/60 mb-4">制作ストーリー</p>
-      <p class="text-base font-light tracking-wide text-sage/60 mb-1">飲食店（東京・府中）</p>
-      <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-6">
-        るなやさま
-      </h1>
-      <p class="text-xs text-[#8a8078] leading-relaxed mb-16 max-w-xl">
-        ※この案件は、2026年10月に納品しました。「どんな想いで、どう考えて作ったか」という制作の過程を<span class="inline-block">ご紹介します。</span>
-      </p>
-
-      <!-- はじめに -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <p class="text-[#5c5450] leading-[2]">
-          <span class="block">Bloom Linkは、「LINEを作ること」を目的にはしていません。</span>
-          <span class="block mt-4">一人でお店を回すオーナーさんの手間を、LINEで減らすこと。それが、私の仕事です。</span>
-          <span class="block mt-4">るなやさまとの取り組みは、その想いを形にした、大切なプロジェクトのひとつです。</span>
-        </p>
-      </section>
-
-      {sections.map((s) => (
-        <section class="mb-16 pb-16 border-b border-sage/10">
-          <div class="flex items-baseline gap-3 mb-6">
-            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
-            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
-          </div>
-          <div class="text-[#5c5450] leading-[2] space-y-4">
-            {s.body.map((line) => (
-              <p>{line}</p>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      <!-- 3. ご提案 -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <div class="flex items-baseline gap-3 mb-6">
-          <span class="text-xs text-sage/40 tracking-wider">03</span>
-          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">
-            ご提案 ―「予約も、営業状況も、手をかけなくても伝わる」LINEへ
-          </h2>
+  <body class="bg-bl-cream text-bl-ink font-notojp antialiased tracking-[.04em]">
+    <div class="flex flex-col overflow-x-hidden">
+      <!-- ヘッダー（トップと同じメニュー） -->
+      <header class="pt-8 px-[clamp(24px,5vw,72px)]">
+        <div class="flex justify-between items-center gap-6 flex-wrap pb-5 border-b border-bl-line">
+          <a href="/" class="text-[13px] font-medium tracking-[.42em] text-bl-ink no-underline">BLOOM LINK</a>
+          <nav class="flex gap-6 md:gap-10 whitespace-nowrap text-xs tracking-[.14em]">
+            <a href="/dekiru/" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">できること</a>
+            <a href="/#price" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">料金</a>
+            <a href="/works/" class="text-bl-orange font-medium no-underline">事例</a>
+          </nav>
         </div>
-        <div class="text-[#5c5450] leading-[2] space-y-4 mb-10">
-          {proposalIntro.map((line) => (
-            <p>{line}</p>
-          ))}
-        </div>
+        <a href="/works/#runaya" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← 作品集へ戻る</a>
+      </header>
 
-        <!-- リッチメニュー実物 -->
-        <figure class="mb-3">
-          <div class="rounded-2xl overflow-hidden">
-            <img
-              src="/images/runaya-richmenu-2026-10.webp"
-              alt="るなやさま向けに設計したリッチメニュー"
-              class="block w-full h-auto"
-            />
+      <!-- ヒーロー -->
+      <section class="pt-14 pb-[100px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap gap-x-[clamp(40px,7vw,96px)] gap-y-14 items-center">
+          <div class="flex-[1_1_440px] flex flex-col gap-7">
+            <div class="flex flex-wrap gap-x-5 gap-y-2.5 items-baseline">
+              <span class="font-garamond italic text-[17px] tracking-[.12em] text-bl-orange">Story</span>
+              <span class="text-xs font-medium tracking-[.2em] text-bl-blue">制作ストーリー・飲食店（東京・府中）</span>
+            </div>
+            <h1 class="m-0 font-mincho text-[clamp(36px,5vw,56px)] leading-[1.4] font-medium tracking-[.14em]">るなや<span class="text-[.5em] ml-1.5">さま</span></h1>
+            <p class="m-0 font-mincho text-lg leading-[2.1] font-medium">Bloom Linkは、「LINEを作ること」を目的にはしていません。<br />一人でお店を回すオーナーさんの手間を、LINEで減らすこと。<br /><span class="text-bl-orange">それが、私の仕事です。</span></p>
+            <p class="m-0 text-sm leading-[2.1] text-bl-body font-light">るなやさまとの取り組みは、その想いを形にした、大切なプロジェクトのひとつです。</p>
           </div>
-          <figcaption class="text-xs text-sage/50 text-center mt-3">実際に設計したリッチメニュー</figcaption>
-        </figure>
-
-        <!-- ギャラリー -->
-        <div class="grid grid-cols-2 gap-3 md:gap-4 mt-8 md:mt-10 mb-10 max-w-md mx-auto">
-          {gallery.map((g) => (
-            <figure>
-              <div class="rounded-xl overflow-hidden">
-                <img src={g.src} alt={g.caption} class="block w-full h-auto" />
+          <div class="flex-[0_0_auto] mx-auto relative">
+            <div class="w-[min(340px,calc(100vw-96px))] aspect-[340/450] rounded-t-full bg-bl-orange overflow-hidden flex items-end justify-center">
+              <div class="w-[64%] rounded-t-[24px] bg-bl-ink pt-[7px] px-[7px]">
+                <img src="/images/works/phone-runaya.jpg" alt="るなやさまのLINE画面" class="block w-full aspect-[9/15] object-cover object-top rounded-t-[18px] bg-bl-cream" />
               </div>
-              <figcaption class="text-[11px] text-sage/50 text-center mt-2">{g.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <figure class="mb-10 max-w-[260px] mx-auto">
-          <div class="rounded-xl overflow-hidden">
-            <img src="/images/runaya-eigyo-2026-10.png" alt="本日の営業状況（実際の画面）" class="block w-full h-auto" />
+            </div>
+            <span class="absolute -left-[min(32px,5vw)] top-[12%] w-[min(68px,17vw)] aspect-square rounded-full bg-bl-blue"></span>
           </div>
-          <figcaption class="text-[11px] text-sage/50 text-center mt-2">本日の営業状況（実際の画面）</figcaption>
-        </figure>
-
-        <div class="text-[#5c5450] leading-[2] space-y-4">
-          {proposalOutro.map((line) => (
-            <p>{line}</p>
-          ))}
+        </div>
+        <div class="max-w-[1080px] mx-auto mt-14 flex gap-4 items-start px-6 py-5 bg-bl-card rounded border border-bl-line">
+          <span class="shrink-0 text-[11px] font-bold tracking-[.14em] text-white bg-bl-blue px-2.5 py-1 rounded-full">納品ずみ</span>
+          <p class="m-0 text-[13px] leading-[1.9] text-bl-body">※この案件は、2026年10月に納品しました。「どんな想いで、どう考えて作ったか」という制作の過程を<span class="inline-block">ご紹介します。</span></p>
         </div>
       </section>
 
-      <!-- 小さな工夫 -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <div class="bg-pinkLight/15 rounded-[1.5rem] px-6 py-8 md:px-10 md:py-10">
-          <p class="text-sm font-medium text-sage tracking-wide mb-5 text-center">【 小さな工夫 】</p>
-          <ul class="text-[#5c5450] leading-[2] text-sm md:text-base space-y-3">
-            {smallThings.map((t) => (
-              <li class="flex gap-3">
-                <span class="text-pink/70 shrink-0">・</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
+      <!-- 01 困りごと -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}><span class={secNo}>01</span><h2 class={secTitle}>まず、お店の「困りごと」を聞きました</h2></div>
+          <div class="flex flex-wrap gap-x-16 gap-y-10 items-start">
+            <div class="flex-[1_1_420px] flex flex-col gap-[22px]">
+              <p class={body}>るなやさまは、毎日日替わりのおうちご飯とお酒をお出しする、府中の小さなお店です。お店を回しているのは、オーナーさんお一人です。</p>
+              <p class={body}>予約のほとんどは、オーナーさんご自身の個人LINEに届いていました。接客や仕込みの手がふさがっているときほど、連絡に気づくのが遅れてしまう。そんな状態でした。</p>
+            </div>
+            <div class="flex-[1_1_340px] flex flex-col gap-5">
+              <div class="bg-bl-orange text-white rounded p-8 flex flex-col gap-3">
+                <span class="text-xs font-bold tracking-[.16em] text-[#FFE6DC]">最初にお聞きした一番の悩み</span>
+                <p class="m-0 font-mincho text-[22px] leading-[1.8] font-medium">「予約を把握できていない時がある」</p>
+              </div>
+              <p class="m-0 font-mincho text-[17px] leading-[2] font-medium pl-5 border-l-2 border-bl-blue">そこで、私が最初に考えたのは「きれいなLINEを作ること」ではなく、<span class="text-bl-blue">「お一人で回すお店の手間を、どう減らすか」</span>でした。</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {finalSections.map((s) => (
-        <section class="mb-16">
-          <div class="flex items-baseline gap-3 mb-6">
-            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
-            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+      <!-- 02 魅力 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じたるなやさまの魅力</h2></div>
+          <div class="flex flex-wrap gap-x-16 gap-y-10 items-center">
+            <div class="flex-[1_1_340px] flex flex-col gap-3.5 items-start">
+              <span class="font-mincho text-[clamp(26px,3.4vw,36px)] leading-[1.6] font-medium text-bl-orange">「楽しい」</span>
+              <span class="font-mincho text-[clamp(26px,3.4vw,36px)] leading-[1.6] font-medium text-bl-blue pl-[clamp(20px,5vw,64px)]">「私の家に来たみたい」</span>
+              <span class="text-xs text-bl-sub pl-[clamp(20px,5vw,64px)]">— よく言われる言葉</span>
+            </div>
+            <div class="flex-[1_1_420px] flex flex-col gap-[22px]">
+              <p class={body}>お客さまがるなやさまを選ぶ理由は、オーナーさん本人に会いに来ることでした。「楽しい」「私の家に来たみたい」。そんな言葉をよく言われるそうです。</p>
+              <p class="m-0 font-mincho text-[17px] leading-[2] font-medium text-bl-ink">お客さまの居場所をつくる。いつでも来ていい場所であること。それが、このお店でいちばん大切にしたいことだと感じました。</p>
+              <p class={body}>だから、LINEも堅苦しくしない。予約や営業状況の連絡は、お客さまにも、オーナーさんにも、手間をかけない形にしよう。そう決めました。</p>
+            </div>
           </div>
-          <div class="text-[#5c5450] leading-[2] space-y-4">
-            {s.body.map((line) => (
-              <p>{line}</p>
-            ))}
-          </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      <!-- 結び -->
-      <p class="text-center text-sage/80 italic tracking-wide mb-20">
-        つながりを育て、未来を咲かせる。—— Bloom Link
-      </p>
+      <!-- STEP2 -->
 
-      <!-- トップへ戻る -->
-      <div class="text-center">
-        <a
-          href="/"
-          class="inline-flex items-center gap-2 text-sm text-sage hover:text-sage/70 transition-colors"
-        >
-          ← トップページへ戻る
-        </a>
-      </div>
-    </main>
+      <!-- STEP3 -->
+    </div>
+    <Reveal />
   </body>
 </html>
