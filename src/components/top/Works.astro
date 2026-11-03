@@ -65,10 +65,10 @@ const works = [
 
     <div
       data-works-track
-      class="nosb flex gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth -mr-[clamp(24px,5vw,72px)] pr-[clamp(24px,5vw,72px)]"
+      class="nosb flex gap-10 overflow-x-auto -mr-[clamp(24px,5vw,72px)] pr-[clamp(24px,5vw,72px)]"
     >
       {works.map((w) => (
-        <article class="flex-[0_0_min(440px,82vw)] snap-start flex flex-col gap-6">
+        <article data-works-card class="flex-[0_0_min(440px,82vw)] flex flex-col gap-6">
           {/* LINEの画面は縦長なので、枠の中に丸ごと収める（contain）。写真は枠いっぱい（cover） */}
           <div class="aspect-[3/2] overflow-hidden bg-bl-card">
             <img
@@ -112,35 +112,79 @@ const works = [
 </section>
 
 <script>
-  // ← → ボタンで、カード1枚分（カード幅＋すき間40px）ずつ動かす
+  // 事例の並び：止まらずに、すうーっと横に流れつづける（2026/11/3）
+  // ・カードを後ろにもう1組くっつけて、つなぎ目なく一周する
+  // ・さわったり、マウスをのせたりしているあいだは止まる。はなすと、また流れだす
+  // ・← → ボタンでも1枚ずつ動かせる
   const track = document.querySelector<HTMLElement>('[data-works-track]');
-  const slide = (dir: number) => {
-    if (!track) return;
-    const card = track.firstElementChild as HTMLElement | null;
-    const w = card ? card.getBoundingClientRect().width + 40 : 480;
-    track.scrollBy({ left: dir * w, behavior: 'smooth' });
-  };
-  document.querySelector('[data-works-prev]')?.addEventListener('click', () => slide(-1));
-  document.querySelector('[data-works-next]')?.addEventListener('click', () => slide(1));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (track) {
+    const cards = Array.from(track.querySelectorAll<HTMLElement>('[data-works-card]'));
+    const GAP = 40;
+    const cardW = () => (cards[0]?.getBoundingClientRect().width ?? 440) + GAP;
 
-  // 自動で横に動く：見えているあいだ、3.5秒ごとに1枚ずつ。最後まで行ったら最初に戻る。
-  // さわったり、マウスをのせたりしているあいだは止まる（読んでいる人のじゃまをしない）
-  if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let visible = false;
+    // 2組目（見た目だけ。読み上げやキーボードでは1組目だけをたどる）
+    if (!reduce) {
+      cards.forEach((c) => {
+        const copy = c.cloneNode(true) as HTMLElement;
+        copy.setAttribute('aria-hidden', 'true');
+        copy.setAttribute('inert', '');
+        copy.removeAttribute('data-works-card');
+        track.appendChild(copy);
+      });
+    }
+    // 1周の長さ＝1組ぶんの幅
+    const loopW = () => cards.length * cardW();
+    const wrap = (x: number) => {
+      const L = loopW();
+      return reduce ? x : ((x % L) + L) % L;
+    };
+
+    let pos = 0;
     let pausedUntil = 0;
+    let holding = false;
     const pause = (ms: number) => { pausedUntil = Date.now() + ms; };
-    ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'focusin'].forEach((ev) =>
-      track.addEventListener(ev, () => pause(8000), { passive: true }),
-    );
-    document.querySelectorAll('[data-works-prev], [data-works-next]').forEach((b) =>
-      b.addEventListener('click', () => pause(8000)),
-    );
-    new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0.3 }).observe(track);
-    setInterval(() => {
-      if (!visible || Date.now() < pausedUntil || document.hidden) return;
-      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
-      if (atEnd) track.scrollTo({ left: 0, behavior: 'smooth' });
-      else slide(1);
-    }, 3500);
+
+    const slide = (dir: number) => {
+      if (!reduce) {
+        // 1周のはしにいるときは、見た目が同じ場所へ先に移ってから動かす
+        const x = track.scrollLeft;
+        if (dir < 0 && x < cardW()) track.scrollLeft = x + loopW();
+        if (dir > 0 && x >= loopW()) track.scrollLeft = x - loopW();
+      }
+      track.scrollBy({ left: dir * cardW(), behavior: 'smooth' });
+      pause(5000);
+    };
+    document.querySelector('[data-works-prev]')?.addEventListener('click', () => slide(-1));
+    document.querySelector('[data-works-next]')?.addEventListener('click', () => slide(1));
+
+    if (!reduce) {
+      track.addEventListener('pointerenter', () => { holding = true; });
+      track.addEventListener('pointerleave', () => { holding = false; pause(1200); });
+      ['pointerdown', 'touchstart', 'wheel', 'focusin'].forEach((ev) =>
+        track.addEventListener(ev, () => pause(4000), { passive: true }),
+      );
+
+      let visible = false;
+      new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0.2 }).observe(track);
+
+      const SPEED = 36; // 1秒に進む量（px）。大きくすると速くなる
+      let last = performance.now();
+      let wasRunning = false;
+      const tick = (now: number) => {
+        const dt = Math.min(now - last, 64) / 1000;
+        last = now;
+        const running = visible && !holding && Date.now() >= pausedUntil && !document.hidden;
+        if (running) {
+          // 止まっていたあとは、人が動かした場所から続ける
+          if (!wasRunning) pos = wrap(track.scrollLeft);
+          pos = wrap(pos + SPEED * dt);
+          track.scrollLeft = pos;
+        }
+        wasRunning = running;
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
   }
 </script>
