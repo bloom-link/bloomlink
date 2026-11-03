@@ -1,0 +1,37 @@
+---
+// 料金欄の松竹梅の1枚。竹（rec）は枠を太くして「おすすめ」の札をつける
+interface Props {
+  t: { rank: string; name: string; first: string; monthly?: string; desc?: string; rec?: boolean };
+  c: string; // プランの色（作り切り＝朱色／構築＋配信＝青）
+}
+const { t, c } = Astro.props;
+const rec = !!t.rec;
+const gray = '#9A8F84';
+const monthlyColor = t.monthly === 'なし' ? gray : c;
+const fs = rec ? '32px' : '26px';
+---
+
+<div
+  class="relative rounded px-5 py-[22px] flex flex-col gap-3.5"
+  style={`background:${rec ? '#FFFCF7' : '#FBF6EE'};border:${rec ? `2px solid ${c}` : '1px solid #E6DCCD'};box-shadow:${rec ? '0 10px 24px rgba(34,32,30,.10)' : 'none'}`}
+>
+  {rec && <span class="absolute -top-[13px] right-4 text-white text-[11px] font-bold tracking-[.14em] px-3 py-[5px] rounded-full" style={`background:${c}`}>おすすめ</span>}
+  <span
+    class="self-start font-mincho text-sm font-medium leading-none px-3 py-1.5 rounded-full"
+    style={`border:1px solid ${c};color:${rec ? '#fff' : c};background:${rec ? c : 'transparent'}`}
+  >{t.rank}</span>
+  <span class="text-sm font-bold leading-[1.7]">{t.name}</span>
+  <div class="flex flex-wrap gap-x-6 gap-y-2">
+    <div class="flex flex-col gap-0.5">
+      <span class="text-[11px] text-bl-faint tracking-[.14em]">最初に</span>
+      <span class="font-garamond font-medium leading-tight whitespace-nowrap" style={`font-size:${fs}`}>{t.first}</span>
+    </div>
+    {t.monthly && (
+      <div class="flex flex-col gap-0.5">
+        <span class="text-[11px] text-bl-faint tracking-[.14em]">毎月</span>
+        <span class="font-garamond font-medium leading-tight whitespace-nowrap" style={`font-size:${fs};color:${monthlyColor}`}>{t.monthly}</span>
+      </div>
+    )}
+  </div>
+  {t.desc && <p class="m-0 text-xs leading-[1.9] text-bl-body font-light pt-3 border-t border-bl-line">{t.desc}</p>}
+</div>

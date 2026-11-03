@@ -1,26 +1,28 @@
 ---
 // 08 料金（金額はすべて税別）
+// 2026/11/3 松竹梅に作り直し。デザイン見本『トップページ 4e v2』（Claude Design）どおり
+// 金額の決定は claud教室/★01_Bloom Link_決定事項.md
 import Label from './Label.astro';
+import TierCard from './PriceTier.astro';
 
-const buildGroups = [
-  {
-    title: '作り切り',
-    sub: '毎月の費用：なし',
-    color: 'orange',
-    rows: [
-      { name: '作り切り（ボタン3つ）', first: '50,000円〜', monthly: 'なし' },
-      { name: '作り切り（ボタン4つ以上）', first: '80,000円〜', monthly: 'なし' },
-    ],
-  },
-  {
-    title: '構築＋見守り',
-    sub: '最初の費用をおさえて、毎月見守り',
-    color: 'blue',
-    rows: [
-      { name: '構築＋見守り（ボタン3つ）', first: '30,000円〜', monthly: '5,500円〜' },
-      { name: '構築＋見守り＋配信おまかせ（ボタン3つ）', first: '30,000円〜', monthly: '15,500円〜' },
-    ],
-  },
+type Tier = { rank: string; name: string; first: string; monthly?: string; desc?: string; rec?: boolean };
+
+const ORANGE = '#EF4B23';
+const BLUE = '#2350B8';
+
+// LINE 作り切りプラン
+const tiersBuild: Tier[] = [
+  { rank: '梅', name: 'ボタン3つ', first: '50,000円〜', monthly: 'なし' },
+  { rank: '竹', name: 'ボタン4〜6つ', first: '80,000円〜', monthly: 'なし', rec: true },
+  { rank: '松', name: '竹＋Lステップの基本構築', first: '90,000円〜', monthly: 'なし' },
+];
+const buildNotes = ['文字・写真の変更：1回5,000円〜', '納品後30日までは、こちらのミスによる不具合を無料で直します'];
+
+// LINE 構築＋配信プラン（金額はボタン3つの場合）
+const tiersDeliver: Tier[] = [
+  { rank: '梅', name: '構築＋見守り（配信はご自分で）', first: '30,000円〜', monthly: '5,500円〜', desc: 'お知らせは、お店・会社で配信していただく形です。LINEが動かなくなったときは、すぐに直して元に戻します' },
+  { rank: '竹', name: '構築＋配信＋見守り', first: '30,000円〜', monthly: '15,500円〜', desc: '毎月のお知らせを作って送ります（月2回まで）', rec: true },
+  { rank: '松', name: '竹＋Lステップ（構築と、毎月の報告・手直し）', first: '40,000円〜', monthly: '25,500円〜', desc: 'Lステップで「誰が何に関心があるか」を毎月まとめてご報告し、案内の手直しをします' },
 ];
 
 const watchPrices = [
@@ -38,93 +40,348 @@ const watchItems = [
 ];
 
 const addons = [
-  { name: '配信おまかせ', price: '月＋10,000円〜', t: 'お知らせの文章・画像を作って送ります。月2回まで' },
-  { name: 'Lステップの運用', price: '月＋10,000円〜', t: '毎月「誰が何に関心があるか」をまとめてご報告します' },
-  { name: '文字・写真の変更', price: '1回5,000円〜', t: '見守りの方は3,000円〜' },
+  { name: 'Lステップの基本構築', price: '最初の費用に＋10,000円〜', t: '梅・竹に、Lステップの基本の設定を足します' },
+  { name: '文字・写真の変更', price: '1回3,000円〜', t: '見守りの方の料金です（作り切りの方は5,000円〜）' },
+];
+
+// お店の紹介ページ
+const tiersPage: Tier[] = [
+  { rank: '梅', name: '1ページ（写真と文章はお店から・Bloom Linkの型で作る）', first: '40,000円〜' },
+  { rank: '竹', name: '1ページ＋取材して文章も作る', first: '60,000円〜', rec: true },
+  { rank: '松', name: '3〜5ページ＋取材して文章も作る', first: '120,000円〜' },
+];
+const pageNotes = [
+  '見守りをつける場合：最初の費用が−15,000円・月3,000円〜（月1回の表示チェック・控えの保管・こわれたときの修理。6か月からのご契約）　例：梅 40,000円 → 25,000円＋月3,000円〜',
+  '竹・松の取材と文章づくりは、取材1回（60分まで）・文章の直し1回まで。それを超える場合は、1回5,000円〜またはお見積もり',
+  '写真はお店・会社でご用意いただきます',
+  '文字・写真の変更：1回5,000円〜（見守りの方は3,000円〜）',
+];
+
+// スマホで回すしくみ
+const toolCards = [
+  { name: '予約システム', t: 'お客さまがLINEから予約。予約が入ると、すぐスマホにお知らせが届きます' },
+  { name: 'スマホ秘書', t: 'LINEに送るだけで、予定はカレンダーへ、レシートは表に記録されます' },
+  { name: '今日のお知らせ', t: '「営業中」「本日のランチ」などを、ボタン1つで切りかえられます' },
+  { name: '顧客管理', t: '来店の回数やお店のメモが自動でたまります。スマホで見られる画面も追加できます' },
+  { name: 'お客さま向けのセルフチェック', t: 'お客さまが質問に答えると、結果とぴったりの案内がLINEで届きます' },
+  { name: '料金シミュレーション', t: 'お客さまが条件を選ぶと、料金の目安がその場で出ます' },
+];
+const toolRows = [
+  { name: '予約・受付システム', first: '50,000円〜', monthly: '3,000円', fee: true },
+  { name: 'スマホ秘書', first: '50,000円〜', monthly: '3,000円', fee: true },
+  { name: '今日のお知らせ', first: '10,000円〜', monthly: '1,000円', fee: true },
+  { name: '顧客管理', first: '30,000円〜', monthly: '1,000円', fee: true },
+  { name: '└ スマホで見られる画面', first: '＋20,000円〜', monthly: '―', sub: true },
+  { name: 'お客さま向けのセルフチェック', first: '30,000円〜', monthly: '1,000円', fee: true },
+  { name: '料金シミュレーション', first: '30,000円〜', monthly: '1,000円', fee: true },
+];
+const toolNotes = [
+  '管理費には、不具合の修正と、設定の変更（営業時間・席数など）が入っています',
+  'スマホ秘書は、管理費とは別に、AIの利用料（実費）をお支払いいただきます',
+];
+
+const footNotes = [
+  '※金額はすべて税別です',
+  '※LINE公式アカウント・Lステップの利用料は、お店・会社のご負担です',
+  '※独自のアドレス（ドメイン）をご希望の場合、その費用（年1,500円ほど）はお店・会社のご負担です',
 ];
 ---
 
 <section id="price" class="py-24 md:py-40 px-[clamp(24px,5vw,72px)] bg-bl-cream2">
-  <div class="max-w-[1080px] mx-auto flex flex-col gap-20">
-    <div class="flex justify-between items-end gap-6 flex-wrap">
-      <div class="flex flex-col gap-4">
-        <Label text="07 — Price" />
-        <h2 class="m-0 font-mincho font-medium text-[28px] md:text-[34px] tracking-[.14em]">料金</h2>
-      </div>
-      <span class="text-xs text-bl-sub tracking-[.1em]">（金額はすべて税別）</span>
+  <div class="max-w-[1080px] mx-auto flex flex-col gap-[88px]">
+    <div class="flex flex-col gap-4">
+      <Label text="07 — Price" />
+      <h2 class="m-0 font-mincho font-medium text-[28px] md:text-[34px] tracking-[.14em]">料金</h2>
+      <p class="m-0 max-w-[640px] text-sm leading-[2.1] text-bl-body font-light">お店・会社に合わせて、それぞれ3つのプランからお選びいただけます。<br />金額は、ボタンを押すと開きます。（金額はすべて税別です）</p>
     </div>
 
-    <div class="flex flex-col gap-6">
-      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">LINE公式アカウントの構築</h3>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-6">
-        {buildGroups.map((g) => {
-          const isOrange = g.color === 'orange';
-          return (
-            <div class:list={['bg-bl-card rounded border-t-4 pt-8 px-6 md:px-8 pb-3 flex flex-col gap-2', isOrange ? 'border-bl-orange' : 'border-bl-blue']}>
-              <div class="flex justify-between items-baseline gap-4 flex-wrap pb-4 border-b border-bl-line">
-                <span class:list={['font-mincho text-2xl font-medium tracking-[.1em]', isOrange ? 'text-bl-orange' : 'text-bl-blue']}>{g.title}</span>
-                <span class="text-xs text-bl-sub tracking-[.06em]">{g.sub}</span>
-              </div>
-              {g.rows.map((r) => (
-                <div class="flex flex-col gap-3.5 py-5 border-b border-bl-line last:border-b-0">
-                  <div class="flex gap-3.5 items-center">
-                    <span class="ph-stripe-mini w-10 h-7 shrink-0"></span>
-                    <span class="text-sm font-medium [word-break:keep-all] [overflow-wrap:anywhere]">{r.name}</span>
-                  </div>
-                  <div class="grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-0.5">
-                      <span class="text-[11px] text-bl-faint tracking-[.14em]">最初に</span>
-                      <span class="font-garamond text-[26px] md:text-[30px] font-medium leading-tight">{r.first}</span>
-                    </div>
-                    <div class="flex flex-col gap-0.5">
-                      <span class="text-[11px] text-bl-faint tracking-[.14em]">毎月</span>
-                      <span class:list={['font-garamond text-[26px] md:text-[30px] font-medium leading-tight', isOrange ? 'text-bl-faint' : 'text-bl-blue']}>{r.monthly}</span>
-                    </div>
-                  </div>
+    <!-- 1. LINE公式アカウント -->
+    <div class="flex flex-col gap-7">
+      <div class="flex flex-col gap-3">
+        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px] text-bl-blue">1.</span>LINE公式アカウント</h3>
+        <p class="m-0 text-sm leading-loose text-bl-body font-light">お客さまとつながる窓口を、お店・会社に合わせて作ります。</p>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))] gap-6 items-start">
+
+        <!-- 作り切りプラン -->
+        <div class="pz-card bg-bl-card rounded border-t-4 border-bl-orange p-[clamp(24px,4vw,36px)] flex flex-col gap-5">
+          <div class="flex flex-col gap-2.5">
+            <span class="font-mincho text-2xl font-medium tracking-[.1em] text-bl-orange">作り切りプラン</span>
+            <p class="m-0 font-mincho text-[17px] leading-[1.8] font-medium">作ったら、あとはお店で使っていくプラン。</p>
+          </div>
+          <p class="m-0 text-[13px] leading-[2.05] text-bl-body font-light">毎月の費用はかかりません。<br />完成したLINEを、お店・会社でそのまま使っていただけます。<br />文字や写真を変えたいときは、そのつどご依頼ください。</p>
+          <div class="bg-bl-cream rounded px-[18px] py-4 flex flex-col gap-1.5">
+            <span class="text-[11px] font-medium tracking-[.16em] text-bl-orange">こんな方に</span>
+            <span class="text-[13px] leading-[1.8]">毎月の費用をかけたくない方／自分で配信していきたい方</span>
+          </div>
+          <button type="button" data-pz-toggle class="pz-btn bg-bl-orange text-white hover:bg-bl-ink" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+          <div class="pz-panel"><div class="pz-inner"><div class="flex flex-col gap-5">
+            <div class="pz-tiers pt-3.5">
+              {tiersBuild.map((t) => <TierCard t={t} c={ORANGE} />)}
+            </div>
+            <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+              {buildNotes.map((it) => <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body"><span class="w-[5px] h-[5px] rounded-full bg-bl-orange mt-[11px] shrink-0"></span><span>{it}</span></li>)}
+            </ul>
+          </div></div></div>
+        </div>
+
+        <!-- 構築＋配信プラン（おすすめ） -->
+        <div class="pz-card relative bg-bl-card rounded border-t-4 border-bl-blue p-[clamp(24px,4vw,36px)] pt-[52px] flex flex-col gap-5">
+          <span class="absolute -top-1 right-[clamp(20px,3vw,32px)] bg-bl-blue text-white text-xs font-bold tracking-[.14em] px-3.5 pt-2 pb-[9px] rounded-b">おすすめ</span>
+          <div class="flex flex-col gap-2.5">
+            <span class="font-mincho text-2xl font-medium tracking-[.1em] text-bl-blue">構築＋配信プラン</span>
+            <p class="m-0 font-mincho text-[17px] leading-[1.8] font-medium">毎月のお知らせまで、まるごとおまかせ。</p>
+          </div>
+          <p class="m-0 text-[13px] leading-[2.05] text-bl-body font-light">最初の費用を作り切りよりおさえて、毎月のお知らせを、文章・画像づくりから配信までおまかせいただけます（月2回まで）。<br />LINEがちゃんと動くかの見守りも入っています。</p>
+          <div class="bg-bl-cream rounded px-[18px] py-4 flex flex-col gap-1.5">
+            <span class="text-[11px] font-medium tracking-[.16em] text-bl-blue">こんな方に</span>
+            <span class="text-[13px] leading-[1.8]">お知らせを出す時間がない方／LINEをしっかり育てたい方</span>
+          </div>
+          <button type="button" data-pz-toggle class="pz-btn bg-bl-blue text-white hover:bg-bl-ink" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+          <div class="pz-panel"><div class="pz-inner"><div class="flex flex-col gap-5 pb-1">
+            <span class="text-xs text-bl-sub tracking-[.06em]">金額はボタン3つの場合</span>
+            <div class="pz-tiers pt-1.5">
+              {tiersDeliver.map((t) => <TierCard t={t} c={BLUE} />)}
+            </div>
+            <p class="m-0 text-[11px] leading-loose text-bl-sub">※Lステップの利用料は、お店・会社からLステップへ直接お支払いいただきます</p>
+
+            <h4 class="m-0 pt-2 text-sm font-bold tracking-[.06em]">見守りの毎月の金額（ボタンの数で変わります）</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {watchPrices.map((r) => (
+                <div class="bg-bl-cream rounded px-3.5 py-4 flex flex-col gap-1">
+                  <span class="text-[10px] text-bl-faint tracking-[.12em]">リッチメニュー</span>
+                  <span class="text-sm font-medium text-bl-blue">{r.name}</span>
+                  <span class="font-garamond text-[22px] font-medium leading-tight whitespace-nowrap">{r.price}</span>
                 </div>
               ))}
             </div>
-          );
-        })}
+            <p class="-mt-2 mb-0 text-[11px] leading-[1.9] text-bl-sub">※竹はこの金額に＋10,000円、松は＋20,000円です（例：ボタン6つの竹 → 10,000円＋10,000円＝月20,000円〜）</p>
+
+            <h4 class="m-0 pt-2 text-sm font-bold tracking-[.06em]">見守りでやること</h4>
+            <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+              {watchItems.map((it) => <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body"><span class="w-[5px] h-[5px] rounded-full bg-bl-blue mt-[11px] shrink-0"></span><span>{it}</span></li>)}
+            </ul>
+            <p class="m-0 text-[11px] leading-loose text-bl-sub">※見守りは6か月からのご契約です<br />※ボタン6つ以上、カードや自動の返事が多い場合はご相談ください</p>
+
+            <!-- 付箋「追加できるもの」 -->
+            <div class="relative mt-9 border border-bl-line2 rounded bg-bl-cream px-5 pt-11 pb-5 flex flex-col gap-3">
+              <button type="button" data-pz-toggle data-pz-tag class="pz-tag" aria-expanded="false">
+                <span class="pz-tape"></span>
+                <span>追加できるもの</span>
+                <span data-pz-sign class="font-notojp text-lg font-light text-bl-orange">＋</span>
+              </button>
+              <p class="m-0 text-[13px] text-bl-body">必要なものだけ足せます。</p>
+              <div class="pz-panel"><div class="pz-inner">
+                <div class="flex flex-col border-t border-bl-ink">
+                  {addons.map((ad) => (
+                    <div class="flex flex-col gap-1.5 py-4 border-b border-bl-line2">
+                      <div class="flex flex-wrap justify-between gap-x-4 gap-y-1 items-baseline">
+                        <span class="text-sm font-medium">{ad.name}</span>
+                        <span class="text-[13px] font-bold text-bl-blue">{ad.price}</span>
+                      </div>
+                      <span class="text-xs leading-[1.9] text-bl-sub font-light">{ad.t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div></div>
+            </div>
+          </div></div></div>
+        </div>
       </div>
     </div>
 
+    <!-- 2. お店の紹介ページ -->
     <div class="flex flex-col gap-7">
-      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">見守り（毎月）</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {watchPrices.map((r) => (
-          <div class="bg-bl-card rounded p-5 md:p-6 flex flex-col gap-1.5">
-            <span class="text-[11px] text-bl-faint tracking-[.14em]">リッチメニュー</span>
-            <span class="text-base font-medium text-bl-blue">{r.name}</span>
-            <span class="font-garamond text-[24px] md:text-[28px] font-medium leading-tight">
-              {r.price}<span class="font-notojp text-[11px] text-bl-sub ml-1">／月</span>
-            </span>
+      <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px] text-bl-blue">2.</span>お店の紹介ページ</h3>
+      <div class="bg-bl-card rounded border-t-4 border-bl-orange p-[clamp(24px,4vw,40px)] flex flex-col gap-7 overflow-hidden">
+        <div class="flex flex-wrap gap-x-14 gap-y-8 items-center">
+          <div class="flex-[1_1_340px] flex flex-col gap-6">
+            <p class="m-0 font-mincho text-[19px] leading-[1.9] font-medium tracking-[.04em]">はじめての人に、お店・会社のことが伝わるページです。</p>
+            <p class="m-0 text-sm leading-[2.05] text-bl-body font-light">Instagramや検索から来た人を、LINEの友だち追加へつなぎます。</p>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="text-xs font-medium px-3.5 py-2 rounded-full border border-[#C9BCA9] bg-bl-cream">Instagram・検索</span>
+              <span class="text-bl-faint text-sm">→</span>
+              <span class="text-xs font-bold px-3.5 py-2 rounded-full bg-bl-orange text-white">紹介ページ</span>
+              <span class="text-bl-faint text-sm">→</span>
+              <span class="text-xs font-bold px-3.5 py-2 rounded-full bg-bl-blue text-white">LINEの友だち追加</span>
+            </div>
           </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-5 pt-1">
-        <p class="m-0 font-mincho text-xl font-medium tracking-[.1em] text-bl-orange">止まらないように、毎月見守ります。</p>
-        <ul class="m-0 p-0 list-none flex flex-col">
-          {watchItems.map((it) => (
-            <li class="text-[13px] leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line2">{it}</li>
-          ))}
-        </ul>
-        <p class="m-0 text-[11px] leading-loose text-bl-sub">※見守りは6か月からのご契約です ※ボタン6つ以上、カードや自動の返事が多い場合はご相談ください</p>
+          <div class="shrink-0 mx-auto w-[220px] h-[250px] rounded-t-[110px] bg-bl-orange relative flex items-end justify-center border-b border-bl-line">
+            <div class="w-[132px] h-[216px] rounded-t-[20px] bg-bl-ink px-1.5 pt-1.5">
+              <div class="pz-screen w-full h-full rounded-t-[14px] flex items-center justify-center font-mono text-[10px] text-bl-faint text-center">紹介ページの<br />画面</div>
+            </div>
+            <span class="absolute -right-3.5 top-[30px] w-10 h-10 rounded-full bg-bl-blue"></span>
+          </div>
+        </div>
+        <button type="button" data-pz-toggle class="pz-btn self-start w-[min(100%,340px)] bg-bl-orange text-white hover:bg-bl-blue relative z-[1]" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+        <div class="pz-panel"><div class="pz-inner"><div class="flex flex-col gap-5">
+          <div class="pz-tiers pt-3.5">
+            {tiersPage.map((t) => <TierCard t={t} c={ORANGE} />)}
+          </div>
+          <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+            {pageNotes.map((it) => <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body"><span class="w-[5px] h-[5px] rounded-full bg-bl-orange mt-[11px] shrink-0"></span><span>{it}</span></li>)}
+          </ul>
+        </div></div></div>
       </div>
     </div>
 
-    <div class="flex flex-col gap-6">
-      <h3 class="m-0 font-mincho text-[21px] font-medium tracking-[.1em]">追加できるもの</h3>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] border-t border-bl-ink">
-        {addons.map((ad) => (
-          <div class="py-6 pr-6 flex flex-col gap-2 border-b border-bl-line2">
-            <span class="text-sm font-medium">{ad.name}</span>
-            <span class="font-garamond text-[22px] text-bl-orange">{ad.price}</span>
-            <span class="text-xs leading-[1.9] text-bl-sub font-light">{ad.t}</span>
+    <!-- 3. LINEと紹介ページを、一緒に -->
+    <div class="bg-bl-orange text-white rounded p-[clamp(28px,4.5vw,48px)] flex flex-col gap-4">
+      <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">3.</span>LINEと紹介ページを、一緒に</h3>
+      <p class="m-0 text-[15px] leading-[2.1]">同じ写真や文章を使えるので、一緒にご依頼いただくと、紹介ページの最初の費用が <span class="font-mincho text-[26px] font-semibold tracking-[.06em] border-b-2 border-white px-0.5">10,000円お安く</span> なります。</p>
+      <p class="m-0 text-[13px] text-[#FFF3EC]">（例：紹介ページの梅 40,000円 → 30,000円〜）</p>
+    </div>
+
+    <!-- 4. スマホで回すしくみ -->
+    <div class="bg-bl-blue text-white rounded p-[clamp(28px,5vw,56px)] flex flex-col gap-8 relative overflow-hidden">
+      <span class="absolute -right-[70px] -top-[70px] w-[200px] h-[200px] rounded-full bg-bl-orange"></span>
+      <div class="flex flex-col gap-3 relative max-w-[620px]">
+        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">4.</span>スマホで回すしくみ</h3>
+        <p class="m-0 text-sm leading-loose text-white font-light">LINEとつなげて、お店・会社の毎日の作業をスマホで片づけるしくみです。<br />どれも、パソコンを開かずにスマホで使えます。</p>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-3.5 relative">
+        {toolCards.map((tc, i) => (
+          <div class="bg-bl-card text-bl-ink rounded px-6 py-[26px] grid grid-cols-[auto_minmax(0,1fr)] gap-x-[18px] gap-y-1 items-baseline transition-transform duration-200 hover:-translate-y-[3px]">
+            <span class="row-span-2 font-garamond text-[40px] leading-none text-bl-blue">{String(i + 1).padStart(2, '0')}</span>
+            <span class="font-mincho text-[17px] font-medium tracking-[.06em] leading-[1.6]">{tc.name}</span>
+            <p class="mt-1.5 mb-0 text-[13px] leading-[1.9] text-bl-body font-light">{tc.t}</p>
           </div>
         ))}
       </div>
-      <p class="m-0 text-[11px] text-bl-sub">※LINE公式アカウント・Lステップの利用料は、お店・会社のご負担です</p>
+      <button type="button" data-pz-toggle class="pz-btn relative self-start w-[min(100%,340px)] bg-bl-card text-bl-blue font-bold hover:bg-bl-orange hover:text-white" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+      <div class="pz-panel -mt-2 relative"><div class="pz-inner"><div class="bg-bl-card text-bl-ink rounded p-[clamp(20px,4vw,36px)] flex flex-col gap-5">
+        <div class="flex flex-col border-t border-bl-ink">
+          {toolRows.map((r) => (
+            <div class="flex flex-wrap gap-x-6 gap-y-2.5 items-center py-[18px] border-b border-bl-line">
+              <span class:list={['flex-[1_1_200px] text-sm font-medium leading-[1.7]', r.sub ? 'text-bl-sub' : 'text-bl-ink']}>{r.name}</span>
+              <div class="flex-[1_1_240px] max-w-[320px] grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[11px] text-bl-faint tracking-[.14em]">最初に</span>
+                  <span class="font-garamond text-[26px] font-medium leading-tight">{r.first}</span>
+                </div>
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[11px] text-bl-faint tracking-[.14em]">毎月</span>
+                  <span class:list={['font-garamond text-[26px] font-medium leading-tight', r.sub ? 'text-bl-faint' : 'text-bl-blue']}>
+                    {r.fee && <span class="font-notojp text-[11px] mr-0.5">管理費 </span>}{r.monthly}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+          {toolNotes.map((it) => <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body"><span class="w-[5px] h-[5px] rounded-full bg-bl-blue mt-[11px] shrink-0"></span><span>{it}</span></li>)}
+        </ul>
+        <div class="border-[1.5px] border-bl-orange rounded px-5 py-4 flex flex-wrap gap-x-3.5 gap-y-1.5 items-baseline">
+          <span class="text-sm font-bold text-bl-orange">スマホ秘書のモニター募集中</span>
+          <span class="text-[13px] leading-[1.8]">1機能10,000円（通常50,000円〜）・先着3名・12月31日まで</span>
+        </div>
+      </div></div></div>
     </div>
+
+    <ul class="m-0 pt-6 px-0 list-none border-t border-bl-line2 flex flex-col gap-1">
+      {footNotes.map((n) => <li class="text-[11px] leading-loose text-bl-sub">{n}</li>)}
+    </ul>
   </div>
 </section>
+
+<style>
+  .pz-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 54px;
+    padding: 0 26px;
+    border-radius: 99px;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .pz-btn:not(.font-bold) {
+    font-weight: 500;
+  }
+  /* 開くところ：高さ0から中身の高さまで、すっと開く */
+  .pz-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+  }
+  .pz-panel.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .pz-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  /* 料金を開いたカードは、横いっぱいに広げる */
+  .pz-card.is-open {
+    grid-column: 1 / -1;
+  }
+  .pz-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 16px 14px;
+  }
+  /* 付箋 */
+  .pz-tag {
+    position: absolute;
+    left: 16px;
+    top: -20px;
+    transform: rotate(-3deg);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 2px;
+    background: #fbe3d9;
+    color: #22201e;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    box-shadow: 0 3px 8px rgba(34, 32, 30, 0.16);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .pz-tag:hover {
+    transform: rotate(-1deg);
+  }
+  .pz-tape {
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    width: 38px;
+    height: 14px;
+    transform: translateX(-50%) rotate(4deg);
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .pz-screen {
+    background: repeating-linear-gradient(135deg, #fbf6ee 0 8px, #f2e9dc 8px 16px);
+  }
+</style>
+
+<script>
+  // ［料金を見る］と付箋：押すと、すぐ下の .pz-panel が開く／閉じる
+  document.querySelectorAll<HTMLButtonElement>('[data-pz-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.parentElement?.querySelector<HTMLElement>(':scope > .pz-panel');
+      if (!panel) return;
+      const open = !panel.classList.contains('is-open');
+      panel.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      const label = btn.querySelector('[data-pz-label]');
+      if (label) label.textContent = open ? '閉じる' : '料金を見る';
+      const sign = btn.querySelector('[data-pz-sign]');
+      if (sign) sign.textContent = open ? '−' : '＋';
+      // LINEの2枚のカードは、開いたら横いっぱいに広げる（付箋のときは広げない）
+      if (!btn.hasAttribute('data-pz-tag')) btn.closest('.pz-card')?.classList.toggle('is-open', open);
+    });
+  });
+</script>
