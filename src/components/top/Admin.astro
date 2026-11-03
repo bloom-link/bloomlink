@@ -35,20 +35,64 @@ const screens = ['予約の一覧', '今日のお知らせの切りかえボタ�
     </div>
 
     <div class="flex flex-col gap-6">
+      <!-- スマホ3台：さわった（押した）スマホが一番前に出る。最初はまんなかが前 -->
       <div class="relative overflow-hidden h-[460px] md:h-[600px] rounded-t-full bg-bl-orange">
-        <div class="absolute left-[4%] md:left-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 -rotate-[7deg]">
-          <img src="/images/dekiru/yoyaku-admin-list.png" alt="るなやの予約の一覧の画面" width="780" height="1600" loading="lazy" class="block w-full h-full rounded-[20px] object-cover object-top bg-white" />
-        </div>
-        <div class="absolute right-[4%] md:right-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 rotate-[7deg]">
-          <img src="/images/dekiru/bot-salon.png" alt="スマホ秘書に「今日の予定」と送った画面" width="780" height="1600" loading="lazy" class="block w-full h-full rounded-[20px] object-cover object-top bg-white" />
-        </div>
-        <div class="absolute left-1/2 -translate-x-1/2 -bottom-[30px] w-[150px] h-[320px] md:w-[200px] md:h-[440px] rounded-[30px] bg-bl-ink p-[7px] shadow-[0_20px_40px_rgba(0,0,0,.18)]">
-          <img src="/images/dekiru/status-admin.png" alt="本日の営業状況を切りかえる管理画面" width="780" height="1400" loading="lazy" class="block w-full h-full rounded-[23px] object-cover object-top bg-white" />
-        </div>
+        <button type="button" data-admin-phone="0" aria-label="予約の一覧を前に出す" aria-pressed="false" class="ad-phone absolute left-[4%] md:left-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 border-0" style="--rot:-7deg">
+          <img src="/images/dekiru/yoyaku-admin-list.png" alt="るなやの予約の一覧の画面" width="780" height="1600" loading="lazy" class="block w-full h-full rounded-[20px] object-contain object-top bg-[#F4EEE4]" />
+        </button>
+        <button type="button" data-admin-phone="2" aria-label="スマホ秘書を前に出す" aria-pressed="false" class="ad-phone absolute right-[4%] md:right-[8%] -bottom-5 w-[110px] h-[240px] md:w-[170px] md:h-[360px] rounded-[26px] bg-bl-ink p-1.5 border-0" style="--rot:7deg">
+          <img src="/images/dekiru/bot-salon.png" alt="スマホ秘書に「今日の予定」と送った画面" width="780" height="1600" loading="lazy" class="block w-full h-full rounded-[20px] object-contain object-top bg-[#8CABD9]" />
+        </button>
+        <button type="button" data-admin-phone="1" aria-label="今日のお知らせの切りかえボタンを前に出す" aria-pressed="true" class="ad-phone is-center is-front absolute left-1/2 -bottom-[30px] w-[150px] h-[320px] md:w-[200px] md:h-[440px] rounded-[30px] bg-bl-ink p-[7px] border-0" style="--tx:-50%">
+          <img src="/images/dekiru/status-admin.png" alt="本日の営業状況を切りかえる管理画面" width="780" height="1400" loading="lazy" class="block w-full h-full rounded-[23px] object-contain object-top bg-[#FAF5EE]" />
+        </button>
       </div>
       <div class="flex justify-center gap-x-7 gap-y-2 flex-wrap text-xs text-bl-sub tracking-[.08em]">
-        {screens.map((s) => <span>{s}</span>)}
+        {screens.map((s, i) => (
+          <button type="button" data-admin-cap={i} class:list={['ad-cap bg-transparent border-0 p-0 cursor-pointer font-[inherit] tracking-[inherit] text-[inherit] transition-colors hover:text-bl-orange', i === 1 && 'is-front']}>{s}</button>
+        ))}
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .ad-phone {
+    transform: translateX(var(--tx, 0)) rotate(var(--rot, 0deg)) scale(var(--s, 1));
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    z-index: 1;
+    cursor: pointer;
+  }
+  /* まんなかのスマホは、前に出ていなくても左右より上に重ねる */
+  .ad-phone.is-center {
+    z-index: 2;
+  }
+  .ad-phone.is-front {
+    --rot: 0deg;
+    --s: 1.06;
+    z-index: 3;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  }
+  .ad-phone:not(.is-front):hover {
+    --s: 1.03;
+  }
+  .ad-cap.is-front {
+    color: #ef4b23;
+  }
+</style>
+
+<script>
+  // さわった（押した）スマホを一番前に出す。下の説明の文字を押しても同じ
+  const phones = document.querySelectorAll<HTMLElement>('[data-admin-phone]');
+  const caps = document.querySelectorAll<HTMLElement>('[data-admin-cap]');
+  const bringFront = (n: string) => {
+    phones.forEach((p) => {
+      const on = p.dataset.adminPhone === n;
+      p.classList.toggle('is-front', on);
+      p.setAttribute('aria-pressed', String(on));
+    });
+    caps.forEach((c) => c.classList.toggle('is-front', c.dataset.adminCap === n));
+  };
+  phones.forEach((p) => p.addEventListener('click', () => bringFront(p.dataset.adminPhone ?? '1')));
+  caps.forEach((c) => c.addEventListener('click', () => bringFront(c.dataset.adminCap ?? '1')));
+</script>
