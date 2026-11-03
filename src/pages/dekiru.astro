@@ -38,10 +38,11 @@ const kokyakuPoints = [
   '「今月お誕生日の方」だけを出すこともできます',
 ];
 
+// 画面は、大事なところだけを大きく見せる（zoom）。さわると、画面の全体（full）が大きく開く（2026/11/4）
 const kanriScreens = [
-  { src: '/images/dekiru/kanri-yoyaku.jpg', alt: 'お店側の画面 予約の一覧', cap: '予約の一覧（今日・明日の組数もひと目で）' },
-  { src: '/images/dekiru/kanri-kokyaku.jpg', alt: 'お店側の画面 お客様一覧', cap: 'お客様一覧（来た回数・好み・お店のメモ）' },
-  { src: '/images/dekiru/kanri-birthday.jpg', alt: 'お店側の画面 今月お誕生日の方', cap: '「今月お誕生日の方」だけを出したところ' },
+  { src: '/images/dekiru/kanri-yoyaku-zoom.jpg', full: '/images/dekiru/kanri-yoyaku.jpg', alt: 'お店側の画面 予約の一覧', cap: '予約の一覧（今日・明日の組数もひと目で）' },
+  { src: '/images/dekiru/kanri-kokyaku-zoom.jpg', full: '/images/dekiru/kanri-kokyaku.jpg', alt: 'お店側の画面 お客様一覧', cap: 'お客様一覧（来た回数・好み・お店のメモ）' },
+  { src: '/images/dekiru/kanri-birthday-zoom.jpg', full: '/images/dekiru/kanri-birthday.jpg', alt: 'お店側の画面 今月お誕生日の方', cap: '「今月お誕生日の方」だけを出したところ' },
 ];
 
 const statusUses = [
@@ -197,9 +198,10 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
               {kanriScreens.map((s) => (
                 <figure class="m-0 flex flex-col gap-3.5 items-center">
                   <figcaption class="text-xs leading-[1.8] text-white text-center">{s.cap}</figcaption>
-                  <div class="w-[min(230px,100%)] rounded-t-[26px] bg-bl-ink px-[7px] pt-[7px]">
-                    <img src={s.src} alt={s.alt} loading="lazy" class="block w-full max-h-[380px] object-cover object-top rounded-t-[20px] bg-bl-cream" />
-                  </div>
+                  <button type="button" data-zoom={s.full} data-zoom-alt={s.alt} aria-label={`${s.alt}を大きく見る`} class="dk-zoom relative block w-[min(300px,100%)] rounded-t-[26px] bg-bl-ink px-[7px] pt-[7px] border-0 cursor-zoom-in">
+                    <img src={s.src} alt={s.alt} width="640" height="940" loading="lazy" class="block w-full aspect-[640/940] object-cover object-top rounded-t-[20px] bg-bl-cream" />
+                    <span class="absolute right-3 bottom-3 text-[11px] font-bold tracking-[.08em] text-white bg-bl-ink/80 rounded-full px-3 py-1.5">＋ 全体を見る</span>
+                  </button>
                 </figure>
               ))}
             </div>
@@ -395,9 +397,33 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
         <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
       </footer>
     </div>
+    <!-- 画面をさわったときに開く、拡大表示 -->
+    <div data-zoom-box hidden class="fixed inset-0 z-50 bg-black/80 p-4 md:p-10 [&:not([hidden])]:flex items-center justify-center cursor-zoom-out" role="dialog" aria-modal="true" aria-label="画面の拡大">
+      <img data-zoom-img alt="" class="block max-w-full max-h-full w-auto h-auto rounded-2xl bg-bl-cream shadow-2xl" />
+      <button type="button" data-zoom-close aria-label="閉じる" class="absolute top-4 right-4 w-11 h-11 rounded-full border-0 bg-white text-bl-ink text-xl cursor-pointer">×</button>
+    </div>
     <Reveal />
   </body>
 </html>
+
+<script>
+  // できること①の画面：さわると全体を大きく表示。背景・×・Escキーで閉じる
+  const zbox = document.querySelector<HTMLElement>('[data-zoom-box]');
+  const zimg = document.querySelector<HTMLImageElement>('[data-zoom-img]');
+  if (zbox && zimg) {
+    const close = () => { zbox.hidden = true; document.body.style.overflow = ''; };
+    document.querySelectorAll<HTMLElement>('[data-zoom]').forEach((b) =>
+      b.addEventListener('click', () => {
+        zimg.src = b.dataset.zoom ?? '';
+        zimg.alt = b.dataset.zoomAlt ?? '';
+        zbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }),
+    );
+    zbox.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !zbox.hidden) close(); });
+  }
+</script>
 
 <style>
   .dk-chip:hover {
