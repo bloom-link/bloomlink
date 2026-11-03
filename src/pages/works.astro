@@ -1,161 +1,106 @@
 ---
+// 作品集のページ（2026/11/3 トップと同じデザインに作り直し）
+// デザイン見本：design_handoff_toppage/works-design.dc.html
+// 文章は見本のまま。画像は /images/works/ などの今あるものを使う。
+// 各事例の場所（#rosawood #runaya #yugon #daijobu #bloomlink）は前のページと同じ
+// 作り直す前のページの控え：sanae claud/★バックアップ/works_20261103_作り直す前.astro
 import '../styles/global.css';
+import '../styles/top.css';
 
 const LINE_URL = 'https://lin.ee/w7c1g5d';
 const FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
 
-// トップページと同じヘッダーナビ（別ページなので /#... で戻れるようにする）
-// current: true の項目は、今いるページとして太字＋下線にする
-const nav = [
-  { label: 'Bloom Linkとは', href: '/#about' },
-  { label: 'できること', href: '/#service' },
-  { label: '選ばれる理由', href: '/#reason' },
-  { label: '料金プラン', href: '/#price' },
-  { label: '制作事例', href: '/#works' },
-  { label: '作品集', href: '/works/', current: true },
-  { label: 'お問い合わせ', href: '/#contact' },
+const index = [
+  { n: '01', id: 'rosawood', name: 'ROSA WOOD', sub: 'アロマテラピーサロン・約3か月 ↓' },
+  { n: '02', id: 'runaya', name: 'るなや', sub: '飲食店（東京・府中）・約3か月 ↓' },
+  { n: '03', id: 'yugon', name: 'ゆうごんさん', sub: '夫婦円満カウンセラー・約3週間 ↓' },
+  { n: '04', id: 'daijobu', name: 'ダイ・JO部', sub: '府中の個人事業主の集まり・約1週間 ↓' },
+  { n: '05', id: 'bloomlink', name: 'Bloom Link（自社）', sub: 'LINE公式アカウント・Lステップ構築サポート ↓' },
 ];
 
-// 制作事例
-// どの事例も「どんなお店・困っていたこと・作ったもの・いただいた声・期間」の同じ形でそろえる
-// 項目が空の事例は、その項目ごと出さない
-// voiceFrom … 声の下に小さく出す「だれの声か」
-const cases = [
+const glossary = [
+  { t: 'リッチメニュー', d: 'LINEを開いたとき、画面の下半分にいつも出ているメニュー' },
+  { t: 'カードタイプメッセージ', d: 'トークに届く、横にスワイプして見られるカード' },
+  { t: 'リッチメッセージ', d: 'トークに届く、1枚の大きな画像' },
+];
+
+// CASE 01〜03（困っていたこと／作ったもの／いただいた声 ＋ 横にすべらせて見る画像）
+type Case = {
+  id: string;
+  n: string;
+  label: string;
+  name: string;
+  lead: string;
+  problem: string;
+  made: string[];
+  voice?: { lines: string[]; from: string };
+  period: string;
+  gallery: { src: string; cap: string }[];
+  alt: boolean; // 背景を濃いクリームにする事例
+};
+
+const cases: Case[] = [
   {
     id: 'rosawood',
+    n: '01',
+    label: 'CASE 01・アロマテラピーサロン',
     name: 'ROSA WOOD',
-    cat: 'アロマテラピーサロン',
-    period: '約3か月',
-    periodFull: '約3か月（2026年6月〜9月）',
     lead: 'アロマの施術と、暮らしを楽しむ教室をしているサロンです。',
-    trouble: 'LINEを「予約を取るだけの場所」にしたくない。オーナーさんの人柄や暮らしを知ってもらい、ファンになってもらいたい。',
+    problem: 'LINEを「予約を取るだけの場所」にしたくない。オーナーさんの人柄や暮らしを知ってもらい、ファンになってもらいたい。',
     made: ['リッチメニュー6区画（アロマってなに？／暮らし／施術メニュー／お客様の声・Q&A／教室／ご予約）', 'めくって読めるカード16枚', '施術メニューのページ'],
-    voices: ['「予約を初めてスマホからできました」', '「綺麗になった」'],
-    voiceFrom: 'お客さまより',
-    imgs: [
+    voice: { lines: ['「予約を初めてスマホからできました」', '「綺麗になった」'], from: '— お客さまより' },
+    period: '期間：約3か月（2026年6月〜9月）',
+    gallery: [
       { src: '/images/works/rosawood-message.jpg', cap: 'リッチメッセージ（トークに届く読みもの）' },
       { src: '/images/works/rosawood-richmenu.jpg', cap: 'リッチメニュー' },
       { src: '/images/works/rosawood-card-aroma.jpg', cap: 'ROSA WOODのアロマ' },
       { src: '/images/works/rosawood-card-voice.jpg', cap: 'お客様の声' },
     ],
+    alt: false,
   },
   {
     id: 'runaya',
+    n: '02',
+    label: 'CASE 02・飲食店（東京・府中）',
     name: 'るなや',
-    cat: '飲食店（東京・府中）',
-    period: '約3か月',
-    periodFull: '約3か月（2026年7月〜10月）',
     lead: '毎日日替わりのおうちご飯とお酒のお店です（17席・おひとりで営業）。',
-    trouble: '予約がDM・電話・口頭でばらばらに入り、見落としそうになる。「今日やってますか？」の問い合わせにも、営業中に答えていた。',
+    problem: '予約がDM・電話・口頭でばらばらに入り、見落としそうになる。「今日やってますか？」の問い合わせにも、営業中に答えていた。',
     made: ['お店専用の予約システム：満席で自動停止／お店のLINEにお知らせ／お客さまに予約の控え', 'お客様一覧（来店回数・アンケート・お店のメモ）', '本日の営業状況（ボタン1つで切りかえ）', '「るなやとは」ページ・ポイントカード'],
-    voices: ['「使いやすい」'],
-    voiceFrom: 'オーナーさんより',
-    imgs: [
+    voice: { lines: ['「使いやすい」'], from: '— オーナーさんより' },
+    period: '期間：約3か月（2026年7月〜10月）',
+    gallery: [
       { src: '/images/works/phone-runaya.jpg', cap: 'LINE画面' },
       { src: '/images/runaya-richmenu-2026-10.webp', cap: 'リッチメニュー' },
       { src: '/images/runaya-card-hours-2026-10.webp', cap: '営業時間' },
       { src: '/images/runaya-card-point-2026-10.webp', cap: 'ポイントカード' },
       { src: '/images/runaya-eigyo-2026-10.png', cap: '本日の営業状況（実際の画面）' },
     ],
+    alt: true,
   },
   {
     id: 'yugon',
+    n: '03',
+    label: 'CASE 03・夫婦円満カウンセラー',
     name: 'ゆうごんさん',
-    cat: '夫婦円満カウンセラー',
-    period: '約3週間',
-    periodFull: '約3週間（2026年9月）',
     lead: '生まれた日から本来の自分を読み解く、夫婦のためのカウンセリングです。',
-    trouble: 'いきなり「相談しませんか？」では、申し込みのハードルが高い。まず気軽に、自分の今の状態に気づいてもらう入り口がほしい。',
+    problem: 'いきなり「相談しませんか？」では、申し込みのハードルが高い。まず気軽に、自分の今の状態に気づいてもらう入り口がほしい。',
     made: ['LINE公式アカウントのリニューアル（リッチメニュー4区画）', '違和感レベルチェック（5問に答えると点数とレベルが出る）', 'プロフィール・ご相談の流れのページ'],
-    voices: [],
-    voiceFrom: '',
-    imgs: [
+    period: '期間：約3週間（2026年9月）',
+    gallery: [
       { src: '/images/works/phone-yugon.jpg', cap: 'LINE画面' },
       { src: '/images/works/yugon-richmenu.jpg', cap: 'リッチメニュー' },
       { src: '/images/works/yugon-check.jpg', cap: '違和感レベルチェック' },
     ],
-  },
-  {
-    id: 'daijobu',
-    name: 'ダイ・JO部',
-    cat: '府中の個人事業主の集まり',
-    period: '約1週間',
-    periodFull: '約1週間（2026年10月）',
-    lead: '府中・府中近郊の個人事業主がつながる集まりです（2026年10月発足）。',
-    trouble: 'メンバーのお仕事やイベントの情報を、ひとつの場所にまとめたい。',
-    made: ['メンバー専用のLINE公式アカウント（リッチメニュー左右2つ）', 'メンバー紹介ページ・イベントのページ'],
-    voices: [],
-    voiceFrom: '',
-    imgs: [
-      { src: '/images/works/phone-daijobu.jpg', cap: 'スマホで見たところ' },
-      { src: '/images/works/daijobu-richmenu.jpg', cap: 'リッチメニュー' },
-    ],
-  },
-  {
-    id: 'bloomlink',
-    name: 'Bloom Link（自社）',
-    cat: 'LINE公式アカウント・Lステップ構築サポート',
-    period: '',
-    periodFull: '',
-    lead: 'ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。',
-    trouble: '',
-    made: [],
-    voices: [],
-    voiceFrom: '',
-    imgs: [
-      { src: '/images/works/bloomlink-logo.jpg', cap: 'ロゴデザイン' },
-      { src: '/images/works/bloomlink-richmenu.jpg', cap: 'リッチメニュー' },
-    ],
-  },
-].map((c, i) => ({ ...c, no: String(i + 1).padStart(2, '0') }));
-
-// ことばのミニ辞典
-const glossary = [
-  { term: 'リッチメニュー', desc: 'LINEを開いたとき、画面の下半分にいつも出ているメニュー' },
-  { term: 'カードタイプメッセージ', desc: 'トークに届く、横にスワイプして見られるカード' },
-  { term: 'リッチメッセージ', desc: 'トークに届く、1枚の大きな画像' },
-];
-
-// デザイン見本（dark: true は画像の台を暗い色にする）
-const samples = [
-  {
-    imgs: [
-      { src: '/images/works/phone-ru.jpg', alt: '花屋の学び（ルー）スマホで見たところ' },
-      { src: '/images/works/sample-ru-richmenu.jpg', alt: '花屋の学び（ルー）リッチメニュー' },
-    ],
-    title: '花屋の学び（ルー）',
-    desc: '花屋をめざす方へ向けたLINE。無料プレゼントを大きく見せて、教科書・質問・相談の3つに分けました。写真の色をそろえて、落ち着いた雰囲気に。',
-    dark: false,
-  },
-  {
-    imgs: [{ src: '/images/works/sample-cafe-richmenu.jpg', alt: 'カフェ向け リッチメニュー見本' }],
-    title: 'カフェ',
-    desc: '朝の光とやわらかい線で、ゆっくり過ごせる時間を。',
-    dark: false,
-  },
-  {
-    imgs: [{ src: '/images/works/sample-bar-richmenu.jpg', alt: 'BAR向け リッチメニュー見本' }],
-    title: 'BAR',
-    desc: '同じ飲食店でも、夜のお店は色も線もがらりと変わります。',
-    dark: true,
+    alt: false,
   },
 ];
 
-// バナー・サムネイル
-const banners = [
-  { src: '/images/works/note-thumbnail-1.jpg', alt: 'note記事サムネイル 1', caption: 'note記事サムネイル' },
-  { src: '/images/works/note-thumbnail-2.jpg', alt: 'note記事サムネイル 2', caption: 'note記事サムネイル' },
-];
-
-// このページだけの色（うすピンク・うすグリーンは使わない）
-// オレンジ #B4501C … 白抜きの四角・番号・点・ホバー
-const optima = "font-[Optima,'Belleza','Candara',sans-serif]";
-const badge = `inline-block bg-[#B4501C] text-white ${optima} text-base tracking-[0.12em] px-4 pt-2 pb-[9px]`;
-const h2 = 'text-[28px] font-medium text-sage tracking-[0.08em]';
-const label = 'text-xs tracking-[0.18em] text-sage font-bold';
-const row = 'py-5 border-t border-sage/[0.18]';
-const imgShadow = 'shadow-[0_1px_2px_rgba(53,94,72,0.08),0_8px_24px_-12px_rgba(53,94,72,0.25)]';
+const label17 = 'font-garamond italic text-[17px] tracking-[.12em] text-bl-orange';
+const h2Cls = 'm-0 font-mincho text-[28px] md:text-[32px] font-medium tracking-[.14em]';
+const dotItem = 'flex gap-2.5 text-[13px] leading-[1.9] text-bl-body';
+const dot = 'w-[5px] h-[5px] rounded-full bg-bl-blue mt-[11px] shrink-0';
+const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
 ---
 
 <html lang="ja">
@@ -165,273 +110,299 @@ const imgShadow = 'shadow-[0_1px_2px_rgba(53,94,72,0.08),0_8px_24px_-12px_rgba(5
     <title>作品集｜Bloom Link</title>
     <meta
       name="description"
-      content="Bloom Linkがこれまでにつくった LINE公式アカウントとお店専用のしくみの作品集。困っていたこと・作ったもの・いただいた声を、お店ごとにご紹介します。"
+      content="これまでにつくった LINE公式アカウントと、お店専用のしくみです。ROSA WOOD、るなや、ゆうごんさん、ダイ・JO部、Bloom Link（自社）。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-cream text-[#2B3A31] font-sans antialiased">
-    <!-- ヘッダー（トップページと同じ。「作品集」だけ太字＋下線） -->
-    <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-sage/10">
-      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm text-[#5c5450]">
-          {nav.map((item) => (
-            <a
-              href={item.href}
-              class={item.current
-                ? 'text-sage font-bold border-b-[1.5px] border-sage pb-0.5'
-                : 'hover:text-sage transition-colors'}
-              aria-current={item.current ? 'page' : undefined}
-            >{item.label}</a>
-          ))}
-        </nav>
-        <a
-          href="/#contact"
-          class="text-xs md:text-sm text-white rounded-full px-5 py-2 bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_16px_rgba(180,120,132,0.18)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_20px_rgba(180,120,132,0.24)] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
-        >
-          無料相談してみる
-        </a>
-      </div>
-    </header>
+  <body class="bg-bl-cream text-bl-ink font-notojp antialiased tracking-[.04em]">
+    <div class="flex flex-col overflow-x-hidden">
+      <!-- ヘッダー（トップと同じメニュー。「事例」はこのページ） -->
+      <header class="pt-8 px-[clamp(24px,5vw,72px)]">
+        <div class="flex justify-between items-center gap-6 flex-wrap pb-5 border-b border-bl-line">
+          <a href="/" class="text-[13px] font-medium tracking-[.42em] text-bl-ink no-underline">BLOOM LINK</a>
+          <nav class="flex gap-6 md:gap-10 whitespace-nowrap text-xs tracking-[.14em]">
+            <a href="/dekiru/" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">できること</a>
+            <a href="/#price" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">料金</a>
+            <a href="/works/" aria-current="page" class="text-bl-orange font-medium no-underline">事例</a>
+          </nav>
+        </div>
+        <a href="/" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← トップへ戻る</a>
+      </header>
 
-    <main>
-      <!-- ■ 一番上：オレンジの四角＋説明文 → 目次 -->
-      <section class="max-w-[1180px] mx-auto px-6 pt-16 md:pt-24 pb-14">
-        <div class="flex flex-wrap items-end gap-10 md:gap-12">
-          <div class="flex-[1_1_420px]">
-            <div class="w-full max-w-[510px] aspect-[3/2] bg-[#B4501C] text-white flex flex-col items-center justify-center gap-5">
-              <div class={`${optima} text-[clamp(64px,10vw,112px)] leading-none tracking-[0.01em]`}>Works</div>
-              <h1 class="text-xl font-medium tracking-[0.4em] pl-[0.4em]">作品集</h1>
+      <!-- 01 ヒーロー -->
+      <section class="pt-14 pb-[100px] px-[clamp(24px,5vw,72px)] relative">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class="flex flex-wrap gap-x-20 gap-y-10 items-end justify-between">
+            <div class="flex-[1_1_420px] flex flex-col gap-7">
+              <span class={label17}>Works</span>
+              <h1 class="m-0 font-mincho text-[clamp(34px,4.6vw,52px)] leading-[1.5] font-medium tracking-[.14em]">作品集</h1>
+              <p class="m-0 text-[15px] leading-[2.2] text-bl-body font-light">
+                これまでにつくった LINE公式アカウントと、お店専用のしくみです。<br />どれも「そのお店の困りごと」から考えて、一つひとつ作っています。
+              </p>
+            </div>
+            <div class="shrink-0 relative w-[min(220px,50vw)] aspect-[220/290] mr-[min(24px,4vw)]">
+              <div class="absolute inset-0 rounded-t-[999px] bg-bl-orange"></div>
+              <span class="absolute -right-[min(28px,5vw)] -top-3.5 w-[min(64px,16vw)] aspect-square rounded-full bg-bl-blue"></span>
+              <span class="absolute left-1/2 bottom-6 -translate-x-1/2 font-garamond text-[64px] leading-none text-white">05</span>
+              <span class="absolute inset-x-0 bottom-2 text-center text-[11px] tracking-[.2em] text-white">cases</span>
             </div>
           </div>
-          <p class="flex-[1_1_340px] text-base leading-[2.1] text-[#4A5A50]">
-            これまでにつくった LINE公式アカウントと、お店専用のしくみです。<br />
-            どれも「そのお店の困りごと」から考えて、一つひとつ作っています。
-          </p>
-        </div>
-
-        <!-- 目次（押すとその事例まで移動） -->
-        <nav aria-label="制作事例の目次" class="mt-16 border-t border-sage/20">
-          {cases.map((c) => (
-            <a
-              href={`#${c.id}`}
-              class="grid grid-cols-[48px_minmax(0,1fr)] md:grid-cols-[64px_minmax(0,1fr)_auto] gap-x-4 gap-y-1 items-baseline px-1 py-[18px] border-b border-sage/20 hover:bg-[#F2ECE3] transition-colors"
-            >
-              <span class={`${optima} text-[22px] text-[#B4501C]`}>{c.no}</span>
-              <span class="text-lg font-bold text-sage">
-                {c.name}<span class="font-normal text-[13px] text-[#6B6B64] ml-3.5">{c.cat}</span>
-              </span>
-              <span class="col-start-2 md:col-start-auto text-[13px] text-[#6B6B64]">{c.period ? `${c.period} ↓` : '↓'}</span>
-            </a>
-          ))}
-        </nav>
-      </section>
-
-      <!-- ■ ことばのミニ辞典 -->
-      <section class="max-w-[1180px] mx-auto px-6 pb-10">
-        <div class="bg-white rounded-[20px] px-6 md:px-8 py-7 grid gap-6 md:grid-cols-3">
-          <p class="md:col-span-3 text-xs tracking-[0.2em] text-[#B4501C] font-bold">ことばのミニ辞典</p>
-          {glossary.map((g) => (
-            <div>
-              <p class="font-bold text-sage mb-1.5">{g.term}</p>
-              <p class="text-sm leading-[1.8] text-[#4A5A50]">{g.desc}</p>
-            </div>
-          ))}
+          <nav class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] border-t border-bl-ink">
+            {index.map((c) => (
+              <a href={`#${c.id}`} class="flex flex-col gap-1.5 py-5 pr-4 border-b border-bl-line2 no-underline text-bl-ink transition-colors hover:text-bl-orange">
+                <span class="font-garamond text-xl text-bl-blue">{c.n}</span>
+                <span class="font-mincho text-[17px] font-medium">{c.name}</span>
+                <span class="text-[11px] text-bl-sub leading-[1.7]">{c.sub}</span>
+              </a>
+            ))}
+          </nav>
         </div>
       </section>
 
-      <!-- ■ 制作事例の見出し -->
-      <section class="max-w-[1180px] mx-auto px-6 pt-14 pb-6">
-        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-3">
-          <div class={badge}>Case studies</div>
-          <h2 class={`${h2} basis-full`}>制作事例</h2>
-          <span class="text-sm text-[#6B6B64]">実際のお店で使われているLINEです</span>
-          <a href="/dekiru/" class="md:ml-auto text-sm font-medium text-sage hover:text-[#B4501C] transition-colors">できることを見る →</a>
-        </div>
-      </section>
-
-      <!-- ■ 各事例（事例ごとに文章と画像の左右を入れかえる） -->
-      {cases.map((c, i) => (
-        <article id={c.id} class="max-w-[1180px] mx-auto px-6 py-14 scroll-mt-20">
-          <div class="border-t border-sage pt-7 mb-9">
-            <div class={`inline-block bg-[#B4501C] text-white ${optima} text-[15px] tracking-[0.2em] px-3.5 pt-[7px] pb-2 mb-4`}>CASE {c.no}</div>
-            <div class="flex flex-wrap items-center gap-4">
-              <h3 class="text-[26px] md:text-[30px] font-medium text-sage tracking-[0.04em]">{c.name}</h3>
-              <span class="text-[13px] text-sage border border-sage rounded-full px-3 py-1">{c.cat}</span>
-            </div>
+      <!-- 02 ことばのミニ辞典 -->
+      <section class="pb-[100px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto bg-bl-blue text-white rounded p-[clamp(28px,4vw,44px)] flex flex-wrap gap-x-12 gap-y-6 items-start">
+          <div class="flex-[0_0_160px] flex flex-col gap-1.5">
+            <span class="font-garamond italic text-[15px] text-[#FBE3D9]">Glossary</span>
+            <span class="font-mincho text-xl font-medium tracking-[.1em]">ことばのミニ辞典</span>
           </div>
-
-          <div class={`flex flex-col gap-10 md:gap-12 md:items-start ${i % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-            <!-- 文章 -->
-            <div class="md:flex-[1_1_320px] min-w-0">
-              <p class="mb-7 text-[17px] leading-[2] text-[#2B3A31]">{c.lead}</p>
-              {c.trouble && (
-                <div class={row}>
-                  <p class={`${label} mb-2.5`}>困っていたこと</p>
-                  <p class="text-[15px] leading-[1.95] text-[#4A5A50]">{c.trouble}</p>
-                </div>
-              )}
-              {c.made.length > 0 && (
-                <div class={row}>
-                  <p class={`${label} mb-2.5`}>作ったもの</p>
-                  <ul class="flex flex-col gap-2">
-                    {c.made.map((m) => (
-                      <li class="flex gap-2.5 text-[15px] leading-[1.8] text-[#4A5A50]">
-                        <span aria-hidden="true" class="flex-none w-1.5 h-1.5 rounded-full bg-[#B4501C] mt-[11px]"></span>
-                        <span>{m}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {c.voices.length > 0 && (
-                <div class={row}>
-                  <p class={`${label} mb-3`}>いただいた声</p>
-                  <div class="bg-[#F4EADF] rounded-2xl px-6 py-[22px] flex flex-col gap-2.5">
-                    {c.voices.map((v) => (
-                      <p class="text-lg font-medium leading-[1.7] text-sage">{v}</p>
-                    ))}
-                    <p class="text-xs text-[#6B6B64] mt-1">— {c.voiceFrom}</p>
-                  </div>
-                </div>
-              )}
-              {c.periodFull && (
-                <div class="pt-5 border-t border-sage/[0.18] flex items-baseline gap-4">
-                  <p class={label}>期間</p>
-                  <p class="text-[15px] text-[#4A5A50]">{c.periodFull}</p>
-                </div>
-              )}
-            </div>
-
-            <!-- 画像（台の上に2列で並べる。画像は切らずに全体を表示） -->
-            <div class="md:flex-[1.4_1_420px] min-w-0 bg-[#EFE9E0] rounded-3xl p-4 md:p-5">
-              <div class="columns-2 gap-3 md:gap-4">
-                {c.imgs.map((im) => (
-                  <figure class="mb-4 break-inside-avoid">
-                    <img
-                      src={im.src}
-                      alt={im.cap}
-                      loading="lazy"
-                      class={`block w-full h-auto rounded-xl bg-white ${imgShadow}`}
-                    />
-                    <figcaption class="text-xs text-[#6B6B64] mt-2 pl-0.5">{im.cap}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </div>
-        </article>
-      ))}
-
-      <!-- ■ デザイン見本（白い帯） -->
-      <section class="bg-white mt-14">
-        <div class="max-w-[1180px] mx-auto px-6 py-16 md:py-[88px]">
-          <div class={badge}>Design samples</div>
-          <h2 class={`${h2} mt-[18px] mb-2.5`}>デザイン見本</h2>
-          <p class="mb-10 text-[15px] text-[#4A5A50]">落ち着いた雰囲気だけでなく、こんなテイストも作れます</p>
-          <div class="grid gap-7 md:grid-cols-3 items-start">
-            {samples.map((s) => (
-              <div class="flex flex-col gap-4">
-                <div class={`rounded-[20px] p-4 ${s.dark ? 'bg-[#26332C]' : 'bg-cream'} ${s.imgs.length > 1 ? 'grid grid-cols-[1fr_1.4fr] gap-3 items-center' : ''}`}>
-                  {s.imgs.map((im) => (
-                    <img src={im.src} alt={im.alt} loading="lazy" class="block w-full h-auto rounded-[10px]" />
-                  ))}
-                </div>
-                <h3 class="text-lg font-medium text-sage">{s.title}</h3>
-                <p class="text-sm leading-[1.9] text-[#4A5A50]">{s.desc}</p>
+          <dl class="flex-[1_1_480px] m-0 grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-x-8 gap-y-5">
+            {glossary.map((g) => (
+              <div class="flex flex-col gap-1.5 pt-3.5 border-t border-white/40">
+                <dt class="text-sm font-bold">{g.t}</dt>
+                <dd class="m-0 text-[13px] leading-[1.9] font-light">{g.d}</dd>
               </div>
             ))}
-          </div>
-          <p class="mt-10 text-[15px] text-sage font-medium text-center">
-            同じ「飲食店」でも、お店の時間帯やお客さまに合わせて作り分けます。
-          </p>
+          </dl>
         </div>
       </section>
 
-      <!-- ■ バナー・サムネイル -->
-      <section class="max-w-[1180px] mx-auto px-6 py-16 md:py-[88px]">
-        <div class={badge}>Banners</div>
-        <h2 class={`${h2} mt-[18px] mb-2.5`}>バナー・サムネイル</h2>
-        <p class="mb-10 text-[15px] text-[#4A5A50]">LINE以外のデザインも作っています</p>
-        <div class="grid gap-7 md:grid-cols-2">
-          {banners.map((b) => (
-            <figure>
-              <img src={b.src} alt={b.alt} loading="lazy" class="block w-full h-auto rounded-2xl" />
-              <figcaption class="text-xs text-[#6B6B64] mt-2.5">{b.caption}</figcaption>
-            </figure>
-          ))}
+      <!-- 03 制作事例 見出し -->
+      <section class="pt-10 px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap justify-between items-end gap-5">
+          <div class="flex flex-col gap-3">
+            <span class={label17}>Case studies</span>
+            <h2 class={h2Cls}>制作事例</h2>
+            <p class="m-0 text-sm text-bl-body font-light">実際のお店で使われているLINEです</p>
+          </div>
+          <a href="/dekiru/" class="text-[13px] font-medium tracking-[.12em] text-bl-blue no-underline border-b border-bl-blue pb-1 hover:text-bl-orange hover:border-bl-orange transition-colors">できることを見る →</a>
         </div>
       </section>
 
-      <!-- ■ 緑の帯：お問い合わせへの導線 -->
-      <section class="bg-sage text-white">
-        <div class="max-w-[1180px] mx-auto px-6 py-20 md:py-24 flex flex-wrap items-center gap-10">
-          <div class="flex-[1_1_380px]">
-            <h2 class="mb-3.5 text-[clamp(26px,3.4vw,38px)] font-medium tracking-[0.06em]">うちのお店だと、どうなる？</h2>
-            <p class="text-[15px] leading-[1.9] text-[#E6EEE9]">ご相談は無料です。無理な勧誘はしません。</p>
+      <!-- CASE 01〜03 -->
+      {cases.map((c, i) => (
+        <section
+          id={c.id}
+          class:list={[
+            'px-[clamp(24px,5vw,72px)] scroll-mt-6',
+            i === 0 ? 'pt-20 pb-[120px]' : 'py-[120px]',
+            c.alt && 'bg-bl-cream2',
+          ]}
+        >
+          <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+            <div class="flex gap-6 items-start pt-10 border-t-2 border-bl-blue">
+              <span class="font-garamond text-[56px] md:text-[72px] leading-[.85] text-bl-orange">{c.n}</span>
+              <div class="flex flex-col gap-2.5">
+                <span class="text-xs font-medium tracking-[.2em] text-bl-blue">{c.label}</span>
+                <h3 class="m-0 font-mincho text-[clamp(26px,3vw,34px)] leading-[1.5] font-medium tracking-[.1em]">{c.name}</h3>
+                <p class="m-0 text-sm leading-[1.9] text-bl-body font-light">{c.lead}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5">
+              <div class="bg-bl-card rounded p-7 flex flex-col gap-3 border-t-[3px] border-bl-orange">
+                <span class="text-xs font-bold tracking-[.16em] text-bl-orange">困っていたこと</span>
+                <p class="m-0 text-sm leading-loose text-bl-body">{c.problem}</p>
+              </div>
+              <div class="bg-bl-card rounded p-7 flex flex-col gap-3 border-t-[3px] border-bl-blue">
+                <span class="text-xs font-bold tracking-[.16em] text-bl-blue">作ったもの</span>
+                <ul class="m-0 p-0 list-none flex flex-col gap-2">
+                  {c.made.map((m) => <li class={dotItem}><span class={dot}></span><span>{m}</span></li>)}
+                </ul>
+                {!c.voice && <span class="mt-auto pt-3.5 border-t border-bl-line text-xs text-bl-sub">{c.period}</span>}
+              </div>
+              {c.voice && (
+                <div class="bg-bl-orange text-white rounded p-7 flex flex-col gap-3">
+                  <span class="text-xs font-bold tracking-[.16em] text-[#FFE6DC]">いただいた声</span>
+                  <p class="m-0 font-mincho text-[19px] leading-[1.8] font-medium">
+                    {c.voice.lines.map((l, j) => <>{j > 0 && <br />}{l}</>)}
+                  </p>
+                  <span class="text-xs text-[#FFE6DC]">{c.voice.from}</span>
+                  <span class="mt-auto pt-3.5 border-t border-white/45 text-xs">{c.period}</span>
+                </div>
+              )}
+            </div>
+            <!-- 横にすべらせて見る画像の並び -->
+            <div class="nosb flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory">
+              {c.gallery.map((g) => (
+                <figure class="m-0 shrink-0 w-[min(260px,70vw)] flex flex-col gap-2.5 snap-start">
+                  <img src={g.src} alt={g.cap} loading="lazy" class:list={[tallImg, c.alt ? 'bg-[#EADFCF]' : 'bg-[#F2E9DC]']} />
+                  <figcaption class="text-xs text-bl-sub">{g.cap}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
-          <div class="flex flex-wrap gap-3">
-            <a
-              href={LINE_URL}
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-white text-sage rounded-full px-7 py-4 font-bold text-[15px] hover:bg-[#B4501C] hover:text-white transition-colors"
-            >
-              LINEで相談する
-            </a>
-            <a
-              href={FORM_URL}
-              target="_blank"
-              rel="noopener"
-              class="inline-block border border-white/60 text-white rounded-full px-7 py-4 font-medium text-[15px] hover:bg-white/10 transition-colors"
-            >
-              フォームで相談する
-            </a>
+        </section>
+      ))}
+
+      <!-- CASE 04・05 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[1080px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-x-12 gap-y-16">
+          <div id="daijobu" class="flex flex-col gap-7 scroll-mt-6">
+            <div class="flex gap-5 items-start pt-8 border-t-2 border-bl-blue">
+              <span class="font-garamond text-[56px] leading-[.85] text-bl-orange">04</span>
+              <div class="flex flex-col gap-2">
+                <span class="text-xs font-medium tracking-[.2em] text-bl-blue">CASE 04・府中の個人事業主の集まり</span>
+                <h3 class="m-0 font-mincho text-[26px] leading-[1.5] font-medium tracking-[.1em]">ダイ・JO部</h3>
+              </div>
+            </div>
+            <p class="m-0 text-sm leading-[1.9] text-bl-body font-light">府中・府中近郊の個人事業主がつながる集まりです（2026年10月発足）。</p>
+            <div class="flex flex-col border-t border-bl-ink">
+              <div class="flex flex-wrap gap-x-5 gap-y-1 py-4 border-b border-bl-line2">
+                <span class="flex-[0_0_100px] text-xs font-bold text-bl-orange">困っていたこと</span>
+                <span class="flex-[1_1_220px] text-[13px] leading-[1.9]">メンバーのお仕事やイベントの情報を、ひとつの場所にまとめたい。</span>
+              </div>
+              <div class="flex flex-wrap gap-x-5 gap-y-1 py-4 border-b border-bl-line2">
+                <span class="flex-[0_0_100px] text-xs font-bold text-bl-blue">作ったもの</span>
+                <span class="flex-[1_1_220px] text-[13px] leading-[1.9]">メンバー専用のLINE公式アカウント（リッチメニュー左右2つ）<br />メンバー紹介ページ・イベントのページ</span>
+              </div>
+              <div class="flex flex-wrap gap-x-5 gap-y-1 py-4 border-b border-bl-line2">
+                <span class="flex-[0_0_100px] text-xs font-bold text-bl-sub">期間</span>
+                <span class="flex-[1_1_220px] text-[13px] leading-[1.9]">約1週間（2026年10月）</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <figure class="m-0 flex flex-col gap-2">
+                <img src="/images/works/phone-daijobu.jpg" alt="スマホで見たところ" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <figcaption class="text-xs text-bl-sub">スマホで見たところ</figcaption>
+              </figure>
+              <figure class="m-0 flex flex-col gap-2">
+                <img src="/images/works/daijobu-richmenu.jpg" alt="リッチメニュー" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <figcaption class="text-xs text-bl-sub">リッチメニュー</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div id="bloomlink" class="flex flex-col gap-7 scroll-mt-6">
+            <div class="flex gap-5 items-start pt-8 border-t-2 border-bl-blue">
+              <span class="font-garamond text-[56px] leading-[.85] text-bl-orange">05</span>
+              <div class="flex flex-col gap-2">
+                <span class="text-xs font-medium tracking-[.2em] text-bl-blue">CASE 05・LINE公式アカウント・Lステップ構築サポート</span>
+                <h3 class="m-0 font-mincho text-[26px] leading-[1.5] font-medium tracking-[.1em]">Bloom Link（自社）</h3>
+              </div>
+            </div>
+            <p class="m-0 text-sm leading-[1.9] text-bl-body font-light">ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。</p>
+            <div class="grid grid-cols-2 gap-4">
+              <figure class="m-0 flex flex-col gap-2">
+                <img src="/images/works/bloomlink-logo.jpg" alt="ロゴデザイン" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <figcaption class="text-xs text-bl-sub">ロゴデザイン</figcaption>
+              </figure>
+              <figure class="m-0 flex flex-col gap-2">
+                <img src="/images/works/bloomlink-richmenu.jpg" alt="リッチメニュー" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <figcaption class="text-xs text-bl-sub">リッチメニュー</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </section>
-    </main>
 
-    <!-- フッター（トップページと同じ） -->
-    <footer class="bg-sage text-cream border-t border-white/10">
-      <div class="max-w-6xl mx-auto px-6 py-14 md:py-16 text-center">
-        <p class="text-xl tracking-[0.15em] mb-7">Bloom Link</p>
-        <p class="mb-6 text-2xl md:text-3xl leading-relaxed">
-          つながりを育て、<br />
-          未来を咲かせる。
-        </p>
-        <p class="mb-10 text-sm text-cream/85 max-w-xs md:max-w-sm mx-auto leading-relaxed">
-          LINE公式の構築から運用まで、<br class="hidden md:block" />
-          お気軽にご相談ください。
-        </p>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-          <a
-            href={FORM_URL}
-            target="_blank"
-            rel="noopener"
-            class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#e2aab6] to-[#cf8b98] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#d99aa8] hover:to-[#bf7a89] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
-          >
-            無料で相談してみる →
-          </a>
-          <a
-            href={LINE_URL}
-            target="_blank"
-            rel="noopener"
-            class="inline-block w-full max-w-xs md:w-auto text-white rounded-full px-9 py-3.5 text-sm font-medium bg-gradient-to-b from-[#06C755] to-[#04b14a] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_6px_18px_rgba(0,0,0,0.15)] hover:from-[#05b94e] hover:to-[#039e42] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_22px_rgba(0,0,0,0.2)] transition-all duration-200"
-          >
-            LINEで友だち追加
-          </a>
+      <!-- デザイン見本 -->
+      <section class="py-24 md:py-[140px] px-[clamp(24px,5vw,72px)] bg-bl-blue text-white relative overflow-hidden">
+        <span class="absolute -right-[90px] -top-[90px] w-[260px] h-[260px] rounded-full bg-bl-orange"></span>
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-14 relative">
+          <div class="flex flex-col gap-3">
+            <span class="font-garamond italic text-[17px] tracking-[.12em] text-[#FBE3D9]">Design samples</span>
+            <h2 class={h2Cls}>デザイン見本</h2>
+            <p class="m-0 text-sm font-light">落ち着いた雰囲気だけでなく、こんなテイストも作れます</p>
+          </div>
+          <div class="bg-bl-card text-bl-ink rounded p-[clamp(24px,4vw,40px)] flex flex-wrap gap-x-12 gap-y-8 items-center">
+            <div class="flex-[1_1_320px] grid grid-cols-2 gap-4">
+              <img src="/images/works/phone-ru.jpg" alt="花屋の学び（ルー）スマホで見たところ" loading="lazy" class={`${tallImg} bg-[#F2E9DC]`} />
+              <img src="/images/works/sample-ru-richmenu.jpg" alt="花屋の学び（ルー）リッチメニュー" loading="lazy" class={`${tallImg} bg-[#F2E9DC]`} />
+            </div>
+            <div class="flex-[1_1_300px] flex flex-col gap-3.5">
+              <h3 class="m-0 font-mincho text-2xl font-medium tracking-[.08em] text-bl-blue">花屋の学び（ルー）</h3>
+              <p class="m-0 text-sm leading-[2.1] text-bl-body">花屋をめざす方へ向けたLINE。無料プレゼントを大きく見せて、教科書・質問・相談の3つに分けました。写真の色をそろえて、落ち着いた雰囲気に。</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
+            <div class="flex flex-col gap-3.5">
+              <img src="/images/works/sample-cafe-richmenu.jpg" alt="カフェ向け リッチメニュー見本" loading="lazy" class="block w-full aspect-[3/2] object-cover rounded bg-bl-card" />
+              <h3 class="m-0 font-mincho text-xl font-medium">カフェ</h3>
+              <p class="m-0 text-[13px] leading-[1.9] font-light">朝の光とやわらかい線で、ゆっくり過ごせる時間を。</p>
+            </div>
+            <div class="flex flex-col gap-3.5">
+              <img src="/images/works/sample-bar-richmenu.jpg" alt="BAR向け リッチメニュー見本" loading="lazy" class="block w-full aspect-[3/2] object-cover rounded bg-bl-card" />
+              <h3 class="m-0 font-mincho text-xl font-medium">BAR</h3>
+              <p class="m-0 text-[13px] leading-[1.9] font-light">同じ飲食店でも、夜のお店は色も線もがらりと変わります。</p>
+            </div>
+          </div>
+          <p class="m-0 font-mincho text-lg leading-[1.9] font-medium pt-6 border-t border-white/40">同じ「飲食店」でも、お店の時間帯やお客さまに合わせて作り分けます。</p>
         </div>
-        <p class="mt-5 text-xs text-cream/75">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。</p>
-        <p class="mt-6 text-xs text-cream/70">bloomlink.01@gmail.com</p>
-        <p class="mt-4 flex items-center justify-center gap-6 text-xs text-cream/85">
-          <a href="https://www.instagram.com/bloomlink_ru/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-cream/40 hover:text-cream transition-colors"><svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>Instagram</a>
-          <a href="https://note.com/b_ru" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-cream/40 hover:text-cream transition-colors"><svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 17V8.5M8 11.2c0-1.7 1-2.7 2.6-2.7s2.4 1 2.4 2.6V17M13 11.2c0-1.7 1-2.7 2.6-2.7" stroke-linecap="round" stroke-linejoin="round"/></svg>note</a>
-        </p>
-        <p class="mt-12 text-xs text-cream/60">&copy; {new Date().getFullYear()} Bloom Link</p>
-      </div>
-    </footer>
+      </section>
+
+      <!-- バナー・サムネイル -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-10">
+          <div class="flex flex-col gap-3">
+            <span class={label17}>Banners</span>
+            <h2 class={h2Cls}>バナー・サムネイル</h2>
+            <p class="m-0 text-sm text-bl-body font-light">LINE以外のデザインも作っています</p>
+          </div>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-6">
+            {['/images/works/note-thumbnail-1.jpg', '/images/works/note-thumbnail-2.jpg'].map((src, i) => (
+              <figure class="m-0 flex flex-col gap-2.5">
+                <img src={src} alt={`note記事サムネイル ${i + 1}`} loading="lazy" class="block w-full aspect-[1.91/1] object-cover rounded bg-[#F2E9DC]" />
+                <figcaption class="text-xs text-bl-sub">note記事サムネイル</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- 相談 -->
+      <section class="py-24 md:py-[140px] px-[clamp(24px,5vw,72px)] bg-bl-orange text-white relative overflow-hidden">
+        <span class="absolute -left-20 -bottom-20 w-[240px] h-[240px] rounded-full bg-bl-blue"></span>
+        <div class="max-w-[820px] mx-auto flex flex-col items-center gap-7 text-center relative">
+          <h2 class="m-0 font-mincho text-[clamp(28px,3.6vw,38px)] leading-[1.8] font-medium tracking-[.1em]">うちのお店だと、どうなる？</h2>
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">ご相談は無料です。無理な勧誘はしません。</p>
+          <div class="flex flex-wrap justify-center gap-3.5 mt-2">
+            <a href={LINE_URL} class="bg-bl-blue text-white no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full shadow-[0_10px_24px_rgba(0,0,0,.15)] transition-colors hover:bg-bl-ink">LINEで相談する</a>
+            <a href={FORM_URL} class="bg-bl-card text-bl-orange no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full transition-colors hover:bg-bl-ink hover:text-white">フォームで相談する</a>
+          </div>
+          <a href="/" class="mt-3 text-xs tracking-[.12em] text-[#FFF3EC] no-underline">← トップへ戻る</a>
+        </div>
+      </section>
+
+      <!-- フッター（「できること」ページと同じ） -->
+      <footer class="pt-16 pb-10 px-[clamp(24px,5vw,72px)] bg-bl-blue text-white">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap justify-between gap-10">
+          <div class="flex flex-col gap-4">
+            <span class="text-[13px] font-medium tracking-[.42em]">BLOOM LINK</span>
+            <p class="m-0 font-mincho text-xl leading-[1.8] font-medium tracking-[.1em]">つながりを育て、<br />未来を咲かせる。</p>
+            <p class="m-0 text-[13px] leading-loose font-light">LINE公式の構築から運用まで、<br />お気軽にご相談ください。</p>
+          </div>
+          <div class="flex flex-col gap-3.5 items-start">
+            <a href={FORM_URL} class="text-[13px] font-bold text-bl-blue bg-bl-card no-underline px-6 py-[13px] rounded-full transition-colors hover:bg-bl-orange hover:text-white">無料で相談してみる →</a>
+            <a href={LINE_URL} class="text-[13px] font-bold text-white border border-white no-underline px-6 py-3 rounded-full transition-colors hover:bg-white hover:text-bl-blue">LINEで友だち追加</a>
+            <p class="m-0 text-xs leading-[1.9]">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。<br /><a href="mailto:bloomlink.01@gmail.com" class="text-white">bloomlink.01@gmail.com</a></p>
+            <div class="flex gap-6 text-xs tracking-[.14em]">
+              <a href="https://www.instagram.com/bloomlink_ru/" class="text-white no-underline">Instagram</a>
+              <a href="https://note.com/b_ru" class="text-white no-underline">note</a>
+            </div>
+          </div>
+        </div>
+        <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
+      </footer>
+    </div>
   </body>
 </html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
