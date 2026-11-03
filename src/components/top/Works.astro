@@ -6,6 +6,9 @@ const works = [
   {
     cat: '飲食店（東京・府中）',
     name: 'るなや',
+    img: '/images/works/phone-runaya.jpg',
+    alt: 'るなやのLINEの画面',
+    fit: 'contain',
     sys: '予約・受付システム／LINE公式アカウント',
     items: ['ワンオペのお店の、予約の見落としを減らしました', '予約が入ると、すぐにお店のLINEに通知が届きます', '「予約する」「本日の営業状況」「アクセス」が、ボタンひと押しで開けます'],
     link: '→ 制作ストーリーを見る',
@@ -14,6 +17,9 @@ const works = [
   {
     cat: 'アロマテラピーサロン',
     name: 'ROSA WOOD',
+    img: '/images/rosawood.jpg',
+    alt: 'ROSA WOODのアロマのしつらえ',
+    fit: 'cover',
     sys: 'LINE公式アカウント',
     items: ['オーナーさんの声：「誰が何に関心があるのかが、わかるようになりました」', 'お客さまの声：「見やすくなった」', '教室の説明をLINEに入れたことで、講座や教室を以前より積極的に開催されるようになりました'],
     link: '→ 制作ストーリーを見る',
@@ -22,6 +28,9 @@ const works = [
   {
     cat: '夫婦円満カウンセラー',
     name: 'ゆうごんさん',
+    img: '/images/works/phone-yugon.jpg',
+    alt: 'ゆうごんさんのLINEの画面',
+    fit: 'contain',
     sys: 'お客さま向けのセルフチェック',
     items: ['お客さまが質問に答えると、結果がLINEで届くチェックを作りました'],
     link: '→ 実例を見る',
@@ -30,6 +39,9 @@ const works = [
   {
     cat: '府中の個人事業主の集まり',
     name: 'ダイ・JO部',
+    img: '/images/works/phone-daijobu.jpg',
+    alt: 'ダイ・JO部のLINEの画面',
+    fit: 'contain',
     sys: 'メンバー専用のLINE（連絡の窓口）',
     items: ['メンバーへのお知らせや案内を、1つのLINEにまとめました'],
     link: '→ 実例を見る',
@@ -57,7 +69,15 @@ const works = [
     >
       {works.map((w) => (
         <article class="flex-[0_0_min(440px,82vw)] snap-start flex flex-col gap-6">
-          <div class="ph-stripe aspect-[3/2] flex items-center justify-center font-mono text-[11px] text-bl-faint">写真：{w.name}</div>
+          {/* LINEの画面は縦長なので、枠の中に丸ごと収める（contain）。写真は枠いっぱい（cover） */}
+          <div class="aspect-[3/2] overflow-hidden bg-bl-card">
+            <img
+              src={w.img}
+              alt={w.alt}
+              loading="lazy"
+              class:list={['block w-full h-full', w.fit === 'contain' ? 'object-contain py-4' : 'object-cover']}
+            />
+          </div>
           <div class="flex flex-col gap-2.5">
             <span class="text-[11px] text-bl-faint tracking-[.16em]">{w.cat}</span>
             <h3 class="m-0 font-mincho text-[26px] font-medium tracking-[.1em] text-bl-orange">{w.name}</h3>
