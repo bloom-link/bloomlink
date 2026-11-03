@@ -13,7 +13,7 @@ const FORM_URL =
 const jump = [
   { n: '01', label: '予約システム＆お客様一覧', href: '#f1' },
   { n: '02', label: '本日の営業・おすすめ', href: '#f2' },
-  { n: '03', label: '違和感レベルチェック', href: '#f3' },
+  { n: '03', label: 'お客さま向けのセルフチェック', href: '#f3' },
   { n: '04', label: 'スマホ秘書', href: '#f4' },
 ];
 
@@ -91,7 +91,7 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
     <title>できること｜Bloom Link</title>
     <meta
       name="description"
-      content="予約システム＆お客様一覧、本日の営業・おすすめ、違和感レベルチェック、スマホ秘書。オーナーさんの毎日の手間を、LINEで減らします。"
+      content="予約システム＆お客様一覧、本日の営業・おすすめ、お客さま向けのセルフチェック、スマホ秘書。オーナーさんの毎日の手間を、LINEで減らします。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -259,14 +259,14 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
         </div>
       </section>
 
-      <!-- 05 できること③ 違和感レベルチェック -->
+      <!-- 05 できること③ お客さま向けのセルフチェック（見本では「違和感レベルチェック」。トップに合わせて名前をそろえた・2026/11/3） -->
       <section id="f3" class="py-24 md:py-[140px] px-[clamp(24px,5vw,72px)]">
         <div class="max-w-[1080px] mx-auto flex flex-col gap-14">
           <div class="flex gap-6 items-start pt-10 border-t-2 border-bl-blue">
             <span class={`${numCls} text-bl-orange`}>03</span>
             <div class="flex flex-col gap-2.5">
               <span class="text-xs font-medium tracking-[.2em] text-bl-blue">できること③</span>
-              <h2 class={h2Cls}>違和感レベルチェック<span class="text-[.6em] text-bl-sub ml-2">（診断・チェックページ）</span></h2>
+              <h2 class={h2Cls}>お客さま向けのセルフチェック<span class="text-[.6em] text-bl-sub ml-2">（診断・チェックページ）</span></h2>
             </div>
           </div>
           <div class="flex flex-wrap gap-x-16 gap-y-12 items-center">
@@ -274,7 +274,7 @@ const jireiBtn = 'self-start text-[13px] font-bold tracking-[.1em] text-white bg
               <div class="w-[min(300px,calc(100vw-96px))] aspect-[300/400] rounded-t-[999px] bg-bl-blue flex items-end justify-center overflow-hidden">
                 <div class="w-[60%] h-[78%] rounded-t-[22px] bg-bl-ink px-1.5 pt-1.5">
                   <!-- 正方形の画像なので、切らずに丸ごと見せる -->
-                  <img src="/images/dekiru/check-yugon.jpg" alt="違和感レベルチェックの画面" loading="lazy" class="block w-full h-full object-contain rounded-t-2xl bg-[#F9F8F4]" />
+                  <img src="/images/dekiru/check-yugon.jpg" alt="ゆうごんさんの違和感レベルチェックの画面" loading="lazy" class="block w-full h-full object-contain rounded-t-2xl bg-[#F9F8F4]" />
                 </div>
               </div>
               <span class="text-xs text-bl-sub">夫婦円満カウンセラー ゆうごんさんのチェック</span>
