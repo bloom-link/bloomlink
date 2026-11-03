@@ -6,6 +6,7 @@
 // 作り直す前のページの控え：sanae claud/★バックアップ/works_20261103_作り直す前.astro
 import '../styles/global.css';
 import '../styles/top.css';
+import Reveal from '../components/Reveal.astro';
 
 const LINE_URL = 'https://lin.ee/w7c1g5d';
 const FORM_URL =
@@ -368,7 +369,7 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
         <span class="absolute -left-20 -bottom-20 w-[240px] h-[240px] rounded-full bg-bl-blue"></span>
         <div class="max-w-[820px] mx-auto flex flex-col items-center gap-7 text-center relative">
           <h2 class="m-0 font-mincho text-[clamp(28px,3.6vw,38px)] leading-[1.8] font-medium tracking-[.1em]">うちのお店だと、どうなる？</h2>
-          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">ご相談は無料です。無理な勧誘はしません。</p>
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">ご相談は無料です。相談したからといって、申し込む必要はありません。</p>
           <div class="flex flex-wrap justify-center gap-3.5 mt-2">
             <a href={LINE_URL} class="bg-bl-blue text-white no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full shadow-[0_10px_24px_rgba(0,0,0,.15)] transition-colors hover:bg-bl-ink">LINEで相談する</a>
             <a href={FORM_URL} class="bg-bl-card text-bl-orange no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full transition-colors hover:bg-bl-ink hover:text-white">フォームで相談する</a>
@@ -398,6 +399,7 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
         <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
       </footer>
     </div>
+    <Reveal />
   </body>
 </html>
 

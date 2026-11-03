@@ -1,0 +1,42 @@
+---
+// スクロールして見えてきたところを、下からふわっと出す（2026/11/3）
+// 使い方：ページの </body> の前に <Reveal /> を置くだけ。見た目の決まりは styles/top.css の .rv
+// 各セクションの中身を1かたまりずつ出す。カードの並び・リストは1つずつ少しずらして出す。
+---
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const targets: HTMLElement[] = [];
+    const mark = (el: Element, i: number) => {
+      const h = el as HTMLElement;
+      h.classList.add('rv');
+      h.style.setProperty('--rv-delay', `${Math.min(i, 5) * 0.08}s`);
+      targets.push(h);
+    };
+    document.querySelectorAll('section').forEach((sec) => {
+      // セクションの中の「中身の箱」（飾りの丸などの absolute は除く）
+      Array.from(sec.children)
+        .filter((c) => c.tagName === 'DIV' && !c.classList.contains('absolute'))
+        .forEach((box) => {
+          Array.from(box.children).forEach((child, i) => {
+            const isList = child.matches('ul, ol, dl, nav, [class*="grid-cols"]') && child.children.length > 1;
+            if (isList) Array.from(child.children).forEach((g, j) => mark(g, j));
+            else mark(child, i);
+          });
+        });
+    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+    );
+    targets.forEach((t) => io.observe(t));
+  }
+</script>

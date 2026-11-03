@@ -122,4 +122,25 @@ const works = [
   };
   document.querySelector('[data-works-prev]')?.addEventListener('click', () => slide(-1));
   document.querySelector('[data-works-next]')?.addEventListener('click', () => slide(1));
+
+  // 自動で横に動く：見えているあいだ、3.5秒ごとに1枚ずつ。最後まで行ったら最初に戻る。
+  // さわったり、マウスをのせたりしているあいだは止まる（読んでいる人のじゃまをしない）
+  if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let visible = false;
+    let pausedUntil = 0;
+    const pause = (ms: number) => { pausedUntil = Date.now() + ms; };
+    ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'focusin'].forEach((ev) =>
+      track.addEventListener(ev, () => pause(8000), { passive: true }),
+    );
+    document.querySelectorAll('[data-works-prev], [data-works-next]').forEach((b) =>
+      b.addEventListener('click', () => pause(8000)),
+    );
+    new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0.3 }).observe(track);
+    setInterval(() => {
+      if (!visible || Date.now() < pausedUntil || document.hidden) return;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+      if (atEnd) track.scrollTo({ left: 0, behavior: 'smooth' });
+      else slide(1);
+    }, 3500);
+  }
 </script>

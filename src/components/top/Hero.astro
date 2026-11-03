@@ -13,7 +13,7 @@
   </div>
 
   <div class="flex-1 flex justify-center items-end gap-[clamp(40px,8vw,120px)] flex-wrap pt-14">
-    <h1 class="tate order-1 md:order-none m-0 self-center font-mincho font-medium text-[26px] md:text-[46px] leading-[1.9] tracking-[.08em] md:tracking-[.16em] md:h-[600px] text-center md:text-left">
+    <h1 class="hero-drop tate order-1 md:order-none m-0 self-center font-mincho font-medium text-[26px] md:text-[46px] leading-[1.9] tracking-[.08em] md:tracking-[.16em] md:h-[600px] text-center md:text-left">
       パソコンを開かずに、<br /><span class="text-bl-orange">スマホで解決。</span>
     </h1>
 
@@ -22,16 +22,56 @@
         <img
           src="/images/top/hand-phone_white.png"
           alt="Bloom Linkのスマホを持つ手"
-          class="absolute left-1/2 -translate-x-[44%] top-[12.4%] h-[93%] max-w-none"
+          class="hero-float absolute left-1/2 -translate-x-[44%] top-[12.4%] h-[93%] max-w-none"
         />
       </div>
-      <div class="absolute -left-6 md:-left-11 top-24 w-[min(88px,21vw)] h-[min(88px,21vw)] rounded-full bg-bl-blue"></div>
+      <!-- 青い丸：さわる（つかんで動かす）と動いて、はなすと元の場所にぽよんと戻る -->
+      <div data-hero-ball class="hero-ball absolute -left-6 md:-left-11 top-24 w-[min(88px,21vw)] h-[min(88px,21vw)]" aria-hidden="true">
+        <span class="hero-ball-in block w-full h-full rounded-full bg-bl-blue"></span>
+      </div>
     </div>
 
-    <div class="flex self-center md:flex-col items-center gap-5 order-2 md:order-none w-full md:w-auto justify-center">
+    <div class="hero-rise flex self-center md:flex-col items-center gap-5 order-2 md:order-none w-full md:w-auto justify-center">
       <span class="h-px w-10 md:w-px md:h-14 bg-bl-ink"></span>
       <span class="tate text-sm font-medium tracking-[.24em]"><span class="text-bl-blue font-bold">LINE</span>公式・Lステップ</span>
       <span class="h-px w-10 md:w-px md:h-14 bg-bl-ink"></span>
     </div>
   </div>
 </header>
+
+<script>
+  // 青い丸：指やマウスでつかんで動かせる。はなすと元の場所に戻る。軽くさわっただけでも、ぴょんと跳ねる
+  const ball = document.querySelector<HTMLElement>('[data-hero-ball]');
+  if (ball) {
+    let sx = 0;
+    let sy = 0;
+    let moved = false;
+    const move = (e: PointerEvent) => {
+      const dx = e.clientX - sx;
+      const dy = e.clientY - sy;
+      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+      ball.style.transform = `translate(${dx}px, ${dy}px)`;
+    };
+    const end = () => {
+      ball.classList.remove('is-dragging');
+      ball.style.transform = '';
+      if (!moved) {
+        ball.classList.remove('is-hop');
+        void ball.offsetWidth; // 続けてさわっても、もう一度跳ねるように
+        ball.classList.add('is-hop');
+      }
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', end);
+      window.removeEventListener('pointercancel', end);
+    };
+    ball.addEventListener('pointerdown', (e) => {
+      sx = e.clientX;
+      sy = e.clientY;
+      moved = false;
+      ball.classList.add('is-dragging');
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', end);
+      window.addEventListener('pointercancel', end);
+    });
+  }
+</script>
