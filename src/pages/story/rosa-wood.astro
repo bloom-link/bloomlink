@@ -4,6 +4,7 @@
 import '../../styles/global.css';
 import '../../styles/top.css';
 import Reveal from '../../components/Reveal.astro';
+import BackLinks from '../../components/BackLinks.astro';
 
 const LINE_URL = 'https://lin.ee/w7c1g5d';
 const FORM_URL =
@@ -54,7 +55,7 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
             <a href="/works/" class="text-bl-orange font-medium no-underline">事例</a>
           </nav>
         </div>
-        <a href="/works/#rosawood" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← 作品集へ戻る</a>
+        <a data-back href="/works/#rosawood" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← 作品集へ戻る</a>
       </header>
 
       <!-- ヒーロー -->
@@ -225,7 +226,7 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
           </div>
           <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[13px] tracking-[.1em] mt-2">
             <a href="/works/" class="text-bl-ink no-underline border-b border-bl-ink pb-[3px]">作品集を見る</a>
-            <a href="/" class="text-bl-ink no-underline border-b border-bl-ink pb-[3px]">← トップページへ戻る</a>
+            <a data-back href="/" class="text-bl-ink no-underline border-b border-bl-ink pb-[3px]">← トップページへ戻る</a>
           </div>
         </div>
       </section>
@@ -252,5 +253,6 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
       </footer>
     </div>
     <Reveal />
+    <BackLinks />
   </body>
 </html>

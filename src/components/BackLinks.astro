@@ -1,0 +1,26 @@
+---
+// 「← 〜へ戻る」を、とぶ前のページに戻す（2026/11/4）
+// 使い方：戻るリンクに data-back を付けて、ページの </body> の前に <BackLinks /> を置く
+// ・このサイトの別のページから来たとき：押すと前のページ（さっき見ていた場所）に戻る。文字も「前のページへ戻る」に変わる
+// ・LINEやInstagramなど外から直接来たとき：今までどおり、書いてある行き先（トップ・作品集）へ
+---
+
+<script>
+  let from: URL | null = null;
+  try {
+    from = document.referrer ? new URL(document.referrer) : null;
+  } catch {
+    from = null;
+  }
+  const cameFromSite =
+    from !== null && from.origin === location.origin && from.pathname !== location.pathname && history.length > 1;
+  if (cameFromSite) {
+    document.querySelectorAll<HTMLAnchorElement>('a[data-back]').forEach((a) => {
+      a.textContent = '← 前のページへ戻る';
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+      });
+    });
+  }
+</script>
