@@ -1,43 +1,20 @@
 ---
+// 制作ストーリー ROSA WOODさま。トップの事例・作品集から開く
+// 見本＝Claude Design「story-rosawood-design.dc.html」（2026/11/4）。文章は見本のまま。作りはるなやさまのページと同じ
 import '../../styles/global.css';
+import '../../styles/top.css';
+import Reveal from '../../components/Reveal.astro';
 
-const journeySteps = ['知る', '好きになる', '体験する', '安心する', '予約する', 'また会いたくなる'];
+const LINE_URL = 'https://lin.ee/w7c1g5d';
+const FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdGcS_8XJYBhs24_yeaunYVr7l7Rx1rkVDlO2xls7DfjqSNWQ/viewform';
 
-const sections = [
-  {
-    no: '01',
-    title: 'まず、じっくり"知る"ことから始めました',
-    body: [
-      'ご相談をいただいてすぐに提案するのではなく、まずはROSA WOODさまのInstagramやホームページを、時間をかけて拝見しました。',
-      'Instagramには400人を超えるフォロワーさんがいらっしゃり、ななえさんの日々の暮らしや想いが、ていねいに綴られていました。',
-      'アロマを使った石けん・ハンドクリーム・バスソルトなどの手づくり。季節の恵みを楽しむ梅シロップ、お味噌づくり、あずきカイロ、玉ねぎ麹など…。',
-      '画面越しからも、「暮らしを大切にされている方なんだな」という温かな空気が伝わってきました。',
-      'そして、その世界観に惹かれたファンの方が、すでにたくさんいらっしゃることも感じました。また、ななえさんの魅力は、発信される一つひとつの言葉にも、相手を思いやる優しさがあふれていました。',
-    ],
-  },
-  {
-    no: '02',
-    title: '私が感じたROSA WOODさまの魅力',
-    body: [
-      '発信を拝見する中で、私が一番感じた大きな魅力は、施術だけではなく、ななえさんのお人柄や丁寧な暮らしでした。',
-      'その温かな世界観に惹かれ、「ななえさんに会いたい」「ななえさんに相談したい」と足を運ぶ方がたくさんいらっしゃることも伝わってきました。',
-      'この魅力をLINEでも大切につないでいけたら、お客さまとのご縁はさらに深まり、安心して長く通いたくなる場所になっていく。',
-      'そんな未来を思い描きました。',
-    ],
-  },
-];
+const body = 'm-0 text-[15px] leading-[2.2] text-bl-body font-light';
+const secHead = 'flex gap-6 items-start pt-10 border-t-2 border-bl-blue';
+const secNo = 'font-garamond text-[72px] leading-[.85] text-bl-orange';
+const secTitle = 'm-0 font-mincho text-[clamp(24px,3vw,32px)] leading-[1.6] font-medium tracking-[.1em]';
 
-const proposalIntro = [
-  'そこでご提案したのは、アロマテラピーサロンとしての魅力を大切にしながら、「やさしく歳を重ねる暮らしの相談室」という世界観をLINEでも育てていくことでした。',
-  '施術だけでなく、手づくりや季節の暮らし、学びの時間も含めて、「ななえさんに会いたい」——そう思っていただける場所を、LINEの中にもつくっていく。',
-  'そのために、リッチメニューを使い、お客さまが自然に世界観へ入り込める導線を設計しました。',
-];
-
-const proposalOutro = [
-  'ポイントは、「施術の日だけ」で終わらないこと。人柄・暮らし・アロマを入口に、お客さまとのつながりを日々の暮らしの中で育てていけるLINEを目指しました。',
-  'また、「暮らしを楽しむ教室（年間講座）」も自然にご紹介できるように設計し、すでにファンでいてくださる方にも、より楽しんでいただけるLINEになるよう考えています。',
-  'LINEは、ただ情報を届けるツールではなく、お店の想いや魅力をやさしく届け、ご縁を育てていく場所。それが、Bloom Linkが大切にしている考え方です。',
-];
+const crafts = ['石けん', 'ハンドクリーム', 'バスソルト', '梅シロップ', 'お味噌づくり', 'あずきカイロ', '玉ねぎ麹'];
 
 const gallery = [
   { src: '/images/story-gallery1.jpg', caption: 'ROSA WOODのアロマ' },
@@ -46,18 +23,7 @@ const gallery = [
   { src: '/images/story-gallery4.jpg', caption: '季節の手しごと' },
 ];
 
-const finalSections = [
-  {
-    no: '05',
-    title: '納品のあと',
-    body: [
-      'ROSA WOODさまのLINEは、2026年9月に納品しました。',
-      '納品後、ROSA WOODさまのお客さまからは、「綺麗になった」「予約がLINEからできた」といったお声をいただいたそうです。',
-      'また、「暮らしを楽しむ教室」の説明をLINEに入れたことで、講座や教室を、以前より積極的に開催されるようになりました。',
-      '一度作って終わりではなく、実際に運用しながら、お客さまと一緒に育てていく。そんな伴走型のサポートを大切にしています。',
-    ],
-  },
-];
+const flow = ['知る', '好きになる', '体験する', '安心する', '予約する', 'また会いたくなる'];
 ---
 
 <html lang="ja">
@@ -67,157 +33,100 @@ const finalSections = [
     <title>制作ストーリー｜ROSA WOODさま｜Bloom Link</title>
     <meta
       name="description"
-      content="Bloom LinkがROSA WOODさまと進めたLINE構築の制作ストーリー。どんな想いで作り、納品のあとにどんな変化があったかをご紹介します。"
+      content="Bloom Linkが、アロマテラピーサロン ROSA WOODさまと進めてきたLINE構築の制作ストーリー。お店らしさや想いを大切にしながら、お客さまとのつながりを育てるLINEをご紹介します。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
     />
   </head>
-  <body class="bg-cream text-[#3f3a37] font-sans antialiased">
-    <!-- ヘッダー -->
-    <header class="bg-cream/90 backdrop-blur border-b border-sage/10">
-      <div class="max-w-3xl mx-auto flex items-center px-6 py-5">
-        <a href="/" class="text-lg tracking-widest text-sage font-semibold">Bloom Link</a>
-      </div>
-    </header>
-
-    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
-      <!-- タイトル -->
-      <p class="text-xs tracking-[0.2em] text-sage/60 mb-4">制作ストーリー</p>
-      <p class="text-base font-light tracking-wide text-sage/60 mb-1">アロマテラピーサロン</p>
-      <h1 class="text-2xl md:text-3xl font-medium text-sage leading-snug mb-6">
-        ROSA WOODさま
-      </h1>
-      <p class="text-xs text-[#8a8078] leading-relaxed mb-16 max-w-xl">
-        ※この案件は、2026年9月に納品しました。「どんな想いで、どう考えて作ったか」という制作の過程と、納品のあとの様子をご紹介します。
-      </p>
-
-      <!-- はじめに -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <p class="text-[#5c5450] leading-[2]">
-          <span class="block">Bloom Linkは、「LINEを作ること」を目的にはしていません。</span>
-          <span class="block mt-4">そのお店らしさや想いを大切にしながら、お客さまとのつながりを育てていくことを大切にしています。</span>
-          <span class="block mt-4">ROSA WOODさまとの取り組みは、その想いを形にしていく、大切なプロジェクトのひとつです。</span>
-        </p>
-      </section>
-
-      {sections.map((s, i) => (
-        <section class={`mb-16 pb-16 ${i < sections.length - 1 || true ? 'border-b border-sage/10' : ''}`}>
-          <div class="flex items-baseline gap-3 mb-6">
-            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
-            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
-          </div>
-          <div class="text-[#5c5450] leading-[2] space-y-4">
-            {s.body.map((line) => (
-              <p>{line}</p>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      <!-- 3. ご提案 -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <div class="flex items-baseline gap-3 mb-6">
-          <span class="text-xs text-sage/40 tracking-wider">03</span>
-          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">
-            ご提案 ―「暮らしの中でも、やさしくつながるLINE」へ
-          </h2>
+  <body class="bg-bl-cream text-bl-ink font-notojp antialiased tracking-[.04em]">
+    <div class="flex flex-col overflow-x-hidden">
+      <!-- ヘッダー（トップと同じメニュー） -->
+      <header class="pt-8 px-[clamp(24px,5vw,72px)]">
+        <div class="flex justify-between items-center gap-6 flex-wrap pb-5 border-b border-bl-line">
+          <a href="/" class="text-[13px] font-medium tracking-[.42em] text-bl-ink no-underline">BLOOM LINK</a>
+          <nav class="flex gap-6 md:gap-10 whitespace-nowrap text-xs tracking-[.14em]">
+            <a href="/dekiru/" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">できること</a>
+            <a href="/#price" class="text-bl-ink no-underline hover:text-bl-orange transition-colors">料金</a>
+            <a href="/works/" class="text-bl-orange font-medium no-underline">事例</a>
+          </nav>
         </div>
-        <div class="text-[#5c5450] leading-[2] space-y-4 mb-10">
-          {proposalIntro.map((line) => (
-            <p>{line}</p>
-          ))}
-        </div>
+        <a href="/works/#rosawood" class="inline-block mt-5 text-xs tracking-[.12em] text-bl-sub no-underline hover:text-bl-orange transition-colors">← 作品集へ戻る</a>
+      </header>
 
-        <!-- リッチメニュー実物 -->
-        <figure class="mb-3">
-          <div class="rounded-2xl overflow-hidden">
-            <img
-              src="/images/rosawood-richmenu.jpg"
-              alt="ROSA WOODさま向けに設計したリッチメニュー"
-              class="block w-full h-auto"
-            />
+      <!-- ヒーロー -->
+      <section class="pt-14 pb-[100px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap gap-x-[clamp(40px,7vw,96px)] gap-y-14 items-center">
+          <div class="flex-[1_1_440px] flex flex-col gap-7">
+            <div class="flex flex-wrap gap-x-5 gap-y-2.5 items-baseline">
+              <span class="font-garamond italic text-[17px] tracking-[.12em] text-bl-orange">Story</span>
+              <span class="text-xs font-medium tracking-[.2em] text-bl-blue">制作ストーリー・アロマテラピーサロン</span>
+            </div>
+            <h1 class="m-0 font-mincho text-[clamp(36px,5vw,56px)] leading-[1.4] font-medium tracking-[.14em]">ROSA WOOD<span class="text-[.5em] ml-1.5">さま</span></h1>
+            <p class="m-0 font-mincho text-lg leading-[2.1] font-medium">Bloom Linkは、「LINEを作ること」を目的にはしていません。<br />そのお店らしさや想いを大切にしながら、<br /><span class="text-bl-orange">お客さまとのつながりを育てていくこと</span>を大切にしています。</p>
+            <p class="m-0 text-sm leading-[2.1] text-bl-body font-light">ROSA WOODさまとの取り組みは、その想いを形にしていく、大切なプロジェクトのひとつです。</p>
           </div>
-          <figcaption class="text-xs text-sage/50 text-center mt-3">実際に設計したリッチメニュー</figcaption>
-        </figure>
-
-        <!-- ギャラリー -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8 md:mt-10 mb-10">
-          {gallery.map((g) => (
-            <figure>
-              <div class="rounded-xl overflow-hidden">
-                <img src={g.src} alt={g.caption} class="block w-full h-auto" />
+          <div class="flex-[0_0_auto] mx-auto relative">
+            <div class="w-[min(340px,calc(100vw-96px))] aspect-[340/450] rounded-t-full bg-bl-orange overflow-hidden flex items-end justify-center">
+              <div class="w-[64%] rounded-t-[24px] bg-bl-ink pt-[7px] px-[7px]">
+                <img src="/images/works/rosawood-richmenu.jpg" alt="ROSA WOODさまのLINE画面" class="block w-full aspect-[9/15] object-cover object-top rounded-t-[18px] bg-bl-cream" />
               </div>
-              <figcaption class="text-[11px] text-sage/50 text-center mt-2">{g.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <!-- ご縁が育つ流れ -->
-        <div class="bg-pinkLight/15 rounded-[1.5rem] px-6 py-8 md:px-10 md:py-10 mb-10">
-          <p class="text-sm font-medium text-sage tracking-wide mb-6 text-center">【 ご縁が育つ流れ 】</p>
-          <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-4">
-            {journeySteps.map((step, i) => (
-              <>
-                <span class="inline-flex items-center rounded-full bg-white text-sage text-xs md:text-sm px-4 py-2 whitespace-nowrap shadow-[0_4px_12px_rgba(53,94,72,0.06)]">
-                  {step}
-                </span>
-                {i < journeySteps.length - 1 && (
-                  <span class="text-pink/70 text-sm px-0.5">→</span>
-                )}
-              </>
-            ))}
+            </div>
+            <span class="absolute -left-[min(32px,5vw)] top-[12%] w-[min(68px,17vw)] aspect-square rounded-full bg-bl-blue"></span>
           </div>
         </div>
-
-        <div class="text-[#5c5450] leading-[2] space-y-4">
-          {proposalOutro.map((line) => (
-            <p>{line}</p>
-          ))}
+        <div class="max-w-[1080px] mx-auto mt-14 flex gap-4 items-start px-6 py-5 bg-bl-card rounded border border-bl-line">
+          <span class="shrink-0 text-[11px] font-bold tracking-[.14em] text-white bg-bl-orange px-2.5 py-1 rounded-full">納品済み</span>
+          <p class="m-0 text-[13px] leading-[1.9] text-bl-body">※この案件は、2026年9月に納品しました。「どんな想いで、どう考えて作ったか」という制作の過程と、納品のあとの様子をご紹介します。</p>
         </div>
       </section>
 
-      <!-- 4. ご感想 -->
-      <section class="mb-16 pb-16 border-b border-sage/10">
-        <div class="flex items-baseline gap-3 mb-6">
-          <span class="text-xs text-sage/40 tracking-wider">04</span>
-          <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">ご感想</h2>
+      <!-- 01 知る -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}><span class={secNo}>01</span><h2 class={secTitle}>まず、じっくり"知る"ことから始めました</h2></div>
+          <div class="flex flex-wrap gap-x-16 gap-y-10 items-start">
+            <div class="flex-[1_1_420px] flex flex-col gap-[22px]">
+              <p class={body}>ご相談をいただいてすぐに提案するのではなく、まずはROSA WOODさまのInstagramやホームページを、時間をかけて拝見しました。</p>
+              <p class={body}>Instagramには400人を超えるフォロワーさんがいらっしゃり、ななえさんの日々の暮らしや想いが、ていねいに綴られていました。</p>
+              <p class={body}>そして、その世界観に惹かれたファンの方が、すでにたくさんいらっしゃることも感じました。また、ななえさんの魅力は、発信される一つひとつの言葉にも、相手を思いやる優しさがあふれていました。</p>
+            </div>
+            <div class="flex-[1_1_340px] flex flex-col gap-5">
+              <div class="bg-bl-card rounded p-7 flex flex-col gap-4 border-t-[3px] border-bl-blue">
+                <p class="m-0 text-sm leading-[2] text-bl-body">アロマを使った石けん・ハンドクリーム・バスソルトなどの手づくり。季節の恵みを楽しむ梅シロップ、お味噌づくり、あずきカイロ、玉ねぎ麹など…。</p>
+                <div class="flex flex-wrap gap-2">
+                  {crafts.map((c) => <span class="text-xs px-3 py-1.5 rounded-full bg-bl-cream2">{c}</span>)}
+                </div>
+              </div>
+              <p class="m-0 font-mincho text-[17px] leading-[2] font-medium pl-5 border-l-2 border-bl-orange">画面越しからも、<span class="text-bl-orange">「暮らしを大切にされている方なんだな」</span>という温かな空気が伝わってきました。</p>
+            </div>
+          </div>
         </div>
-        <p class="text-[#5c5450] leading-[2] mb-6">ご提案をお伝えした際に、こんなお言葉をいただきました。</p>
-        <blockquote class="border-l-2 border-pink/40 pl-6 md:pl-8 py-2 mb-6">
-          <p class="text-[#4a4542] leading-[2] italic">
-            「今までのコンサルの方にはなかった発想で、とてもワクワクしました。ぜひこの方向で進めていきたいです。」
-          </p>
-          <p class="text-sm text-sage/70 mt-4">── アロマテラピーサロン ROSA WOOD　後藤 奈々絵さま</p>
-        </blockquote>
-        <p class="text-[#5c5450] leading-[2]">この言葉をいただけたことは、私にとって大きな励みになりました。</p>
       </section>
 
-      {finalSections.map((s) => (
-        <section class="mb-16">
-          <div class="flex items-baseline gap-3 mb-6">
-            <span class="text-xs text-sage/40 tracking-wider">{s.no}</span>
-            <h2 class="text-lg md:text-xl font-medium text-sage leading-snug">{s.title}</h2>
+      <!-- 02 魅力 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)]">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じた<span class="inline-block">ROSA WOODさまの魅力</span></h2></div>
+          <div class="flex flex-wrap gap-x-16 gap-y-10 items-center">
+            <div class="flex-[1_1_340px] flex flex-col gap-3.5 items-start">
+              <span class="font-mincho text-[clamp(24px,3.2vw,34px)] leading-[1.6] font-medium text-bl-orange"><span class="inline-block">「ななえさんに</span><span class="inline-block">会いたい」</span></span>
+              <span class="font-mincho text-[clamp(24px,3.2vw,34px)] leading-[1.6] font-medium text-bl-blue pl-[clamp(20px,5vw,64px)]"><span class="inline-block">「ななえさんに</span><span class="inline-block">相談したい」</span></span>
+            </div>
+            <div class="flex-[1_1_420px] flex flex-col gap-[22px]">
+              <p class={body}>発信を拝見する中で、私が一番感じた大きな魅力は、施術だけではなく、ななえさんのお人柄や丁寧な暮らしでした。</p>
+              <p class={body}>その温かな世界観に惹かれ、「ななえさんに会いたい」「ななえさんに相談したい」と足を運ぶ方がたくさんいらっしゃることも伝わってきました。</p>
+              <p class="m-0 font-mincho text-[17px] leading-[2] font-medium text-bl-ink">この魅力をLINEでも大切につないでいけたら、お客さまとのご縁はさらに深まり、安心して長く通いたくなる場所になっていく。<br />そんな未来を思い描きました。</p>
+            </div>
           </div>
-          <div class="text-[#5c5450] leading-[2] space-y-4">
-            {s.body.map((line) => (
-              <p>{line}</p>
-            ))}
-          </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      <!-- 結び -->
-      <p class="text-center text-sage/80 italic tracking-wide mb-20">
-        つながりを育て、未来を咲かせる。—— Bloom Link
-      </p>
-
-      <!-- トップへ戻る -->
-      <div class="text-center">
-        <a
-          href="/"
-          class="inline-flex items-center gap-2 text-sm text-sage hover:text-sage/70 transition-colors"
-        >
-          ← トップページへ戻る
-        </a>
-      </div>
-    </main>
+      <!-- STEP2 -->
+    </div>
+    <Reveal />
   </body>
 </html>
