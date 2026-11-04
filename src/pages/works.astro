@@ -101,7 +101,8 @@ const label17 = 'font-garamond italic text-[17px] tracking-[.12em] text-bl-orang
 const h2Cls = 'm-0 font-mincho text-[28px] md:text-[32px] font-medium tracking-[.14em]';
 const dotItem = 'flex gap-2.5 text-[13px] leading-[1.9] text-bl-body';
 const dot = 'w-[5px] h-[5px] rounded-full bg-bl-blue mt-[11px] shrink-0';
-const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
+// 作ったものは切らずに全体を見せる（contain）。さわると大きく開く（2026/11/4）
+const tallImg = 'block w-full aspect-[3/4] object-contain p-2 rounded cursor-zoom-in';
 ---
 
 <html lang="ja">
@@ -241,7 +242,7 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
             <div class="nosb flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory">
               {c.gallery.map((g) => (
                 <figure class="m-0 shrink-0 w-[min(260px,70vw)] flex flex-col gap-2.5 snap-start">
-                  <img src={g.src} alt={g.cap} loading="lazy" class:list={[tallImg, c.alt ? 'bg-[#EADFCF]' : 'bg-[#F2E9DC]']} />
+                  <img src={g.src} alt={g.cap} loading="lazy" data-zoomable class:list={[tallImg, c.alt ? 'bg-[#EADFCF]' : 'bg-[#F2E9DC]']} />
                   <figcaption class="text-xs text-bl-sub">{g.cap}</figcaption>
                 </figure>
               ))}
@@ -278,11 +279,11 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
             </div>
             <div class="grid grid-cols-2 gap-4">
               <figure class="m-0 flex flex-col gap-2">
-                <img src="/images/works/phone-daijobu.jpg" alt="スマホで見たところ" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <img src="/images/works/phone-daijobu.jpg" alt="スマホで見たところ" loading="lazy" data-zoomable class={`${tallImg} bg-[#EADFCF]`} />
                 <figcaption class="text-xs text-bl-sub">スマホで見たところ</figcaption>
               </figure>
               <figure class="m-0 flex flex-col gap-2">
-                <img src="/images/works/daijobu-richmenu.jpg" alt="リッチメニュー" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <img src="/images/works/daijobu-richmenu.jpg" alt="リッチメニュー" loading="lazy" data-zoomable class={`${tallImg} bg-[#EADFCF]`} />
                 <figcaption class="text-xs text-bl-sub">リッチメニュー</figcaption>
               </figure>
             </div>
@@ -298,11 +299,11 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
             <p class="m-0 text-sm leading-[1.9] text-bl-body font-light">ロゴから公式サイト、LINEの中身まで、ブランド全体をそろえて作りました。</p>
             <div class="grid grid-cols-2 gap-4">
               <figure class="m-0 flex flex-col gap-2">
-                <img src="/images/works/bloomlink-logo.jpg" alt="ロゴデザイン" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <img src="/images/works/bloomlink-logo.jpg" alt="ロゴデザイン" loading="lazy" data-zoomable class={`${tallImg} bg-[#EADFCF]`} />
                 <figcaption class="text-xs text-bl-sub">ロゴデザイン</figcaption>
               </figure>
               <figure class="m-0 flex flex-col gap-2">
-                <img src="/images/works/bloomlink-richmenu.jpg" alt="リッチメニュー" loading="lazy" class={`${tallImg} bg-[#EADFCF]`} />
+                <img src="/images/works/bloomlink-richmenu.jpg" alt="リッチメニュー" loading="lazy" data-zoomable class={`${tallImg} bg-[#EADFCF]`} />
                 <figcaption class="text-xs text-bl-sub">リッチメニュー</figcaption>
               </figure>
             </div>
@@ -321,8 +322,8 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
           </div>
           <div class="bg-bl-card text-bl-ink rounded p-[clamp(24px,4vw,40px)] flex flex-wrap gap-x-12 gap-y-8 items-center">
             <div class="flex-[1_1_320px] grid grid-cols-2 gap-4">
-              <img src="/images/works/phone-ru.jpg" alt="花屋の学び（ルー）スマホで見たところ" loading="lazy" class={`${tallImg} bg-[#F2E9DC]`} />
-              <img src="/images/works/sample-ru-richmenu.jpg" alt="花屋の学び（ルー）リッチメニュー" loading="lazy" class={`${tallImg} bg-[#F2E9DC]`} />
+              <img src="/images/works/phone-ru.jpg" alt="花屋の学び（ルー）スマホで見たところ" loading="lazy" data-zoomable class={`${tallImg} bg-[#F2E9DC]`} />
+              <img src="/images/works/sample-ru-richmenu.jpg" alt="花屋の学び（ルー）リッチメニュー" loading="lazy" data-zoomable class={`${tallImg} bg-[#F2E9DC]`} />
             </div>
             <div class="flex-[1_1_300px] flex flex-col gap-3.5">
               <h3 class="m-0 font-mincho text-2xl font-medium tracking-[.08em] text-bl-blue">花屋の学び（ルー）</h3>
@@ -331,12 +332,12 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
           </div>
           <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
             <div class="flex flex-col gap-3.5">
-              <img src="/images/works/sample-cafe-richmenu.jpg" alt="カフェ向け リッチメニュー見本" loading="lazy" class="block w-full aspect-[3/2] object-cover rounded bg-bl-card" />
+              <img src="/images/works/sample-cafe-richmenu.jpg" alt="カフェ向け リッチメニュー見本" loading="lazy" data-zoomable class="block w-full aspect-[3/2] object-contain p-2 rounded bg-bl-card cursor-zoom-in" />
               <h3 class="m-0 font-mincho text-xl font-medium">カフェ</h3>
               <p class="m-0 text-[13px] leading-[1.9] font-light">朝の光とやわらかい線で、ゆっくり過ごせる時間を。</p>
             </div>
             <div class="flex flex-col gap-3.5">
-              <img src="/images/works/sample-bar-richmenu.jpg" alt="BAR向け リッチメニュー見本" loading="lazy" class="block w-full aspect-[3/2] object-cover rounded bg-bl-card" />
+              <img src="/images/works/sample-bar-richmenu.jpg" alt="BAR向け リッチメニュー見本" loading="lazy" data-zoomable class="block w-full aspect-[3/2] object-contain p-2 rounded bg-bl-card cursor-zoom-in" />
               <h3 class="m-0 font-mincho text-xl font-medium">BAR</h3>
               <p class="m-0 text-[13px] leading-[1.9] font-light">同じ飲食店でも、夜のお店は色も線もがらりと変わります。</p>
             </div>
@@ -399,6 +400,11 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
         <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
       </footer>
     </div>
+    <!-- 画像をさわったときに開く、拡大表示 -->
+    <div data-zoom-box hidden class="fixed inset-0 z-50 bg-black/80 p-4 md:p-10 [&:not([hidden])]:flex items-center justify-center cursor-zoom-out" role="dialog" aria-modal="true" aria-label="画像の拡大">
+      <img data-zoom-img alt="" class="block max-w-full max-h-full w-auto h-auto rounded-2xl bg-bl-cream shadow-2xl" />
+      <button type="button" data-zoom-close aria-label="閉じる" class="absolute top-4 right-4 w-11 h-11 rounded-full border-0 bg-white text-bl-ink text-xl cursor-pointer">×</button>
+    </div>
     <Reveal />
   </body>
 </html>
@@ -408,3 +414,27 @@ const tallImg = 'block w-full aspect-[3/4] object-cover object-top rounded';
     scroll-behavior: smooth;
   }
 </style>
+
+<script>
+  // 作ったものの画像：さわると全体を大きく表示。背景・×・Escキーで閉じる（できることページと同じ）
+  const zbox = document.querySelector<HTMLElement>('[data-zoom-box]');
+  const zimg = document.querySelector<HTMLImageElement>('[data-zoom-img]');
+  if (zbox && zimg) {
+    const close = () => { zbox.hidden = true; document.body.style.overflow = ''; };
+    const open = (img: HTMLImageElement) => {
+      zimg.src = img.currentSrc || img.src;
+      zimg.alt = img.alt;
+      zbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+    document.querySelectorAll<HTMLImageElement>('img[data-zoomable]').forEach((img) => {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `${img.alt}を大きく見る`);
+      img.addEventListener('click', () => open(img));
+      img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });
+    });
+    zbox.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !zbox.hidden) close(); });
+  }
+</script>

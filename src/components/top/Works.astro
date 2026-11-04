@@ -123,12 +123,13 @@ const works = [
     const GAP = 40;
     const cardW = () => (cards[0]?.getBoundingClientRect().width ?? 440) + GAP;
 
-    // 2組目（見た目だけ。読み上げやキーボードでは1組目だけをたどる）
+    // 2組目（押すこともできる。読み上げやキーボードでは1組目だけをたどる）
     if (!reduce) {
       cards.forEach((c) => {
         const copy = c.cloneNode(true) as HTMLElement;
+        // 押せないようにすると、流れてきたカードのリンクが効かなくなるので、読み上げとキーボードだけ外す
         copy.setAttribute('aria-hidden', 'true');
-        copy.setAttribute('inert', '');
+        copy.querySelectorAll('a').forEach((l) => l.setAttribute('tabindex', '-1'));
         copy.removeAttribute('data-works-card');
         track.appendChild(copy);
       });
