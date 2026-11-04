@@ -14,6 +14,25 @@ const body = 'm-0 text-[15px] leading-[2.2] text-bl-body font-light';
 const secHead = 'flex gap-6 items-start pt-10 border-t-2 border-bl-blue';
 const secNo = 'font-garamond text-[72px] leading-[.85] text-bl-orange';
 const secTitle = 'm-0 font-mincho text-[clamp(24px,3vw,32px)] leading-[1.6] font-medium tracking-[.1em]';
+
+const menuItems = ['予約する', 'るなやとは', '本日の営業状況', '営業日・営業時間とポイントカード', 'アクセス・Instagram', 'グループ店舗のご案内'];
+
+const gallery = [
+  { src: '/images/runaya-card-hours-2026-10.webp', caption: '営業時間のカード' },
+  { src: '/images/runaya-card-point-2026-10.webp', caption: 'ポイントカードのカード' },
+];
+
+const points = [
+  { label: '予約のしくみ', t: '予約のしくみは、お店に合わせて一から作りました。予約が入るとオーナーさんのLINEにすぐ通知が届き、毎日お昼には、明日の予約の一覧も届きます。人数やお席の希望を選んでいただけて、満席になれば自動で受付が止まります。' },
+  { label: '本日の営業状況', blue: true, t: '「本日の営業状況」は、スマホの画面から、営業中・定休日・臨時休業・満席をその場で切りかえられます。お客さまは「今日は開いてる？」と、お店に聞かなくても確かめられます。' },
+  { label: '予約のカード', t: 'また、予約のカードには、来店回数や好きなもの・苦手なものが表示されます（初回にお客さまが任意で答えた内容だけです）。お一人で回すお店でも、常連さんを「いつもの」でお迎えできるようにしました。' },
+];
+
+const smallThings = [
+  'キャンセルの連絡は、電話ではなくLINEのトークだけにしました。オーナーさんが落ち着いて確認できる時間に、まとめて見られるようにするためです。',
+  '「営業状況」の管理画面は、暗証番号で守り、スマホ一つで更新できるようにしました。',
+  '店内のQRコードや、お店のInstagramからLINEに入ってもらう道すじも整えました。',
+];
 ---
 
 <html lang="ja">
@@ -113,7 +132,72 @@ const secTitle = 'm-0 font-mincho text-[clamp(24px,3vw,32px)] leading-[1.6] font
         </div>
       </section>
 
-      <!-- STEP2 -->
+      <!-- 03 ご提案 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}>
+            <span class={secNo}>03</span>
+            <div class="flex flex-col gap-2.5">
+              <span class="text-xs font-medium tracking-[.2em] text-bl-blue">ご提案</span>
+              <h2 class={secTitle}>「予約も、営業状況も、<br />手をかけなくても伝わる」LINEへ</h2>
+            </div>
+          </div>
+          <div class="flex flex-col gap-[22px] max-w-[760px]">
+            <p class={body}>ご提案したのは、「予約も、営業状況も、お店が手をかけなくても伝わるLINE」でした。</p>
+            <p class={body}>お客さまが迷わないよう、リッチメニューは6つの区画に整理しました。</p>
+          </div>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-2.5">
+            {menuItems.map((m, i) => (
+              <div class="bg-bl-card rounded p-4 flex flex-col gap-1.5">
+                <span class="font-garamond text-lg text-bl-blue">{i + 1}</span>
+                <span class="text-[13px] font-medium leading-[1.7]">{m}</span>
+              </div>
+            ))}
+          </div>
+          <!-- 画像は切らずに全体を見せる（height:auto） -->
+          <div class="bg-bl-blue rounded p-[clamp(24px,4vw,48px)] flex flex-wrap gap-y-8 gap-x-[clamp(24px,4vw,48px)] items-start">
+            <figure class="m-0 flex-[1_1_440px] flex flex-col gap-3">
+              <img src="/images/runaya-richmenu-2026-10.webp" alt="るなやさま向けに設計したリッチメニュー" class="block w-full h-auto rounded bg-bl-cream" />
+              <figcaption class="text-[13px] font-medium text-white">実際に設計したリッチメニュー</figcaption>
+            </figure>
+            <figure class="m-0 flex-[0_1_220px] mx-auto flex flex-col gap-3">
+              <div class="rounded-[24px] bg-bl-ink p-1.5">
+                <img src="/images/runaya-eigyo-2026-10.png" alt="本日の営業状況（実際の画面）" class="block w-full h-auto rounded-[18px] bg-bl-cream" />
+              </div>
+              <figcaption class="text-[13px] font-medium text-white text-center">本日の営業状況（実際の画面）</figcaption>
+            </figure>
+            <div class="flex-[1_1_100%] grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-6 pt-8 border-t border-white/35">
+              {gallery.map((g) => (
+                <figure class="m-0 flex flex-col gap-3">
+                  <img src={g.src} alt={g.caption} class="block w-full h-auto rounded bg-bl-cream" />
+                  <figcaption class="text-[13px] font-medium text-white">{g.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
+            {points.map((pt) => (
+              <div class:list={['bg-bl-card rounded p-7 flex flex-col gap-3 border-t-[3px]', pt.blue ? 'border-bl-blue' : 'border-bl-orange']}>
+                <span class:list={['text-xs font-bold tracking-[.16em]', pt.blue ? 'text-bl-blue' : 'text-bl-orange']}>{pt.label}</span>
+                <p class="m-0 text-sm leading-[2] text-bl-body">{pt.t}</p>
+              </div>
+            ))}
+          </div>
+          <p class="m-0 max-w-[760px] font-mincho text-lg leading-[2] font-medium">既製のシステムを入れるのではなく、お店の実際の条件に合わせて作る。そうすることで、<span class="text-bl-orange">月々のシステム利用料もかからない形</span>にできました。</p>
+          <!-- 小さな工夫：紙の付箋の見出し -->
+          <div class="relative bg-bl-card rounded pt-11 pb-8 px-[clamp(24px,4vw,40px)] mt-4">
+            <span class="absolute left-6 -top-3.5 -rotate-3 bg-[#FBE3D9] text-bl-ink text-[13px] font-bold tracking-[.14em] px-[18px] py-2 shadow-[0_3px_6px_rgba(0,0,0,.08)]">小さな工夫</span>
+            <ul class="m-0 p-0 list-none flex flex-col border-t border-bl-line">
+              {smallThings.map((t, i) => (
+                <li class="flex gap-4 py-4 border-b border-bl-line text-sm leading-[1.9] text-bl-body">
+                  <span class="font-garamond text-lg text-bl-blue min-w-[18px]">{i + 1}</span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <!-- STEP3 -->
     </div>
