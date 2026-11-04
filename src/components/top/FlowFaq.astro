@@ -13,7 +13,7 @@ const steps = [
 
 const faqs = [
   { q: 'パソコンが苦手でも大丈夫ですか？', a: '大丈夫です。スマホだけで使えるように作ります。使い方も、わかるまでお伝えします。' },
-  { q: 'LINE公式アカウントをまだ持っていません。', a: '作るところからお手伝いします。自分で作ってみたい方には、スマホで作る手順をまとめた無料ガイドもあります。' },
+  { q: 'LINE公式アカウントをまだ持っていません。', a: '作るところからお手伝いします。自分で作ってみたい方には、スマホで作る手順をまとめた無料ガイドもあります。', link: { href: '#free-guide', text: '→ 無料ガイドを見る' } },
   { q: 'すでにLINE公式アカウントを使っています。', a: '今のアカウントをそのまま使って、整えることができます。' },
   { q: '毎月の見守りに入らないといけませんか？', a: 'いいえ、選べます。作ったら終わりの「作り切り」もあります。作り切りの場合も、納品後30日までは、こちらのミスによる不具合を無料で直します。' },
   { q: 'LINE公式アカウントの利用料はかかりますか？', a: 'LINE公式アカウントの利用料は、お店・会社のご負担です。無料のプランから始められます。' },
@@ -59,7 +59,12 @@ const faqs = [
             </summary>
             <div class="flex gap-5 pb-7">
               <span class="font-garamond text-xl text-bl-blue">A</span>
-              <p class="m-0 flex-1 text-sm leading-[2.1] text-bl-body font-light pt-0.5">{f.a}</p>
+              <p class="m-0 flex-1 text-sm leading-[2.1] text-bl-body font-light pt-0.5">
+                {f.a}
+                {f.link && (
+                  <a href={f.link.href} class="block mt-2 text-bl-orange font-medium no-underline hover:opacity-70">{f.link.text}</a>
+                )}
+              </p>
             </div>
           </details>
         ))}
