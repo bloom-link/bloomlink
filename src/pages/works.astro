@@ -38,6 +38,7 @@ type Case = {
   made: string[];
   voice?: { lines: string[]; from: string };
   period: string;
+  story?: string; // 制作ストーリーのページがある事例だけ
   gallery: { src: string; cap: string }[];
   alt: boolean; // 背景を濃いクリームにする事例
 };
@@ -53,6 +54,7 @@ const cases: Case[] = [
     made: ['リッチメニュー6区画（アロマってなに？／暮らし／施術メニュー／お客様の声・Q&A／教室／ご予約）', 'めくって読めるカード16枚', '施術メニューのページ'],
     voice: { lines: ['「予約を初めてスマホからできました」', '「綺麗になった」'], from: '— お客さまより' },
     period: '期間：約3か月（2026年6月〜9月）',
+    story: '/story/rosa-wood/',
     gallery: [
       { src: '/images/works/rosawood-message.jpg', cap: 'リッチメッセージ（トークに届く読みもの）' },
       { src: '/images/works/rosawood-richmenu.jpg', cap: 'リッチメニュー' },
@@ -71,6 +73,7 @@ const cases: Case[] = [
     made: ['お店専用の予約システム：満席で自動停止／お店のLINEにお知らせ／お客さまに予約の控え', 'お客様一覧（来店回数・アンケート・お店のメモ）', '本日の営業状況（ボタン1つで切りかえ）', '「るなやとは」ページ・ポイントカード'],
     voice: { lines: ['「使いやすい」'], from: '— オーナーさんより' },
     period: '期間：約3か月（2026年7月〜10月）',
+    story: '/story/runaya/',
     gallery: [
       { src: '/images/works/phone-runaya.jpg', cap: 'LINE画面' },
       { src: '/images/runaya-richmenu-2026-10.webp', cap: 'リッチメニュー' },
@@ -248,6 +251,9 @@ const tallImg = 'block w-full aspect-[3/4] object-contain p-2 rounded cursor-zoo
                 </figure>
               ))}
             </div>
+            {c.story && (
+              <a href={c.story} class="self-start text-[13px] font-medium tracking-[.12em] text-bl-blue no-underline border-b border-bl-blue pb-1 hover:text-bl-orange hover:border-bl-orange transition-colors">制作ストーリーを見る →</a>
+            )}
           </div>
         </section>
       ))}
