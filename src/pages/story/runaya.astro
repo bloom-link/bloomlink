@@ -15,7 +15,7 @@ const secHead = 'flex gap-6 items-start pt-10 border-t-2 border-bl-blue';
 const secNo = 'font-garamond text-[72px] leading-[.85] text-bl-orange';
 const secTitle = 'm-0 font-mincho text-[clamp(24px,3vw,32px)] leading-[1.6] font-medium tracking-[.1em]';
 
-const menuItems = ['予約する', 'るなやとは', '本日の営業状況', '営業日・営業時間とポイントカード', 'アクセス・Instagram', 'グループ店舗のご案内'];
+const menuItems = ['予約する', 'るなやとは', '本日の営業状況', '営業日・営業時間とポイントカード', 'アクセス・Instagram', ['グループ店舗の', 'ご案内']];
 
 const gallery = [
   { src: '/images/runaya-card-hours-2026-10.webp', caption: '営業時間のカード' },
@@ -116,11 +116,11 @@ const smallThings = [
       <!-- 02 魅力 -->
       <section class="py-[120px] px-[clamp(24px,5vw,72px)]">
         <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
-          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じたるなやさまの魅力</h2></div>
+          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じた<span class="inline-block">るなやさまの魅力</span></h2></div>
           <div class="flex flex-wrap gap-x-16 gap-y-10 items-center">
             <div class="flex-[1_1_340px] flex flex-col gap-3.5 items-start">
               <span class="font-mincho text-[clamp(26px,3.4vw,36px)] leading-[1.6] font-medium text-bl-orange">「楽しい」</span>
-              <span class="font-mincho text-[clamp(26px,3.4vw,36px)] leading-[1.6] font-medium text-bl-blue pl-[clamp(20px,5vw,64px)]">「私の家に来たみたい」</span>
+              <span class="font-mincho text-[clamp(26px,3.4vw,36px)] leading-[1.6] font-medium text-bl-blue pl-[clamp(20px,5vw,64px)]"><span class="inline-block">「私の家に</span><span class="inline-block">来たみたい」</span></span>
               <span class="text-xs text-bl-sub pl-[clamp(20px,5vw,64px)]">— よく言われる言葉</span>
             </div>
             <div class="flex-[1_1_420px] flex flex-col gap-[22px]">
@@ -150,7 +150,7 @@ const smallThings = [
             {menuItems.map((m, i) => (
               <div class="bg-bl-card rounded p-4 flex flex-col gap-1.5">
                 <span class="font-garamond text-lg text-bl-blue">{i + 1}</span>
-                <span class="text-[13px] font-medium leading-[1.7]">{m}</span>
+                <span class="text-[13px] font-medium leading-[1.7]">{Array.isArray(m) ? m.map((p) => <span class="inline-block">{p}</span>) : m}</span>
               </div>
             ))}
           </div>
@@ -199,7 +199,57 @@ const smallThings = [
         </div>
       </section>
 
-      <!-- STEP3 -->
+      <!-- 04 これから -->
+      <section class="py-[140px] px-[clamp(24px,5vw,72px)] bg-bl-blue text-white relative overflow-hidden">
+        <span class="absolute -right-[90px] -top-[90px] w-[260px] h-[260px] rounded-full bg-bl-orange"></span>
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12 relative">
+          <div class="flex gap-6 items-start pt-10 border-t-2 border-white"><span class="font-garamond text-[72px] leading-[.85] text-white">04</span><h2 class={secTitle}>これから</h2></div>
+          <div class="flex flex-col gap-[22px] max-w-[760px]">
+            <p class="m-0 text-[15px] leading-[2.2] font-light">るなやさまのLINEは、2026年10月に納品しました。</p>
+            <p class="m-0 font-mincho text-[19px] leading-[2] font-medium">作って終わりではなく、実際に使いながら、お客さまの声やお店の変化に合わせて、少しずつ育てていく。そんな伴走型のサポートを大切にしています。</p>
+            <p class="m-0 text-[15px] leading-[2.2] font-light">使い始めたあとの変化も、またご紹介できたら嬉しいです。</p>
+          </div>
+          <p class="m-0 pt-7 border-t border-white/40 font-mincho text-lg tracking-[.12em]">つながりを育て、未来を咲かせる。—— Bloom Link</p>
+        </div>
+      </section>
+
+      <!-- 相談 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-orange text-white relative overflow-hidden">
+        <span class="absolute -left-20 -bottom-20 w-60 h-60 rounded-full bg-bl-blue"></span>
+        <div class="max-w-[820px] mx-auto flex flex-col items-center gap-7 text-center relative">
+          <h2 class="m-0 font-mincho text-[clamp(28px,3.6vw,38px)] leading-[1.8] font-medium tracking-[.1em]">うちのお店だと、<span class="inline-block">どうなる？</span></h2>
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-[#FFF3EC]">ご相談は無料です。無理な勧誘はしません。</p>
+          <div class="flex flex-wrap justify-center gap-3.5 mt-2">
+            <a href={LINE_URL} class="bg-bl-blue text-white no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full shadow-[0_10px_24px_rgba(0,0,0,.15)] transition-colors hover:bg-bl-ink">LINEで相談する</a>
+            <a href={FORM_URL} class="bg-bl-card text-bl-orange no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full transition-colors hover:bg-bl-ink hover:text-white">フォームで相談する</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[13px] tracking-[.1em] mt-2">
+            <a href="/works/" class="text-white no-underline border-b border-white pb-[3px]">作品集を見る</a>
+            <a href="/" class="text-white no-underline border-b border-white pb-[3px]">← トップページへ戻る</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- フッター -->
+      <footer class="pt-16 pb-10 px-[clamp(24px,5vw,72px)] bg-bl-blue text-white">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap justify-between gap-10">
+          <div class="flex flex-col gap-4">
+            <span class="text-[13px] font-medium tracking-[.42em]">BLOOM LINK</span>
+            <p class="m-0 font-mincho text-xl leading-[1.8] font-medium tracking-[.1em]">つながりを育て、<br />未来を咲かせる。</p>
+            <p class="m-0 text-[13px] leading-loose font-light">LINE公式の構築から運用まで、<br />お気軽にご相談ください。</p>
+          </div>
+          <div class="flex flex-col gap-3.5 items-start">
+            <a href={FORM_URL} class="text-[13px] font-bold text-bl-blue bg-bl-card no-underline px-6 py-[13px] rounded-full transition-colors hover:bg-bl-orange hover:text-white">無料で相談してみる →</a>
+            <a href={LINE_URL} class="text-[13px] font-bold text-white border border-white no-underline px-6 py-3 rounded-full transition-colors hover:bg-white hover:text-bl-blue">LINEで友だち追加</a>
+            <p class="m-0 text-xs leading-[1.9]">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。<br /><a href="mailto:bloomlink.01@gmail.com" class="text-white">bloomlink.01@gmail.com</a></p>
+            <div class="flex gap-6 text-xs tracking-[.14em]">
+              <a href="https://www.instagram.com/bloomlink_ru/" class="text-white no-underline">Instagram</a>
+              <a href="https://note.com/b_ru" class="text-white no-underline">note</a>
+            </div>
+          </div>
+        </div>
+        <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
+      </footer>
     </div>
     <Reveal />
   </body>
