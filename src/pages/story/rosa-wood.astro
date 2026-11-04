@@ -23,7 +23,7 @@ const gallery = [
   { src: '/images/story-gallery4.jpg', caption: '季節の手しごと' },
 ];
 
-const flow = ['知る', '好きになる', '体験する', '安心する', '予約する', 'また会いたくなる'];
+const flow = ['知る', '好きになる', '体験する', '安心する', '予約する', ['また', '会いたくなる']];
 ---
 
 <html lang="ja">
@@ -65,7 +65,7 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
               <span class="font-garamond italic text-[17px] tracking-[.12em] text-bl-orange">Story</span>
               <span class="text-xs font-medium tracking-[.2em] text-bl-blue">制作ストーリー・アロマテラピーサロン</span>
             </div>
-            <h1 class="m-0 font-mincho text-[clamp(36px,5vw,56px)] leading-[1.4] font-medium tracking-[.14em]">ROSA WOOD<span class="text-[.5em] ml-1.5">さま</span></h1>
+            <h1 class="m-0 font-mincho text-[clamp(36px,5vw,56px)] leading-[1.4] font-medium tracking-[.14em]"><span class="whitespace-nowrap">ROSA WOOD</span><span class="text-[.5em] ml-1.5">さま</span></h1>
             <p class="m-0 font-mincho text-lg leading-[2.1] font-medium">Bloom Linkは、「LINEを作ること」を目的にはしていません。<br />そのお店らしさや想いを大切にしながら、<br /><span class="text-bl-orange">お客さまとのつながりを育てていくこと</span>を大切にしています。</p>
             <p class="m-0 text-sm leading-[2.1] text-bl-body font-light">ROSA WOODさまとの取り組みは、その想いを形にしていく、大切なプロジェクトのひとつです。</p>
           </div>
@@ -110,7 +110,7 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
       <!-- 02 魅力 -->
       <section class="py-[120px] px-[clamp(24px,5vw,72px)]">
         <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
-          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じた<span class="inline-block">ROSA WOODさまの魅力</span></h2></div>
+          <div class={secHead}><span class={secNo}>02</span><h2 class={secTitle}>私が感じた<span class="inline-block whitespace-nowrap">ROSA WOOD</span><span class="inline-block">さまの魅力</span></h2></div>
           <div class="flex flex-wrap gap-x-16 gap-y-10 items-center">
             <div class="flex-[1_1_340px] flex flex-col gap-3.5 items-start">
               <span class="font-mincho text-[clamp(24px,3.2vw,34px)] leading-[1.6] font-medium text-bl-orange"><span class="inline-block">「ななえさんに</span><span class="inline-block">会いたい」</span></span>
@@ -125,7 +125,131 @@ const flow = ['知る', '好きになる', '体験する', '安心する', '予�
         </div>
       </section>
 
-      <!-- STEP2 -->
+      <!-- 03 ご提案 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2">
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12">
+          <div class={secHead}>
+            <span class={secNo}>03</span>
+            <div class="flex flex-col gap-2.5">
+              <span class="text-xs font-medium tracking-[.2em] text-bl-blue">ご提案</span>
+              <h2 class={secTitle}>「暮らしの中でも、<br /><span class="inline-block">やさしくつながる</span><span class="inline-block">LINE」へ</span></h2>
+            </div>
+          </div>
+          <div class="flex flex-col gap-[22px] max-w-[760px]">
+            <p class={body}>そこでご提案したのは、アロマテラピーサロンとしての魅力を大切にしながら、<span class="font-mincho font-medium text-bl-orange"><span class="inline-block">「やさしく歳を重ねる</span><span class="inline-block">暮らしの相談室」</span></span>という世界観をLINEでも育てていくことでした。</p>
+            <p class={body}>施術だけでなく、手づくりや季節の暮らし、学びの時間も含めて、「ななえさんに会いたい」——そう思っていただける場所を、LINEの中にもつくっていく。</p>
+            <p class={body}>そのために、リッチメニューを使い、お客さまが自然に世界観へ入り込める導線を設計しました。</p>
+          </div>
+          <!-- 画像は切らずに全体を見せる（height:auto） -->
+          <div class="bg-bl-blue rounded p-[clamp(24px,4vw,48px)] flex flex-col gap-8">
+            <figure class="m-0 flex flex-col gap-3 max-w-[640px]">
+              <img src="/images/rosawood-richmenu.jpg" alt="ROSA WOODさま向けに設計したリッチメニュー" class="block w-full h-auto rounded bg-bl-cream" />
+              <figcaption class="text-[13px] font-medium text-white">実際に設計したリッチメニュー</figcaption>
+            </figure>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-6 pt-8 border-t border-white/35">
+              {gallery.map((g) => (
+                <figure class="m-0 flex flex-col gap-3">
+                  <img src={g.src} alt={g.caption} class="block w-full h-auto rounded bg-bl-cream" />
+                  <figcaption class="text-[13px] font-medium text-white">{g.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+          <!-- ご縁が育つ流れ：紙の付箋の見出し＋6つの小さなカード（6だけ朱色） -->
+          <div class="relative bg-bl-card rounded pt-12 pb-9 px-[clamp(24px,4vw,40px)] mt-4 flex flex-col gap-7">
+            <span class="absolute left-6 -top-3.5 -rotate-3 bg-[#FBE3D9] text-bl-ink text-[13px] font-bold tracking-[.14em] px-[18px] py-2 shadow-[0_3px_6px_rgba(0,0,0,.08)]">ご縁が育つ流れ</span>
+            <ol class="m-0 p-0 list-none grid grid-cols-[repeat(auto-fit,minmax(min(100%,120px),1fr))] gap-2.5">
+              {flow.map((f, i) => {
+                const last = i === flow.length - 1;
+                return (
+                  <li class:list={['flex flex-col gap-1 p-4 rounded', last ? 'bg-bl-orange text-white' : 'bg-bl-cream2']}>
+                    <span class:list={['font-garamond text-lg', !last && 'text-bl-blue']}>{i + 1}</span>
+                    <span class:list={['text-sm', last ? 'font-bold' : 'font-medium']}>{Array.isArray(f) ? f.map((p) => <span class="inline-block">{p}</span>) : f}</span>
+                  </li>
+                );
+              })}
+            </ol>
+            <p class="m-0 text-sm leading-[2] text-bl-body">ポイントは、<span class="font-bold text-bl-ink">「施術の日だけ」で終わらないこと</span>。人柄・暮らし・アロマを入口に、お客さまとのつながりを日々の暮らしの中で育てていけるLINEを目指しました。</p>
+          </div>
+          <div class="flex flex-col gap-[22px] max-w-[760px]">
+            <p class={body}>また、「暮らしを楽しむ教室（年間講座）」も自然にご紹介できるように設計し、すでにファンでいてくださる方にも、より楽しんでいただけるLINEになるよう考えています。</p>
+            <p class="m-0 font-mincho text-lg leading-[2] font-medium text-bl-ink">LINEは、ただ情報を届けるツールではなく、お店の想いや魅力をやさしく届け、<span class="text-bl-orange">ご縁を育てていく場所</span>。それが、Bloom Linkが大切にしている考え方です。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 ご感想（朱色の面。お言葉は本文と同じ14pxの控えめな大きさ） -->
+      <section class="py-14 px-[clamp(24px,5vw,72px)] bg-bl-orange text-white relative overflow-hidden">
+        <span class="absolute -right-[70px] -bottom-[70px] w-[220px] h-[220px] rounded-full bg-bl-blue"></span>
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-10 relative">
+          <div class="flex gap-6 items-start pt-10 border-t-2 border-white"><span class="font-garamond text-[72px] leading-[.85] text-white">04</span><h2 class={secTitle}>ご感想</h2></div>
+          <p class="m-0 text-[15px] leading-[2] font-light text-[#FFF3EC]">ご提案をお伝えした際に、こんなお言葉をいただきました。</p>
+          <blockquote class="m-0 max-w-[640px] flex flex-col gap-3">
+            <span class="font-garamond text-4xl leading-[.4] text-[#FBE3D9]">“</span>
+            <p class="m-0 font-mincho text-sm leading-[2] font-medium tracking-[.06em]">「今までのコンサルの方にはなかった発想で、とてもワクワクしました。ぜひこの方向で進めていきたいです。」</p>
+            <footer class="text-[13px] tracking-[.1em] text-[#FFF3EC]">── アロマテラピーサロン ROSA WOOD　後藤 奈々絵さま</footer>
+          </blockquote>
+          <p class="m-0 text-[15px] leading-[2] font-light text-[#FFF3EC] pt-7 border-t border-white/45">この言葉をいただけたことは、私にとって大きな励みになりました。</p>
+        </div>
+      </section>
+
+      <!-- 05 納品のあと（青い面に白い箱2つ） -->
+      <section class="py-[140px] px-[clamp(24px,5vw,72px)] bg-bl-blue text-white relative overflow-hidden">
+        <span class="absolute -right-[90px] -top-[90px] w-[260px] h-[260px] rounded-full bg-bl-orange"></span>
+        <div class="max-w-[1080px] mx-auto flex flex-col gap-12 relative">
+          <div class="flex gap-6 items-start pt-10 border-t-2 border-white"><span class="font-garamond text-[72px] leading-[.85] text-white">05</span><h2 class={secTitle}>納品のあと</h2></div>
+          <p class="m-0 text-[15px] leading-[2.2] font-light">ROSA WOODさまのLINEは、2026年9月に納品しました。</p>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
+            <div class="bg-bl-card text-bl-ink rounded p-7 flex flex-col gap-3.5">
+              <span class="text-xs font-bold tracking-[.16em] text-bl-orange">お客さまの声</span>
+              <p class="m-0 text-sm leading-[2] text-bl-body">納品後、ROSA WOODさまのお客さまからは、<span class="font-mincho text-[17px] font-medium text-bl-ink"><span class="inline-block">「綺麗になった」</span><span class="inline-block">「予約がLINEからできた」</span></span>といったお声をいただいたそうです。</p>
+            </div>
+            <div class="bg-bl-card text-bl-ink rounded p-7 flex flex-col gap-3.5">
+              <span class="text-xs font-bold tracking-[.16em] text-bl-blue">お店の変化</span>
+              <p class="m-0 text-sm leading-[2] text-bl-body">また、「暮らしを楽しむ教室」の説明をLINEに入れたことで、講座や教室を、以前より積極的に開催されるようになりました。</p>
+            </div>
+          </div>
+          <p class="m-0 max-w-[760px] font-mincho text-[19px] leading-[2] font-medium">一度作って終わりではなく、実際に運用しながら、お客さまと一緒に育てていく。そんな伴走型のサポートを大切にしています。</p>
+          <p class="m-0 pt-7 border-t border-white/40 font-mincho text-lg tracking-[.12em]">つながりを育て、未来を咲かせる。—— Bloom Link</p>
+        </div>
+      </section>
+
+      <!-- 相談 -->
+      <section class="py-[120px] px-[clamp(24px,5vw,72px)] bg-bl-cream2 relative overflow-hidden">
+        <div class="max-w-[820px] mx-auto flex flex-col items-center gap-7 text-center">
+          <h2 class="m-0 font-mincho text-[clamp(28px,3.6vw,38px)] leading-[1.8] font-medium tracking-[.1em]">うちのお店だと、<span class="inline-block text-bl-orange">どうなる？</span></h2>
+          <p class="m-0 text-[15px] leading-[2.2] font-light text-bl-body">ご相談は無料です。無理な勧誘はしません。</p>
+          <div class="flex flex-wrap justify-center gap-3.5 mt-2">
+            <a href={LINE_URL} class="bg-bl-blue text-white no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full shadow-[0_10px_24px_rgba(35,80,184,.2)] transition-colors hover:bg-bl-ink">LINEで相談する</a>
+            <a href={FORM_URL} class="bg-bl-orange text-white no-underline text-[15px] font-bold tracking-[.14em] px-11 py-5 rounded-full transition-colors hover:bg-bl-ink">フォームで相談する</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[13px] tracking-[.1em] mt-2">
+            <a href="/works/" class="text-bl-ink no-underline border-b border-bl-ink pb-[3px]">作品集を見る</a>
+            <a href="/" class="text-bl-ink no-underline border-b border-bl-ink pb-[3px]">← トップページへ戻る</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- フッター -->
+      <footer class="pt-16 pb-10 px-[clamp(24px,5vw,72px)] bg-bl-blue text-white">
+        <div class="max-w-[1080px] mx-auto flex flex-wrap justify-between gap-10">
+          <div class="flex flex-col gap-4">
+            <span class="text-[13px] font-medium tracking-[.42em]">BLOOM LINK</span>
+            <p class="m-0 font-mincho text-xl leading-[1.8] font-medium tracking-[.1em]">つながりを育て、<br />未来を咲かせる。</p>
+            <p class="m-0 text-[13px] leading-loose font-light">LINE公式の構築から運用まで、<br />お気軽にご相談ください。</p>
+          </div>
+          <div class="flex flex-col gap-3.5 items-start">
+            <a href={FORM_URL} class="text-[13px] font-bold text-bl-blue bg-bl-card no-underline px-6 py-[13px] rounded-full transition-colors hover:bg-bl-orange hover:text-white">無料で相談してみる →</a>
+            <a href={LINE_URL} class="text-[13px] font-bold text-white border border-white no-underline px-6 py-3 rounded-full transition-colors hover:bg-white hover:text-bl-blue">LINEで友だち追加</a>
+            <p class="m-0 text-xs leading-[1.9]">フォームでも、LINEでも、メールでも、お好きな方でどうぞ。<br /><a href="mailto:bloomlink.01@gmail.com" class="text-white">bloomlink.01@gmail.com</a></p>
+            <div class="flex gap-6 text-xs tracking-[.14em]">
+              <a href="https://www.instagram.com/bloomlink_ru/" class="text-white no-underline">Instagram</a>
+              <a href="https://note.com/b_ru" class="text-white no-underline">note</a>
+            </div>
+          </div>
+        </div>
+        <p class="max-w-[1080px] mx-auto mt-12 mb-0 text-[11px] tracking-[.1em] text-[#D8E0F5]">© 2026 Bloom Link</p>
+      </footer>
     </div>
     <Reveal />
   </body>
