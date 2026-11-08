@@ -6,13 +6,13 @@ const tiers = [
   {
     no: '01',
     label: '見つけてもらう',
-    name: 'LP（お店・会社の紹介ページ）',
-    lead: 'はじめての人に、あなたのお店・会社が伝わるページ。',
+    name: 'LP（お店・会社の紹介ページ）・動画',
+    lead: 'はじめての人に、あなたのお店・会社が伝わるページと動画。',
     items: [
       'スマホで見やすい1ページの紹介ページ',
       'Instagramや検索から来た人を、LINEの友だち追加へつなぐ',
       'LINEと同じ写真や文章を使うので、まとめて作れる',
-      'Instagramのリール動画の編集・テロップ入れも、お手伝いします',
+      'Instagramの動画編集：撮った動画にテロップを入れて、リールに仕上げます',
     ],
   },
   {
@@ -48,6 +48,7 @@ const tools = [
     </div>
 
     {tiers.map((tr) => (
+      <Fragment>
       <div class="grid grid-cols-1 md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 md:gap-14 pt-11 border-t-2 border-bl-blue">
         <div class="flex gap-5 items-start">
           <span class="font-garamond text-[56px] leading-[.9] font-normal text-bl-orange">{tr.no}</span>
@@ -64,6 +65,50 @@ const tools = [
           {tr.note && <p class="m-0 text-[13px] leading-[1.9] text-bl-sub">※ {tr.note}</p>}
         </div>
       </div>
+      {tr.no === '01' && (
+        <!-- LINE誘導動画（2026/11/8 追加）。見本はBloom Link自身の宣伝動画。声が入っているので自動では再生しない -->
+        <div class="-mt-6 md:-mt-10 bg-bl-card rounded border-t-4 border-bl-orange p-[clamp(24px,4vw,48px)] flex flex-wrap gap-x-[clamp(32px,6vw,72px)] gap-y-8 items-center">
+          <div class="shrink-0 mx-auto w-[260px] h-[380px] rounded-t-[130px] bg-bl-orange relative flex items-end justify-center overflow-hidden">
+            <div class="relative w-[188px] h-[340px] rounded-t-[24px] bg-bl-ink px-1.5 pt-1.5">
+              <!-- 「試しに見てみる」：押すと声つきで再生。再生中は消え、終わるとまた出る -->
+              <button
+                type="button"
+                data-promo-play
+                class="absolute left-1/2 top-[56%] -translate-x-1/2 -translate-y-1/2 z-[2] flex flex-col items-center gap-2 border-0 bg-transparent cursor-pointer p-0 group"
+                aria-label="宣伝動画を再生する（音が出ます）"
+              >
+                <span class="w-16 h-16 rounded-full bg-bl-orange text-white flex items-center justify-center shadow-[0_6px_18px_rgba(34,32,30,.28)] transition-transform group-hover:scale-110">
+                  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+                </span>
+                <span class="whitespace-nowrap text-[13px] font-bold tracking-[.1em] text-white bg-bl-ink/80 px-3.5 py-1.5 rounded-full">試しに見てみる</span>
+              </button>
+              <video
+                data-promo-video
+                src="/images/top/promo-video.mp4"
+                poster="/images/top/promo-video-poster.jpg"
+                controls
+                playsinline
+                preload="metadata"
+                aria-label="Bloom LinkのLINE誘導動画の見本（キャラクターがLINEのコツを紹介して、最後にLINE登録へご案内する動画・声入り）"
+                class="block w-full h-full rounded-t-[18px] object-cover bg-bl-cream"
+              ></video>
+            </div>
+            <span class="absolute right-3 top-[34px] w-10 h-10 rounded-full bg-bl-blue"></span>
+          </div>
+          <div class="flex-[1_1_320px] flex flex-col gap-5">
+            <span class="self-start text-xs font-bold tracking-[.16em] px-3.5 py-1.5 rounded-full bg-bl-orange text-white">NEW</span>
+            <h3 class="m-0 font-mincho text-[22px] md:text-[26px] leading-[1.7] font-medium tracking-[.08em]">LINEに登録したくなる<br />宣伝動画も、作れます。</h3>
+            <ul class="m-0 p-0 list-none flex flex-col border-t border-bl-line">
+              <li class="text-sm leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line">キャラクターがお店・会社を紹介して、最後にLINEの友だち登録へご案内</li>
+              <li class="text-sm leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line">AIで作るので、撮影はいりません</li>
+              <li class="text-sm leading-[1.9] text-bl-body font-light py-3 border-b border-bl-line">声入りの縦の動画なので、Instagramのリールにそのまま使えます</li>
+            </ul>
+            <p class="m-0 text-xs leading-[1.9] text-bl-sub">▶ この動画は、Bloom Link自身の宣伝動画です（音が出ます）</p>
+            <a href="#price" class="self-start flex gap-3 items-center text-[13px] tracking-[.14em] text-white no-underline bg-bl-orange hover:bg-bl-blue transition-colors px-7 py-3.5 rounded-full">料金を見る<span>→</span></a>
+          </div>
+        </div>
+      )}
+      </Fragment>
     ))}
 
     <div class="flex flex-col gap-10 pt-11 border-t-2 border-bl-blue">
@@ -97,3 +142,16 @@ const tools = [
     </div>
   </div>
 </section>
+
+<script>
+  // 宣伝動画の「試しに見てみる」ボタン
+  const promoBtn = document.querySelector<HTMLButtonElement>('[data-promo-play]');
+  const promoVideo = document.querySelector<HTMLVideoElement>('[data-promo-video]');
+  if (promoBtn && promoVideo) {
+    promoBtn.addEventListener('click', () => {
+      promoVideo.play();
+    });
+    promoVideo.addEventListener('play', () => (promoBtn.style.display = 'none'));
+    promoVideo.addEventListener('ended', () => (promoBtn.style.display = ''));
+  }
+</script>

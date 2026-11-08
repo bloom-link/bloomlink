@@ -5,7 +5,7 @@
 import Label from './Label.astro';
 import TierCard from './PriceTier.astro';
 
-type Tier = { rank: string; name: string; first: string; monthly?: string; desc?: string; rec?: boolean };
+type Tier = { rank: string; name: string; first: string; firstLabel?: string; monthly?: string; desc?: string; rec?: boolean };
 
 const ORANGE = '#EF4B23';
 const BLUE = '#2350B8';
@@ -55,6 +55,28 @@ const pageNotes = [
   '竹・松の取材と文章づくりは、取材1回（60分まで）・文章の直し1回まで。それを超える場合は、1回5,000円〜またはお見積もり',
   '写真はお店・会社でご用意いただきます',
   '文字・写真の変更：1回5,000円〜（見守りの方は3,000円〜）',
+];
+
+// 動画（2026/11/8 決定）
+// LINE誘導動画：AIで作る（撮影なし）・字幕なし・お店から資料をもらうのが条件
+const tiersVideo: Tier[] = [
+  { rank: '梅', name: 'いただいた資料と原稿で、動画に仕上げる', first: '20,000円〜', firstLabel: '1本' },
+  { rank: '竹', name: '資料をもとにお話を聞いて、原稿もこちらで作る＋お店に合うキャラクターを作る', first: '35,000円〜', firstLabel: '1本', rec: true },
+  { rank: '松', name: '竹＋2本目（別の内容）をセットで', first: '55,000円〜', firstLabel: '2本' },
+];
+const videoNeeds = [
+  'お店の写真（外観・店内・商品など）',
+  'お店の強み・おすすめ・よく聞かれること',
+  'LINEに登録するといいこと（クーポン・予約が楽 など）',
+];
+const videoNotes = [
+  'LINE構築と一緒にご依頼いただくと、10,000円お安くなります',
+  'AIで作るので、撮影はありません',
+];
+// Instagramの動画編集
+const reelRows = [
+  { name: '1本', price: '5,000円〜' },
+  { name: '月4本', price: '18,000円〜' },
 ];
 
 // スマホで回すしくみ
@@ -226,18 +248,75 @@ const footNotes = [
       </div>
     </div>
 
-    <!-- 3. LINEと紹介ページを、一緒に -->
+    <!-- 3. 動画（2026/11/8 追加） -->
+    <div class="flex flex-col gap-7">
+      <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px] text-bl-blue">3.</span>動画</h3>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))] gap-6 items-start">
+
+        <!-- LINE誘導動画 -->
+        <div class="pz-card bg-bl-card rounded border-t-4 border-bl-orange p-[clamp(24px,4vw,36px)] flex flex-col gap-5">
+          <div class="flex flex-col gap-2.5">
+            <span class="font-mincho text-2xl font-medium tracking-[.1em] text-bl-orange">LINE誘導動画</span>
+            <p class="m-0 font-mincho text-[17px] leading-[1.8] font-medium">見た人が、そのままLINEに登録したくなる動画。</p>
+          </div>
+          <p class="m-0 text-[13px] leading-[2.05] text-bl-body font-light">キャラクターがお店・会社を紹介して、最後にLINEの友だち登録へご案内します。<br />AIで作るので、撮影はいりません。</p>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="text-xs font-medium px-3.5 py-2 rounded-full border border-[#C9BCA9] bg-bl-cream">Instagram・サイト</span>
+            <span class="text-bl-faint text-sm">→</span>
+            <span class="text-xs font-bold px-3.5 py-2 rounded-full bg-bl-orange text-white">動画</span>
+            <span class="text-bl-faint text-sm">→</span>
+            <span class="text-xs font-bold px-3.5 py-2 rounded-full bg-bl-blue text-white">LINEの友だち追加</span>
+          </div>
+          <div class="bg-bl-cream rounded px-[18px] py-4 flex flex-col gap-1.5">
+            <span class="text-[11px] font-medium tracking-[.16em] text-bl-orange">ご用意いただくもの</span>
+            <ul class="m-0 p-0 list-none flex flex-col gap-0.5">
+              {videoNeeds.map((it) => <li class="text-[13px] leading-[1.8]">・{it}</li>)}
+            </ul>
+            <span class="text-[11px] leading-[1.8] text-bl-sub">お店・会社だけの動画にするために、どのプランでもご用意をお願いしています</span>
+          </div>
+          <button type="button" data-pz-toggle class="pz-btn bg-bl-orange text-white hover:bg-bl-ink" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+          <div class="pz-panel"><div class="pz-inner"><div class="flex flex-col gap-5">
+            <div class="pz-tiers pt-3.5">
+              {tiersVideo.map((t) => <TierCard t={t} c={ORANGE} />)}
+            </div>
+            <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
+              {videoNotes.map((it) => <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body"><span class="w-[5px] h-[5px] rounded-full bg-bl-orange mt-[11px] shrink-0"></span><span>{it}</span></li>)}
+            </ul>
+          </div></div></div>
+        </div>
+
+        <!-- Instagramの動画編集 -->
+        <div class="pz-card bg-bl-card rounded border-t-4 border-bl-blue p-[clamp(24px,4vw,36px)] flex flex-col gap-5">
+          <div class="flex flex-col gap-2.5">
+            <span class="font-mincho text-2xl font-medium tracking-[.1em] text-bl-blue">Instagramの動画編集</span>
+            <p class="m-0 font-mincho text-[17px] leading-[1.8] font-medium">撮った動画を、見てもらえるリールに。</p>
+          </div>
+          <p class="m-0 text-[13px] leading-[2.05] text-bl-body font-light">お店・会社で撮った動画に、テロップ（文字）を入れて、リールに仕上げます（30秒くらい）。</p>
+          <button type="button" data-pz-toggle class="pz-btn bg-bl-blue text-white hover:bg-bl-ink" aria-expanded="false"><span data-pz-label>料金を見る</span><span data-pz-sign class="text-xl font-light">＋</span></button>
+          <div class="pz-panel"><div class="pz-inner"><div class="grid grid-cols-2 gap-2 pt-3.5">
+            {reelRows.map((r) => (
+              <div class="bg-bl-cream rounded px-3.5 py-4 flex flex-col gap-1">
+                <span class="text-sm font-medium text-bl-blue">{r.name}</span>
+                <span class="font-garamond text-[26px] font-medium leading-tight whitespace-nowrap">{r.price}</span>
+              </div>
+            ))}
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. LINEと紹介ページを、一緒に -->
     <div class="bg-bl-orange text-white rounded p-[clamp(28px,4.5vw,48px)] flex flex-col gap-4">
-      <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">3.</span>LINEと紹介ページを、一緒に</h3>
+      <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">4.</span>LINEと紹介ページを、一緒に</h3>
       <p class="m-0 text-[15px] leading-[2.1]">同じ写真や文章を使えるので、一緒にご依頼いただくと、紹介ページの最初の費用が <span class="font-mincho text-[26px] font-semibold tracking-[.06em] border-b-2 border-white px-0.5">10,000円お安く</span> なります。</p>
       <p class="m-0 text-[13px] text-[#FFF3EC]">（例：紹介ページの梅 40,000円 → 30,000円〜）</p>
     </div>
 
-    <!-- 4. スマホで回すしくみ -->
+    <!-- 5. スマホで回すしくみ -->
     <div class="bg-bl-blue text-white rounded p-[clamp(28px,5vw,56px)] flex flex-col gap-8 relative overflow-hidden">
       <span class="absolute -right-[70px] -top-[70px] w-[200px] h-[200px] rounded-full bg-bl-orange"></span>
       <div class="flex flex-col gap-3 relative max-w-[620px]">
-        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">4.</span><span><span class="inline-block">スマホで</span><span class="inline-block">回すしくみ</span></span></h3>
+        <h3 class="m-0 flex gap-3.5 items-baseline font-mincho text-2xl font-medium tracking-[.1em]"><span class="font-garamond text-[30px]">5.</span><span><span class="inline-block">スマホで</span><span class="inline-block">回すしくみ</span></span></h3>
         <p class="m-0 text-sm leading-loose text-white font-light">LINEとつなげて、お店・会社の毎日の作業をスマホで片づけるしくみです。<br />どれも、パソコンを開かずにスマホで使えます。</p>
       </div>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-3.5 relative">

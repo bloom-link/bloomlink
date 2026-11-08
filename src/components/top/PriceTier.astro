@@ -1,7 +1,7 @@
 ---
 // 料金欄の松竹梅の1枚。竹（rec）は枠を太くして「おすすめ」の札をつける
 interface Props {
-  t: { rank: string; name: string; first: string; monthly?: string; desc?: string; rec?: boolean };
+  t: { rank: string; name: string; first: string; firstLabel?: string; monthly?: string; desc?: string; rec?: boolean };
   c: string; // プランの色（作り切り＝朱色／構築＋配信＝青）
 }
 const { t, c } = Astro.props;
@@ -23,7 +23,7 @@ const fs = rec ? '32px' : '26px';
   <span class="text-sm font-bold leading-[1.7]">{t.name}</span>
   <div class="flex flex-wrap gap-x-6 gap-y-2">
     <div class="flex flex-col gap-0.5">
-      <span class="text-[11px] text-bl-faint tracking-[.14em]">最初に</span>
+      <span class="text-[11px] text-bl-faint tracking-[.14em]">{t.firstLabel ?? '最初に'}</span>
       <span class="font-garamond font-medium leading-tight whitespace-nowrap" style={`font-size:${fs}`}>{t.first}</span>
     </div>
     {t.monthly && (
