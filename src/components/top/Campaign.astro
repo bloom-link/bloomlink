@@ -1,0 +1,76 @@
+---
+// 年末キャンペーン（2026/11/15〜12/20）「こんな方に」の下に置く帯
+// 画像：チャッピーで作ったもの → public/images/top/campaign-2026-yearend.jpg
+// ⚠️ 12/20を過ぎたら、index.astro の <Campaign /> を消すか、受付終了の表示にする
+import Label from './Label.astro';
+
+const points = [
+  '毎月の見守りは 5,500円〜（6か月から）',
+  'お申し込みは 12/20 まで',
+  ['納品：ご依頼から40日以内', '年末年始のお知らせに使いたい方は、11月中のお申し込みがおすすめです'],
+  '完成後に、ご感想と作ったLINEの画面を紹介ページに載せさせていただきます',
+  '新しくご依頼いただくお店さま限定',
+];
+---
+
+<section id="campaign" class="pb-24 md:pb-40 px-[clamp(24px,5vw,72px)]">
+  <div class="max-w-[960px] mx-auto bg-bl-card border border-bl-line rounded-[28px] p-8 md:p-12 grid grid-cols-1 md:grid-cols-[300px_minmax(0,1fr)] gap-8 md:gap-12 items-center">
+    <img
+      src="/images/top/campaign-2026-yearend.jpg"
+      alt="年末キャンペーン。梅プラン（構築＋見守り）の最初の費用が半額、50,000円〜が25,000円〜。先着5店舗、12/20まで"
+      width="900"
+      height="1200"
+      loading="lazy"
+      class="block w-[240px] md:w-full mx-auto rounded-xl shadow-[0_10px_24px_rgba(34,32,30,.12)]"
+    />
+    <div class="flex flex-col gap-5 text-center md:text-left items-center md:items-start">
+      <div class="flex gap-3 items-center flex-wrap justify-center md:justify-start">
+        <Label text="Campaign" />
+        <span class="text-[11px] font-medium text-white bg-bl-orange rounded-full px-3 py-[3px] tracking-[.1em]">先着5店舗</span>
+      </div>
+      <h2 class="m-0 font-mincho font-medium text-[22px] md:text-[28px] leading-[1.8] tracking-[.12em]">
+        年末年始に間に合う<br />お店のLINE、はじめませんか？
+      </h2>
+      <p class="m-0 text-sm leading-[2.1] text-bl-body font-light">
+        梅プラン（構築＋見守り）の<br class="md:hidden" />最初の費用が、いまだけ半額です。
+      </p>
+      <p class="m-0 flex items-baseline gap-3 flex-wrap justify-center md:justify-start">
+        <span class="text-sm text-bl-sub line-through">50,000円〜</span>
+        <span class="text-bl-sub">→</span>
+        <span class="font-mincho text-[32px] md:text-[38px] font-medium text-bl-orange tracking-[.04em]">25,000円〜</span>
+      </p>
+      <ul class="m-0 p-0 list-none flex flex-col gap-2 text-left">
+        {points.map((t) => (
+          <li class="flex gap-2.5 text-[13px] leading-[1.9] text-bl-body font-light">
+            <span class="text-bl-orange font-bold shrink-0">✓</span>
+            {Array.isArray(t) ? (
+              <span>{t[0]}<span class="block text-xs text-bl-sub">{t[1].split('、')[0]}、<br class="md:hidden" />{t[1].split('、')[1]}</span></span>
+            ) : (
+              <span>{t}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <a
+        href="https://lin.ee/w7c1g5d"
+        target="_blank"
+        rel="noopener"
+        class="mt-1 bg-bl-blue hover:bg-bl-ink transition-colors text-white no-underline whitespace-nowrap text-[14px] md:text-[15px] font-bold tracking-[.1em] md:tracking-[.14em] py-4 px-8 md:px-10 rounded-full"
+      >
+        まずは無料で相談してみる
+      </a>
+      <div class="w-full max-w-[400px] bg-white border border-bl-line rounded-2xl px-5 py-4 flex flex-col gap-3 text-left">
+        <p class="m-0 text-[13px] font-bold tracking-[.1em] text-bl-ink">お申し込みのしかた</p>
+        <p class="m-0 flex gap-3 items-center text-[13px] leading-[1.8] text-bl-body">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-bl-blue text-white text-xs font-bold flex items-center justify-center">1</span>
+          <span>上のボタンから、<span class="whitespace-nowrap">LINEを友だち追加</span></span>
+        </p>
+        <p class="m-0 flex gap-3 items-center text-[13px] leading-[1.8] text-bl-body flex-wrap">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-bl-blue text-white text-xs font-bold flex items-center justify-center">2</span>
+          <span><span class="inline-block bg-bl-orange text-white font-bold rounded-md px-2.5 py-0.5 mr-1 tracking-[.1em]">キャンペーン</span>と送る</span>
+        </p>
+        <p class="m-0 text-xs text-bl-sub font-light pl-9">あとは、さなえからご連絡します</p>
+      </div>
+    </div>
+  </div>
+</section>
