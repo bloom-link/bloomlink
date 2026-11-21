@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>施術・商品について｜Laksmi Hari Studio</title>
+<meta name="description" content="恵比寿の美容鍼・頭皮ケアサロン Laksmi Hari Studio の施術と商品のご紹介。リフトアップ美容鍼・ミコステラ美肌ケア・3か月集中スカルプケア・スカルプインク・NEWTONシミケア。">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="施術・商品について｜Laksmi Hari Studio">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'LH Num';src:url(fonts/cormorant-500.woff2) format('woff2');font-weight:500;font-display:swap}
+  html,body{margin:0;padding:0;background:#ebe4da}
+  body{font-family:"Shippori Mincho B1","Yu Mincho",serif;-webkit-font-smoothing:antialiased;color:#2b2622}
+  a{text-decoration:none}
+  @keyframes lhFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .page{width:100%;max-width:480px;margin:0 auto;background:#f4e4d7;box-shadow:0 0 40px rgba(60,45,30,.10);position:relative;min-height:100vh}
+  .orn{display:flex;align-items:center;justify-content:center;gap:10px;padding:24px 0 4px}
+  .orn i{width:44px;height:1px;background:#cdb98f}
+  .orn b{width:6px;height:6px;background:#B8975A;transform:rotate(45deg)}
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(244,228,215,.95);backdrop-filter:blur(6px);padding:14px 14px 12px;border-bottom:1px solid rgba(184,151,90,.2)}
+  .tabs div{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .lh-tab{padding:9px 4px;font-family:inherit;font-size:12px;letter-spacing:.04em;line-height:1.35;border-radius:2px;cursor:pointer;transition:all .25s;background:transparent;color:#6f6255;border:1px solid rgba(184,151,90,.45);min-height:46px}
+  .lh-tab small{display:block;font-size:10px;color:#B8975A;letter-spacing:.02em}
+  .lh-tab[aria-selected="true"]{background:#2b2622;color:#efe2c4;border-color:#2b2622}
+  .lh-tab[aria-selected="true"] small{color:#d9bf86}
+  .panel{padding:28px 24px 6px;animation:lhFade .45s ease both}
+  .panel[hidden]{display:none}
+  .en{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.3em;color:#B8975A;margin:0 0 6px}
+  .h2{margin:0 0 6px;font-size:21px;font-weight:600;line-height:1.55;letter-spacing:.02em}
+  .catch{margin:0 0 16px;font-size:15px;line-height:1.7;color:#8C6A2C}
+  .lead{margin:0 0 16px;font-size:14px;line-height:1.95;color:#5e5249}
+  .h3{display:flex;align-items:center;gap:10px;margin:26px 0 12px;font-size:15px;font-weight:600;letter-spacing:.06em}
+  .h3::before{content:"";width:6px;height:6px;background:#B8975A;transform:rotate(45deg);flex:none}
+  .h3::after{content:"";flex:1;height:1px;background:rgba(184,151,90,.4)}
+  .dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px;line-height:1.7;color:#5e5249}
+  .dl dt{color:#a3927c;font-size:12.5px;white-space:nowrap}
+  .dl dd{margin:0}
+  .check{margin:0;padding:0;list-style:none;font-size:14px;line-height:1.75;color:#5e5249}
+  .check li{position:relative;padding:5px 0 5px 22px}
+  .check li::before{content:"";position:absolute;left:3px;top:13px;width:9px;height:5px;border-left:1.5px solid #B8975A;border-bottom:1.5px solid #B8975A;transform:rotate(-45deg)}
+  .points{display:grid;gap:10px}
+  .pt{padding:14px 16px;background:#faf3ec;border:1px solid rgba(184,151,90,.25);border-radius:4px}
+  .pt b{display:block;font-size:14.5px;font-weight:600;margin-bottom:4px}
+  .pt b span{font-family:'LH Num','Cormorant Garamond',serif;color:#B8975A;font-size:17px;margin-right:8px}
+  .pt p{margin:0;font-size:13.5px;line-height:1.85;color:#5e5249}
+  .types{margin:6px 0 10px;padding:10px 18px;background:#2b2622;border:1px solid rgba(184,151,90,.55);border-radius:6px;box-shadow:0 8px 20px rgba(60,40,25,.18);list-style:none;font-size:13.5px;line-height:1.7;color:#e9dfcf}
+  .types li{display:grid;grid-template-columns:6.6em 1fr;gap:10px;padding:8px 0;border-bottom:1px solid rgba(217,191,134,.22)}
+  .types li:last-child{border-bottom:0}
+  .types b{color:#d9bf86;font-weight:600}
+  .flow{margin:0;padding:0;list-style:none;counter-reset:f}
+  .flow li{counter-increment:f;position:relative;padding:0 0 16px 40px;font-size:14px;line-height:1.75;color:#5e5249}
+  .flow li::before{content:counter(f);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:#2b2622;color:#efe2c4;font-family:'LH Num',serif;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .flow li::after{content:"";position:absolute;left:12.5px;top:30px;bottom:4px;width:1px;background:rgba(184,151,90,.45)}
+  .flow li:last-child::after{display:none}
+  .flow b{display:block;color:#2b2622;font-weight:600}
+  .small{margin:8px 0 0;font-size:12.5px;line-height:1.8;color:#8a7d70}
+  .badge{display:inline-block;font-size:10.5px;letter-spacing:.12em;padding:2px 8px;border-radius:2px;margin-bottom:6px;background:#2b2622;color:#efe2c4}
+  .to-price{display:flex;align-items:center;justify-content:center;gap:8px;margin:26px 0 6px;height:46px;border:1px solid #B8975A;color:#8C6A2C;font-size:14px;letter-spacing:.12em;border-radius:2px;background:rgba(250,243,236,.6)}
+  .to-price::after{content:"→";font-family:'LH Num',serif}
+  .more{margin:22px 0 0}
+  .more summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border:1px solid rgba(184,151,90,.6);border-radius:2px;color:#6f6255;font-size:13.5px;letter-spacing:.1em;cursor:pointer;background:rgba(250,243,236,.5)}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary::after{content:"";width:6px;height:6px;border-right:1.5px solid #B8975A;border-bottom:1.5px solid #B8975A;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+  .more[open] summary{margin-bottom:14px}
+  .more[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+  .more .cl,.more[open] .op{display:none}
+  .more[open] .cl{display:inline}
+  .gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -24px;padding:2px 24px 8px;-webkit-overflow-scrolling:touch}
+  .gal img{height:300px;width:auto;flex:none;scroll-snap-align:center;border-radius:4px;border:1px solid rgba(184,151,90,.3);box-shadow:0 6px 16px rgba(60,40,25,.12)}
+  .soon{padding:28px 18px;text-align:center;background:#faf3ec;font-size:14px;line-height:1.9;color:#5e5249}
+  .note{margin:24px 24px 0;padding:16px 18px;background:#faf3ec;border:1px solid rgba(184,151,90,.22)}
+  .note p{margin:0 0 6px;font-size:12.5px;line-height:1.85;color:#7a6d60}
+  .note p:last-child{margin:0}
+  .foot{position:relative;margin-top:30px;overflow:hidden}
+  .foot img{display:block;width:100%;height:250px;object-fit:cover;filter:blur(1.5px) saturate(.9);transform:scale(1.04)}
+  .foot .ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(244,228,215,.80),rgba(244,228,215,.50) 55%,rgba(244,228,215,.90))}
+  .foot .tx{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  .foot .tx span:first-child{font-size:11px;letter-spacing:.38em;color:#6f6255}
+  .foot .tx span:last-child{font-family:'LH Num','Cormorant Garamond',serif;font-weight:500;font-size:32px;letter-spacing:.08em;color:#8C6A2C;text-shadow:0 0 8px rgba(255,250,240,.9),0 0 2px rgba(255,250,240,.9)}
+  .cta-wrap{position:sticky;bottom:0;z-index:30;padding:14px 20px 18px;background:linear-gradient(to top,rgba(244,228,215,.98),rgba(244,228,215,.88));border-top:1px solid rgba(184,151,90,.25)}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;background:#2b2622;color:#efe2c4;font-size:16px;letter-spacing:.14em;border-radius:2px;border:1px solid #B8975A;box-shadow:0 6px 18px rgba(43,38,34,.22)}
+  .cta i{width:7px;height:7px;background:#B8975A;transform:rotate(45deg)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <img src="img/hero-about.jpg" alt="Laksmi Hari Studio 施術・商品について" style="display:block;width:100%;height:auto">
+
+  <div class="orn"><i></i><b></b><i></i></div>
+
+  <nav class="tabs"><div role="tablist">
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-lift" aria-selected="true">リフトアップ<br>美容鍼</button>
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-myco" aria-selected="false">ミコステラ<br>美肌ケア</button>
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-scalp" aria-selected="false">3か月集中<br>スカルプケア</button>
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-ink" aria-selected="false">スカルプ<br>インク</button>
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-newton" aria-selected="false">NEWTON<br>シミケア<small>12/19から</small></button>
+    <button type="button" class="lh-tab" role="tab" aria-controls="p-brow" aria-selected="false">眉タトゥー<small>準備中</small></button>
+  </div></nav>
+
+  <!-- ▼ リフトアップ美容鍼 -->
+  <section class="panel" id="p-lift" role="tabpanel">
+    <p class="en">LIFT UP</p>
+    <h2 class="h2">リフトアップ美容鍼</h2>
+    <p class="catch">筋肉と骨格から、お顔をととのえる美容鍼</p>
+    <p class="lead">JMCAA認定の「立体造顔美容鍼®」の技術で行います。お顔の筋肉や骨格の位置・働きをふまえて鍼をうち、低周波の通電も組み合わせて、すっきりとしたフェイスラインを目指します。</p>
+    <h3 class="h3">3つの知識にもとづく技術</h3>
+    <div class="points">
+      <div class="pt"><b><span>01</span>皮膚科学</b><p>鍼が皮膚や皮膚の下の組織にどう働くかを理解したうえで、ていねいにアプローチします。</p></div>
+      <div class="pt"><b><span>02</span>解剖学</b><p>お顔の筋肉・骨格の位置や働きを正しくとらえ、必要なところに鍼をうちます。</p></div>
+      <div class="pt"><b><span>03</span>生理学</b><p>低周波の通電が、皮膚や筋肉にどう働くかをふまえて、組み合わせて行います。</p></div>
+    </div>
+    <dl class="dl" style="margin-top:20px"><dt>所要時間</dt><dd>約75分</dd></dl>
+    <a class="to-price" href="../laksmi-menu/#lift">料金を見る</a>
+  </section>
+
+  <!-- ▼ ミコステラ -->
+  <section class="panel" id="p-myco" role="tabpanel" hidden>
+    <p class="en">MICO STELLA</p>
+    <h2 class="h2">ミコステラ美肌ケア</h2>
+    <p class="catch">針を使わない、肌にやさしい美容液の導入</p>
+    <p class="lead">ミコステラは、美容液をこまかい粒にして、空気の力で角層のすみずみまで届ける美容機器です。針を使わず、肌を傷つけずにケアできます。お悩みに合わせて、専用の美容液（SAN MOND）を4種類からお選びいただけます。</p>
+    <h3 class="h3">4つの専用美容液</h3>
+    <ul class="types">
+      <li><b>モーメント</b><span>乾燥・小ジワ・ハリ不足</span></li>
+      <li><b>メラショット</b><span>シミ・くすみ・美白</span></li>
+      <li><b>アドバンス</b><span>肌荒れ・ニキビ・毛穴の開き</span></li>
+      <li><b>グレイスヘア</b><span>白髪・抜け毛・髪のボリューム・頭皮の乾燥</span></li>
+    </ul>
+    <p class="small">※どの美容液にするかは、カウンセリングで一緒に決めます。</p>
+    <dl class="dl" style="margin-top:20px"><dt>所要時間</dt><dd>約60分</dd></dl>
+    <a class="to-price" href="../laksmi-menu/#myco">料金を見る</a>
+  </section>
+
+  <!-- ▼ 3か月集中スカルプケア -->
+  <section class="panel" id="p-scalp" role="tabpanel" hidden>
+    <p class="en">SCALP CARE COURSE</p>
+    <h2 class="h2">3か月集中<br>スカルプケアコース</h2>
+    <p class="catch">頭皮から、髪の土台をととのえる3か月</p>
+    <p class="lead">育毛鍼と、ミコステラの頭皮用美容液「グレイスヘア」を組み合わせたコースです。3か月のあいだに6回通っていただき、頭皮の環境を集中してととのえます。</p>
+    <h3 class="h3">こんな方に</h3>
+    <ul class="check">
+      <li>白髪が気になりはじめた</li>
+      <li>髪が細くなった・ボリュームが出ない</li>
+      <li>抜け毛が増えた気がする</li>
+      <li>頭皮の乾燥やかゆみが気になる</li>
+    </ul>
+    <dl class="dl" style="margin-top:20px"><dt>内容</dt><dd>育毛鍼 ＋ ミコステラ（グレイスヘア）</dd><dt>回数</dt><dd>6回（有効期限 3か月）</dd><dt>所要時間</dt><dd>約90分</dd></dl>
+    <a class="to-price" href="../laksmi-menu/#scalp">料金を見る</a>
+  </section>
+
+  <!-- ▼ スカルプインク -->
+  <section class="panel" id="p-ink" role="tabpanel" hidden>
+    <p class="en">THE SCALP INK®</p>
+    <h2 class="h2">スカルプインク<br>（頭皮タトゥー）</h2>
+    <p class="catch">頭皮に、自然な影を描く</p>
+    <p class="lead">THE SCALP INK®は、日本で生まれた頭皮用タトゥー（SMP）の専門ブランドです。髪の根元のような小さな点（dot）を頭皮に描いて、地肌の透け感を目立ちにくくします。麻酔は使いません。</p>
+    <h3 class="h3">こんな方に</h3>
+    <ul class="check">
+      <li>いろいろ試したけれど、なかなか変化を感じられない</li>
+      <li>分け目やつむじの地肌が気になる</li>
+      <li>第一印象に自信が持てない</li>
+      <li>毎日どこかで、髪のことを考えてしまう</li>
+    </ul>
+    <details class="more">
+    <summary><span class="op">施術例を見る</span><span class="cl">施術例を閉じる</span></summary>
+    <p class="small" style="margin:0 0 12px">頭皮のお写真です。施術の前と後を並べています。</p>
+    <div class="gal">
+      <img src="img/ink-1.jpg" alt="スカルプインク 施術前と施術後（分け目）" loading="lazy">
+      <img src="img/ink-2.jpg" alt="スカルプインク 施術前と施術後（分け目）" loading="lazy">
+      <img src="img/ink-3.jpg" alt="スカルプインク 施術前と施術後（分け目）" loading="lazy">
+      <img src="img/ink-4.jpg" alt="スカルプインク 施術前と施術後（分け目）" loading="lazy">
+    </div>
+    <p class="small">← 横にスライドしてご覧いただけます<br>※THE SCALP INK®の施術例です。仕上がりには個人差があります。</p>
+    </details>
+    <h3 class="h3">料金の決まり方</h3>
+    <p class="lead" style="margin-bottom:0">描く点（dot）の数で決まります。初めての方は3万dotからのご案内です。SNSへのお写真の掲載にご協力いただけると、1dotあたりの料金が下がります。</p>
+    <a class="to-price" href="../laksmi-menu/#ink">料金を見る</a>
+  </section>
+
+  <!-- ▼ NEWTON -->
+  <section class="panel" id="p-newton" role="tabpanel" hidden>
+    <span class="badge">12/19から</span>
+    <p class="en">NEWTON</p>
+    <h2 class="h2">NEWTON シミケア</h2>
+    <p class="catch">気になるシミに、必要な部分だけ</p>
+    <p class="lead">NEWTONは、気になるシミに部分的にアプローチするピーリングのシミケアです。サロンでの施術（RESET）と、ご自宅でのホームケア（HOLD）を組み合わせて、お肌の状態を見ながら続けてケアしていきます。</p>
+    <h3 class="h3">得意なシミ</h3>
+    <ul class="check">
+      <li>老人性色素斑（年齢とともに出てきたシミ）</li>
+      <li>そばかす</li>
+      <li>炎症後色素沈着（ニキビあとなど）</li>
+    </ul>
+    <p class="small">※輪郭が比較的はっきりしたシミが向いています。肝斑など、施術できないシミもあるため、カウンセリングで確かめてからご案内します。</p>
+    <h3 class="h3">施術の流れ</h3>
+    <ol class="flow">
+      <li><b>カウンセリング・クレンジング</b>シミとお肌の状態を確かめます</li>
+      <li><b>NEWTON施術</b>気になるシミに部分的にアプローチします</li>
+      <li><b>施術後のご説明</b>ホームケアのしかたをお伝えします</li>
+      <li><b>約2週間後にご来店</b>お肌の状態を確かめて、次のケアを決めます</li>
+    </ol>
+    <h3 class="h3">ホームケア商品</h3>
+    <div class="points">
+      <div class="pt"><b>カーミングバーム</b><p>施術後のデリケートな肌をしずめて、守るためのバームです。</p></div>
+      <div class="pt"><b>ルーセントクリーム</b><p>施術後のお肌を、より透明感のある印象へ導くための夜用クリームです。</p></div>
+    </div>
+    <p class="small">※初回の施術には、この2つの商品がついています。</p>
+    <p class="small">※施術の当日は、レーザー・IPL・ピーリングなど、施術した部分に刺激が加わる施術は行えません。</p>
+    <a class="to-price" href="../laksmi-menu/#newton">料金を見る</a>
+  </section>
+
+  <!-- ▼ 眉タトゥー -->
+  <section class="panel" id="p-brow" role="tabpanel" hidden>
+    <span class="badge">2027年1月から</span>
+    <p class="en">COSMETIC INK</p>
+    <h2 class="h2">コスメティックインク<br>（眉タトゥー）</h2>
+    <div class="soon">ただいま準備中です。<br>くわしい内容は、決まりしだいお知らせいたします。</div>
+  </section>
+
+  <div class="note">
+    <p>※ 初回はカウンセリングなどのお時間として、施術時間に＋15分ほどいただいております。</p>
+    <p>※ お肌や頭皮の状態によっては、施術をお受けいただけない場合があります。</p>
+  </div>
+
+  <div class="foot">
+    <img src="img/newton-products.jpg" alt="">
+    <div class="ov"></div>
+    <div class="tx"><span>恵比寿の美容鍼・頭皮ケアサロン</span><span>Laksmi Hari Studio</span></div>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="cta" href="#" target="_blank" rel="noopener"><i></i>ご予約はこちら</a>
+  </div>
+
+</div>
+
+<script>
+// 施術ごとのタブ切り替え（URLの最後に #newton などで、その施術を開いた状態に）
+(function () {
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.lh-tab'));
+  function show(b) {
+    btns.forEach(function (x) {
+      var on = x === b;
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      show(b);
+      var t = document.querySelector('.tabs').offsetTop;
+      if (window.scrollY > t) window.scrollTo({ top: t, behavior: 'smooth' });
+    });
+  });
+  var h = location.hash.replace('#', '');
+  btns.forEach(function (b) { if (b.getAttribute('aria-controls') === 'p-' + h) show(b); });
+})();
+</script>
+</body>
+</html>
