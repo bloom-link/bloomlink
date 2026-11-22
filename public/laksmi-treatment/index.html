@@ -51,9 +51,20 @@
   .pt b span{font-family:'LH Num','Cormorant Garamond',serif;color:#B8975A;font-size:17px;margin-right:8px}
   .pt p{margin:0;font-size:13.5px;line-height:1.85;color:#55524e}
   .types{margin:6px 0 10px;padding:10px 18px;background:#2b2622;border:1px solid rgba(184,151,90,.55);border-radius:6px;box-shadow:0 8px 20px rgba(60,40,25,.18);list-style:none;font-size:13.5px;line-height:1.7;color:#e9dfcf}
-  .types li{display:grid;grid-template-columns:6.6em 1fr;gap:10px;padding:8px 0;border-bottom:1px solid rgba(217,191,134,.22)}
+  .types li{display:grid;grid-template-columns:6.6em 1fr 14px;align-items:center;gap:10px;padding:10px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;border-bottom:1px solid rgba(217,191,134,.22)}
   .types li:last-child{border-bottom:0}
   .types b{color:#d9bf86;font-weight:600}
+  .types li:active{opacity:.6}
+  .types .go{width:7px;height:7px;border-top:1.5px solid #d9bf86;border-right:1.5px solid #d9bf86;transform:rotate(45deg);justify-self:center}
+  .lb{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(24,22,20,.84);backdrop-filter:blur(3px)}
+  .lb.on{display:flex;animation:lhFade .3s ease both}
+  .lb figure{margin:0;max-width:640px;width:100%;text-align:center}
+  .lb img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:8px;border:1px solid rgba(184,151,90,.6);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  .lb .wait{display:none;padding:40px 20px;background:#f4f4f3;border:1px solid rgba(184,151,90,.6);border-radius:8px;color:#55524e;font-size:14px;line-height:1.9}
+  .lb.noimg img{display:none}
+  .lb.noimg .wait{display:block}
+  .lb figcaption{margin-top:12px;color:#e9dfcf;font-size:13px;letter-spacing:.12em}
+  .lb .x{position:absolute;top:14px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(217,191,134,.7);background:rgba(43,38,34,.7);color:#efe2c4;font-size:20px;line-height:38px;text-align:center;cursor:pointer;font-family:inherit}
   .flow{margin:0;padding:0;list-style:none;counter-reset:f}
   .flow li{counter-increment:f;position:relative;padding:0 0 16px 40px;font-size:14px;line-height:1.75;color:#55524e}
   .flow li::before{content:counter(f);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:#2b2622;color:#efe2c4;font-family:'LH Num',serif;font-size:14px;display:flex;align-items:center;justify-content:center}
@@ -129,11 +140,12 @@
     <p class="lead">ミコステラは、美容液をこまかい粒にして、空気の力で角層のすみずみまで届ける美容機器です。針を使わず、肌を傷つけずにケアできます。お悩みに合わせて、専用の美容液（SAN MOND）を4種類からお選びいただけます。</p>
     <h3 class="h3">4つの専用美容液</h3>
     <ul class="types">
-      <li><b>モーメント</b><span>乾燥・小ジワ・ハリ不足</span></li>
-      <li><b>メラショット</b><span>シミ・くすみ・美白</span></li>
-      <li><b>アドバンス</b><span>肌荒れ・ニキビ・毛穴の開き</span></li>
-      <li><b>グレイスヘア</b><span>白髪・抜け毛・髪のボリューム・頭皮の乾燥</span></li>
+      <li role="button" tabindex="0" data-img="img/serum-moment.jpg" data-name="モーメント"><b>モーメント</b><span>乾燥・小ジワ・ハリ不足</span><i class="go"></i></li>
+      <li role="button" tabindex="0" data-img="img/serum-melashot.jpg" data-name="メラショット"><b>メラショット</b><span>シミ・くすみ・美白</span><i class="go"></i></li>
+      <li role="button" tabindex="0" data-img="img/serum-advanced.jpg" data-name="アドバンス"><b>アドバンス</b><span>肌荒れ・ニキビ・毛穴の開き</span><i class="go"></i></li>
+      <li role="button" tabindex="0" data-img="img/serum-gracehair.jpg" data-name="グレイスヘア"><b>グレイスヘア</b><span>白髪・抜け毛・髪のボリューム・頭皮の乾燥</span><i class="go"></i></li>
     </ul>
+    <p class="small" style="margin-top:4px">それぞれの名前を押すと、美容液のくわしいご紹介が開きます。</p>
     <p class="small">※どの美容液にするかは、カウンセリングで一緒に決めます。</p>
     <dl class="dl" style="margin-top:20px"><dt>所要時間</dt><dd>約60分</dd></dl>
     <a class="to-price" href="../laksmi-menu/#myco">料金を見る</a>
@@ -235,6 +247,11 @@
     <div class="tx"><span>恵比寿の美容鍼・頭皮ケアサロン</span><span>Laksmi Hari Studio</span></div>
   </div>
 
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="美容液のご紹介">
+    <button type="button" class="x" aria-label="閉じる">×</button>
+    <figure><img alt=""><div class="wait">画像を準備中です。</div><figcaption></figcaption></figure>
+  </div>
+
   <div class="cta-wrap">
     <a class="cta" href="#" target="_blank" rel="noopener"><i></i>ご予約はこちら</a>
   </div>
@@ -261,6 +278,25 @@
   });
   var h = location.hash.replace('#', '');
   btns.forEach(function (b) { if (b.getAttribute('aria-controls') === 'p-' + h) show(b); });
+})();
+// 美容液の名前を押すと、画像を大きく表示
+(function () {
+  var lb = document.getElementById('lb'), img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+  function open(li) {
+    lb.classList.remove('noimg');
+    img.onerror = function () { lb.classList.add('noimg'); };
+    img.src = li.getAttribute('data-img');
+    img.alt = li.getAttribute('data-name');
+    cap.textContent = li.getAttribute('data-name') + '　｜　画面のどこかを押すと閉じます';
+    lb.classList.add('on'); document.body.style.overflow = 'hidden';
+  }
+  function close() { lb.classList.remove('on'); document.body.style.overflow = ''; }
+  Array.prototype.forEach.call(document.querySelectorAll('.types li[data-img]'), function (li) {
+    li.addEventListener('click', function () { open(li); });
+    li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(li); } });
+  });
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
 </script>
 </body>
