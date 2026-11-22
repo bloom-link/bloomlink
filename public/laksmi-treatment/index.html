@@ -51,9 +51,11 @@
   .pt b span{font-family:'LH Num','Cormorant Garamond',serif;color:#B8975A;font-size:17px;margin-right:8px}
   .pt p{margin:0;font-size:13.5px;line-height:1.85;color:#55524e}
   .types{margin:6px 0 10px;padding:10px 18px;background:#2b2622;border:1px solid rgba(184,151,90,.55);border-radius:6px;box-shadow:0 8px 20px rgba(60,40,25,.18);list-style:none;font-size:13.5px;line-height:1.7;color:#e9dfcf}
-  .types li{display:grid;grid-template-columns:6.6em 1fr 14px;align-items:center;gap:10px;padding:10px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;border-bottom:1px solid rgba(217,191,134,.22)}
+  .types li{display:grid;grid-template-columns:1fr 14px;grid-template-areas:"n g" "d g";align-items:center;column-gap:10px;row-gap:1px;padding:10px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;border-bottom:1px solid rgba(217,191,134,.22)}
   .types li:last-child{border-bottom:0}
-  .types b{color:#d9bf86;font-weight:600}
+  .types b{grid-area:n;color:#d9bf86;font-weight:600;letter-spacing:.04em}
+  .types li span{grid-area:d;font-size:13px;color:#e9dfcf}
+  .types .go{grid-area:g}
   .types li:active{opacity:.6}
   .types .go{width:7px;height:7px;border-top:1.5px solid #d9bf86;border-right:1.5px solid #d9bf86;transform:rotate(45deg);justify-self:center}
   .lb{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(24,22,20,.84);backdrop-filter:blur(3px)}
@@ -142,7 +144,7 @@
     <ul class="types">
       <li role="button" tabindex="0" data-img="img/serum-moment.jpg" data-name="モーメント"><b>モーメント</b><span>乾燥・小ジワ・ハリ不足</span><i class="go"></i></li>
       <li role="button" tabindex="0" data-img="img/serum-melashot.jpg" data-name="メラショット"><b>メラショット</b><span>シミ・くすみ・美白</span><i class="go"></i></li>
-      <li role="button" tabindex="0" data-img="img/serum-advanced.jpg" data-name="アドバンス"><b>アドバンス</b><span>肌荒れ・ニキビ・毛穴の開き</span><i class="go"></i></li>
+      <li role="button" tabindex="0" data-img="img/serum-advanced.jpg" data-name="WHアドバンスト"><b>WHアドバンスト</b><span>肌荒れ・ニキビ・毛穴の開き</span><i class="go"></i></li>
       <li role="button" tabindex="0" data-img="img/serum-gracehair.jpg" data-name="グレイスヘア"><b>グレイスヘア</b><span>白髪・抜け毛・髪のボリューム・頭皮の乾燥</span><i class="go"></i></li>
     </ul>
     <p class="small" style="margin-top:4px">それぞれの名前を押すと、美容液のくわしいご紹介が開きます。</p>
