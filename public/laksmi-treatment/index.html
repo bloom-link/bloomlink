@@ -42,8 +42,11 @@
   .check{margin:0;padding:0;list-style:none;font-size:14px;line-height:1.75;color:#55524e}
   .check li{position:relative;padding:5px 0 5px 22px}
   .check li::before{content:"";position:absolute;left:3px;top:13px;width:9px;height:5px;border-left:1.5px solid #B8975A;border-bottom:1.5px solid #B8975A;transform:rotate(-45deg)}
-  .points{display:grid;gap:10px}
-  .pt{padding:14px 16px;background:rgba(255,255,255,.72);border:1px solid rgba(184,151,90,.25);border-radius:4px}
+  .points{display:grid;gap:14px;padding:2px 0 6px}
+  .pt{position:relative;overflow:hidden;padding:16px 18px;background:linear-gradient(150deg,#ffffff 0%,#f8f8f7 50%,#ececea 100%);border:1px solid rgba(184,151,90,.4);border-radius:12px;box-shadow:0 12px 24px rgba(40,38,34,.11),0 2px 5px rgba(40,38,34,.07),inset 0 1px 0 #fff}
+  .pt::before{content:"";position:absolute;top:0;left:-20%;width:55%;height:100%;background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.75) 50%,transparent 100%);transform:skewX(-18deg);pointer-events:none}
+  .pt > *{position:relative;z-index:1}
+  .pt::after{content:"";position:absolute;left:12px;right:12px;top:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,151,90,.7),transparent)}
   .pt b{display:block;font-size:14.5px;font-weight:600;margin-bottom:4px}
   .pt b span{font-family:'LH Num','Cormorant Garamond',serif;color:#B8975A;font-size:17px;margin-right:8px}
   .pt p{margin:0;font-size:13.5px;line-height:1.85;color:#55524e}
